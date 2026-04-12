@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 
 <html lang="en">
@@ -10,231 +9,235 @@
 <style>
 :root{--black:#0d0d0d;--charcoal:#1a1a1a;--steel:#252525;--border:#2e2e2e;--muted:#555;--mid:#888;--light:#bbb;--cream:#f0ece4;--white:#fff;--red:#e63946;--orange:#f4a261;--green:#52b788;--blue:#4cc9f0;--gold:#f4c430}
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+button{-webkit-appearance:none;appearance:none;border-radius:0;font-family:inherit;cursor:pointer}
+button:focus{outline:none}
+a{color:inherit;text-decoration:none}
+input{-webkit-appearance:none;appearance:none;border-radius:0}
 html,body{height:100%}
-body{background:var(--black);color:var(--cream);font-family:'DM Sans',sans-serif;overflow-x:hidden}
-.header{background:var(--charcoal);border-bottom:1px solid var(--border);padding:0 20px;position:sticky;top:0;z-index:200}
+body{background:#0d0d0d;color:#f0ece4;font-family:'DM Sans',sans-serif;overflow-x:hidden}
+.header{background:#1a1a1a;border-bottom:1px solid #2e2e2e;padding:0 20px;position:sticky;top:0;z-index:200}
 .header-inner{max-width:860px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:52px}
-.logo{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:3px;color:var(--white)}.logo span{color:var(--red)}
-.day-badge{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:2px}
-.nav{background:var(--charcoal);border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:3px;color:#fff}.logo span{color:#e63946}
+.day-badge{font-family:'DM Mono',monospace;font-size:10px;color:#555;letter-spacing:2px}
+.nav{background:#1a1a1a;border-bottom:1px solid #2e2e2e;overflow-x:auto;scrollbar-width:none}
 .nav::-webkit-scrollbar{display:none}
 .nav-inner{max-width:860px;margin:0 auto;display:flex;padding:0 16px}
-.tab{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);padding:13px 16px;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .2s;background:none;border-top:none;border-left:none;border-right:none}
-.tab:hover{color:var(--light)}.tab.active{color:var(--white);border-bottom-color:var(--red)}
+.tab{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#555;padding:13px 16px;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .2s;background:none;border-top:none;border-left:none;border-right:none;-webkit-appearance:none;appearance:none}
+.tab:hover{color:#bbb}.tab.active{color:#fff;border-bottom-color:#e63946}
 .main{max-width:860px;margin:0 auto;padding:24px 18px 80px}
 .section{display:none}.section.active{display:block}
-.hero{background:linear-gradient(135deg,var(--charcoal) 0%,#1f0f0f 100%);border:1px solid var(--border);border-left:4px solid var(--red);padding:24px;margin-bottom:24px}
-.hero-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;color:var(--red);text-transform:uppercase;margin-bottom:8px}
-.hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(34px,8vw,62px);line-height:.92;color:var(--white);margin-bottom:12px}
-.hero-sub{font-size:13px;color:var(--mid);line-height:1.7;max-width:520px}
+.hero{background:linear-gradient(135deg,#1a1a1a 0%,#1f0f0f 100%);border:1px solid #2e2e2e;border-left:4px solid #e63946;padding:24px;margin-bottom:24px}
+.hero-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;color:#e63946;text-transform:uppercase;margin-bottom:8px}
+.hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(34px,8vw,62px);line-height:.92;color:#fff;margin-bottom:12px}
+.hero-sub{font-size:13px;color:#888;line-height:1.7;max-width:520px}
 .rules-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px;margin-bottom:24px}
-.rule-card{background:var(--charcoal);border:1px solid var(--border);padding:16px 18px;display:flex;gap:12px;align-items:flex-start}
+.rule-card{background:#1a1a1a;border:1px solid #2e2e2e;padding:16px 18px;display:flex;gap:12px;align-items:flex-start}
 .rule-icon{font-size:20px;flex-shrink:0;margin-top:2px}
-.rule-title{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
-.rule-text{font-size:12px;color:var(--mid);line-height:1.6}
+.rule-title{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#f4c430;margin-bottom:4px}
+.rule-text{font-size:12px;color:#888;line-height:1.6}
 .profiles{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px}
 @media(max-width:480px){.profiles{grid-template-columns:1fr}}
-.profile-card{background:var(--charcoal);border:1px solid var(--border);padding:18px}
-.profile-name{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:2px;color:var(--white);margin-bottom:10px}
-.profile-stat{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--border);font-size:12px}
+.profile-card{background:#1a1a1a;border:1px solid #2e2e2e;padding:18px}
+.profile-name{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:2px;color:#fff;margin-bottom:10px}
+.profile-stat{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #2e2e2e;font-size:12px}
 .profile-stat:last-child{border-bottom:none}
-.stat-label{color:var(--muted)}.stat-val{color:var(--cream);font-weight:500}
+.stat-label{color:#555}.stat-val{color:#f0ece4;font-weight:500}
 .section-head{margin-bottom:20px}
-.section-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;color:var(--red);text-transform:uppercase;margin-bottom:5px}
-.section-title{font-family:'Bebas Neue',sans-serif;font-size:36px;letter-spacing:2px;color:var(--white);line-height:1}
-.section-sub{font-size:13px;color:var(--muted);margin-top:6px;line-height:1.6}
-.info-box{background:rgba(230,57,70,.07);border:1px solid rgba(230,57,70,.25);border-left:3px solid var(--red);padding:13px 15px;margin-bottom:14px;font-size:13px;color:var(--mid);line-height:1.7}
-.info-box strong{color:var(--cream)}
-.info-box.green{background:rgba(82,183,136,.07);border-color:rgba(82,183,136,.25);border-left-color:var(--green)}
-.info-box.gold{background:rgba(244,196,48,.07);border-color:rgba(244,196,48,.25);border-left-color:var(--gold)}
-.divider{height:1px;background:var(--border);margin:24px 0}
+.section-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;color:#e63946;text-transform:uppercase;margin-bottom:5px}
+.section-title{font-family:'Bebas Neue',sans-serif;font-size:36px;letter-spacing:2px;color:#fff;line-height:1}
+.section-sub{font-size:13px;color:#555;margin-top:6px;line-height:1.6}
+.info-box{background:rgba(230,57,70,.07);border:1px solid rgba(230,57,70,.25);border-left:3px solid #e63946;padding:13px 15px;margin-bottom:14px;font-size:13px;color:#888;line-height:1.7}
+.info-box strong{color:#f0ece4}
+.info-box.green{background:rgba(82,183,136,.07);border-color:rgba(82,183,136,.25);border-left-color:#52b788}
+.info-box.gold{background:rgba(244,196,48,.07);border-color:rgba(244,196,48,.25);border-left-color:#f4c430}
+.divider{height:1px;background:#2e2e2e;margin:24px 0}
 
 /* WORKOUT LAUNCHER */
 .phase-tabs{display:flex;gap:6px;margin-bottom:18px;flex-wrap:wrap}
-.phase-tab{font-family:‘DM Mono’,monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;padding:6px 12px;background:var(–steel);border:1px solid var(–border);color:var(–muted);cursor:pointer;transition:all .2s}
-.phase-tab:hover{color:var(–light);border-color:#444}
-.phase-tab.active{background:var(–red);border-color:var(–red);color:var(–cream)}
+.phase-tab{display:inline-block;font-family:‘DM Mono’,monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;padding:6px 12px;background:#252525;border:1px solid #2e2e2e;color:#555;cursor:pointer;transition:all .2s;-webkit-appearance:none;appearance:none;border-radius:0}
+.phase-tab:hover{color:#bbb;border-color:#444}
+.phase-tab.active{background:#e63946;border-color:#e63946;color:#f0ece4}
 .day-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-bottom:18px}
-.day-btn{padding:8px 2px;background:var(–steel);border:1px solid var(–border);color:var(–muted);font-family:‘DM Mono’,monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;text-align:center;transition:all .2s}
-.day-btn:hover{border-color:#444;color:var(–light)}.day-btn.active{background:var(–red);border-color:var(–red);color:var(–cream)}
+.day-btn{display:block;width:100%;padding:8px 2px;background:#252525;border:1px solid #2e2e2e;color:#555;font-family:‘DM Mono’,monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;text-align:center;transition:all .2s;-webkit-appearance:none;appearance:none;border-radius:0}
+.day-btn:hover{border-color:#444;color:#bbb}.day-btn.active{background:#e63946;border-color:#e63946;color:#f0ece4}
 .session-selector{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px}
 @media(max-width:480px){.session-selector{grid-template-columns:1fr}}
-.session-card{background:var(–steel);border:1px solid var(–border);padding:14px;cursor:pointer;transition:all .2s;position:relative}
-.session-card:hover{border-color:#444}.session-card.selected{border-color:var(–red);background:rgba(230,57,70,.08)}
-.sc-tag{font-family:‘DM Mono’,monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(–muted);margin-bottom:5px}
-.sc-name{font-family:‘Bebas Neue’,sans-serif;font-size:18px;letter-spacing:1px;color:var(–light);margin-bottom:3px}
-.sc-detail{font-size:11px;color:var(–muted);line-height:1.5}
-.sc-check{position:absolute;top:12px;right:12px;width:18px;height:18px;border-radius:50%;border:2px solid var(–border);display:flex;align-items:center;justify-content:center;font-size:10px;transition:all .2s}
-.session-card.selected .sc-check{background:var(–red);border-color:var(–red);color:var(–cream)}
-.start-btn{width:100%;padding:11px 16px;background:#2a2a2a;border:1px solid #444;color:var(–light);font-family:‘DM Mono’,monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:16px}
-.start-btn:hover{background:var(–red);border-color:var(–red);color:var(–cream)}
+.session-card{background:#252525;border:1px solid #2e2e2e;padding:14px;cursor:pointer;transition:all .2s;position:relative}
+.session-card.active{border-color:#e63946;border-width:2px;background:#1f0a0a}.session-card:hover{border-color:#444}.session-card.selected{border-color:#e63946;background:rgba(230,57,70,.08)}
+.sc-tag{font-family:‘DM Mono’,monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#555;margin-bottom:5px}
+.sc-name{font-family:‘Bebas Neue’,sans-serif;font-size:18px;letter-spacing:1px;color:#bbb;margin-bottom:3px}
+.sc-detail{font-size:11px;color:#555;line-height:1.5}
+.sc-check{position:absolute;top:12px;right:12px;width:18px;height:18px;border-radius:50%;border:2px solid #2e2e2e;display:flex;align-items:center;justify-content:center;font-size:10px;transition:all .2s}
+.session-card.selected .sc-check{background:#e63946;border-color:#e63946;color:#f0ece4}
+.start-btn{width:100%;padding:11px 16px;background:#2a2a2a;border:1px solid #444;color:#bbb;font-family:‘DM Mono’,monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:16px;-webkit-appearance:none;appearance:none;border-radius:0}
+.start-btn:hover{background:#e63946;border-color:#e63946;color:#f0ece4 !important}.start-btn,.start-btn *{color:#bbb !important;text-decoration:none !important}
 
 /* PHASE REFERENCE */
-.phase-block{margin-bottom:16px;background:var(–charcoal);border:1px solid var(–border);overflow:hidden}
-.phase-header{padding:14px 18px;background:var(–steel);display:flex;justify-content:space-between;align-items:center;cursor:pointer;user-select:none}
+.phase-block{margin-bottom:16px;background:#1a1a1a;border:1px solid #2e2e2e;overflow:hidden}
+.phase-header{padding:14px 18px;background:#252525;display:flex;justify-content:space-between;align-items:center;cursor:pointer;user-select:none}
 .phase-header:hover{background:#2c2c2c}
-.phase-name{font-family:‘Bebas Neue’,sans-serif;font-size:20px;letter-spacing:2px;color:var(–white)}
-.phase-range{font-family:‘DM Mono’,monospace;font-size:9px;letter-spacing:2px;color:var(–muted);text-transform:uppercase}
+.phase-name{font-family:‘Bebas Neue’,sans-serif;font-size:20px;letter-spacing:2px;color:#fff}
+.phase-range{font-family:‘DM Mono’,monospace;font-size:9px;letter-spacing:2px;color:#555;text-transform:uppercase}
 .phase-body{padding:18px;display:none}.phase-body.open{display:block}
-.chevron{color:var(–muted);font-size:13px;transition:transform .2s}
+.chevron{color:#555;font-size:13px;transition:transform .2s}
 .phase-header.open .chevron{transform:rotate(180deg)}
-.workout-day{margin-bottom:12px;padding:14px;background:var(–black);border-left:3px solid var(–border)}
-.workout-day.strength{border-left-color:var(–blue)}.workout-day.cardio{border-left-color:var(–orange)}.workout-day.recovery{border-left-color:var(–green)}.workout-day.full{border-left-color:var(–gold)}
+.workout-day{margin-bottom:12px;padding:14px;background:#0d0d0d;border-left:3px solid #2e2e2e}
+.workout-day.strength{border-left-color:#4cc9f0}.workout-day.cardio{border-left-color:#f4a261}.workout-day.recovery{border-left-color:#52b788}.workout-day.full{border-left-color:#f4c430}
 .wd-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px}
-.wd-day{font-family:‘Bebas Neue’,sans-serif;font-size:17px;letter-spacing:1px;color:var(–white)}
+.wd-day{font-family:‘Bebas Neue’,sans-serif;font-size:17px;letter-spacing:1px;color:#fff}
 .wd-tag{font-family:‘DM Mono’,monospace;font-size:9px;letter-spacing:1.5px;padding:3px 7px;text-transform:uppercase}
-.tag-s{background:rgba(76,201,240,.12);color:var(–blue)}.tag-c{background:rgba(244,162,97,.12);color:var(–orange)}.tag-r{background:rgba(82,183,136,.12);color:var(–green)}.tag-f{background:rgba(244,196,48,.12);color:var(–gold)}
+.tag-s{background:rgba(76,201,240,.12);color:#4cc9f0}.tag-c{background:rgba(244,162,97,.12);color:#f4a261}.tag-r{background:rgba(82,183,136,.12);color:#52b788}.tag-f{background:rgba(244,196,48,.12);color:#f4c430}
 .wd-sessions{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 @media(max-width:460px){.wd-sessions{grid-template-columns:1fr}}
-.wd-session{background:var(–charcoal);padding:11px 13px;border:1px solid var(–border)}
-.wds-label{font-family:‘DM Mono’,monospace;font-size:9px;letter-spacing:1.5px;color:var(–muted);text-transform:uppercase;margin-bottom:4px}
-.wds-name{font-size:13px;font-weight:600;color:var(–cream);margin-bottom:3px}
-.wds-detail{font-size:11px;color:var(–muted);line-height:1.5}
+.wd-session{background:#1a1a1a;padding:11px 13px;border:1px solid #2e2e2e}
+.wds-label{font-family:‘DM Mono’,monospace;font-size:9px;letter-spacing:1.5px;color:#555;text-transform:uppercase;margin-bottom:4px}
+.wds-name{font-size:13px;font-weight:600;color:#f0ece4;margin-bottom:3px}
+.wds-detail{font-size:11px;color:#555;line-height:1.5}
 .ex-table{width:100%;border-collapse:collapse;margin-bottom:14px;font-size:12px}
-.ex-table th{font-family:‘DM Mono’,monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(–muted);text-align:left;padding:7px 9px;border-bottom:1px solid var(–border);background:var(–steel)}
-.ex-table td{padding:9px 9px;border-bottom:1px solid #1e1e1e;color:var(–cream);vertical-align:top;line-height:1.5}
+.ex-table th{font-family:‘DM Mono’,monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:#555;text-align:left;padding:7px 9px;border-bottom:1px solid #2e2e2e;background:#252525}
+.ex-table td{padding:9px 9px;border-bottom:1px solid #1e1e1e;color:#f0ece4;vertical-align:top;line-height:1.5}
 .ex-table tr:last-child td{border-bottom:none}
 
 /* DIET */
 .person-toggle{display:flex;gap:8px;margin-bottom:18px}
-.ptog{padding:8px 20px;background:var(–charcoal);border:1px solid var(–border);color:var(–muted);font-family:‘DM Mono’,monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .2s}
-.ptog.active{background:var(–red);border-color:var(–red);color:var(–white)}
+.ptog{padding:8px 20px;background:#1a1a1a;border:1px solid #2e2e2e;color:#555;font-family:‘DM Mono’,monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .2s;-webkit-appearance:none;appearance:none;border-radius:0}
+.ptog.active{background:#e63946;border-color:#e63946;color:#fff}
 .diet-person{display:none}.diet-person.active{display:block}
 .macro-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px}
-.macro-card{background:var(–charcoal);border:1px solid var(–border);padding:14px;text-align:center}
+.macro-card{background:#1a1a1a;border:1px solid #2e2e2e;padding:14px;text-align:center}
 .macro-val{font-family:‘Bebas Neue’,sans-serif;font-size:30px;letter-spacing:1px;line-height:1;margin-bottom:3px}
-.macro-label{font-family:‘DM Mono’,monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(–muted)}
+.macro-label{font-family:‘DM Mono’,monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#555}
 .meal-grid{display:grid;gap:8px;margin-bottom:18px}
-.meal-card{background:var(–charcoal);border:1px solid var(–border);padding:14px 16px;display:grid;grid-template-columns:90px 1fr;gap:12px;align-items:start}
+.meal-card{background:#1a1a1a;border:1px solid #2e2e2e;padding:14px 16px;display:grid;grid-template-columns:90px 1fr;gap:12px;align-items:start}
 @media(max-width:440px){.meal-card{grid-template-columns:1fr}}
-.meal-time{font-family:‘Bebas Neue’,sans-serif;font-size:17px;letter-spacing:1px;color:var(–white);line-height:1.1}
-.meal-kcal{font-family:‘DM Mono’,monospace;font-size:10px;color:var(–orange);margin-top:2px}
-.meal-name{font-size:13px;font-weight:600;color:var(–cream);margin-bottom:3px}
-.meal-desc{font-size:12px;color:var(–muted);line-height:1.6}
+.meal-time{font-family:‘Bebas Neue’,sans-serif;font-size:17px;letter-spacing:1px;color:#fff;line-height:1.1}
+.meal-kcal{font-family:‘DM Mono’,monospace;font-size:10px;color:#f4a261;margin-top:2px}
+.meal-name{font-size:13px;font-weight:600;color:#f0ece4;margin-bottom:3px}
+.meal-desc{font-size:12px;color:#555;line-height:1.6}
 
 /* STRETCH (reference) */
-.stretch-block{background:var(–charcoal);border:1px solid var(–border);margin-bottom:10px;overflow:hidden}
-.stretch-header{padding:13px 16px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;background:var(–steel)}
+.stretch-block{background:#1a1a1a;border:1px solid #2e2e2e;margin-bottom:10px;overflow:hidden}
+.stretch-header{padding:13px 16px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;background:#252525}
 .stretch-header:hover{background:#2c2c2c}
-.stretch-name{font-size:13px;font-weight:600;color:var(–cream)}
-.stretch-meta{font-family:‘DM Mono’,monospace;font-size:10px;color:var(–muted)}
+.stretch-name{font-size:13px;font-weight:600;color:#f0ece4}
+.stretch-meta{font-family:‘DM Mono’,monospace;font-size:10px;color:#555}
 .stretch-body{display:none;padding:14px 16px}.stretch-body.open{display:block}
-.stretch-step{display:flex;gap:10px;padding:9px 0;border-bottom:1px solid #1e1e1e;font-size:12px;color:var(–mid);line-height:1.6;align-items:flex-start}
+.stretch-step{display:flex;gap:10px;padding:9px 0;border-bottom:1px solid #1e1e1e;font-size:12px;color:#888;line-height:1.6;align-items:flex-start}
 .stretch-step:last-child{border-bottom:none}
-.step-num{font-family:‘Bebas Neue’,sans-serif;font-size:17px;color:var(–red);flex-shrink:0;width:20px;line-height:1.1}
+.step-num{font-family:‘Bebas Neue’,sans-serif;font-size:17px;color:#e63946;flex-shrink:0;width:20px;line-height:1.1}
 
 /* TRACKER */
 .tracker-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(36px,1fr));gap:5px;margin-bottom:22px}
-.tracker-day{aspect-ratio:1;background:var(–charcoal);border:1px solid var(–border);display:flex;align-items:center;justify-content:center;font-family:‘DM Mono’,monospace;font-size:10px;color:var(–muted);cursor:pointer;transition:all .15s;user-select:none}
-.tracker-day:hover{border-color:var(–red)}.tracker-day.done{background:var(–green);border-color:var(–green);color:var(–black);font-weight:600}.tracker-day.failed{background:rgba(230,57,70,.25);border-color:var(–red);color:var(–red)}
+.tracker-day{aspect-ratio:1;background:#1a1a1a;border:1px solid #2e2e2e;display:flex;align-items:center;justify-content:center;font-family:‘DM Mono’,monospace;font-size:10px;color:#555;cursor:pointer;transition:all .15s;user-select:none}
+.tracker-day:hover{border-color:#e63946}.tracker-day.done{background:#52b788;border-color:#52b788;color:#0d0d0d;font-weight:600}.tracker-day.failed{background:rgba(230,57,70,.25);border-color:#e63946;color:#e63946}
 .checklist{display:grid;gap:7px;margin-bottom:18px}
-.check-item{display:flex;align-items:center;gap:12px;padding:13px 14px;background:var(–charcoal);border:1px solid var(–border);cursor:pointer;transition:all .15s;user-select:none}
-.check-item.checked{border-color:var(–green);background:rgba(82,183,136,.07)}
-.check-box{width:20px;height:20px;border:2px solid var(–border);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;transition:all .15s}
-.check-item.checked .check-box{background:var(–green);border-color:var(–green);color:var(–black)}
-.check-label{font-size:13px;color:var(–cream)}.check-item.checked .check-label{text-decoration:line-through;color:var(–muted)}
-.check-sub{font-size:11px;color:var(–muted);margin-top:1px}
-.water-label{font-family:‘DM Mono’,monospace;font-size:10px;color:var(–muted);letter-spacing:2px;margin-bottom:7px}
+.check-item{display:flex;align-items:center;gap:12px;padding:13px 14px;background:#1a1a1a;border:1px solid #2e2e2e;cursor:pointer;transition:all .15s;user-select:none}
+.check-item.checked{border-color:#52b788;background:rgba(82,183,136,.07)}
+.check-box{width:20px;height:20px;border:2px solid #2e2e2e;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;transition:all .15s}
+.check-item.checked .check-box{background:#52b788;border-color:#52b788;color:#0d0d0d}
+.check-label{font-size:13px;color:#f0ece4}.check-item.checked .check-label{text-decoration:line-through;color:#555}
+.check-sub{font-size:11px;color:#555;margin-top:1px}
+.water-label{font-family:‘DM Mono’,monospace;font-size:10px;color:#555;letter-spacing:2px;margin-bottom:7px}
 .water-tracker{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:18px}
-.water-cup{width:40px;height:40px;background:var(–charcoal);border:1px solid var(–border);display:flex;align-items:center;justify-content:center;font-size:18px;cursor:pointer;transition:all .15s}
-.water-cup.filled{background:rgba(76,201,240,.18);border-color:var(–blue)}
+.water-cup{width:40px;height:40px;background:#1a1a1a;border:1px solid #2e2e2e;display:flex;align-items:center;justify-content:center;font-size:18px;cursor:pointer;transition:all .15s}
+.water-cup.filled{background:rgba(76,201,240,.18);border-color:#4cc9f0}
 .weight-log{display:grid;gap:7px;margin-bottom:18px}
-.weight-row{display:grid;grid-template-columns:70px 1fr 1fr;gap:8px;align-items:center;background:var(–charcoal);border:1px solid var(–border);padding:11px 13px;font-size:12px}
-.weight-week{font-family:‘Bebas Neue’,sans-serif;font-size:15px;color:var(–white)}
-.weight-input{background:var(–black);border:1px solid var(–border);padding:5px 8px;color:var(–cream);font-family:‘DM Mono’,monospace;font-size:12px;width:100%;text-align:center}
-.weight-input:focus{outline:none;border-color:var(–red)}
-.wlabel{font-family:‘DM Mono’,monospace;font-size:9px;color:var(–muted);letter-spacing:1px;text-transform:uppercase}
-h3{font-family:‘Bebas Neue’,sans-serif;font-size:20px;letter-spacing:2px;color:var(–white);margin-bottom:10px}
-p.bt{font-size:13px;color:var(–mid);line-height:1.75;margin-bottom:12px}
+.weight-row{display:grid;grid-template-columns:70px 1fr 1fr;gap:8px;align-items:center;background:#1a1a1a;border:1px solid #2e2e2e;padding:11px 13px;font-size:12px}
+.weight-week{font-family:‘Bebas Neue’,sans-serif;font-size:15px;color:#fff}
+.weight-input{background:#0d0d0d;border:1px solid #2e2e2e;padding:5px 8px;color:#f0ece4;font-family:‘DM Mono’,monospace;font-size:12px;width:100%;text-align:center}
+.weight-input:focus{outline:none;border-color:#e63946}
+.wlabel{font-family:‘DM Mono’,monospace;font-size:9px;color:#555;letter-spacing:1px;text-transform:uppercase}
+h3{font-family:‘Bebas Neue’,sans-serif;font-size:20px;letter-spacing:2px;color:#fff;margin-bottom:10px}
+p.bt{font-size:13px;color:#888;line-height:1.75;margin-bottom:12px}
 
 /* ══════════ WORKOUT PLAYER — inline panel ══════════ */
 .player-panel{display:none;flex-direction:column;}
 .player-panel.active{display:flex;}
-.player-header{background:var(–charcoal);border:1px solid var(–border);border-bottom:none;padding:0 16px;display:flex;align-items:center;justify-content:space-between;height:48px;}
-.player-close{background:none;border:1px solid var(–border);color:var(–mid);font-family:‘DM Mono’,monospace;font-size:10px;letter-spacing:1.5px;padding:5px 10px;cursor:pointer;transition:all .2s;}
-.player-close:hover{border-color:var(–red);color:var(–red);}
-.player-title{font-family:‘Bebas Neue’,sans-serif;font-size:15px;letter-spacing:2px;color:var(–white);}
-.player-session-label{font-family:‘DM Mono’,monospace;font-size:9px;color:var(–muted);letter-spacing:1px;}
-.player-elapsed{font-family:‘Bebas Neue’,sans-serif;font-size:20px;letter-spacing:2px;color:var(–white);}
-.done-screen{display:none;background:var(–charcoal);border:1px solid var(–border);padding:36px 20px;text-align:center;align-items:center;flex-direction:column;}
+.player-header{background:#1a1a1a;border:1px solid #2e2e2e;border-bottom:none;padding:0 16px;display:flex;align-items:center;justify-content:space-between;height:48px;}
+.player-close{background:none;border:1px solid #2e2e2e;color:#888;font-family:‘DM Mono’,monospace;font-size:10px;letter-spacing:1.5px;padding:5px 10px;-webkit-appearance:none;appearance:none;border-radius:0;cursor:pointer;transition:all .2s;}
+.player-close:hover{border-color:#e63946;color:#e63946;}
+.player-title{font-family:‘Bebas Neue’,sans-serif;font-size:15px;letter-spacing:2px;color:#fff;}
+.player-session-label{font-family:‘DM Mono’,monospace;font-size:9px;color:#555;letter-spacing:1px;}
+.player-elapsed{font-family:‘Bebas Neue’,sans-serif;font-size:20px;letter-spacing:2px;color:#fff;}
+.done-screen{display:none;background:#1a1a1a;border:1px solid #2e2e2e;padding:36px 20px;text-align:center;align-items:center;flex-direction:column;}
 .done-screen.active{display:flex;}
 .done-icon{font-size:48px;margin-bottom:12px;}
-.done-title{font-family:‘Bebas Neue’,sans-serif;font-size:clamp(36px,8vw,56px);letter-spacing:3px;color:var(–white);line-height:1;margin-bottom:8px;}
-.done-sub{font-size:13px;color:var(–mid);line-height:1.7;max-width:340px;margin-bottom:24px;}
+.done-title{font-family:‘Bebas Neue’,sans-serif;font-size:clamp(36px,8vw,56px);letter-spacing:3px;color:#fff;line-height:1;margin-bottom:8px;}
+.done-sub{font-size:13px;color:#888;line-height:1.7;max-width:340px;margin-bottom:24px;}
 .done-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;width:100%;max-width:360px;margin-bottom:24px;}
-.dstat{background:var(–steel);border:1px solid var(–border);padding:12px 8px;text-align:center;}
-.dstat-val{font-family:‘Bebas Neue’,sans-serif;font-size:26px;letter-spacing:1px;color:var(–white);}
-.dstat-label{font-family:‘DM Mono’,monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(–muted);margin-top:2px;}
-.done-btn{padding:12px 32px;background:var(–green);border:none;color:var(–black);font-family:‘Bebas Neue’,sans-serif;font-size:20px;letter-spacing:3px;cursor:pointer;transition:all .2s;}
+.dstat{background:#252525;border:1px solid #2e2e2e;padding:12px 8px;text-align:center;}
+.dstat-val{font-family:‘Bebas Neue’,sans-serif;font-size:26px;letter-spacing:1px;color:#fff;}
+.dstat-label{font-family:‘DM Mono’,monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:#555;margin-top:2px;}
+.done-btn{padding:12px 32px;background:#52b788;border:none;color:#0d0d0d;font-family:‘Bebas Neue’,sans-serif;font-size:20px;letter-spacing:3px;cursor:pointer;transition:all .2s;}
 .done-btn:hover{background:#45a373;}
 
 /* CHECKLIST EXERCISE ROWS */
-.cl-row{display:flex;gap:12px;padding:13px 0;border-bottom:1px solid var(–border);align-items:flex-start;transition:opacity 0.2s}
+.cl-row{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid #2e2e2e;align-items:flex-start;transition:opacity 0.2s;cursor:pointer}
 .cl-row:last-child{border-bottom:none}
 .cl-row.cl-done{opacity:0.45}
-.cl-row.cl-done .cl-name{text-decoration:line-through;color:var(–muted)}
-.cl-check{flex-shrink:0;padding-top:2px;cursor:pointer}
-.cl-box{width:24px;height:24px;border:2px solid var(–border);display:flex;align-items:center;justify-content:center;font-size:13px;color:transparent;transition:all 0.15s;border-radius:2px}
-.cl-row.cl-done .cl-box{background:var(–green);border-color:var(–green);color:var(–black)}
+.cl-row.cl-done .cl-name{text-decoration:line-through;color:#555}
+.cl-check{flex-shrink:0;padding-top:1px}
+.cl-box{width:28px;height:28px;border:2px solid #555;display:flex;align-items:center;justify-content:center;font-size:14px;color:transparent;transition:all 0.15s;border-radius:4px;background:#252525}
+.cl-row.cl-done .cl-box{background:#52b788;border-color:#52b788;color:#000}
 .cl-content{flex:1;min-width:0}
-.cl-name{font-size:14px;font-weight:600;color:var(–cream);margin-bottom:5px;line-height:1.3}
+.cl-name{font-size:14px;font-weight:600;color:#f0ece4;margin-bottom:5px;line-height:1.3}
 .cl-meta{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:6px;align-items:center}
 .cl-tag{font-family:‘DM Mono’,monospace;font-size:9px;letter-spacing:1px;padding:2px 7px;border:1px solid}
-.cl-sets{color:var(–blue);border-color:rgba(76,201,240,.3);background:rgba(76,201,240,.08)}
-.cl-reps{color:var(–gold);border-color:rgba(244,196,48,.3);background:rgba(244,196,48,.08)}
-.cl-equip{color:var(–green);border-color:rgba(82,183,136,.3);background:rgba(82,183,136,.08)}
-.cl-mins{font-family:‘DM Mono’,monospace;font-size:9px;color:var(–muted);letter-spacing:1px;margin-left:2px}
-.cl-desc{font-size:12px;color:var(–mid);line-height:1.6;margin-bottom:5px}
-.cl-mod{font-size:11px;color:var(–orange);background:rgba(244,162,97,.08);border-left:2px solid var(–orange);padding:6px 10px;line-height:1.5}
+.cl-sets{color:#4cc9f0;border-color:rgba(76,201,240,.3);background:rgba(76,201,240,.08)}
+.cl-reps{color:#f4c430;border-color:rgba(244,196,48,.3);background:rgba(244,196,48,.08)}
+.cl-equip{color:#52b788;border-color:rgba(82,183,136,.3);background:rgba(82,183,136,.08)}
+.cl-mins{font-family:‘DM Mono’,monospace;font-size:9px;color:#555;letter-spacing:1px;margin-left:2px}
+.cl-desc{font-size:12px;color:#888;line-height:1.6;margin-bottom:5px}
+.cl-mod{font-size:11px;color:#f4a261;background:rgba(244,162,97,.08);border-left:2px solid #f4a261;padding:6px 10px;line-height:1.5}
 
 /* ══════════ STRETCH PLAYER — inline panel ══════════ */
-.stretch-start-btn{width:100%;padding:9px;background:var(–steel);border:1px solid #444;color:var(–light);font-family:‘DM Mono’,monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:10px;margin-bottom:3px;}
-.stretch-start-btn:hover{background:var(–green);border-color:var(–green);color:var(–black);}
-.sp-hint{font-family:‘DM Mono’,monospace;font-size:9px;color:var(–muted);text-align:center;letter-spacing:1.5px;margin-bottom:12px;}
+.stretch-start-btn{width:100%;padding:9px;background:#252525;border:1px solid #444;color:#bbb;font-family:‘DM Mono’,monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:10px;margin-bottom:3px;}
+.stretch-start-btn:hover{background:#52b788;border-color:#52b788;color:#0d0d0d;}
+.sp-hint{font-family:‘DM Mono’,monospace;font-size:9px;color:#555;text-align:center;letter-spacing:1.5px;margin-bottom:12px;}
 .sp-overlay{display:none;flex-direction:column;}
 .sp-overlay.active{display:flex;}
-.sp-hdr{background:var(–charcoal);border:1px solid var(–border);border-bottom:none;padding:0 16px;display:flex;align-items:center;justify-content:space-between;height:48px;}
-.sp-close{background:none;border:1px solid var(–border);color:var(–mid);font-family:‘DM Mono’,monospace;font-size:10px;letter-spacing:1.5px;padding:6px 12px;cursor:pointer;transition:all .2s}
-.sp-close:hover{border-color:var(–red);color:var(–red)}
-.sp-hdr-title{font-family:‘Bebas Neue’,sans-serif;font-size:17px;letter-spacing:2px;color:var(–white)}
-.sp-hdr-count{font-family:‘DM Mono’,monospace;font-size:11px;color:var(–muted);letter-spacing:1px}
+.sp-hdr{background:#1a1a1a;border:1px solid #2e2e2e;border-bottom:none;padding:0 16px;display:flex;align-items:center;justify-content:space-between;height:48px;}
+.sp-close{background:none;border:1px solid #2e2e2e;color:#888;font-family:‘DM Mono’,monospace;font-size:10px;letter-spacing:1.5px;padding:6px 12px;cursor:pointer;transition:all .2s}
+.sp-close:hover{border-color:#e63946;color:#e63946}
+.sp-hdr-title{font-family:‘Bebas Neue’,sans-serif;font-size:17px;letter-spacing:2px;color:#fff}
+.sp-hdr-count{font-family:‘DM Mono’,monospace;font-size:11px;color:#555;letter-spacing:1px}
 
 /* Progress */
-.sp-prog-wrap{height:3px;background:var(–steel);flex-shrink:0}
-.sp-prog-fill{height:100%;background:var(–green);transition:width .4s ease}
+.sp-prog-wrap{height:3px;background:#252525;flex-shrink:0}
+.sp-prog-fill{height:100%;background:#52b788;transition:width .4s ease}
 
 /* Active stretch screen */
 .sp-active{display:flex;flex-direction:column;align-items:center;flex:1;overflow-y:auto;padding:18px 18px 0}
 
-.sp-step-lbl{font-family:‘DM Mono’,monospace;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(–muted);margin-bottom:12px;text-align:center}
-.sp-name{font-family:‘Bebas Neue’,sans-serif;font-size:clamp(28px,8vw,48px);letter-spacing:2px;color:var(–white);line-height:1;text-align:center;margin-bottom:6px}
-.sp-dur-pill{font-family:‘DM Mono’,monospace;font-size:11px;letter-spacing:2px;background:rgba(82,183,136,.15);color:var(–green);border:1px solid rgba(82,183,136,.3);padding:4px 14px;margin-bottom:18px}
+.sp-step-lbl{font-family:‘DM Mono’,monospace;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:#555;margin-bottom:12px;text-align:center}
+.sp-name{font-family:‘Bebas Neue’,sans-serif;font-size:clamp(28px,8vw,48px);letter-spacing:2px;color:#fff;line-height:1;text-align:center;margin-bottom:6px}
+.sp-dur-pill{font-family:‘DM Mono’,monospace;font-size:11px;letter-spacing:2px;background:rgba(82,183,136,.15);color:#52b788;border:1px solid rgba(82,183,136,.3);padding:4px 14px;margin-bottom:18px}
 
 /* Ring timer */
 .sp-ring-wrap{position:relative;width:min(210px,52vw);height:min(210px,52vw);margin:0 auto 18px;flex-shrink:0}
 .sp-ring-svg{width:100%;height:100%;transform:rotate(-90deg)}
-.sp-ring-bg{fill:none;stroke:var(–steel);stroke-width:10}
-.sp-ring-fill{fill:none;stroke:var(–green);stroke-width:10;stroke-linecap:round;transition:stroke-dashoffset .95s linear}
+.sp-ring-bg{fill:none;stroke:#252525;stroke-width:10}
+.sp-ring-fill{fill:none;stroke:#52b788;stroke-width:10;stroke-linecap:round;transition:stroke-dashoffset .95s linear}
 .sp-ring-inner{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
-.sp-seconds{font-family:‘Bebas Neue’,sans-serif;font-size:clamp(50px,14vw,78px);letter-spacing:2px;color:var(–white);line-height:1}
-.sp-sec-lbl{font-family:‘DM Mono’,monospace;font-size:9px;letter-spacing:2px;color:var(–muted);text-transform:uppercase}
+.sp-seconds{font-family:‘Bebas Neue’,sans-serif;font-size:clamp(50px,14vw,78px);letter-spacing:2px;color:#fff;line-height:1}
+.sp-sec-lbl{font-family:‘DM Mono’,monospace;font-size:9px;letter-spacing:2px;color:#555;text-transform:uppercase}
 
-.sp-desc{font-size:13px;color:var(–mid);line-height:1.7;text-align:center;max-width:380px;margin:0 auto 10px}
-.sp-mod{background:rgba(244,162,97,.09);border-left:3px solid var(–orange);padding:10px 14px;font-size:12px;color:var(–orange);width:100%;max-width:420px;text-align:left;margin-bottom:14px}
-.sp-mod strong{color:var(–orange)}
-.sp-next-lbl{font-family:‘DM Mono’,monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(–muted);text-align:center;margin-bottom:3px}
-.sp-next-name{font-size:13px;color:var(–mid);text-align:center;margin-bottom:14px}
+.sp-desc{font-size:13px;color:#888;line-height:1.7;text-align:center;max-width:380px;margin:0 auto 10px}
+.sp-mod{background:rgba(244,162,97,.09);border-left:3px solid #f4a261;padding:10px 14px;font-size:12px;color:#f4a261;width:100%;max-width:420px;text-align:left;margin-bottom:14px}
+.sp-mod strong{color:#f4a261}
+.sp-next-lbl{font-family:‘DM Mono’,monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#555;text-align:center;margin-bottom:3px}
+.sp-next-name{font-size:13px;color:#888;text-align:center;margin-bottom:14px}
 
 /* Actions */
-.sp-actions{display:grid;grid-template-columns:1fr 1fr 1fr;flex-shrink:0;border-top:1px solid var(–border)}
+.sp-actions{display:grid;grid-template-columns:1fr 1fr 1fr;flex-shrink:0;border-top:1px solid #2e2e2e}
 .sp-act{padding:18px 8px;border:none;font-family:‘Bebas Neue’,sans-serif;font-size:17px;letter-spacing:2px;cursor:pointer;transition:all .2s;text-align:center}
-.spa-prev{background:var(–steel);color:var(–mid);border-right:1px solid var(–border)}
-.spa-prev:hover{background:#2c2c2c;color:var(–cream)}
-.spa-pause{background:var(–charcoal);color:var(–gold);border-right:1px solid var(–border)}
+.spa-prev{background:#252525;color:#888;border-right:1px solid #2e2e2e}
+.spa-prev:hover{background:#2c2c2c;color:#f0ece4}
+.spa-pause{background:#1a1a1a;color:#f4c430;border-right:1px solid #2e2e2e}
 .spa-pause:hover{background:#222}
-.spa-next{background:var(–green);color:var(–black)}
+.spa-next{background:#52b788;color:#0d0d0d}
 .spa-next:hover{background:#45a373}
-.spa-next.sp-finish{background:var(–gold);color:var(–black)}
+.spa-next.sp-finish{background:#f4c430;color:#0d0d0d}
 
 /* Done */
 .sp-done{display:none;flex-direction:column;align-items:center;justify-content:center;flex:1;padding:40px 24px;text-align:center}
@@ -246,11 +249,11 @@ p.bt{font-size:13px;color:var(–mid);line-height:1.75;margin-bottom:12px}
 
 <div class="header">
   <div class="header-inner">
-    <a href="index.html" style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1.5px;color:var(--muted);text-decoration:none;text-transform:uppercase;padding:5px 10px;border:1px solid var(--border);">← Home</a>
+    <a href="index.html" style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1.5px;color:#555;text-decoration:none;text-transform:uppercase;padding:5px 10px;border:1px solid #2e2e2e;">← Home</a>
     <div class="logo">75<span>HARD</span></div>
     <div style="text-align:right">
       <div class="day-badge">Dan & Carrie · 75 Days</div>
-      <div id="syncStatus" style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1px;color:var(--muted);margin-top:2px;">☁️ Loading...</div>
+      <div id="syncStatus" style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1px;color:#555;margin-top:2px;">☁️ Loading...</div>
     </div>
   </div>
 </div>
@@ -287,16 +290,16 @@ p.bt{font-size:13px;color:var(–mid);line-height:1.75;margin-bottom:12px}
       <div class="profile-name">Dan</div>
       <div class="profile-stat"><span class="stat-label">Age</span><span class="stat-val">43</span></div>
       <div class="profile-stat"><span class="stat-label">Start Weight</span><span class="stat-val">184 lbs</span></div>
-      <div class="profile-stat"><span class="stat-label">Goal</span><span class="stat-val" style="color:var(--green)">~170 lbs</span></div>
-      <div class="profile-stat"><span class="stat-label">Daily Calories</span><span class="stat-val" style="color:var(--orange)">2,000 kcal</span></div>
-      <div class="profile-stat"><span class="stat-label">Back Note</span><span class="stat-val" style="color:var(--orange);font-size:11px">Bulged discs — mods throughout</span></div>
+      <div class="profile-stat"><span class="stat-label">Goal</span><span class="stat-val" style="color:#52b788">~170 lbs</span></div>
+      <div class="profile-stat"><span class="stat-label">Daily Calories</span><span class="stat-val" style="color:#f4a261">2,000 kcal</span></div>
+      <div class="profile-stat"><span class="stat-label">Back Note</span><span class="stat-val" style="color:#f4a261;font-size:11px">Bulged discs — mods throughout</span></div>
     </div>
     <div class="profile-card">
       <div class="profile-name">Carrie</div>
       <div class="profile-stat"><span class="stat-label">Age</span><span class="stat-val">42</span></div>
       <div class="profile-stat"><span class="stat-label">Start Weight</span><span class="stat-val">125 lbs</span></div>
-      <div class="profile-stat"><span class="stat-label">Goal</span><span class="stat-val" style="color:var(--green)">Tone / Recomp</span></div>
-      <div class="profile-stat"><span class="stat-label">Daily Calories</span><span class="stat-val" style="color:var(--orange)">1,600 kcal</span></div>
+      <div class="profile-stat"><span class="stat-label">Goal</span><span class="stat-val" style="color:#52b788">Tone / Recomp</span></div>
+      <div class="profile-stat"><span class="stat-label">Daily Calories</span><span class="stat-val" style="color:#f4a261">1,600 kcal</span></div>
       <div class="profile-stat"><span class="stat-label">Level</span><span class="stat-val">Beginner / Moderate</span></div>
     </div>
   </div>
@@ -389,17 +392,17 @@ p.bt{font-size:13px;color:var(–mid);line-height:1.75;margin-bottom:12px}
       </div>
       <div class="player-elapsed" id="pHeaderTime">0:00</div>
     </div>
-    <div style="background:var(--charcoal);border:1px solid var(--border);border-top:none;border-bottom:none;padding:12px 16px;">
+    <div style="background:#1a1a1a;border:1px solid #2e2e2e;border-top:none;border-bottom:none;padding:12px 16px;">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
-        <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--muted)">Goal Progress</div>
-        <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--cream)"><span id="goalMins">0</span><span style="color:var(--muted)"> / 45 min</span></div>
+        <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#555">Goal Progress</div>
+        <div style="font-family:'DM Mono',monospace;font-size:11px;color:#f0ece4"><span id="goalMins">0</span><span style="color:#555"> / 45 min</span></div>
       </div>
-      <div style="height:6px;background:var(--steel);border-radius:3px;overflow:hidden">
-        <div id="goalBar" style="height:100%;background:var(--red);border-radius:3px;width:0%;transition:width 0.5s ease"></div>
+      <div style="height:6px;background:#252525;border-radius:3px;overflow:hidden">
+        <div id="goalBar" style="height:100%;background:#e63946;border-radius:3px;width:0%;transition:width 0.5s ease"></div>
       </div>
-      <div id="goalLabel" style="font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);margin-top:4px;letter-spacing:1px">Check off exercises as you finish them</div>
+      <div id="goalLabel" style="font-family:'DM Mono',monospace;font-size:9px;color:#555;margin-top:4px;letter-spacing:1px">Check off exercises as you finish them</div>
     </div>
-    <div id="exCheckList" style="background:var(--charcoal);border:1px solid var(--border);border-top:none;padding:14px 16px 20px;"></div>
+    <div id="exCheckList" style="background:#1a1a1a;border:1px solid #2e2e2e;border-top:none;padding:14px 16px 20px;"></div>
     <div class="done-screen" id="doneScreen">
       <div class="done-icon">🏆</div>
       <div class="done-title">Session<br>Complete!</div>
@@ -430,9 +433,9 @@ p.bt{font-size:13px;color:var(–mid);line-height:1.75;margin-bottom:12px}
   <div class="diet-person active" id="diet-dan">
     <h3>Dan · 2,000 kcal / day</h3>
     <div class="macro-grid">
-      <div class="macro-card"><div class="macro-val" style="color:var(--red)">185g</div><div class="macro-label">Protein</div></div>
-      <div class="macro-card"><div class="macro-val" style="color:var(--orange)">175g</div><div class="macro-label">Carbs</div></div>
-      <div class="macro-card"><div class="macro-val" style="color:var(--gold)">65g</div><div class="macro-label">Fat</div></div>
+      <div class="macro-card"><div class="macro-val" style="color:#e63946">185g</div><div class="macro-label">Protein</div></div>
+      <div class="macro-card"><div class="macro-val" style="color:#f4a261">175g</div><div class="macro-label">Carbs</div></div>
+      <div class="macro-card"><div class="macro-val" style="color:#f4c430">65g</div><div class="macro-label">Fat</div></div>
     </div>
     <div class="info-box"><strong>Anti-inflammatory priority:</strong> Omega-3s (cod, walnuts, flaxseed), turmeric, leafy greens, berries. Minimize refined sugar and seed oils — helps your back as much as your weight.</div>
     <div class="meal-grid">
@@ -453,9 +456,9 @@ p.bt{font-size:13px;color:var(–mid);line-height:1.75;margin-bottom:12px}
   <div class="diet-person" id="diet-carrie">
     <h3>Carrie · 1,600 kcal / day</h3>
     <div class="macro-grid">
-      <div class="macro-card"><div class="macro-val" style="color:var(--red)">130g</div><div class="macro-label">Protein</div></div>
-      <div class="macro-card"><div class="macro-val" style="color:var(--orange)">150g</div><div class="macro-label">Carbs</div></div>
-      <div class="macro-card"><div class="macro-val" style="color:var(--gold)">55g</div><div class="macro-label">Fat</div></div>
+      <div class="macro-card"><div class="macro-val" style="color:#e63946">130g</div><div class="macro-label">Protein</div></div>
+      <div class="macro-card"><div class="macro-val" style="color:#f4a261">150g</div><div class="macro-label">Carbs</div></div>
+      <div class="macro-card"><div class="macro-val" style="color:#f4c430">55g</div><div class="macro-label">Fat</div></div>
     </div>
     <div class="info-box green"><strong>Goal — Recomposition:</strong> Lose fat, build lean muscle. Keep protein high. Don't under-eat — you'll lose muscle not fat. Dairy is fully on the table.</div>
     <div class="meal-grid">
@@ -1157,7 +1160,7 @@ function renderChecklist(){
     if(curSession.rounds>1&&round!==lastRound){
       lastRound=round;
       const rh=document.createElement('div');
-      rh.style.cssText='font-family:"Bebas Neue",sans-serif;font-size:16px;letter-spacing:2px;color:var(--gold);padding:12px 0 6px;border-bottom:1px solid var(--border);margin-bottom:6px';
+      rh.style.cssText='font-family:"Bebas Neue",sans-serif;font-size:16px;letter-spacing:2px;color:#f4c430;padding:12px 0 6px;border-bottom:1px solid #2e2e2e;margin-bottom:6px';
       rh.textContent='Round '+round+' of '+curSession.rounds;
       list.appendChild(rh);
     }
@@ -1202,13 +1205,13 @@ function updateGoalMeter(){
   document.querySelectorAll('#exCheckList .cl-row.cl-done').forEach(r=>{mins+=parseInt(r.dataset.mins)||0;});
   const pct=Math.min(100,(mins/45)*100);
   document.getElementById('goalBar').style.width=pct+'%';
-  document.getElementById('goalBar').style.background=pct>=100?'var(--green)':pct>=70?'var(--orange)':'var(--red)';
+  document.getElementById('goalBar').style.background=pct>=100?'#52b788':pct>=70?'#f4a261':'#e63946';
   document.getElementById('goalMins').textContent=mins;
   const remaining=Math.max(0,45-mins);
   const lbl=document.getElementById('goalLabel');
-  if(pct>=100){lbl.textContent='🔥 Goal reached! You hit 45 minutes.';lbl.style.color='var(--green)';}
-  else if(pct>=70){lbl.textContent=remaining+' min to go — keep pushing';lbl.style.color='var(--orange)';}
-  else{lbl.textContent='Check off exercises as you finish them · '+remaining+' min remaining';lbl.style.color='var(--muted)';}
+  if(pct>=100){lbl.textContent='🔥 Goal reached! You hit 45 minutes.';lbl.style.color='#52b788';}
+  else if(pct>=70){lbl.textContent=remaining+' min to go — keep pushing';lbl.style.color='#f4a261';}
+  else{lbl.textContent='Check off exercises as you finish them · '+remaining+' min remaining';lbl.style.color='#555';}
 }
 
 function closePlayer(){
@@ -1264,9 +1267,9 @@ function setSyncStatus(status, msg) {
   const el = document.getElementById('syncStatus');
   if (!el) return;
   const icons = { idle:'☁️', syncing:'⏳', ok:'✓', error:'⚠️', offline:'📴', nourl:'⚙️' };
-  const colors = { idle:'var(--muted)', syncing:'var(--gold)', ok:'var(--green)', error:'var(--red)', offline:'var(--muted)', nourl:'var(--muted)' };
+  const colors = { idle:'#555', syncing:'#f4c430', ok:'#52b788', error:'#e63946', offline:'#555', nourl:'#555' };
   el.textContent = (icons[status]||'') + ' ' + (msg || status);
-  el.style.color = colors[status] || 'var(--muted)';
+  el.style.color = colors[status] || '#555';
 }
 
 async function sheetsGet() {
