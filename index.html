@@ -14,7 +14,7 @@ body{background:#0d0d0d;color:#f0ece4;font-family:'DM Sans',system-ui,-apple-sys
 
 /* HERO */
 .hero{padding:48px 24px 36px;position:relative;overflow:hidden}
-.hero::before{content:’’;position:absolute;inset:0;background:linear-gradient(135deg,#1a0505 0%,var(–black) 60%);z-index:0}
+.hero::before{content:’’;position:absolute;inset:0;background:linear-gradient(135deg,#1a0505 0%,#0d0d0d 60%);z-index:0}
 .hero-inner{position:relative;z-index:1}
 .hero-label{font-family:‘DM Mono’,monospace;font-size:10px;letter-spacing:4px;color:#e63946;text-transform:uppercase;margin-bottom:10px}
 .hero-title{font-family:‘Bebas Neue’,sans-serif;font-size:clamp(56px,15vw,96px);line-height:.88;color:#fff;margin-bottom:4px}
@@ -29,8 +29,8 @@ body{background:#0d0d0d;color:#f0ece4;font-family:'DM Sans',system-ui,-apple-sys
 .day-lbl{font-family:‘DM Mono’,monospace;font-size:9px;letter-spacing:2px;color:#555;text-transform:uppercase}
 .day-text{font-size:13px;color:#bbb;margin-top:3px}
 .day-bar-wrap{flex:1;margin-left:auto}
-.day-bar-track{height:4px;background:var(–border);margin-bottom:5px}
-.day-bar-fill{height:100%;background:var(–red);transition:width .6s ease}
+.day-bar-track{height:4px;background:#2e2e2e;margin-bottom:5px}
+.day-bar-fill{height:100%;background:#e63946;transition:width .6s ease}
 .day-pct{font-family:‘DM Mono’,monospace;font-size:9px;color:#555;text-align:right;letter-spacing:1px}
 
 /* APPS GRID */
@@ -40,7 +40,7 @@ body{background:#0d0d0d;color:#f0ece4;font-family:'DM Sans',system-ui,-apple-sys
 @media(min-width:480px){.apps-grid{grid-template-columns:1fr 1fr 1fr}}
 
 .app-card{background:#1a1a1a;border:1px solid #2e2e2e;padding:22px 18px;text-decoration:none;color:#f0ece4;display:flex;flex-direction:column;gap:10px;transition:all .2s;position:relative;overflow:hidden}
-.app-card::before{content:’’;position:absolute;bottom:0;left:0;right:0;height:2px;background:var(–accent-color, var(–red));transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.app-card::before{content:’’;position:absolute;bottom:0;left:0;right:0;height:2px;background:var(–accent-color, #e63946);transform:scaleX(0);transform-origin:left;transition:transform .25s}
 .app-card:hover{border-color:#444;transform:translateY(-2px)}
 .app-card:hover::before{transform:scaleX(1)}
 .app-card:active{transform:translateY(0)}
@@ -64,7 +64,7 @@ body{background:#0d0d0d;color:#f0ece4;font-family:'DM Sans',system-ui,-apple-sys
 .checklist{display:flex;flex-direction:column;gap:8px}
 .check-row{display:flex;align-items:center;gap:12px;background:#1a1a1a;border:1px solid #2e2e2e;padding:13px 16px;cursor:pointer;transition:border-color .15s;user-select:none}
 .check-row:active{border-color:#52b788}
-.check-box{width:20px;height:20px;border:2px solid var(–border);display:flex;align-items:center;justify-content:center;font-size:11px;color:transparent;flex-shrink:0;transition:all .2s}
+.check-box{width:20px;height:20px;border:2px solid #2e2e2e;display:flex;align-items:center;justify-content:center;font-size:11px;color:transparent;flex-shrink:0;transition:all .2s}
 .check-row.done .check-box{background:#52b788;border-color:#52b788;color:#fff}
 .check-label{font-size:13px;color:#f0ece4}
 .check-row.done .check-label{color:#555;text-decoration:line-through}
@@ -72,8 +72,8 @@ body{background:#0d0d0d;color:#f0ece4;font-family:'DM Sans',system-ui,-apple-sys
 /* FOOTER */
 .footer{padding:20px 24px;border-top:1px solid #2e2e2e;text-align:center;font-family:‘DM Mono’,monospace;font-size:9px;letter-spacing:2px;color:#555;text-transform:uppercase}
 .app-card-main{grid-column:1/-1;border-left:3px solid #e63946}
-.app-card-main::before{background:var(–red)}
-.app-card-recipes::before{background:var(–orange)}
+.app-card-main::before{background:#e63946}
+.app-card-recipes::before{background:#f4a261}
 .app-card-groceries::before{background:#52b788}
 .app-card{text-decoration:none !important}
 .app-title{color:#fff !important}
