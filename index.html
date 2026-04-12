@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>75 Hard · Dan & Carrie</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--black:#0d0d0d;--charcoal:#1a1a1a;--steel:#252525;--border:#2e2e2e;--muted:#555;--mid:#888;--light:#bbb;--cream:#f0ece4;--white:#fff;--red:#e63946;--orange:#f4a261;--green:#52b788;--blue:#4cc9f0;--gold:#f4c430}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{background:var(--black);color:var(--cream);font-family:'DM Sans',sans-serif;overflow-x:hidden;min-height:100vh}
+
+/* HERO */
+.hero{padding:48px 24px 36px;position:relative;overflow:hidden}
+.hero::before{content:’’;position:absolute;inset:0;background:linear-gradient(135deg,#1a0505 0%,var(–black) 60%);z-index:0}
+.hero-inner{position:relative;z-index:1}
+.hero-label{font-family:‘DM Mono’,monospace;font-size:10px;letter-spacing:4px;color:var(–red);text-transform:uppercase;margin-bottom:10px}
+.hero-title{font-family:‘Bebas Neue’,sans-serif;font-size:clamp(56px,15vw,96px);line-height:.88;color:var(–white);margin-bottom:4px}
+.hero-title span{color:var(–red)}
+.hero-names{font-family:‘DM Mono’,monospace;font-size:11px;letter-spacing:3px;color:var(–muted);text-transform:uppercase;margin-bottom:20px}
+.hero-sub{font-size:14px;color:var(–mid);line-height:1.6;max-width:340px}
+
+/* DAY COUNTER */
+.day-strip{margin:0 24px 32px;background:var(–charcoal);border:1px solid var(–border);border-left:3px solid var(–red);padding:16px 20px;display:flex;align-items:center;gap:20px}
+.day-num{font-family:‘Bebas Neue’,sans-serif;font-size:52px;color:var(–red);line-height:1}
+.day-info{}
+.day-lbl{font-family:‘DM Mono’,monospace;font-size:9px;letter-spacing:2px;color:var(–muted);text-transform:uppercase}
+.day-text{font-size:13px;color:var(–light);margin-top:3px}
+.day-bar-wrap{flex:1;margin-left:auto}
+.day-bar-track{height:4px;background:var(–border);margin-bottom:5px}
+.day-bar-fill{height:100%;background:var(–red);transition:width .6s ease}
+.day-pct{font-family:‘DM Mono’,monospace;font-size:9px;color:var(–muted);text-align:right;letter-spacing:1px}
+
+/* APPS GRID */
+.apps-section{padding:0 24px 40px}
+.section-label{font-family:‘DM Mono’,monospace;font-size:9px;letter-spacing:3px;color:var(–muted);text-transform:uppercase;margin-bottom:16px}
+.apps-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(min-width:480px){.apps-grid{grid-template-columns:1fr 1fr 1fr}}
+
+.app-card{background:var(–charcoal);border:1px solid var(–border);padding:22px 18px;text-decoration:none;color:var(–cream);display:flex;flex-direction:column;gap:10px;transition:all .2s;position:relative;overflow:hidden}
+.app-card::before{content:’’;position:absolute;bottom:0;left:0;right:0;height:2px;background:var(–accent-color, var(–red));transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.app-card:hover{border-color:#444;transform:translateY(-2px)}
+.app-card:hover::before{transform:scaleX(1)}
+.app-card:active{transform:translateY(0)}
+
+.app-icon{font-size:28px;line-height:1}
+.app-title{font-family:‘Bebas Neue’,sans-serif;font-size:20px;letter-spacing:1.5px;color:var(–white);line-height:1}
+.app-desc{font-size:11px;color:var(–mid);line-height:1.5}
+.app-arrow{font-family:‘DM Mono’,monospace;font-size:9px;letter-spacing:1.5px;color:var(–muted);margin-top:auto}
+
+/* RULES */
+.rules-section{padding:0 24px 32px}
+.rules-title{font-family:‘Bebas Neue’,sans-serif;font-size:26px;letter-spacing:2px;color:var(–white);margin-bottom:14px}
+.rule-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.rule-item{background:var(–charcoal);border:1px solid var(–border);padding:14px 16px}
+.rule-num{font-family:‘DM Mono’,monospace;font-size:9px;letter-spacing:2px;color:var(–red);margin-bottom:5px}
+.rule-text{font-size:12px;color:var(–mid);line-height:1.5}
+
+/* TODAY */
+.today-section{padding:0 24px 40px}
+.today-title{font-family:‘Bebas Neue’,sans-serif;font-size:26px;letter-spacing:2px;color:var(–white);margin-bottom:14px}
+.checklist{display:flex;flex-direction:column;gap:8px}
+.check-row{display:flex;align-items:center;gap:12px;background:var(–charcoal);border:1px solid var(–border);padding:13px 16px;cursor:pointer;transition:border-color .15s;user-select:none}
+.check-row:active{border-color:var(–green)}
+.check-box{width:20px;height:20px;border:2px solid var(–border);display:flex;align-items:center;justify-content:center;font-size:11px;color:transparent;flex-shrink:0;transition:all .2s}
+.check-row.done .check-box{background:var(–green);border-color:var(–green);color:var(–white)}
+.check-label{font-size:13px;color:var(–cream)}
+.check-row.done .check-label{color:var(–muted);text-decoration:line-through}
+
+/* FOOTER */
+.footer{padding:20px 24px;border-top:1px solid var(–border);text-align:center;font-family:‘DM Mono’,monospace;font-size:9px;letter-spacing:2px;color:var(–muted);text-transform:uppercase}
+</style>
+
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-label">The Challenge</div>
+    <div class="hero-title">75<span>HARD</span></div>
+    <div class="hero-names">Dan & Carrie Cleveland</div>
+    <div class="hero-sub">75 days. No compromises. Two workouts a day, clean diet, gallon of water, 10 pages, progress photo. Every single day.</div>
+  </div>
+</div>
+
+<div class="day-strip">
+  <div class="day-num" id="dayNum">1</div>
+  <div class="day-info">
+    <div class="day-lbl">Current Day</div>
+    <div class="day-text" id="dayText">Day 1 of 75</div>
+  </div>
+  <div class="day-bar-wrap">
+    <div class="day-bar-track"><div class="day-bar-fill" id="dayBarFill" style="width:0%"></div></div>
+    <div class="day-pct" id="dayPct">0% complete</div>
+  </div>
+</div>
+
+<div class="apps-section">
+  <div class="section-label">Your Tools</div>
+  <div class="apps-grid">
+    <a class="app-card" href="75hard.html" style="--accent-color:var(--red);grid-column:1/-1">
+      <div class="app-icon">💪</div>
+      <div class="app-title">75 Hard App</div>
+      <div class="app-desc">Workouts, tracker, diet plan, stretch routines. Your daily command center.</div>
+      <div class="app-arrow">OPEN APP →</div>
+    </a>
+    <a class="app-card" href="recipes.html" style="--accent-color:var(--orange)">
+      <div class="app-icon">🍳</div>
+      <div class="app-title">Recipes</div>
+      <div class="app-desc">9 compliant meals with timers and scaling.</div>
+      <div class="app-arrow">OPEN →</div>
+    </a>
+    <a class="app-card" href="groceries.html" style="--accent-color:var(--green)">
+      <div class="app-icon">🛒</div>
+      <div class="app-title">Grocery List</div>
+      <div class="app-desc">Pick 'n Save & Aldi friendly. Tap to check off.</div>
+      <div class="app-arrow">OPEN →</div>
+    </a>
+  </div>
+</div>
+
+<div class="rules-section">
+  <div class="rules-title">The 5 Rules</div>
+  <div class="rule-grid">
+    <div class="rule-item"><div class="rule-num">01</div><div class="rule-text">Two 45-min workouts daily. One must be outdoors.</div></div>
+    <div class="rule-item"><div class="rule-num">02</div><div class="rule-text">Follow the diet. No alcohol. No cheat meals.</div></div>
+    <div class="rule-item"><div class="rule-num">03</div><div class="rule-text">1 gallon of water every day.</div></div>
+    <div class="rule-item"><div class="rule-num">04</div><div class="rule-text">Read 10 pages of non-fiction.</div></div>
+    <div class="rule-item" style="grid-column:1/-1"><div class="rule-num">05</div><div class="rule-text">Take a progress photo every day. Miss any task = restart Day 1. No exceptions.</div></div>
+  </div>
+</div>
+
+<div class="today-section">
+  <div class="today-title">Today's Checklist</div>
+  <div class="checklist" id="todayChecklist"></div>
+</div>
+
+<div class="footer">75 Hard · Dan & Carrie Cleveland · 2026</div>
+
+<script>
+// Day counter — reads from localStorage shared with 75hard app
+const tState = JSON.parse(localStorage.getItem('75h_days') || '{}');
+const completedDays = Object.values(tState).filter(v => v === 'done').length;
+const currentDay = Math.min(75, completedDays + 1);
+const pct = Math.round((completedDays / 75) * 100);
+
+document.getElementById('dayNum').textContent = currentDay;
+document.getElementById('dayText').textContent = `Day ${currentDay} of 75`;
+document.getElementById('dayBarFill').style.width = pct + '%';
+document.getElementById('dayPct').textContent = pct + '% complete';
+
+// Today's checklist — stored separately per day
+const today = new Date().toISOString().split('T')[0];
+const checkKey = '75h_today_' + today;
+const checkState = JSON.parse(localStorage.getItem(checkKey) || '{}');
+
+const TASKS = [
+  'Workout 1 — 45 min indoor',
+  'Workout 2 — 45 min outdoor / rowing',
+  'Diet followed — no cheat meals',
+  '1 gallon of water',
+  '10 pages read',
+  'Progress photo taken',
+  'Morning stretch done',
+  'Evening stretch done',
+];
+
+const cl = document.getElementById('todayChecklist');
+TASKS.forEach((task, i) => {
+  const row = document.createElement('div');
+  row.className = 'check-row' + (checkState[i] ? ' done' : '');
+  row.innerHTML = `<div class="check-box">✓</div><div class="check-label">${task}</div>`;
+  row.addEventListener('click', () => {
+    checkState[i] = !checkState[i];
+    row.classList.toggle('done', checkState[i]);
+    localStorage.setItem(checkKey, JSON.stringify(checkState));
+  });
+  cl.appendChild(row);
+});
+</script>
+
+</body>
+</html>
