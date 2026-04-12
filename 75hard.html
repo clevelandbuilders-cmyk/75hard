@@ -22,7 +22,7 @@ body{background:#0d0d0d;color:#f0ece4;font-family:'DM Sans',sans-serif;overflow-
 .nav{background:#1a1a1a;border-bottom:1px solid #2e2e2e;overflow-x:auto;scrollbar-width:none}
 .nav::-webkit-scrollbar{display:none}
 .nav-inner{max-width:860px;margin:0 auto;display:flex;padding:0 16px}
-.tab{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#555;padding:13px 16px;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .2s;background:none;border-top:none;border-left:none;border-right:none;-webkit-appearance:none;appearance:none}
+.tab{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#555;padding:13px 16px;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .2s;background:none;border-top:none;border-left:none;border-right:none;-webkit-appearance:none;appearance:none;border-radius:0}
 .tab:hover{color:#bbb}.tab.active{color:#fff;border-bottom-color:#e63946}
 .main{max-width:860px;margin:0 auto;padding:24px 18px 80px}
 .section{display:none}.section.active{display:block}
@@ -144,7 +144,7 @@ body{background:#0d0d0d;color:#f0ece4;font-family:'DM Sans',sans-serif;overflow-
 .weight-log{display:grid;gap:7px;margin-bottom:18px}
 .weight-row{display:grid;grid-template-columns:70px 1fr 1fr;gap:8px;align-items:center;background:#1a1a1a;border:1px solid #2e2e2e;padding:11px 13px;font-size:12px}
 .weight-week{font-family:‘Bebas Neue’,sans-serif;font-size:15px;color:#fff}
-.weight-input{background:#0d0d0d;border:1px solid #2e2e2e;padding:5px 8px;color:#f0ece4;font-family:‘DM Mono’,monospace;font-size:12px;width:100%;text-align:center}
+.weight-input{-webkit-appearance:none;appearance:none;background:#0d0d0d;border:1px solid #2e2e2e;padding:5px 8px;color:#f0ece4;font-family:‘DM Mono’,monospace;font-size:12px;width:100%;text-align:center}
 .weight-input:focus{outline:none;border-color:#e63946}
 .wlabel{font-family:‘DM Mono’,monospace;font-size:9px;color:#555;letter-spacing:1px;text-transform:uppercase}
 h3{font-family:‘Bebas Neue’,sans-serif;font-size:20px;letter-spacing:2px;color:#fff;margin-bottom:10px}
@@ -168,7 +168,7 @@ p.bt{font-size:13px;color:#888;line-height:1.75;margin-bottom:12px}
 .dstat{background:#252525;border:1px solid #2e2e2e;padding:12px 8px;text-align:center;}
 .dstat-val{font-family:‘Bebas Neue’,sans-serif;font-size:26px;letter-spacing:1px;color:#fff;}
 .dstat-label{font-family:‘DM Mono’,monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:#555;margin-top:2px;}
-.done-btn{padding:12px 32px;background:#52b788;border:none;color:#0d0d0d;font-family:‘Bebas Neue’,sans-serif;font-size:20px;letter-spacing:3px;cursor:pointer;transition:all .2s;}
+.done-btn{padding:12px 32px;background:#52b788;border:none;color:#0d0d0d;font-family:‘Bebas Neue’,sans-serif;font-size:20px;letter-spacing:3px;cursor:pointer;transition:all .2s;-webkit-appearance:none;appearance:none;border-radius:0;}
 .done-btn:hover{background:#45a373;}
 
 /* CHECKLIST EXERCISE ROWS */
@@ -191,13 +191,13 @@ p.bt{font-size:13px;color:#888;line-height:1.75;margin-bottom:12px}
 .cl-mod{font-size:11px;color:#f4a261;background:rgba(244,162,97,.08);border-left:2px solid #f4a261;padding:6px 10px;line-height:1.5}
 
 /* ══════════ STRETCH PLAYER — inline panel ══════════ */
-.stretch-start-btn{width:100%;padding:9px;background:#252525;border:1px solid #444;color:#bbb;font-family:‘DM Mono’,monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:10px;margin-bottom:3px;}
+.stretch-start-btn{width:100%;padding:9px;background:#252525;border:1px solid #444;color:#bbb;font-family:‘DM Mono’,monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:10px;margin-bottom:3px;;-webkit-appearance:none;appearance:none;border-radius:0}
 .stretch-start-btn:hover{background:#52b788;border-color:#52b788;color:#0d0d0d;}
 .sp-hint{font-family:‘DM Mono’,monospace;font-size:9px;color:#555;text-align:center;letter-spacing:1.5px;margin-bottom:12px;}
 .sp-overlay{display:none;flex-direction:column;}
 .sp-overlay.active{display:flex;}
 .sp-hdr{background:#1a1a1a;border:1px solid #2e2e2e;border-bottom:none;padding:0 16px;display:flex;align-items:center;justify-content:space-between;height:48px;}
-.sp-close{background:none;border:1px solid #2e2e2e;color:#888;font-family:‘DM Mono’,monospace;font-size:10px;letter-spacing:1.5px;padding:6px 12px;cursor:pointer;transition:all .2s}
+.sp-close{background:none;border:1px solid #2e2e2e;color:#888;font-family:‘DM Mono’,monospace;font-size:10px;letter-spacing:1.5px;padding:6px 12px;cursor:pointer;transition:all .2s;-webkit-appearance:none;appearance:none;border-radius:0}
 .sp-close:hover{border-color:#e63946;color:#e63946}
 .sp-hdr-title{font-family:‘Bebas Neue’,sans-serif;font-size:17px;letter-spacing:2px;color:#fff}
 .sp-hdr-count{font-family:‘DM Mono’,monospace;font-size:11px;color:#555;letter-spacing:1px}
@@ -230,7 +230,7 @@ p.bt{font-size:13px;color:#888;line-height:1.75;margin-bottom:12px}
 
 /* Actions */
 .sp-actions{display:grid;grid-template-columns:1fr 1fr 1fr;flex-shrink:0;border-top:1px solid #2e2e2e}
-.sp-act{padding:18px 8px;border:none;font-family:‘Bebas Neue’,sans-serif;font-size:17px;letter-spacing:2px;cursor:pointer;transition:all .2s;text-align:center}
+.sp-act{padding:18px 8px;border:none;font-family:‘Bebas Neue’,sans-serif;font-size:17px;letter-spacing:2px;cursor:pointer;transition:all .2s;text-align:center;-webkit-appearance:none;appearance:none;border-radius:0}
 .spa-prev{background:#252525;color:#888;border-right:1px solid #2e2e2e}
 .spa-prev:hover{background:#2c2c2c;color:#f0ece4}
 .spa-pause{background:#1a1a1a;color:#f4c430;border-right:1px solid #2e2e2e}
@@ -278,7 +278,7 @@ p.bt{font-size:13px;color:#888;line-height:1.75;margin-bottom:12px}
     <div class="hero-sub">Built for Dan & Carrie — around your basement gear, Dan's back, Wisconsin winters, and real life.</div>
   </div>
   <div class="rules-grid">
-    <div class="rule-card"><div class="rule-icon">💪</div><div><div class="rule-title">Two Workouts Daily</div><div class="rule-text">45 min each. One outdoors or cold-weather row substitute.</div></div></div>
+    <div class="rule-card"><div class="rule-icon">💪</div><div><div class="rule-title">Two Workouts Daily</div><div class="rule-text">45 min each. One outdoors or cold-weather rowing/stair substitute.</div></div></div>
     <div class="rule-card"><div class="rule-icon">💧</div><div><div class="rule-title">1 Gallon Water</div><div class="rule-text">128 oz per day. Plain water only.</div></div></div>
     <div class="rule-card"><div class="rule-icon">📖</div><div><div class="rule-title">10 Pages Reading</div><div class="rule-text">Non-fiction or self-improvement. No audiobooks.</div></div></div>
     <div class="rule-card"><div class="rule-icon">🥗</div><div><div class="rule-title">Zero Cheat Meals</div><div class="rule-text">One slip = restart Day 1. No exceptions.</div></div></div>
@@ -303,8 +303,8 @@ p.bt{font-size:13px;color:#888;line-height:1.75;margin-bottom:12px}
       <div class="profile-stat"><span class="stat-label">Level</span><span class="stat-val">Beginner / Moderate</span></div>
     </div>
   </div>
-  <div class="info-box gold"><strong>Equipment:</strong> Rowing machine · TRX · 25 lb KB · 10 lb KB · Bands (light / medium / heavy / leg) · Sit-up bench</div>
-  <div class="info-box green"><strong>Cold Weather Rule:</strong> When outdoors isn't possible, your "outdoor" session = 45 min structured rowing machine work. It counts.</div>
+  <div class="info-box gold"><strong>Equipment:</strong> Bicycles · TRX · Rowing Machine · 2–8 lb Dumbbells · 20 lb Kettlebell · Resistance bands (light / medium / heavy) · Leg bands (light / medium / heavy) · Sit-up bench · Stairs · Zojirushi Rice Cooker</div>
+  <div class="info-box green"><strong>Cold Weather Rule:</strong> When biking outside isn't possible, your outdoor session = 45 min structured rowing machine work, stair climbs, or walk/jog intervals. It counts.</div>
 </div>
 
 <!-- ═══ WORKOUT ═══ -->
@@ -324,7 +324,7 @@ p.bt{font-size:13px;color:#888;line-height:1.75;margin-bottom:12px}
       <button class="ptog active" id="pickDan" onclick="selectPerson('dan',this)">Dan</button>
       <button class="ptog" id="pickCarrie" onclick="selectPerson('carrie',this)">Carrie</button>
     </div>
-    <div class="info-box" id="personNote"><strong>Dan's Back Rules:</strong> No heavy deadlifts, no loaded forward bends. Core = bracing and anti-rotation only. If back flares, substitute any floor work with TRX or band work standing. Modifications shown on every exercise.</div>
+    <div class="info-box" id="personNote"><strong>Dan's Back Rules:</strong> No heavy deadlifts, no loaded forward bends. Core = bracing and anti-rotation only. If back flares, substitute any floor work with standing band work or bodyweight movements. Modifications shown on every exercise.</div>
     <h3>Phase</h3>
     <div class="phase-tabs">
       <button class="phase-tab active" onclick="selPhase(0,this)">Phase 1 · Days 1–25</button>
@@ -342,24 +342,24 @@ p.bt{font-size:13px;color:#888;line-height:1.75;margin-bottom:12px}
       <div class="phase-header" onclick="togPhase(this)"><div><div class="phase-name">Phase 1 — Foundation</div><div class="phase-range">Days 1–25 · Build the habit</div></div><div class="chevron">▼</div></div>
       <div class="phase-body open">
         <p class="bt">Lower intensity, learning movement patterns, building daily discipline.</p>
-        <div class="workout-day full"><div class="wd-header"><div class="wd-day">Monday — Full Body</div><span class="wd-tag tag-f">Full</span></div><div class="wd-sessions"><div class="wd-session"><div class="wds-label">Session 1 · Indoor</div><div class="wds-name">TRX + KB Circuit</div><div class="wds-detail">Rows, squats, swings, pull-aparts, plank. 3 rounds.</div></div><div class="wd-session"><div class="wds-label">Session 2 · Outdoor/Row</div><div class="wds-name">Brisk Walk or Row</div><div class="wds-detail">45 min easy-moderate pace.</div></div></div></div>
-        <div class="workout-day cardio"><div class="wd-header"><div class="wd-day">Tuesday — Cardio</div><span class="wd-tag tag-c">Cardio</span></div><div class="wd-sessions"><div class="wd-session"><div class="wds-label">Session 1 · Indoor</div><div class="wds-name">Row + Band Superset</div><div class="wds-detail">20 min row + 3 rounds band work.</div></div><div class="wd-session"><div class="wds-label">Session 2 · Outdoor</div><div class="wds-name">Walk + Bodyweight</div><div class="wds-detail">20 min walk + park circuit.</div></div></div></div>
-        <div class="workout-day recovery"><div class="wd-header"><div class="wd-day">Wednesday — Recovery</div><span class="wd-tag tag-r">Recovery</span></div><div class="wd-sessions"><div class="wd-session"><div class="wds-label">Session 1 · Indoor</div><div class="wds-name">Yoga Flow</div><div class="wds-detail">Full routine. Back-safe mods throughout.</div></div><div class="wd-session"><div class="wds-label">Session 2 · Outdoor</div><div class="wds-name">Easy Walk</div><div class="wds-detail">45 min mental reset.</div></div></div></div>
-        <div class="workout-day strength"><div class="wd-header"><div class="wd-day">Thursday — Upper Body</div><span class="wd-tag tag-s">Strength</span></div><div class="wd-sessions"><div class="wd-session"><div class="wds-label">Session 1 · Indoor</div><div class="wds-name">TRX Upper + Core</div><div class="wds-detail">Push, row, curl, press. 3–4 rounds.</div></div><div class="wd-session"><div class="wds-label">Session 2 · Outdoor/Row</div><div class="wds-name">Steady Walk or Row</div><div class="wds-detail">HR 120–140 bpm target.</div></div></div></div>
-        <div class="workout-day strength"><div class="wd-header"><div class="wd-day">Friday — Lower Body</div><span class="wd-tag tag-s">Strength</span></div><div class="wd-sessions"><div class="wd-session"><div class="wds-label">Session 1 · Indoor</div><div class="wds-name">KB + Band Lower</div><div class="wds-detail">Goblet squat, RDL, band work. 3 rounds.</div></div><div class="wd-session"><div class="wds-label">Session 2 · Outdoor</div><div class="wds-name">Walk/Jog Intervals</div><div class="wds-detail">4 min walk / 1 min jog × 9.</div></div></div></div>
-        <div class="workout-day cardio"><div class="wd-header"><div class="wd-day">Saturday — Row + Core</div><span class="wd-tag tag-c">Cardio</span></div><div class="wd-sessions"><div class="wd-session"><div class="wds-label">Session 1 · Indoor</div><div class="wds-name">Structured Row</div><div class="wds-detail">5×4 min hard / 2 min easy + core finisher.</div></div><div class="wd-session"><div class="wds-label">Session 2 · Outdoor</div><div class="wds-name">Family Walk</div><div class="wds-detail">Bring Kira. Keep the motivation up.</div></div></div></div>
-        <div class="workout-day recovery"><div class="wd-header"><div class="wd-day">Sunday — Stretch + Walk</div><span class="wd-tag tag-r">Recovery</span></div><div class="wd-sessions"><div class="wd-session"><div class="wds-label">Session 1 · Indoor</div><div class="wds-name">Full Stretch</div><div class="wds-detail">Complete yoga sequence. Hold each pose longer.</div></div><div class="wd-session"><div class="wds-label">Session 2 · Outdoor</div><div class="wds-name">Easy Walk</div><div class="wds-detail">Recovery pace. 45 min.</div></div></div></div>
+        <div class="workout-day full"><div class="wd-header"><div class="wd-day">Monday — Full Body</div><span class="wd-tag tag-f">Full</span></div><div class="wd-sessions"><div class="wd-session"><div class="wds-label">Session 1 · Indoor</div><div class="wds-name">KB + Band Circuit</div><div class="wds-detail">KB swings, goblet squats, DB rows, band work. 3 rounds.</div></div><div class="wd-session"><div class="wds-label">Session 2 · Outdoor/Row</div><div class="wds-name">Bike Ride or Brisk Walk</div><div class="wds-detail">45 min moderate bike or walk.</div></div></div></div>
+        <div class="workout-day cardio"><div class="wd-header"><div class="wd-day">Tuesday — Cardio</div><span class="wd-tag tag-c">Cardio</span></div><div class="wd-sessions"><div class="wd-session"><div class="wds-label">Session 1 · Indoor</div><div class="wds-name">Dumbbell + Band Upper</div><div class="wds-detail">DB + band upper body. 3 rounds.</div></div><div class="wd-session"><div class="wds-label">Session 2 · Outdoor</div><div class="wds-name">Walk + Bodyweight</div><div class="wds-detail">20 min walk + park circuit.</div></div></div></div>
+        <div class="workout-day recovery"><div class="wd-header"><div class="wd-day">Wednesday — Recovery</div><span class="wd-tag tag-r">Recovery</span></div><div class="wd-sessions"><div class="wd-session"><div class="wds-label">Session 1 · Indoor</div><div class="wds-name">Yoga Flow</div><div class="wds-detail">Full routine. Back-safe mods throughout.</div></div><div class="wd-session"><div class="wds-label">Session 2 · Outdoor</div><div class="wds-name">Easy Bike or Walk</div><div class="wds-detail">45 min mental reset.</div></div></div></div>
+        <div class="workout-day strength"><div class="wd-header"><div class="wd-day">Thursday — Upper Body</div><span class="wd-tag tag-s">Strength</span></div><div class="wd-sessions"><div class="wd-session"><div class="wds-label">Session 1 · Indoor</div><div class="wds-name">Dumbbell + Band Strength</div><div class="wds-detail">DB press, rows, curls, band work. 3–4 rounds.</div></div><div class="wd-session"><div class="wds-label">Session 2 · Outdoor/Row</div><div class="wds-name">Steady Walk or Row</div><div class="wds-detail">Bike intervals or steady walk. HR 120–140 bpm.</div></div></div></div>
+        <div class="workout-day strength"><div class="wd-header"><div class="wd-day">Friday — Lower Body</div><span class="wd-tag tag-s">Strength</span></div><div class="wd-sessions"><div class="wd-session"><div class="wds-label">Session 1 · Indoor</div><div class="wds-name">KB + Band Lower</div><div class="wds-detail">Goblet squat, RDL, band work. 3 rounds.</div></div><div class="wd-session"><div class="wds-label">Session 2 · Outdoor</div><div class="wds-name">Bike Intervals or Walk/Jog</div><div class="wds-detail">Bike: 4 min easy / 1 min hard × 8. Or walk/jog.</div></div></div></div>
+        <div class="workout-day cardio"><div class="wd-header"><div class="wd-day">Saturday — Row + Core</div><span class="wd-tag tag-c">Cardio</span></div><div class="wd-sessions"><div class="wd-session"><div class="wds-label">Session 1 · Indoor</div><div class="wds-name">Structured Row</div><div class="wds-detail">Full body KB + band circuit + stair climbs. 4 rounds.</div></div><div class="wd-session"><div class="wds-label">Session 2 · Outdoor</div><div class="wds-name">Family Bike or Walk</div><div class="wds-detail">Bike or walk. Bring Kira.</div></div></div></div>
+        <div class="workout-day recovery"><div class="wd-header"><div class="wd-day">Sunday — Stretch + Walk</div><span class="wd-tag tag-r">Recovery</span></div><div class="wd-sessions"><div class="wd-session"><div class="wds-label">Session 1 · Indoor</div><div class="wds-name">Full Stretch</div><div class="wds-detail">Complete yoga sequence. Hold each pose longer.</div></div><div class="wd-session"><div class="wds-label">Session 2 · Outdoor</div><div class="wds-name">Easy Bike or Walk</div><div class="wds-detail">Easy bike or walk. 45 min.</div></div></div></div>
       </div>
     </div>
     <div class="phase-block">
       <div class="phase-header" onclick="togPhase(this)"><div><div class="phase-name">Phase 2 — Build</div><div class="phase-range">Days 26–50 · Increase intensity</div></div><div class="chevron">▼</div></div>
       <div class="phase-body">
-        <div class="info-box gold"><strong>Changes:</strong> Switch to 25lb KB. Add HIIT row intervals Tue/Thu. TRX: single-leg squat, archer row. 5th set on all circuits. Outdoors: jog/walk intervals.</div>
+        <div class="info-box gold"><strong>Changes:</strong> Increase to 20lb KB for all swings and squats. Add 4th round to all circuits. Bike intervals get harder — 2 min hard / 3 min easy. Stairs: add DBs for step-ups.</div>
         <table class="ex-table"><thead><tr><th>Exercise</th><th>Sets × Reps</th><th>Equipment</th><th>Dan Mod</th></tr></thead><tbody>
-        <tr><td>TRX Single-Leg Squat</td><td>4 × 10 ea</td><td>TRX</td><td>Both legs if back flares</td></tr>
-        <tr><td>KB Swing (25 lb)</td><td>4 × 15</td><td>25 lb KB</td><td>Hip hinge, brace, never round</td></tr>
-        <tr><td>TRX Archer Row</td><td>4 × 10 ea</td><td>TRX</td><td>Neutral spine, slow eccentric</td></tr>
-        <tr><td>KB Goblet Squat (25 lb)</td><td>4 × 12</td><td>25 lb KB</td><td>Box squat to bench if needed</td></tr>
+        <tr><td>Single-Leg Stair Step-Up (8 lb DB)</td><td>4 × 10 ea</td><td>Stairs + 8 lb DB</td><td>Hold rail if balance is off</td></tr>
+        <tr><td>KB Swing (20 lb)</td><td>4 × 15</td><td>25 lb KB</td><td>Hip hinge, brace, never round</td></tr>
+        <tr><td>Dumbbell Row (8 lb)</td><td>4 × 12 ea</td><td>8 lb DB</td><td>Neutral spine, slow eccentric</td></tr>
+        <tr><td>KB Goblet Squat (20 lb)</td><td>4 × 12</td><td>25 lb KB</td><td>Box squat to bench if needed</td></tr>
         <tr><td>Band Pallof Press</td><td>3 × 12 ea</td><td>Medium band</td><td>Anti-rotation — back safe ✓</td></tr>
         <tr><td>Reverse Crunch (Bench)</td><td>3 × 15</td><td>Sit-up bench</td><td>Feet only — no torso curl</td></tr>
         </tbody></table>
@@ -368,14 +368,14 @@ p.bt{font-size:13px;color:#888;line-height:1.75;margin-bottom:12px}
     <div class="phase-block">
       <div class="phase-header" onclick="togPhase(this)"><div><div class="phase-name">Phase 3 — Push</div><div class="phase-range">Days 51–75 · Finish strong</div></div><div class="chevron">▼</div></div>
       <div class="phase-body">
-        <div class="info-box gold"><strong>Changes:</strong> Outdoor = jog/run intervals. Row = 20 min HIIT + 25 min strength. KB clean & press, TRX suspended lunges. Final 10 days: extra set on everything.</div>
+        <div class="info-box gold"><strong>Changes:</strong> Bike = push pace intervals. Add KB clean & press. Stair step-ups with 8 lb DBs every session. Final 10 days: extra set on everything.</div>
         <table class="ex-table"><thead><tr><th>Exercise</th><th>Sets × Reps</th><th>Dan Note</th></tr></thead><tbody>
         <tr><td>KB Clean & Press (25 lb)</td><td>4 × 8 ea</td><td>Standing, strict posture</td></tr>
-        <tr><td>TRX Suspended Lunge</td><td>4 × 10 ea</td><td>Drive through heel</td></tr>
-        <tr><td>KB Swing (25 lb)</td><td>5 × 20</td><td>Power from hips only</td></tr>
+        <tr><td>Stair Step-Up with DB (8 lb)</td><td>4 × 12 ea</td><td>Drive through heel, hold rail if needed</td></tr>
+        <tr><td>KB Swing (20 lb)</td><td>5 × 20</td><td>Power from hips only</td></tr>
         <tr><td>Bird Dog</td><td>4 × 12 ea</td><td>Back-safe core ✓ Slow</td></tr>
         <tr><td>Dead Bug</td><td>3 × 10 ea</td><td>Back flat to floor the whole time</td></tr>
-        <tr><td>Row HIIT</td><td>20 min</td><td>30 sec hard / 30 sec easy × 20</td></tr>
+        <tr><td>Stair Intervals</td><td>20 min</td><td>1 min hard climb / 30 sec easy × 13</td></tr>
         </tbody></table>
       </div>
     </div>
@@ -440,15 +440,16 @@ p.bt{font-size:13px;color:#888;line-height:1.75;margin-bottom:12px}
     <div class="info-box"><strong>Anti-inflammatory priority:</strong> Omega-3s (cod, walnuts, flaxseed), turmeric, leafy greens, berries. Minimize refined sugar and seed oils — helps your back as much as your weight.</div>
     <div class="meal-grid">
       <div class="meal-card"><div><div class="meal-time">Breakfast</div><div class="meal-kcal">~450 kcal</div></div><div><div class="meal-name">Eggs + Oats or Scramble</div><div class="meal-desc">3 eggs scrambled + 1 cup oatmeal with blueberries. OR 3-egg scramble with shredded cheese + whatever veg is in the fridge. Protein shake + banana when leaving early for the job.</div></div></div>
-      <div class="meal-card"><div><div class="meal-time">Lunch</div><div class="meal-kcal">~550 kcal</div></div><div><div class="meal-name">Lean Protein + Carb + Veg</div><div class="meal-desc">Grilled chicken or canned tuna over rice or pasta. Side of green beans, broccoli, or raw veggies. String cheese or almonds on the side. Eating out: grilled protein + rice or baked potato, nothing fried.</div></div></div>
+      <div class="meal-card"><div><div class="meal-time">Lunch</div><div class="meal-kcal">~550 kcal</div></div><div><div class="meal-name">Lean Protein + Carb + Veg</div><div class="meal-desc">Grilled chicken or canned tuna over rice (pull straight from the Zojirushi — zero effort) or pasta. Side of green beans, broccoli, or raw veggies. String cheese or almonds on the side. Eating out: grilled protein + rice or baked potato, nothing fried.</div></div></div>
       <div class="meal-card"><div><div class="meal-time">Snack</div><div class="meal-kcal">~200 kcal</div></div><div><div class="meal-name">Quick Bites</div><div class="meal-desc">2 hard-boiled eggs (batch cook Sunday) · OR · Deli turkey slices + string cheese rolled up · OR · Whole grain crackers + shredded cheese · OR · Cottage cheese + cucumber · OR · Protein energy ball (see batch prep below).</div></div></div>
       <div class="meal-card"><div><div class="meal-time">Dinner</div><div class="meal-kcal">~650 kcal</div></div><div><div class="meal-name">Protein + Carb + Veg</div><div class="meal-desc">Chicken thighs, lean beef, pork tenderloin, cod/white fish, or shrimp. Carb: rice, potato, pasta, or corn tortillas. Veg: green beans, broccoli, cauliflower, zucchini, or frozen mixed. Skip heavy sauces.</div></div></div>
       <div class="meal-card"><div><div class="meal-time">Evening</div><div class="meal-kcal">~150 kcal</div></div><div><div class="meal-name">Optional Protein</div><div class="meal-desc">Cottage cheese or casein shake before bed. Muscle recovery overnight. Skip if not hungry.</div></div></div>
     </div>
     <div class="info-box green"><strong>Carb options:</strong> White or brown rice · Russet or gold potato · Whole wheat pasta · Corn tortillas · Oats · Whole grain bread · Black or pinto beans</div>
     <div class="info-box green"><strong>Dairy — all fine:</strong> Full-fat Greek yogurt · Cottage cheese · Shredded cheese · String cheese · Milk · Butter (in moderation)</div>
-    <div class="info-box gold"><strong>Batch cook Sunday:</strong> Hard-boil a dozen eggs · Grill 4–5 chicken breasts · Cook a big pot of rice. That's 3 days of lunches and snacks handled with zero thought.</div>
+    <div class="info-box gold"><strong>Batch cook Sunday:</strong> Hard-boil a dozen eggs · Grill 4–5 chicken breasts · Set the Zojirushi and walk away — rice stays warm all day on keep-warm mode. That's 3 days of lunches handled with zero thought.</div>
     <div class="info-box"><strong>Eliminate:</strong> Alcohol · Soda · Chips · Fast food · Candy · Frozen dinners · Anything with added sugar in the first 3 ingredients</div>
+  <div class="info-box green"><strong>Zojirushi tip:</strong> Use the timer setting — load it before bed, wake up to fresh rice for breakfast scrambles. Or set it before the job, come home to warm rice ready for dinner. Keep-warm holds it perfectly for up to 12 hours.</div>
   </div>
 
   <!-- CARRIE -->
@@ -488,10 +489,10 @@ p.bt{font-size:13px;color:#888;line-height:1.75;margin-bottom:12px}
   <table class="ex-table"><thead><tr><th>Meal</th><th>Time</th><th>Notes</th></tr></thead><tbody>
   <tr><td>Sheet Pan Chicken Thighs + Green Beans + Potatoes</td><td>30 min</td><td>Olive oil, garlic, salt, pepper. One pan, one oven. Everyone eats the same thing.</td></tr>
   <tr><td>Ground Turkey Taco Bowls</td><td>20 min</td><td>Turkey + cumin + chili powder over rice + black beans + salsa + shredded cheese. Corn tortillas optional.</td></tr>
-  <tr><td>Cod + Green Beans + Rice</td><td>20 min</td><td>Season cod with lemon + garlic + olive oil, bake at 400° for 12–14 min. Frozen green beans in the microwave. Rice cooker does the rest.</td></tr>
+  <tr><td>Cod + Green Beans + Rice</td><td>20 min</td><td>Season cod with lemon + garlic + olive oil, bake at 400° for 12–14 min. Frozen green beans in microwave. Zojirushi handles the rice — just start it when you walk in the door.</td></tr>
   <tr><td>3-Egg Scramble</td><td>10 min</td><td>Eggs + shredded cheese + whatever veg is in the fridge + hot sauce. The no-excuses emergency meal.</td></tr>
   <tr><td>Pasta + Lean Ground Beef + Marinara</td><td>25 min</td><td>Whole wheat pasta + 93/7 beef + jarred marinara (check: no added sugar on label). Simple and filling.</td></tr>
-  <tr><td>Baked Chicken + Broccoli + Rice</td><td>30 min</td><td>Season chicken, 400° for 25 min. Microwave broccoli. Rice cooker. Meal prep Sunday = lunches for 3 days.</td></tr>
+  <tr><td>Baked Chicken + Broccoli + Rice</td><td>30 min</td><td>Season chicken, 400° for 25 min. Microwave broccoli. Start the Zojirushi first — rice is done by the time the chicken is. Meal prep Sunday = lunches for 3 days.</td></tr>
   <tr><td>Slow Cooker Beef Stew</td><td>Set &amp; forget</td><td>Lean beef + carrots + celery + potatoes + broth. Start before the job. Done when you get home.</td></tr>
   <tr><td>Shrimp Stir-Fry + Rice</td><td>15 min</td><td>Frozen shrimp (thaw fast under cold water) + frozen mixed veggies + soy sauce + garlic over rice. Aldi carries all of this.</td></tr>
   <tr><td>Burrito Bowls</td><td>20 min</td><td>Rice + pinto or black beans + grilled chicken + shredded cheese + salsa + sour cream. Everyone builds their own.</td></tr>
@@ -645,7 +646,7 @@ p.bt{font-size:13px;color:#888;line-height:1.75;margin-bottom:12px}
   <h3>Today's Checklist</h3>
   <div class="checklist">
     <div class="check-item" onclick="this.classList.toggle('checked');this.querySelector('.check-box').textContent='✓'"><div class="check-box">✓</div><div><div class="check-label">Workout 1 Complete</div><div class="check-sub">45 min indoor strength / conditioning</div></div></div>
-    <div class="check-item" onclick="this.classList.toggle('checked');this.querySelector('.check-box').textContent='✓'"><div class="check-box">✓</div><div><div class="check-label">Workout 2 Complete</div><div class="check-sub">45 min outdoor or rowing machine</div></div></div>
+    <div class="check-item" onclick="this.classList.toggle('checked');this.querySelector('.check-box').textContent='✓'"><div class="check-box">✓</div><div><div class="check-label">Workout 2 Complete</div><div class="check-sub">45 min outdoor — bike ride, walk, or stair intervals</div></div></div>
     <div class="check-item" onclick="this.classList.toggle('checked');this.querySelector('.check-box').textContent='✓'"><div class="check-box">✓</div><div><div class="check-label">Diet Followed</div><div class="check-sub">No cheat meals, no alcohol</div></div></div>
     <div class="check-item" onclick="this.classList.toggle('checked');this.querySelector('.check-box').textContent='✓'"><div class="check-box">✓</div><div><div class="check-label">1 Gallon Water</div><div class="check-sub">128 oz minimum — plain water only</div></div></div>
     <div class="check-item" onclick="this.classList.toggle('checked');this.querySelector('.check-box').textContent='✓'"><div class="check-box">✓</div><div><div class="check-label">10 Pages Read</div><div class="check-sub">Non-fiction / self-improvement</div></div></div>
@@ -676,210 +677,208 @@ const DAY_KEYS=['mon','tue','wed','thu','fri','sat','sun'];
 // ══════════════════════════════════════
 const SESSIONS_DAN={
   mon:[
-    {name:'Session 1 · Indoor',label:'TRX + KB Full Body Circuit',rounds:3,exercises:[
-      {name:'TRX Row',sets:3,reps:'12',equip:'TRX',desc:'Face anchor, lean back, pull chest to hands. Elbows wide, squeeze shoulder blades at top.',mod:'Keep spine neutral. Don\'t let hips sag.'},
-      {name:'TRX Squat',sets:3,reps:'15',equip:'TRX',desc:'Face anchor, hold handles, feet shoulder-width. Sit back into squat, chest tall.',mod:'Box squat to sit-up bench if knees or back protest.'},
-      {name:'KB Swing (10 lb)',sets:3,reps:'15',equip:'10 lb KB',desc:'Hinge from hips, drive hips forward explosively, swing to chest height.',mod:'If back flares: deadlift pattern only — no swing today.'},
-      {name:'Band Pull-Apart',sets:3,reps:'20',equip:'Light band',desc:'Hold at chest width, pull apart until touching chest, control return.',mod:'Fully back-safe. No mod needed.'},
-      {name:'TRX Plank Hold',sets:3,reps:'30 sec',equip:'TRX',desc:'Feet in foot cradles, hands on floor. Hold rigid plank.',mod:'If back hurts: forearm plank on floor, or sub bird dogs.'},
+    {name:"Session 1 · Indoor",label:"TRX + KB Full Body Circuit",rounds:3,exercises:[
+      {name:"TRX Row",sets:3,reps:"12",equip:"TRX",desc:"Face anchor, lean back, pull chest to hands. Elbows wide, squeeze shoulder blades at top.",mod:"Keep spine neutral. Do not let hips sag."},
+      {name:"KB Swing (20 lb)",sets:3,reps:"15",equip:"20 lb KB",desc:"Hinge from hips, drive hips forward explosively, swing to chest height. Power from hips not arms.",mod:"If back flares: deadlift pattern only — no swing today."},
+      {name:"KB Goblet Squat (20 lb)",sets:3,reps:"12",equip:"20 lb KB",desc:"Hold KB at chest, elbows in. Squat deep, chest tall, drive through heels.",mod:"Sit back to a chair to control depth if needed."},
+      {name:"Band Pull-Apart",sets:3,reps:"20",equip:"Light band",desc:"Hold band at shoulder width, pull apart to chest, control return.",mod:"Fully back-safe. No modification needed."},
+      {name:"Stair Step-Up",sets:3,reps:"12 each leg",equip:"Stairs",desc:"Step up with one foot, drive through heel to stand. Alternate legs.",mod:"Hold the railing for balance. Keep back upright."},
     ]},
-    {name:'Session 2 · Outdoor/Row',label:'Brisk Walk or Easy Row',rounds:1,exercises:[
-      {name:'Warm-Up',sets:1,reps:'5 min',equip:'Outdoors',desc:'Easy pace to get joints moving.',mod:'5 min easy row if cold.'},
-      {name:'Brisk Walk or Row',sets:1,reps:'35 min',equip:'Outdoors or Rower',desc:'Pace where you can talk but feel your heart working. Row: 22–24 strokes/min.',mod:'Row: legs drive first, lean back, then arms. Sit tall.'},
-      {name:'Cool-Down',sets:1,reps:'5 min',equip:'Outdoors',desc:'Easy pace. Let heart rate come down.',mod:''},
+    {name:"Session 2 · Outdoor",label:"Bike Ride or Brisk Walk",rounds:1,exercises:[
+      {name:"Warm-Up",sets:1,reps:"5 min",equip:"Bicycle",desc:"Easy pace, just get moving.",mod:"Walk easy if no bike."},
+      {name:"Steady Bike Ride",sets:1,reps:"35 min",equip:"Bicycle",desc:"Moderate effort — you can talk but feel it.",mod:"Brisk walk 35 min if no bike."},
+      {name:"Cool-Down",sets:1,reps:"5 min",equip:"Bicycle",desc:"Easy spin, let heart rate come down.",mod:"Easy walk."},
     ]}
   ],
   tue:[
-    {name:'Session 1 · Indoor',label:'Row + Band Superset',rounds:3,exercises:[
-      {name:'Moderate Row',sets:1,reps:'20 min',equip:'Rower',desc:'Steady moderate effort. 22–24 strokes/min.',mod:'Sit tall. Don\'t round the lower back at the catch.'},
-      {name:'Band Bicep Curl',sets:3,reps:'15',equip:'Medium band',desc:'Stand on band, curl both hands to shoulders, control descent.',mod:'Fully back-safe.'},
-      {name:'Band Tricep Extension',sets:3,reps:'15',equip:'Medium band',desc:'Anchor overhead, pull down extending elbows fully.',mod:'Keep core braced.'},
-      {name:'Band Lateral Raise',sets:3,reps:'12',equip:'Light band',desc:'Stand on band, raise arms out to shoulder height.',mod:'Lighter band is fine.'},
-      {name:'March in Place',sets:3,reps:'60 sec',equip:'Bodyweight',desc:'Drive knees high, swing arms. Keeps HR up without loading the spine.',mod:'Fully back-safe.'},
+    {name:"Session 1 · Indoor",label:"Row + Band + Dumbbell Circuit",rounds:3,exercises:[
+      {name:"Rowing Machine",sets:1,reps:"15 min",equip:"Rowing Machine",desc:"Steady moderate effort. Legs drive first, lean back, then arms. Sit tall.",mod:"Do not round the lower back at the catch."},
+      {name:"Dumbbell Shoulder Press (8 lb)",sets:3,reps:"12",equip:"8 lb DB",desc:"Stand or sit, press both DBs overhead. Do not arch lower back.",mod:"Seated is safer for the back. Keep core braced."},
+      {name:"Band Bicep Curl",sets:3,reps:"15",equip:"Medium band",desc:"Stand on band, curl both hands to shoulders, slow controlled descent.",mod:"Fully back-safe."},
+      {name:"Band Tricep Extension",sets:3,reps:"15",equip:"Medium band",desc:"Anchor band above, pull down extending elbows fully. Keep elbows at sides.",mod:"Keep core braced."},
+      {name:"Band Lateral Raise",sets:3,reps:"12",equip:"Light band",desc:"Stand on band, raise arms out to shoulder height. Slow and controlled.",mod:"Light band is appropriate here."},
     ]},
-    {name:'Session 2 · Outdoor',label:'Walk + Bodyweight Circuit',rounds:1,exercises:[
-      {name:'Brisk Walk',sets:1,reps:'20 min',equip:'Outdoors',desc:'Get moving. Brisk pace.',mod:''},
-      {name:'Bodyweight Squat',sets:3,reps:'15',equip:'Bodyweight',desc:'Feet shoulder-width, sit back, chest up.',mod:''},
-      {name:'Reverse Lunge',sets:3,reps:'10 each',equip:'Bodyweight',desc:'Step back, lower rear knee toward ground.',mod:'Hold a fence for balance if needed.'},
-      {name:'Push-Up',sets:3,reps:'10',equip:'Bodyweight',desc:'Lower chest to ground, press up.',mod:'Incline on a park bench to reduce load on lower back.'},
-      {name:'Walk Home',sets:1,reps:'5 min',equip:'Outdoors',desc:'Cool-down walk.',mod:''},
+    {name:"Session 2 · Outdoor",label:"Bike + Bodyweight Circuit",rounds:1,exercises:[
+      {name:"Steady Bike",sets:1,reps:"20 min",equip:"Bicycle",desc:"Moderate effort.",mod:"Brisk walk 20 min."},
+      {name:"Bodyweight Squat",sets:3,reps:"15",equip:"Bodyweight",desc:"Feet shoulder-width, sit back, chest up, drive through heels.",mod:""},
+      {name:"Reverse Lunge",sets:3,reps:"10 each",equip:"Bodyweight",desc:"Step back, lower rear knee toward ground. Front knee over ankle.",mod:"Hold a fence for balance if needed."},
+      {name:"Push-Up",sets:3,reps:"10",equip:"Bodyweight",desc:"Lower chest to ground, press up. Full range.",mod:"Incline on a park bench to reduce lower back stress."},
+      {name:"Stair Climbs",sets:2,reps:"3 min",equip:"Stairs",desc:"Walk up and down stairs continuously.",mod:"Hold railing as needed."},
     ]}
   ],
   wed:[
-    {name:'Session 1 · Indoor',label:'Full Yoga Flow',rounds:1,exercises:[
-      {name:'Cat-Cow',sets:1,reps:'90 sec',equip:'Mat',desc:'Inhale to arch, exhale to round. Dan\'s #1 disc exercise.',mod:'Non-negotiable. Do this every single day.'},
-      {name:'Child\'s Pose',sets:1,reps:'60 sec',equip:'Mat',desc:'Sit back on heels, arms forward.',mod:'Widen knees until lower back feels comfortable.'},
-      {name:'Downward Dog',sets:2,reps:'60 sec',equip:'Mat',desc:'Hips high, hands and feet on floor. Walk the dog.',mod:'Bend knees, lengthen spine over straightening legs.'},
-      {name:'Low Lunge',sets:1,reps:'60 sec each side',equip:'Mat',desc:'Front knee over ankle, back knee down, arms overhead.',mod:''},
-      {name:'Warrior I + II',sets:1,reps:'60 sec each side',equip:'Mat',desc:'Warrior I: hips square, arms up. Warrior II: hips open, arms extended.',mod:''},
-      {name:'Supine Pigeon',sets:1,reps:'90 sec each side',equip:'Mat',desc:'On back, cross ankle over opposite knee, pull bottom leg toward chest.',mod:'Always supine. Never floor pigeon with disc issues.'},
-      {name:'Supine Twist',sets:1,reps:'45 sec each side',equip:'Mat',desc:'One knee across body, look opposite.',mod:'Keep both shoulders flat. Don\'t force.'},
-      {name:'Bridge Pose',sets:1,reps:'10 reps + 30 sec',equip:'Mat',desc:'Drive hips to ceiling, squeeze glutes.',mod:''},
-      {name:'Legs Up the Wall',sets:1,reps:'3 min',equip:'Wall',desc:'Full decompression.',mod:''},
-      {name:'Savasana',sets:1,reps:'5 min',equip:'Mat',desc:'Lie flat, eyes closed, completely still.',mod:''},
+    {name:"Session 1 · Indoor",label:"Full Yoga Flow",rounds:1,exercises:[
+      {name:"Cat-Cow",sets:1,reps:"90 sec",equip:"Mat",desc:"Inhale to arch (cow), exhale to round (cat). Dan number 1 disc exercise.",mod:"Non-negotiable. Every single day."},
+      {name:"Child's Pose",sets:1,reps:"60 sec",equip:"Mat",desc:"Sit back on heels, arms forward.",mod:"Widen knees until lower back feels comfortable."},
+      {name:"Downward Dog",sets:2,reps:"60 sec",equip:"Mat",desc:"Hips high, hands and feet on floor. Walk the dog.",mod:"Bend knees generously, focus on lengthening the spine."},
+      {name:"Low Lunge",sets:1,reps:"60 sec each side",equip:"Mat",desc:"Front knee over ankle, back knee down, arms overhead.",mod:""},
+      {name:"Warrior I + II",sets:1,reps:"60 sec each side",equip:"Mat",desc:"Warrior I: hips square arms up. Warrior II: hips open arms extended.",mod:""},
+      {name:"Supine Pigeon",sets:1,reps:"90 sec each side",equip:"Mat",desc:"On back, cross ankle over opposite knee, pull bottom leg toward chest.",mod:"Always supine for Dan. Never floor pigeon with disc issues."},
+      {name:"Supine Twist",sets:1,reps:"45 sec each side",equip:"Mat",desc:"One knee across body, look opposite direction.",mod:"Keep both shoulders flat. Do not force."},
+      {name:"Bridge Pose",sets:1,reps:"10 reps + 30 sec",equip:"Mat",desc:"Drive hips to ceiling, squeeze glutes.",mod:""},
+      {name:"Legs Up the Wall",sets:1,reps:"3 min",equip:"Wall",desc:"Full lumbar decompression.",mod:""},
+      {name:"Savasana",sets:1,reps:"5 min",equip:"Mat",desc:"Lie flat, eyes closed, completely still.",mod:""},
     ]},
-    {name:'Session 2 · Outdoor',label:'Easy Recovery Walk',rounds:1,exercises:[
-      {name:'Easy Walk',sets:1,reps:'45 min',equip:'Outdoors',desc:'No intensity. Podcast or book. Mental reset.',mod:'Cold: 45 min easy row.'},
+    {name:"Session 2 · Outdoor",label:"Easy Recovery Bike or Walk",rounds:1,exercises:[
+      {name:"Easy Bike or Walk",sets:1,reps:"45 min",equip:"Bicycle",desc:"No intensity today. Easy spin or easy walk. Mental reset.",mod:"Walk 45 min if preferred."},
     ]}
   ],
   thu:[
-    {name:'Session 1 · Indoor',label:'TRX Upper Body + Core',rounds:4,exercises:[
-      {name:'TRX Push-Up',sets:4,reps:'10',equip:'TRX',desc:'Feet in cradles, hands on floor. Lower chest, press up.',mod:'Incline push-ups on bench if back doesn\'t like this.'},
-      {name:'TRX Row',sets:4,reps:'12',equip:'TRX',desc:'Pull chest to hands, elbows wide, squeeze at top.',mod:''},
-      {name:'TRX Bicep Curl',sets:4,reps:'12',equip:'TRX',desc:'Face anchor, lean back, curl body weight up.',mod:''},
-      {name:'TRX Tricep Press',sets:4,reps:'12',equip:'TRX',desc:'Face away, lean forward, bend elbows to lower head, press out.',mod:'Keep core braced. Don\'t let hips drop.'},
-      {name:'Reverse Crunch',sets:3,reps:'15',equip:'Sit-up bench',desc:'Lie on decline. Drive knees toward chest.',mod:'Feet and legs only — no full torso curl.'},
-      {name:'Band Pallof Press',sets:3,reps:'12 each',equip:'Medium band',desc:'Anchor band at chest height, press straight out and return. Anti-rotation core.',mod:'This IS the back-safe core exercise. Perfect for disc issues.'},
+    {name:"Session 1 · Indoor",label:"TRX Upper Body + Core",rounds:4,exercises:[
+      {name:"TRX Push-Up",sets:4,reps:"10",equip:"TRX",desc:"Feet in cradles, hands on floor. Lower chest, press up.",mod:"Incline push-ups on bench if back does not like this."},
+      {name:"TRX Row",sets:4,reps:"12",equip:"TRX",desc:"Pull chest to hands, elbows wide, squeeze at top.",mod:""},
+      {name:"TRX Bicep Curl",sets:4,reps:"12",equip:"TRX",desc:"Face anchor, lean back, curl bodyweight up.",mod:""},
+      {name:"TRX Tricep Press",sets:4,reps:"12",equip:"TRX",desc:"Face away, lean forward, bend elbows to lower, press out.",mod:"Keep core braced. Do not let hips drop."},
+      {name:"Bird Dog",sets:3,reps:"10 each side",equip:"Floor",desc:"On hands and knees, extend opposite arm and leg. Hold 2 seconds, return slowly.",mod:"Gold standard back-safe core exercise. Go slow."},
+      {name:"Band Pallof Press",sets:3,reps:"12 each side",equip:"Medium band",desc:"Anchor band at chest height, press straight out and return. Anti-rotation core.",mod:"Perfect for disc issues."},
     ]},
-    {name:'Session 2 · Outdoor/Row',label:'Steady Walk or Row',rounds:1,exercises:[
-      {name:'Steady Walk or Row',sets:1,reps:'45 min',equip:'Outdoors or Rower',desc:'Target HR 120–140 bpm.',mod:'Row: 22–24 strokes/min. Sit tall.'},
+    {name:"Session 2 · Outdoor",label:"Bike Intervals",rounds:1,exercises:[
+      {name:"Bike Intervals",sets:8,reps:"4 min easy · 1 min hard",equip:"Bicycle",desc:"Easy pace 4 min, push hard 1 min. Repeat 8 times = 40 min.",mod:"Walk/jog intervals if no bike — 4 min walk, 1 min jog x 8."},
     ]}
   ],
   fri:[
-    {name:'Session 1 · Indoor',label:'KB + Band Lower Body',rounds:3,exercises:[
-      {name:'KB Goblet Squat (10 lb)',sets:3,reps:'12',equip:'10 lb KB',desc:'Hold KB at chest, squat deep, chest tall.',mod:'Box squat to sit-up bench to control depth.'},
-      {name:'KB Romanian Deadlift (10 lb)',sets:3,reps:'12',equip:'10 lb KB',desc:'Hinge from hips, lower KB along legs until hamstring pull, drive up. Back flat.',mod:'Light weight and neutral spine only. Stop if you feel back pain.'},
-      {name:'Band Leg Press (Floor)',sets:3,reps:'15',equip:'Leg band',desc:'On back, loop band around feet, press legs out.',mod:'Fully back-safe ✓'},
-      {name:'Band Clamshell',sets:3,reps:'20 each',equip:'Leg band',desc:'Lie on side, band above knees. Open top knee, close slowly.',mod:'Fully back-safe ✓'},
-      {name:'Band Lateral Walk',sets:3,reps:'15 steps each way',equip:'Leg band',desc:'Band above knees, slight squat. Step side-to-side.',mod:'Stand more upright if bent position bothers back.'},
+    {name:"Session 1 · Indoor",label:"KB + Band Lower Body + Stairs",rounds:3,exercises:[
+      {name:"KB Goblet Squat (20 lb)",sets:3,reps:"12",equip:"20 lb KB",desc:"Hold KB at chest, squat to full depth. Drive through heels.",mod:"Box squat to a chair to control depth."},
+      {name:"KB Romanian Deadlift (20 lb)",sets:3,reps:"12",equip:"20 lb KB",desc:"Hinge from hips, lower KB along legs until hamstring tension, drive up. Back flat.",mod:"Strict neutral spine only. Stop immediately if lower back hurts."},
+      {name:"Band Clamshell",sets:3,reps:"20 each",equip:"Medium leg band",desc:"Lie on side, band above knees. Open top knee toward ceiling, close slowly.",mod:"Fully back-safe."},
+      {name:"Band Lateral Walk",sets:3,reps:"15 steps each way",equip:"Medium leg band",desc:"Band above knees, squat position. Step side-to-side with constant tension.",mod:"Stand more upright if needed."},
+      {name:"Stair Step-Up with DB (8 lb)",sets:3,reps:"10 each leg",equip:"Stairs + 8 lb DB",desc:"Hold a dumbbell in each hand. Step up, drive through heel. Controlled descent.",mod:"No weight if balance is an issue."},
     ]},
-    {name:'Session 2 · Outdoor',label:'Walk / Jog Intervals',rounds:1,exercises:[
-      {name:'Walk/Jog Intervals',sets:9,reps:'4 min walk · 1 min jog',equip:'Outdoors',desc:'Walk 4 min brisk, jog 1 min. Repeat 9 times = 45 min.',mod:'Cold: Row 4 min easy / 1 min hard × 9.'},
+    {name:"Session 2 · Outdoor",label:"Bike Ride — Longer Effort",rounds:1,exercises:[
+      {name:"Bike Ride",sets:1,reps:"45 min",equip:"Bicycle",desc:"Moderate effort for the full 45 minutes. Main cardio day.",mod:"Walk/jog intervals if no bike — 4 min walk, 1 min jog x 9."},
     ]}
   ],
   sat:[
-    {name:'Session 1 · Indoor',label:'Structured Row + Core',rounds:1,exercises:[
-      {name:'Row Warm-Up',sets:1,reps:'5 min',equip:'Rower',desc:'Easy effort. 18–20 strokes/min.',mod:'Sit tall. Long fluid strokes.'},
-      {name:'Row Intervals (5×4 min)',sets:5,reps:'4 min hard · 2 min easy',equip:'Rower',desc:'Hard: 24–26 strokes/min. Full recovery easy intervals.',mod:'Drive with legs — keep lumbar stable on hard intervals.'},
-      {name:'Row Cool-Down',sets:1,reps:'5 min',equip:'Rower',desc:'Easy effort. Breathe.',mod:''},
-      {name:'TRX Plank Hold',sets:3,reps:'30 sec',equip:'TRX',desc:'Feet in cradles. Rigid plank.',mod:'Standing forearm plank against wall if back is irritated.'},
-      {name:'Bird Dog',sets:3,reps:'10 each',equip:'Floor',desc:'Extend opposite arm and leg. Hold 2 sec, return.',mod:'Gold standard back-safe core. This IS your modification.'},
+    {name:"Session 1 · Indoor",label:"Structured Row + KB + Core",rounds:1,exercises:[
+      {name:"Row Warm-Up",sets:1,reps:"5 min",equip:"Rowing Machine",desc:"Easy effort. Long fluid strokes.",mod:"Sit tall."},
+      {name:"Row Intervals",sets:5,reps:"4 min hard · 2 min easy",equip:"Rowing Machine",desc:"Hard: push pace. Easy: full recovery. 5 rounds.",mod:"Drive with legs — keep lumbar stable on hard intervals."},
+      {name:"Row Cool-Down",sets:1,reps:"5 min",equip:"Rowing Machine",desc:"Easy effort. Breathe.",mod:""},
+      {name:"KB Swing (20 lb)",sets:3,reps:"15",equip:"20 lb KB",desc:"Drive hard. Full hip extension at top.",mod:"Reduce reps or skip if back is tired from the week."},
+      {name:"Bird Dog",sets:3,reps:"12 each side",equip:"Floor",desc:"Opposite arm and leg. Hold 2 sec. Quality over speed.",mod:""},
+      {name:"Stair Climbs",sets:2,reps:"3 min",equip:"Stairs",desc:"Up and down stairs continuously.",mod:"Hold railing as needed."},
     ]},
-    {name:'Session 2 · Outdoor',label:'Family Walk',rounds:1,exercises:[
-      {name:'Family Walk',sets:1,reps:'45 min',equip:'Outdoors',desc:'Bring Kira. Make it fun. Morale fuel.',mod:''},
+    {name:"Session 2 · Outdoor",label:"Family Bike Ride or Walk",rounds:1,exercises:[
+      {name:"Family Bike or Walk",sets:1,reps:"45 min",equip:"Bicycle",desc:"Bring Kira. Easy-moderate pace. Make it fun.",mod:"Walk 45 min at comfortable family pace."},
     ]}
   ],
   sun:[
-    {name:'Session 1 · Indoor',label:'Full Stretch + Recovery',rounds:1,exercises:[
-      {name:'Cat-Cow',sets:1,reps:'2 min',equip:'Mat',desc:'10 slow reps. Start every session here.',mod:''},
-      {name:'Child\'s Pose',sets:1,reps:'90 sec',equip:'Mat',desc:'Wider knees today. Hold longer.',mod:'Widen until comfortable.'},
-      {name:'Hip Flexor Stretch',sets:1,reps:'90 sec each side',equip:'Mat',desc:'Half-kneeling, lean forward. Hold longer — recovery day.',mod:''},
-      {name:'Supine Pigeon',sets:1,reps:'90 sec each side',equip:'Mat',desc:'Figure-4 on back. Most important hip stretch.',mod:'Never force floor pigeon with disc issues.'},
-      {name:'Band Hamstring Stretch',sets:1,reps:'90 sec each leg',equip:'Resistance band',desc:'On back, loop band around foot, lift leg.',mod:''},
-      {name:'Bridge Pose',sets:1,reps:'10 reps + 30 sec',equip:'Mat',desc:'Drive hips high, squeeze glutes.',mod:''},
-      {name:'Legs Up the Wall',sets:1,reps:'4 min',equip:'Wall',desc:'Full decompression. Non-negotiable.',mod:''},
-      {name:'Savasana',sets:1,reps:'5 min',equip:'Mat',desc:'Completely still. Eyes closed.',mod:''},
+    {name:"Session 1 · Indoor",label:"Full Stretch + Recovery",rounds:1,exercises:[
+      {name:"Cat-Cow",sets:1,reps:"2 min",equip:"Mat",desc:"10 slow reps to open the week.",mod:""},
+      {name:"Child's Pose",sets:1,reps:"90 sec",equip:"Mat",desc:"Arms forward. Let hips melt toward heels.",mod:""},
+      {name:"Hip Flexor Stretch",sets:1,reps:"90 sec each side",equip:"Mat",desc:"Half-kneeling, lean forward into hip. Hold longer on recovery day.",mod:""},
+      {name:"Supine Pigeon",sets:1,reps:"90 sec each side",equip:"Mat",desc:"Figure-4 on back. Pull bottom leg toward chest.",mod:""},
+      {name:"Band Hamstring Stretch",sets:1,reps:"90 sec each leg",equip:"Light band",desc:"On back, loop band around foot, lift leg toward ceiling.",mod:""},
+      {name:"Bridge Pose",sets:1,reps:"10 reps + 30 sec",equip:"Mat",desc:"Drive hips high.",mod:""},
+      {name:"Happy Baby",sets:1,reps:"60 sec",equip:"Mat",desc:"On back, grab outer feet, knees wide. Rock gently.",mod:""},
+      {name:"Legs Up the Wall",sets:1,reps:"4 min",equip:"Wall",desc:"Full decompression.",mod:""},
+      {name:"Savasana",sets:1,reps:"5 min",equip:"Mat",desc:"Completely still. Let it go.",mod:""},
     ]},
-    {name:'Session 2 · Outdoor',label:'Recovery Walk',rounds:1,exercises:[
-      {name:'Recovery Walk',sets:1,reps:'45 min',equip:'Outdoors',desc:'Recovery pace. Low heart rate. Tomorrow starts a new week.',mod:''},
+    {name:"Session 2 · Outdoor",label:"Easy Recovery Bike or Walk",rounds:1,exercises:[
+      {name:"Easy Bike or Walk",sets:1,reps:"45 min",equip:"Bicycle",desc:"Easy pace. Reset before the new week.",mod:"Walk 45 min easy."},
     ]}
   ]
 };
 
-// ══════════════════════════════════════
-// CARRIE'S SESSIONS — no back restrictions, appropriate weights, full range
-// ══════════════════════════════════════
 const SESSIONS_CARRIE={
   mon:[
-    {name:'Session 1 · Indoor',label:'TRX + KB Full Body Circuit',rounds:3,exercises:[
-      {name:'TRX Row',sets:3,reps:'15',equip:'TRX',desc:'Face anchor, lean back, pull chest to hands. More horizontal = harder. Go challenging.',mod:''},
-      {name:'TRX Squat',sets:3,reps:'15',equip:'TRX',desc:'Face anchor, sit back deep into squat, drive through heels. Full range of motion.',mod:''},
-      {name:'KB Swing (10 lb)',sets:3,reps:'20',equip:'10 lb KB',desc:'Hinge from hips, drive hips forward, swing to chest height. Power from hip snap.',mod:''},
-      {name:'Band Pull-Apart',sets:3,reps:'25',equip:'Light band',desc:'Pull band apart at chest height. Shoulder health and upper back activation.',mod:''},
-      {name:'TRX Plank + Knee Tuck',sets:3,reps:'10',equip:'TRX',desc:'Feet in cradles, plank position. Drive both knees to chest and return. Core and stability.',mod:''},
+    {name:"Session 1 · Indoor",label:"TRX + Dumbbell Full Body",rounds:3,exercises:[
+      {name:"TRX Row",sets:3,reps:"12",equip:"TRX",desc:"Face anchor, lean back, pull chest to hands. Elbows wide.",mod:""},
+      {name:"TRX Squat",sets:3,reps:"15",equip:"TRX",desc:"Face anchor, hold handles, feet shoulder-width. Sit back into squat, chest tall.",mod:""},
+      {name:"Dumbbell Shoulder Press (8 lb)",sets:3,reps:"12",equip:"8 lb DB",desc:"Press both DBs overhead from shoulder height.",mod:""},
+      {name:"Band Pull-Apart",sets:3,reps:"20",equip:"Light band",desc:"Hold band at shoulder width, pull apart to chest.",mod:""},
+      {name:"Stair Step-Up",sets:3,reps:"15 each leg",equip:"Stairs",desc:"Step up with one foot, drive through heel. Alternate legs.",mod:""},
     ]},
-    {name:'Session 2 · Outdoor/Row',label:'Brisk Walk or Easy Row',rounds:1,exercises:[
-      {name:'Warm-Up Walk',sets:1,reps:'5 min',equip:'Outdoors',desc:'Easy pace.',mod:''},
-      {name:'Brisk Walk or Row',sets:1,reps:'35 min',equip:'Outdoors or Rower',desc:'Brisk walking pace where you feel your heart rate. Row: 22–24 strokes/min.',mod:''},
-      {name:'Cool-Down',sets:1,reps:'5 min',equip:'Outdoors',desc:'Easy pace. Breathe.',mod:''},
+    {name:"Session 2 · Outdoor",label:"Bike Ride or Brisk Walk",rounds:1,exercises:[
+      {name:"Warm-Up",sets:1,reps:"5 min",equip:"Bicycle",desc:"Easy pace.",mod:"Easy walk."},
+      {name:"Steady Bike",sets:1,reps:"35 min",equip:"Bicycle",desc:"Moderate effort. Consistent pace.",mod:"Brisk walk 35 min."},
+      {name:"Cool-Down",sets:1,reps:"5 min",equip:"Bicycle",desc:"Easy spin.",mod:"Easy walk."},
     ]}
   ],
   tue:[
-    {name:'Session 1 · Indoor',label:'Row + Band Superset',rounds:3,exercises:[
-      {name:'Moderate Row',sets:1,reps:'20 min',equip:'Rower',desc:'Steady moderate effort. 22–24 strokes/min. Focus on full leg drive and posture.',mod:''},
-      {name:'Band Bicep Curl',sets:3,reps:'15',equip:'Medium band',desc:'Stand on band, curl both arms to shoulders, squeeze at top.',mod:''},
-      {name:'Band Tricep Extension',sets:3,reps:'15',equip:'Medium band',desc:'Anchor overhead, extend elbows fully. Keep upper arms still.',mod:''},
-      {name:'Band Lateral Raise',sets:3,reps:'15',equip:'Light band',desc:'Stand on band, raise arms to shoulder height. Slow descent.',mod:''},
-      {name:'Band Front Raise',sets:3,reps:'12',equip:'Light band',desc:'Stand on band, raise arms straight in front to shoulder height.',mod:''},
+    {name:"Session 1 · Indoor",label:"Row + Band Upper Body",rounds:3,exercises:[
+      {name:"Rowing Machine",sets:1,reps:"15 min",equip:"Rowing Machine",desc:"Steady moderate effort. Build your stroke.",mod:""},
+      {name:"Band Bicep Curl",sets:3,reps:"15",equip:"Medium band",desc:"Stand on band, curl hands to shoulders, slow descent.",mod:""},
+      {name:"Band Tricep Extension",sets:3,reps:"15",equip:"Medium band",desc:"Anchor band above, pull down extending elbows.",mod:""},
+      {name:"Dumbbell Lateral Raise (6 lb)",sets:3,reps:"12",equip:"6 lb DB",desc:"Raise arms out to shoulder height. Slow and controlled.",mod:""},
+      {name:"Stair Climbs",sets:3,reps:"3 min",equip:"Stairs",desc:"Up and down stairs continuously for 3 minutes.",mod:""},
     ]},
-    {name:'Session 2 · Outdoor',label:'Walk + Bodyweight Circuit',rounds:1,exercises:[
-      {name:'Brisk Walk',sets:1,reps:'20 min',equip:'Outdoors',desc:'Fast walk pace. Arms pumping.',mod:''},
-      {name:'Bodyweight Squat',sets:3,reps:'20',equip:'Bodyweight',desc:'Full depth squat. Chest tall, knees track toes.',mod:''},
-      {name:'Walking Lunge',sets:3,reps:'12 each leg',equip:'Bodyweight',desc:'Step forward and lower rear knee, continue walking. Tougher than reverse lunges.',mod:''},
-      {name:'Push-Up',sets:3,reps:'10',equip:'Bodyweight',desc:'Full push-up or incline on bench. Chest to surface.',mod:''},
-      {name:'Glute Bridge',sets:3,reps:'20',equip:'Bodyweight',desc:'On back, feet flat, drive hips up. Squeeze glutes hard at top.',mod:''},
-      {name:'Walk Home',sets:1,reps:'5 min',equip:'Outdoors',desc:'Cool-down.',mod:''},
+    {name:"Session 2 · Outdoor",label:"Bike + Bodyweight",rounds:1,exercises:[
+      {name:"Steady Bike",sets:1,reps:"20 min",equip:"Bicycle",desc:"Moderate effort.",mod:"Brisk walk 20 min."},
+      {name:"Bodyweight Squat",sets:3,reps:"20",equip:"Bodyweight",desc:"Full depth squat. Chest tall, knees track toes.",mod:""},
+      {name:"Walking Lunge",sets:3,reps:"12 each leg",equip:"Bodyweight",desc:"Step forward and lower rear knee, continue walking.",mod:""},
+      {name:"Push-Up",sets:3,reps:"10",equip:"Bodyweight",desc:"Full push-up or incline on bench.",mod:""},
+      {name:"Glute Bridge",sets:3,reps:"20",equip:"Bodyweight",desc:"On back, feet flat, drive hips up. Squeeze glutes at top.",mod:""},
     ]}
   ],
   wed:[
-    {name:'Session 1 · Indoor',label:'Full Yoga Flow',rounds:1,exercises:[
-      {name:'Cat-Cow',sets:1,reps:'90 sec',equip:'Mat',desc:'Inhale to arch, exhale to round. 10 slow reps.',mod:''},
-      {name:'Child\'s Pose',sets:1,reps:'60 sec',equip:'Mat',desc:'Sit back on heels, arms forward, forehead down.',mod:''},
-      {name:'Downward Dog',sets:2,reps:'60 sec',equip:'Mat',desc:'Hips high. Pedal heels alternately. Work toward straight legs.',mod:''},
-      {name:'Low Lunge',sets:1,reps:'60 sec each side',equip:'Mat',desc:'Front knee over ankle, back knee down, arms overhead.',mod:''},
-      {name:'Warrior I + II',sets:1,reps:'60 sec each side',equip:'Mat',desc:'Warrior I: hips square, arms up. Warrior II: hips open, arms extended.',mod:''},
-      {name:'Pigeon Pose',sets:1,reps:'90 sec each side',equip:'Mat',desc:'Full floor pigeon. Shin across mat, back leg extended. Fold forward.',mod:''},
-      {name:'Seated Spinal Twist',sets:1,reps:'45 sec each side',equip:'Mat',desc:'One leg extended, cross other foot over knee. Rotate toward raised knee.',mod:''},
-      {name:'Bridge Pose',sets:1,reps:'10 reps + 30 sec',equip:'Mat',desc:'Drive hips to ceiling, strong glute squeeze.',mod:''},
-      {name:'Legs Up the Wall',sets:1,reps:'3 min',equip:'Wall',desc:'Full decompression.',mod:''},
-      {name:'Savasana',sets:1,reps:'5 min',equip:'Mat',desc:'Lie flat, eyes closed, completely still.',mod:''},
+    {name:"Session 1 · Indoor",label:"Full Yoga Flow",rounds:1,exercises:[
+      {name:"Cat-Cow",sets:1,reps:"90 sec",equip:"Mat",desc:"Inhale to arch, exhale to round. 10 slow reps.",mod:""},
+      {name:"Child's Pose",sets:1,reps:"60 sec",equip:"Mat",desc:"Sit back on heels, arms forward, forehead down.",mod:""},
+      {name:"Downward Dog",sets:2,reps:"60 sec",equip:"Mat",desc:"Hips high. Pedal heels alternately.",mod:""},
+      {name:"Low Lunge",sets:1,reps:"60 sec each side",equip:"Mat",desc:"Front knee over ankle, back knee down, arms overhead.",mod:""},
+      {name:"Warrior I + II",sets:1,reps:"60 sec each side",equip:"Mat",desc:"Warrior I: hips square arms up. Warrior II: hips open arms extended.",mod:""},
+      {name:"Pigeon Pose",sets:1,reps:"90 sec each side",equip:"Mat",desc:"Full floor pigeon. Shin across mat, back leg extended. Fold forward.",mod:""},
+      {name:"Seated Spinal Twist",sets:1,reps:"45 sec each side",equip:"Mat",desc:"One leg extended, cross other foot over knee. Rotate toward raised knee.",mod:""},
+      {name:"Bridge Pose",sets:1,reps:"10 reps + 30 sec",equip:"Mat",desc:"Drive hips to ceiling, strong glute squeeze.",mod:""},
+      {name:"Legs Up the Wall",sets:1,reps:"3 min",equip:"Wall",desc:"Full decompression.",mod:""},
+      {name:"Savasana",sets:1,reps:"5 min",equip:"Mat",desc:"Lie flat, eyes closed, completely still.",mod:""},
     ]},
-    {name:'Session 2 · Outdoor',label:'Easy Recovery Walk',rounds:1,exercises:[
-      {name:'Easy Walk',sets:1,reps:'45 min',equip:'Outdoors',desc:'No intensity. Podcast or book. Mental reset.',mod:''},
+    {name:"Session 2 · Outdoor",label:"Easy Recovery Bike or Walk",rounds:1,exercises:[
+      {name:"Easy Bike or Walk",sets:1,reps:"45 min",equip:"Bicycle",desc:"No intensity. Mental reset.",mod:"Walk 45 min."},
     ]}
   ],
   thu:[
-    {name:'Session 1 · Indoor',label:'TRX Upper Body + Core',rounds:4,exercises:[
-      {name:'TRX Push-Up',sets:4,reps:'12',equip:'TRX',desc:'Feet in cradles, hands on floor. Lower chest, press up. Go deeper than a regular push-up.',mod:''},
-      {name:'TRX Row',sets:4,reps:'15',equip:'TRX',desc:'Pull chest to hands, elbows wide. Try to get more horizontal each set.',mod:''},
-      {name:'TRX Bicep Curl',sets:4,reps:'12',equip:'TRX',desc:'Face anchor, lean back, curl body weight up.',mod:''},
-      {name:'TRX Tricep Press',sets:4,reps:'12',equip:'TRX',desc:'Face away, lean forward, bend elbows down, press out.',mod:''},
-      {name:'Sit-Up Bench Crunch',sets:3,reps:'20',equip:'Sit-up bench',desc:'Full range crunch on decline bench. Slow and controlled on the way down.',mod:''},
-      {name:'Decline Oblique Twist',sets:3,reps:'15 each',equip:'Sit-up bench',desc:'Rotate elbow toward opposite knee on the decline.',mod:''},
+    {name:"Session 1 · Indoor",label:"TRX Upper Body + Core",rounds:4,exercises:[
+      {name:"TRX Push-Up",sets:4,reps:"12",equip:"TRX",desc:"Feet in cradles, hands on floor. Lower chest, press up. Go deeper than a regular push-up.",mod:""},
+      {name:"TRX Row",sets:4,reps:"15",equip:"TRX",desc:"Pull chest to hands, elbows wide.",mod:""},
+      {name:"TRX Bicep Curl",sets:4,reps:"12",equip:"TRX",desc:"Face anchor, lean back, curl bodyweight up.",mod:""},
+      {name:"TRX Tricep Press",sets:4,reps:"12",equip:"TRX",desc:"Face away, lean forward, bend elbows down, press out.",mod:""},
+      {name:"Sit-Up Bench Crunch",sets:3,reps:"20",equip:"Sit-up bench",desc:"Full range crunch on decline bench. Slow and controlled on the way down.",mod:""},
+      {name:"Glute Bridge + Hold",sets:3,reps:"15 reps + 10 sec hold",equip:"Bodyweight",desc:"Drive hips up, hold at top for 10 seconds, lower slowly.",mod:""},
     ]},
-    {name:'Session 2 · Outdoor/Row',label:'Steady Walk or Row',rounds:1,exercises:[
-      {name:'Steady Walk or Row',sets:1,reps:'45 min',equip:'Outdoors or Rower',desc:'Target HR 120–140 bpm. Aerobic base work.',mod:''},
+    {name:"Session 2 · Outdoor",label:"Bike Intervals",rounds:1,exercises:[
+      {name:"Bike Intervals",sets:8,reps:"4 min easy · 1 min hard",equip:"Bicycle",desc:"Easy 4 min, push hard 1 min. Repeat 8 times.",mod:"Walk/jog intervals if no bike."},
     ]}
   ],
   fri:[
-    {name:'Session 1 · Indoor',label:'KB + Band Lower Body',rounds:3,exercises:[
-      {name:'KB Goblet Squat (10 lb)',sets:3,reps:'15',equip:'10 lb KB',desc:'Hold KB at chest, squat to full depth. Drive through heels.',mod:''},
-      {name:'KB Sumo Deadlift (25 lb)',sets:3,reps:'12',equip:'25 lb KB',desc:'Wide stance, toes out, KB between feet. Hinge and lift. Great for glutes and hamstrings.',mod:''},
-      {name:'Band Leg Press (Floor)',sets:3,reps:'20',equip:'Leg band',desc:'On back, loop band around feet, press legs out.',mod:''},
-      {name:'Band Clamshell',sets:3,reps:'25 each',equip:'Leg band',desc:'Lie on side, band above knees. Open top knee, close slowly.',mod:''},
-      {name:'Band Lateral Walk',sets:3,reps:'20 steps each way',equip:'Leg band',desc:'Band above knees, squat position. Step side-to-side.',mod:''},
-      {name:'Glute Bridge + Hold',sets:3,reps:'15 + 10 sec hold',equip:'Bodyweight',desc:'Drive hips up, hold at top for 10 sec, lower.',mod:''},
+    {name:"Session 1 · Indoor",label:"Band Lower Body + Stairs",rounds:3,exercises:[
+      {name:"Dumbbell Sumo Squat (8 lb)",sets:3,reps:"15",equip:"8 lb DB",desc:"Wide stance, toes out, hold one DB between legs. Squat deep.",mod:""},
+      {name:"Band Clamshell",sets:3,reps:"25 each",equip:"Heavy leg band",desc:"Lie on side, band above knees. Open and close with control.",mod:""},
+      {name:"Band Lateral Walk",sets:3,reps:"20 steps each way",equip:"Medium leg band",desc:"Band above knees, squat position. Step side-to-side.",mod:""},
+      {name:"Band Leg Press Floor",sets:3,reps:"20",equip:"Heavy leg band",desc:"On back, loop band around feet, press legs out to full extension.",mod:""},
+      {name:"Stair Step-Up with DB (6 lb)",sets:3,reps:"12 each leg",equip:"Stairs + 6 lb DB",desc:"Hold a DB in each hand. Step up, drive through heel. Controlled descent.",mod:""},
     ]},
-    {name:'Session 2 · Outdoor',label:'Walk / Jog Intervals',rounds:1,exercises:[
-      {name:'Walk/Jog Intervals',sets:9,reps:'4 min walk · 1 min jog',equip:'Outdoors',desc:'Walk 4 min brisk, jog 1 min. Repeat 9 times = 45 min.',mod:''},
+    {name:"Session 2 · Outdoor",label:"Bike Ride — Longer Effort",rounds:1,exercises:[
+      {name:"Bike Ride",sets:1,reps:"45 min",equip:"Bicycle",desc:"Moderate effort for 45 minutes. Push yourself on this one.",mod:"Walk/jog intervals if no bike."},
     ]}
   ],
   sat:[
-    {name:'Session 1 · Indoor',label:'Structured Row + Core',rounds:1,exercises:[
-      {name:'Row Warm-Up',sets:1,reps:'5 min',equip:'Rower',desc:'Easy effort. Settle into your stroke.',mod:''},
-      {name:'Row Intervals (5×4 min)',sets:5,reps:'4 min hard · 2 min easy',equip:'Rower',desc:'Hard: push pace. Easy: full recovery.',mod:''},
-      {name:'Row Cool-Down',sets:1,reps:'5 min',equip:'Rower',desc:'Easy effort. Breathe.',mod:''},
-      {name:'TRX Plank + Knee Tuck',sets:3,reps:'12',equip:'TRX',desc:'Feet in cradles. Drive both knees to chest and extend. Control the movement.',mod:''},
-      {name:'TRX Pike',sets:3,reps:'10',equip:'TRX',desc:'Plank position, drive hips up toward ceiling (pike), return to plank.',mod:''},
+    {name:"Session 1 · Indoor",label:"Structured Row + Full Body Circuit",rounds:1,exercises:[
+      {name:"Row Warm-Up",sets:1,reps:"5 min",equip:"Rowing Machine",desc:"Easy effort. Get into your stroke.",mod:""},
+      {name:"Row Intervals",sets:5,reps:"4 min hard · 2 min easy",equip:"Rowing Machine",desc:"Hard: push pace. Easy: full recovery. 5 rounds.",mod:""},
+      {name:"Row Cool-Down",sets:1,reps:"5 min",equip:"Rowing Machine",desc:"Easy effort. Breathe.",mod:""},
+      {name:"Dumbbell Squat (8 lb)",sets:3,reps:"15",equip:"8 lb DB",desc:"Full depth. Drive through heels.",mod:""},
+      {name:"Band Pull-Apart",sets:3,reps:"20",equip:"Light band",desc:"Pull band to chest. Squeeze shoulder blades.",mod:""},
+      {name:"Stair Climbs",sets:3,reps:"3 min",equip:"Stairs",desc:"Up and down stairs continuously.",mod:""},
     ]},
-    {name:'Session 2 · Outdoor',label:'Family Walk',rounds:1,exercises:[
-      {name:'Family Walk',sets:1,reps:'45 min',equip:'Outdoors',desc:'Bring Kira. Make it fun.',mod:''},
+    {name:"Session 2 · Outdoor",label:"Family Bike Ride or Walk",rounds:1,exercises:[
+      {name:"Family Bike or Walk",sets:1,reps:"45 min",equip:"Bicycle",desc:"Bring the family. Easy-moderate pace.",mod:"Walk 45 min."},
     ]}
   ],
   sun:[
-    {name:'Session 1 · Indoor',label:'Full Stretch + Recovery',rounds:1,exercises:[
-      {name:'Cat-Cow',sets:1,reps:'2 min',equip:'Mat',desc:'10 slow reps to start.',mod:''},
-      {name:'Child\'s Pose',sets:1,reps:'90 sec',equip:'Mat',desc:'Arms forward. Let hips melt toward heels.',mod:''},
-      {name:'Hip Flexor Stretch',sets:1,reps:'90 sec each side',equip:'Mat',desc:'Half-kneeling, lean forward. Recovery day — hold longer.',mod:''},
-      {name:'Pigeon Pose',sets:1,reps:'90 sec each side',equip:'Mat',desc:'Full floor pigeon. Fold forward over shin. Best hip stretch.',mod:''},
-      {name:'Band Hamstring Stretch',sets:1,reps:'90 sec each leg',equip:'Resistance band',desc:'On back, loop band around foot, lift leg toward ceiling.',mod:''},
-      {name:'Bridge Pose',sets:1,reps:'10 reps + 30 sec',equip:'Mat',desc:'Drive hips high.',mod:''},
-      {name:'Happy Baby',sets:1,reps:'60 sec',equip:'Mat',desc:'On back, grab outer feet, knees wide. Rock gently.',mod:''},
-      {name:'Legs Up the Wall',sets:1,reps:'4 min',equip:'Wall',desc:'Full decompression.',mod:''},
-      {name:'Savasana',sets:1,reps:'5 min',equip:'Mat',desc:'Completely still. Let it all go.',mod:''},
+    {name:"Session 1 · Indoor",label:"Full Stretch + Recovery",rounds:1,exercises:[
+      {name:"Cat-Cow",sets:1,reps:"2 min",equip:"Mat",desc:"10 slow reps to start.",mod:""},
+      {name:"Child's Pose",sets:1,reps:"90 sec",equip:"Mat",desc:"Arms forward. Let hips melt.",mod:""},
+      {name:"Hip Flexor Stretch",sets:1,reps:"90 sec each side",equip:"Mat",desc:"Half-kneeling, lean into hip.",mod:""},
+      {name:"Pigeon Pose",sets:1,reps:"90 sec each side",equip:"Mat",desc:"Full floor pigeon. Best hip stretch.",mod:""},
+      {name:"Band Hamstring Stretch",sets:1,reps:"90 sec each leg",equip:"Light band",desc:"On back, loop band around foot, lift leg toward ceiling.",mod:""},
+      {name:"Bridge Pose",sets:1,reps:"10 reps + 30 sec",equip:"Mat",desc:"Drive hips high.",mod:""},
+      {name:"Happy Baby",sets:1,reps:"60 sec",equip:"Mat",desc:"On back, grab outer feet, knees wide. Rock gently.",mod:""},
+      {name:"Legs Up the Wall",sets:1,reps:"4 min",equip:"Wall",desc:"Full decompression.",mod:""},
+      {name:"Savasana",sets:1,reps:"5 min",equip:"Mat",desc:"Completely still.",mod:""},
     ]},
-    {name:'Session 2 · Outdoor',label:'Recovery Walk',rounds:1,exercises:[
-      {name:'Recovery Walk',sets:1,reps:'45 min',equip:'Outdoors',desc:'Easy pace. Reset before the new week.',mod:''},
+    {name:"Session 2 · Outdoor",label:"Easy Recovery Bike or Walk",rounds:1,exercises:[
+      {name:"Easy Bike or Walk",sets:1,reps:"45 min",equip:"Bicycle",desc:"Easy pace. Reset before the new week.",mod:"Walk 45 min easy."},
     ]}
   ]
 };
@@ -895,7 +894,7 @@ function selectPerson(person, btn){
   btn.classList.add('active');
   const note=document.getElementById('personNote');
   if(person==='dan'){
-    note.innerHTML='<strong>Dan\'s Back Rules:</strong> No heavy deadlifts, no loaded forward bends. Core = bracing and anti-rotation only. If back flares, substitute any floor work with TRX or band work standing. Modifications shown on every exercise.';
+    note.innerHTML='<strong>Dan\'s Back Rules:</strong> No heavy deadlifts, no loaded forward bends. Core = bracing and anti-rotation only. If back flares, substitute any floor work with standing band work or bodyweight movements. Modifications shown on every exercise.';
     note.className='info-box';
   } else {
     note.innerHTML='<strong>Carrie\'s Program:</strong> Full range of motion, heavier lower body work, and complete ab work with no restrictions. Reps are slightly higher to match your recomposition goal.';
