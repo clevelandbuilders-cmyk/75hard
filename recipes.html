@@ -520,13 +520,13 @@ const RECIPES = [
       {name:'Baby spinach or romaine', amt:2, unit:'cup', base:2},
     ],
     steps: [
-      {title:'Start rice', text:'Start rice in cooker or pot now. Takes about 18 minutes.', timer:1080},
+      {title:'Start rice', text:'Start rice in the Zojirushi now — walk away, it handles itself. Keep-warm kicks in automatically when done.', timer:2100},
       {title:'Season chicken', text:'Coat chicken breasts with olive oil, garlic powder, cumin, salt, and pepper on both sides.'},
       {title:'Grill or pan-sear', text:'Heat a skillet or grill pan over medium-high. Cook chicken 6–7 minutes per side until internal temp hits 165°F. Don\'t press it down — let it sear.', timer:420},
       {title:'Rest and slice', text:'Let chicken rest 5 minutes, then slice against the grain into strips. This keeps it juicy.', timer:300},
       {title:'Build bowls', text:'Rice base → spinach → chicken slices → salsa → shredded cheese. Add hot sauce if you want heat.'},
     ],
-    notes:'Dan: make 4–6 breasts at once on Sunday. Refrigerate sliced chicken in a container — it reheats in 60 seconds for lunches all week. Carrie: lighter rice portion, double the spinach. This is the foundation of the whole meal prep strategy.',
+    notes:'Dan: make 4–6 breasts at once on Sunday. Refrigerate sliced chicken in a container — reheats in 60 seconds. Set the Zojirushi on timer Sunday night — wake up to fresh rice, keep-warm holds it all day. Carrie: lighter rice portion, double the spinach. This is the foundation of the whole meal prep strategy.',
   },
   {
     id: 'pork-tenderloin',
@@ -571,7 +571,7 @@ const RECIPES = [
     ingredients: [
       {name:'Bell peppers (large)', amt:4, unit:'', base:4},
       {name:'Lean ground turkey', amt:1, unit:'lb', base:1},
-      {name:'White rice (cooked)', amt:1, unit:'cup', base:1},
+      {name:'White rice (cooked — Zojirushi)', amt:1, unit:'cup', base:1},
       {name:'Canned diced tomatoes, drained', amt:14, unit:'oz', base:14},
       {name:'Shredded cheese', amt:0.5, unit:'cup', base:0.5},
       {name:'Garlic cloves, minced', amt:3, unit:'', base:3},
@@ -616,7 +616,7 @@ const RECIPES = [
     steps: [
       {title:'Slow cooker method', text:'Add everything except pasta/rice to the slow cooker. Cook on LOW 6 hours or HIGH 3 hours. Remove chicken, shred with two forks, return to pot. Add pasta/rice in last 20 minutes.', timer:21600},
       {title:'Stovetop method', text:'Sauté onion and garlic in a large pot with olive oil over medium, 3 minutes. Add broth, carrots, celery, and spices. Add whole chicken breasts. Simmer 20 minutes until chicken is cooked through.', timer:1200},
-      {title:'Shred and finish', text:'Remove chicken, shred, return to pot. Add pasta or rice if using, cook 10 more minutes until tender. Taste and adjust salt.', timer:600},
+      {title:'Shred and finish', text:'Remove chicken, shred, return to pot. Add pasta if using and cook 10 more minutes until tender. Or serve over rice from the Zojirushi — easier than cooking it in the soup. Taste and adjust salt.', timer:600},
     ],
     notes:'Dan: turmeric is anti-inflammatory — don\'t skip it. This is one of the best things you can make for your back. Big batch lasts 4–5 days in the fridge. Carrie: add extra broth and go lighter on the pasta for a lower-carb version. Great to have in the fridge during the week for a quick warm lunch.',
   },
@@ -728,6 +728,31 @@ const RECIPES = [
       {title:'Peel and store', text:'Peel all 12 now while they\'re cold. Store in a sealed container in the fridge. They keep for up to 5 days.'},
     ],
     notes:'2 eggs = ~140 kcal, ~12g protein. Zero effort during the week — just grab and go. Dan: 3 eggs + string cheese = 25g protein in under 60 seconds. Sprinkle with salt and hot sauce or eat plain. The ice bath is the secret to easy peeling — don\'t skip it.',
+  },
+  {
+    id: 'zoji-rice-bowl',
+    title: 'Zojirushi Rice Bowl — Build Your Own',
+    desc: 'The fastest compliant meal you will ever make. Rice is always ready.',
+    tag: 'Lunch · Dinner · 5 min',
+    tagColor: '#f4c430',
+    category: ['dinner'],
+    time: '5 min (rice already done)',
+    servings: 1,
+    baseServings: 1,
+    ingredients: [
+      {name:'White or brown rice (from Zojirushi)', amt:1, unit:'cup', base:1},
+      {name:'Protein — choose one: grilled chicken, canned tuna, shrimp, deli turkey, or egg', amt:4, unit:'oz', base:4},
+      {name:'Vegetable — choose one: green beans, broccoli, cucumber, or spinach', amt:1, unit:'cup', base:1},
+      {name:'Topping — choose one: salsa, soy sauce, hot sauce, or olive oil + lemon', amt:2, unit:'tbsp', base:2},
+      {name:'Shredded cheese (optional)', amt:2, unit:'tbsp', base:2},
+    ],
+    steps: [
+      {title:'Scoop rice', text:'Lift the Zojirushi lid. Scoop 1 cup of rice into your bowl. It is warm and ready — no reheating needed.'},
+      {title:'Add protein', text:'Add whatever protein you have on hand. Leftover grilled chicken is ideal. Canned tuna takes 10 seconds to open. A fried egg takes 3 minutes.'},
+      {title:'Add veg', text:'Handful of raw spinach, sliced cucumber, or microwave a bag of frozen green beans for 3 minutes. Done.'},
+      {title:'Sauce and eat', text:'Drizzle your topping of choice. Salt and pepper. Done. This is a full compliant meal in under 5 minutes.'},
+    ],
+    notes:'This is the whole point of the Zojirushi — rice is always ready on keep-warm, so you never have to think about a carb source. Dan: this is your field lunch when you come home between jobs. Carrie: lighter rice scoop, heavier on protein and veg. The Zojirushi timer setting means you can load it before bed and wake up to fresh rice for breakfast scrambles too.',
   },
 ];
 
