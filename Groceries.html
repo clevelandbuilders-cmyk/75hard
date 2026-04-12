@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grocery List — Dan & Carrie</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Sans+3:wght@300;400;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f7f4ef;
+  --paper: #fdfcf9;
+  --ink: #1c1a17;
+  --muted: #8a8680;
+  --rule: #e2ddd8;
+  --green: #3a7d5a;
+  --green-light: #edf5f0;
+  --green-mid: #c8e0d4;
+  --red: #c0392b;
+  --orange: #d4622a;
+  --gold: #b8860b;
+  --blue: #2c5f8a;
+  --purple: #6b4c8a;
+  --teal: #2a7a7a;
+}
+
+- { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body {
+  background: var(–bg);
+  color: var(–ink);
+  font-family: ‘Source Sans 3’, sans-serif;
+  min-height: 100vh;
+  padding-bottom: 80px;
+  }
+
+/* HEADER */
+.header {
+background: var(–ink);
+padding: 22px 20px 18px;
+position: sticky;
+top: 0;
+z-index: 100;
+}
+.header-inner { max-width: 640px; margin: 0 auto; }
+.header-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px; }
+.title-block {}
+.store-tag {
+font-family: ‘DM Mono’, monospace;
+font-size: 9px;
+letter-spacing: 3px;
+text-transform: uppercase;
+color: var(–muted);
+margin-bottom: 4px;
+}
+.main-title {
+font-family: ‘Playfair Display’, serif;
+font-size: 26px;
+font-weight: 900;
+color: #fff;
+line-height: 1;
+}
+.main-title span { color: #a8c8a0; }
+.header-actions { display: flex; gap: 8px; align-items: center; }
+.hdr-btn {
+font-family: ‘DM Mono’, monospace;
+font-size: 9px;
+letter-spacing: 1.5px;
+text-transform: uppercase;
+padding: 6px 12px;
+border: 1px solid #444;
+background: none;
+color: var(–muted);
+cursor: pointer;
+transition: all 0.2s;
+}
+.hdr-btn:hover { border-color: #888; color: #ccc; }
+.hdr-btn.danger { border-color: rgba(192,57,43,0.5); color: #c0392b; }
+.hdr-btn.danger:hover { background: rgba(192,57,43,0.1); }
+
+/* Progress bar */
+.progress-wrap { height: 4px; background: #333; border-radius: 2px; overflow: hidden; }
+.progress-fill { height: 100%; background: #a8c8a0; border-radius: 2px; transition: width 0.4s ease; }
+.progress-label {
+font-family: ‘DM Mono’, monospace;
+font-size: 10px;
+color: var(–muted);
+margin-top: 6px;
+letter-spacing: 1px;
+}
+
+/* MAIN */
+.main { max-width: 640px; margin: 0 auto; padding: 20px 16px; }
+
+/* SECTION */
+.section { margin-bottom: 10px; background: var(–paper); border: 1px solid var(–rule); overflow: hidden; }
+
+.section-header {
+display: flex;
+align-items: center;
+justify-content: space-between;
+padding: 14px 16px;
+cursor: pointer;
+user-select: none;
+border-bottom: 1px solid var(–rule);
+transition: background 0.15s;
+}
+.section-header:hover { background: #faf8f5; }
+
+.section-left { display: flex; align-items: center; gap: 12px; }
+.section-emoji { font-size: 20px; }
+.section-name {
+font-family: ‘Playfair Display’, serif;
+font-size: 17px;
+font-weight: 700;
+color: var(–ink);
+}
+.section-count {
+font-family: ‘DM Mono’, monospace;
+font-size: 10px;
+color: var(–muted);
+letter-spacing: 1px;
+margin-top: 1px;
+}
+.section-chevron { font-size: 11px; color: var(–muted); transition: transform 0.2s; }
+.section.collapsed .section-chevron { transform: rotate(-90deg); }
+
+.section-badge {
+font-family: ‘DM Mono’, monospace;
+font-size: 9px;
+letter-spacing: 1px;
+padding: 3px 8px;
+border-radius: 20px;
+}
+
+/* ITEM LIST */
+.item-list { display: none; }
+.section:not(.collapsed) .item-list { display: block; }
+
+.item {
+display: flex;
+align-items: flex-start;
+gap: 12px;
+padding: 12px 16px;
+border-bottom: 1px solid var(–rule);
+cursor: pointer;
+transition: background 0.12s;
+user-select: none;
+}
+.item:last-child { border-bottom: none; }
+.item:hover { background: #faf8f5; }
+.item.checked { background: var(–green-light); }
+
+.item-box {
+width: 22px;
+height: 22px;
+border: 2px solid var(–rule);
+flex-shrink: 0;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 12px;
+margin-top: 1px;
+transition: all 0.15s;
+border-radius: 3px;
+}
+.item.checked .item-box {
+background: var(–green);
+border-color: var(–green);
+color: #fff;
+}
+
+.item-body { flex: 1; min-width: 0; }
+.item-name {
+font-size: 15px;
+font-weight: 600;
+color: var(–ink);
+margin-bottom: 2px;
+transition: all 0.15s;
+}
+.item.checked .item-name {
+text-decoration: line-through;
+color: var(–muted);
+}
+.item-detail {
+font-size: 12px;
+color: var(–muted);
+line-height: 1.5;
+}
+.item-qty {
+font-family: ‘DM Mono’, monospace;
+font-size: 11px;
+color: var(–muted);
+flex-shrink: 0;
+padding-top: 3px;
+text-align: right;
+min-width: 60px;
+}
+.item.checked .item-qty { color: var(–green-mid); }
+
+/* NUTRITION TAG */
+.nt {
+display: inline-block;
+font-family: ‘DM Mono’, monospace;
+font-size: 8px;
+letter-spacing: 1px;
+text-transform: uppercase;
+padding: 1px 5px;
+margin-left: 4px;
+border-radius: 2px;
+vertical-align: middle;
+position: relative;
+top: -1px;
+}
+.nt-p { background: rgba(44,95,138,0.12); color: var(–blue); }
+.nt-ai { background: rgba(58,125,90,0.12); color: var(–green); }
+.nt-f { background: rgba(180,134,11,0.12); color: var(–gold); }
+.nt-c { background: rgba(107,76,138,0.12); color: var(–purple); }
+
+/* DONE STRIP */
+.all-done {
+display: none;
+text-align: center;
+padding: 32px 20px;
+background: var(–green-light);
+border: 1px solid var(–green-mid);
+margin-bottom: 16px;
+}
+.all-done.show { display: block; }
+.all-done-icon { font-size: 40px; margin-bottom: 8px; }
+.all-done-title {
+font-family: ‘Playfair Display’, serif;
+font-size: 22px;
+font-weight: 900;
+color: var(–green);
+margin-bottom: 4px;
+}
+.all-done-sub { font-size: 13px; color: var(–muted); }
+
+/* FILTER BAR */
+.filter-bar { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
+.filter-btn {
+font-family: ‘DM Mono’, monospace;
+font-size: 9px;
+letter-spacing: 1.5px;
+text-transform: uppercase;
+padding: 5px 12px;
+background: var(–paper);
+border: 1px solid var(–rule);
+color: var(–muted);
+cursor: pointer;
+transition: all 0.15s;
+}
+.filter-btn.active { background: var(–ink); border-color: var(–ink); color: #fff; }
+</style>
+
+</head>
+<body>
+<div style="background:#1a1a1a;border-bottom:1px solid #2e2e2e;padding:10px 20px;"><a href="index.html" style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1.5px;color:#555;text-decoration:none;text-transform:uppercase;">← Home</a></div>
+
+<div class="header">
+  <div class="header-inner">
+    <div class="header-top">
+      <div class="title-block">
+        <div class="store-tag">75 Hard · Week 1</div>
+        <div class="main-title">Grocery <span>List</span></div>
+      </div>
+      <div class="header-actions">
+        <button class="hdr-btn danger" onclick="clearAll()">Clear</button>
+        <button class="hdr-btn" onclick="collapseAll()">Collapse</button>
+      </div>
+    </div>
+    <div class="progress-wrap">
+      <div class="progress-fill" id="progressFill" style="width:0%"></div>
+    </div>
+    <div class="progress-label" id="progressLabel">0 of 0 items checked</div>
+  </div>
+</div>
+
+<div class="main">
+  <div class="all-done" id="allDone">
+    <div class="all-done-icon">🛒</div>
+    <div class="all-done-title">Cart's Full!</div>
+    <div class="all-done-sub">Everything checked off. You're set for the week.</div>
+  </div>
+
+  <div class="filter-bar">
+    <button class="filter-btn active" onclick="filterBy('all',this)">All</button>
+    <button class="filter-btn" onclick="filterBy('remaining',this)">Remaining</button>
+    <button class="filter-btn" onclick="filterBy('checked',this)">Got It</button>
+  </div>
+
+  <div id="listWrap"></div>
+</div>
+
+<script>
+const SECTIONS = [
+  {
+    name: 'Meat & Seafood',
+    emoji: '🥩',
+    color: '#c0392b',
+    items: [
+      { name: 'Chicken Breast', qty: '4–5 lbs', detail: 'Grill Sunday — feeds lunches all week. Aldi usually cheapest.', tags: ['p'] },
+      { name: 'Chicken Thighs', qty: '2 lbs', detail: 'Sheet pan dinners. More flavor than breast, just as lean boneless.', tags: ['p'] },
+      { name: 'Lean Ground Turkey', qty: '2 lbs', detail: 'Taco bowls, egg scrambles, pasta sauce.', tags: ['p'] },
+      { name: 'Lean Ground Beef (93/7)', qty: '1 lb', detail: 'Pasta + marinara dinner. Slow cooker stew.', tags: ['p'] },
+      { name: 'Pork Tenderloin', qty: '1 lb', detail: 'Lean, easy weeknight protein. Season and bake.', tags: ['p'] },
+      { name: 'Cod or White Fish Fillets (frozen)', qty: '2 lbs', detail: 'Bake at 400° for 12–14 min with lemon + garlic. Aldi frozen cod is great value.', tags: ['p','ai'] },
+      { name: 'Frozen Shrimp', qty: '1 bag (1 lb)', detail: 'Thaws under cold water in 5 min. Stir-fry with soy sauce + frozen veggies over rice. Aldi carries these.', tags: ['p'] },
+      { name: 'Canned Tuna (in water)', qty: '4–6 cans', detail: 'Dan\'s field lunch. 5 oz cans. Mix with olive oil + salt over rice or crackers.', tags: ['p'] },
+      { name: 'Nitrate-Free Deli Turkey', qty: '1 lb', detail: 'Roll-ups with string cheese — zero cooking. Pick \'n Save has better options than Aldi here.', tags: ['p'] },
+    ]
+  },
+  {
+    name: 'Dairy & Eggs',
+    emoji: '🥚',
+    color: '#d4622a',
+    items: [
+      { name: 'Eggs', qty: '2 dozen', detail: 'Breakfast, scrambles, hard-boiled snacks. Batch boil a dozen Sunday. Best price at Aldi.', tags: ['p','f'] },
+      { name: 'Greek Yogurt, Plain Full-Fat', qty: '2 large tubs', detail: 'Snack for both. Friendly Farms at Aldi is solid. Plain only — check for added sugar.', tags: ['p'] },
+      { name: 'Cottage Cheese', qty: '2 tubs', detail: 'Dan\'s evening protein. Snack with cucumber or tomato. High protein, zero prep.', tags: ['p'] },
+      { name: 'Shredded Cheese (cheddar or Mexican blend)', qty: '2 bags', detail: 'Scrambles, taco bowls, burrito bowls. Aldi best price.', tags: ['f'] },
+      { name: 'String Cheese', qty: '1 pack', detail: 'Grab-and-go snack. Pair with turkey slices or an apple.', tags: ['f','p'] },
+      { name: 'Whole Milk or 2%', qty: '1 gallon', detail: 'Carrie\'s smoothies, coffee, cooking.', tags: [] },
+      { name: 'Sour Cream', qty: '1 container', detail: 'Burrito bowls. Small amount, big payoff.', tags: ['f'] },
+      { name: 'Protein Powder (Whey or Casein)', qty: 'Check stock', detail: 'Dan: casein before bed. Carrie: whey in smoothies. ~25–30g per scoop.', tags: ['p'] },
+    ]
+  },
+  {
+    name: 'Produce — Vegetables',
+    emoji: '🥦',
+    color: '#3a7d5a',
+    items: [
+      { name: 'Broccoli (fresh or frozen)', qty: '2 heads or bags', detail: 'Steam, roast, or microwave. Aldi frozen bags are easy and cheap.', tags: ['ai'] },
+      { name: 'Green Beans (fresh or frozen)', qty: '2 bags', detail: 'Goes with cod, chicken, everything. Microwave frozen bag in 5 min. Aldi staple.', tags: [] },
+      { name: 'Baby Spinach', qty: '2 bags (5 oz)', detail: 'Carrie\'s smoothies and salads. Wilts into scrambles easily.', tags: ['ai'] },
+      { name: 'Mixed Greens / Salad Mix', qty: '1 large bag', detail: 'Carrie\'s lunch salads all week.', tags: [] },
+      { name: 'Cherry Tomatoes', qty: '1 pint', detail: 'Salads, scrambles.', tags: [] },
+      { name: 'Cucumbers', qty: '2', detail: 'Dan\'s snack with cottage cheese.', tags: [] },
+      { name: 'Carrots', qty: '1 bag', detail: 'Slow cooker stew. Snacking.', tags: [] },
+      { name: 'Yellow Onions', qty: '2', detail: 'Sheet pan meals, stew, everything.', tags: [] },
+      { name: 'Garlic', qty: '1 head', detail: 'Cod, chicken, stir-fry. Everything.', tags: ['ai'] },
+      { name: 'Bell Peppers', qty: '3 (mixed)', detail: 'Sheet pan chicken, egg scrambles.', tags: [] },
+      { name: 'Russet or Gold Potatoes', qty: '3–4 lbs', detail: 'Baked, roasted chunks, or in the stew. Simple filling carb. Aldi cheapest.', tags: ['c'] },
+      { name: 'Zucchini', qty: '2–3', detail: 'Roasted or sautéed side. Easy swap for any vegetable.', tags: [] },
+      { name: 'Celery', qty: '1 bunch', detail: 'Slow cooker stew. Snacking.', tags: [] },
+    ]
+  },
+  {
+    name: 'Produce — Fruit',
+    emoji: '🫐',
+    color: '#6b4c8a',
+    items: [
+      { name: 'Blueberries', qty: '2 pints', detail: 'Dan\'s oatmeal every morning. Anti-inflammatory powerhouse.', tags: ['ai'] },
+      { name: 'Frozen Berries (Mixed)', qty: '1 large bag', detail: 'Carrie\'s smoothies. Aldi has great frozen berry bags.', tags: ['ai'] },
+      { name: 'Bananas', qty: '1 bunch', detail: 'Dan\'s quick on-the-road breakfast with a protein shake.', tags: ['c'] },
+      { name: 'Apples', qty: '4–5', detail: 'Snack with peanut butter.', tags: [] },
+      { name: 'Lemons', qty: '3', detail: 'Cod, salad dressings, water.', tags: ['ai'] },
+    ]
+  },
+  {
+    name: 'Grains & Pantry Carbs',
+    emoji: '🌾',
+    color: '#b8860b',
+    items: [
+      { name: 'Old-Fashioned Oats', qty: '1 large canister', detail: 'Dan\'s breakfast every morning. Also the base for protein energy balls.', tags: ['c'] },
+      { name: 'White or Brown Rice', qty: '2 lb bag', detail: 'Dinner carb for both. Rice cooker = set and forget. Aldi or Pick \'n Save same price.', tags: ['c'] },
+      { name: 'Whole Wheat Pasta', qty: '2 boxes', detail: 'Pasta + 93/7 beef + marinara = easiest compliant dinner.', tags: ['c'] },
+      { name: 'Corn Tortillas', qty: '1 pack', detail: 'Taco bowls, burrito bowls. Much cleaner than flour.', tags: ['c'] },
+      { name: 'Whole Grain Bread', qty: '1 loaf', detail: 'Carrie\'s toast. Whole grain as first ingredient, under 3g sugar per slice.', tags: ['c'] },
+      { name: 'Black Beans (canned)', qty: '2 cans', detail: 'Taco bowls, burrito bowls. Aldi cheapest.', tags: ['p','c'] },
+      { name: 'Whole Grain Crackers (Triscuits or similar)', qty: '1 box', detail: 'Pair with shredded cheese for a 2-min snack. Whole grain as first ingredient.', tags: ['c'] },
+    ]
+  },
+  {
+    name: 'Healthy Fats & Snacks',
+    emoji: '🥜',
+    color: '#2a7a7a',
+    items: [
+      { name: 'Peanut Butter (natural)', qty: '1 jar', detail: 'Protein energy balls + Carrie\'s apple snack. Ingredients: peanuts, salt. Nothing else. Aldi has best price.', tags: ['f'] },
+      { name: 'Extra Virgin Olive Oil', qty: 'Check stock', detail: 'Sheet pan everything. Salad dressings. Only cooking oil you need.', tags: ['f','ai'] },
+      { name: 'Raw Almonds', qty: '1 bag', detail: 'Dan\'s lunch snack. ~1 oz handful.', tags: ['f'] },
+      { name: 'Walnuts', qty: '1 bag', detail: 'Dan\'s oatmeal topping + snack. Omega-3 — good for back inflammation.', tags: ['f','ai'] },
+      { name: 'Avocados', qty: '4–5', detail: 'Carrie\'s toast + salads. Buy mix of ripe and unripe.', tags: ['f','ai'] },
+      { name: 'Hummus', qty: '1 tub', detail: 'Veggie dip snack. Aldi carries this.', tags: ['f','p'] },
+    ]
+  },
+  {
+    name: 'Spices, Sauces & Pantry',
+    emoji: '🧂',
+    color: '#555',
+    items: [
+      { name: 'Garlic Powder', qty: 'Check stock', detail: 'Sheet pan chicken, cod, everything.', tags: [] },
+      { name: 'Cumin (ground)', qty: 'Check stock', detail: 'Turkey taco bowls.', tags: [] },
+      { name: 'Chili Powder', qty: 'Check stock', detail: 'Taco bowls.', tags: [] },
+      { name: 'Turmeric (ground)', qty: 'Check stock', detail: 'Add to eggs, oatmeal, rice. Anti-inflammatory for Dan\'s back.', tags: ['ai'] },
+      { name: 'Black Pepper', qty: 'Check stock', detail: 'Activates turmeric absorption.', tags: [] },
+      { name: 'Hot Sauce', qty: 'Check stock', detail: 'Dan\'s egg scramble staple.', tags: [] },
+      { name: 'Salsa (jar, no added sugar)', qty: '1–2 jars', detail: 'Taco bowls. Check label — no added sugar. Aldi has a good one.', tags: [] },
+      { name: 'Jarred Marinara (no added sugar)', qty: '1–2 jars', detail: 'Pasta dinners. Check first 3 ingredients for sugar. Aldi works fine.', tags: [] },
+      { name: 'Low-Sodium Chicken or Beef Broth', qty: '2 cartons', detail: 'Slow cooker stew base.', tags: [] },
+      { name: 'Low-Sodium Soy Sauce or Coconut Aminos', qty: '1 bottle', detail: 'Shrimp stir-fry. Aldi carries soy sauce.', tags: [] },
+      { name: 'Honey', qty: '1 jar', detail: 'Protein energy balls (¼ cup per batch).', tags: [] },
+    ]
+  },
+  {
+    name: 'Drinks & Supplements',
+    emoji: '💧',
+    color: '#2c5f8a',
+    items: [
+      { name: 'Sparkling Water / Seltzer', qty: '2 cases', detail: 'Makes hitting a gallon of water way easier. Plain, no sweeteners.', tags: [] },
+      { name: 'Black Coffee / Ground Coffee', qty: 'Check stock', detail: 'Dan\'s morning staple. No flavored creamers.', tags: [] },
+      { name: 'Green Tea or Herbal Tea', qty: '1–2 boxes', detail: 'Carrie\'s evening wind-down instead of alcohol.', tags: ['ai'] },
+      { name: 'Ground Flaxseed', qty: '1 bag', detail: 'Dan: stir into oatmeal or shakes. Omega-3 boost for disc inflammation.', tags: ['ai','f'] },
+    ]
+  },
+];
+
+// State
+const state = JSON.parse(localStorage.getItem('75h_grocery') || '{}');
+let currentFilter = 'all';
+
+function save() { localStorage.setItem('75h_grocery', JSON.stringify(state)); }
+
+function getItemId(sIdx, iIdx) { return `s${sIdx}_i${iIdx}`; }
+
+function buildList() {
+  const wrap = document.getElementById('listWrap');
+  wrap.innerHTML = '';
+
+  SECTIONS.forEach((sec, sIdx) => {
+    const div = document.createElement('div');
+    div.className = 'section' + (localStorage.getItem('75h_col_' + sIdx) === '1' ? ' collapsed' : '');
+    div.id = 'sec_' + sIdx;
+
+    const checkedCount = sec.items.filter((_, iIdx) => state[getItemId(sIdx, iIdx)]).length;
+    const total = sec.items.length;
+
+    div.innerHTML = `
+      <div class="section-header" onclick="toggleSection(${sIdx})">
+        <div class="section-left">
+          <div class="section-emoji">${sec.emoji}</div>
+          <div>
+            <div class="section-name">${sec.name}</div>
+            <div class="section-count">${checkedCount} of ${total} items</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px">
+          ${checkedCount === total ? `<span class="section-badge" style="background:rgba(58,125,90,0.12);color:var(--green)">Done ✓</span>` : ''}
+          <div class="section-chevron">▼</div>
+        </div>
+      </div>
+      <div class="item-list" id="list_${sIdx}"></div>
+    `;
+
+    wrap.appendChild(div);
+    renderItems(sIdx);
+  });
+
+  updateProgress();
+}
+
+function renderItems(sIdx) {
+  const sec = SECTIONS[sIdx];
+  const list = document.getElementById('list_' + sIdx);
+  if (!list) return;
+  list.innerHTML = '';
+
+  sec.items.forEach((item, iIdx) => {
+    const id = getItemId(sIdx, iIdx);
+    const checked = !!state[id];
+
+    if (currentFilter === 'remaining' && checked) return;
+    if (currentFilter === 'checked' && !checked) return;
+
+    const row = document.createElement('div');
+    row.className = 'item' + (checked ? ' checked' : '');
+    row.onclick = () => toggleItem(sIdx, iIdx);
+
+    const tagHTML = item.tags.map(t => {
+      const labels = { p: 'Protein', ai: 'Anti-Inflam', f: 'Fat', c: 'Carb' };
+      return `<span class="nt nt-${t}">${labels[t]}</span>`;
+    }).join('');
+
+    row.innerHTML = `
+      <div class="item-box">${checked ? '✓' : ''}</div>
+      <div class="item-body">
+        <div class="item-name">${item.name}${tagHTML}</div>
+        <div class="item-detail">${item.detail}</div>
+      </div>
+      <div class="item-qty">${item.qty}</div>
+    `;
+    list.appendChild(row);
+  });
+}
+
+function toggleItem(sIdx, iIdx) {
+  const id = getItemId(sIdx, iIdx);
+  state[id] = !state[id];
+  save();
+  renderItems(sIdx);
+  // Update section header
+  const sec = SECTIONS[sIdx];
+  const checkedCount = sec.items.filter((_, i) => state[getItemId(sIdx, i)]).length;
+  const header = document.querySelector(`#sec_${sIdx} .section-count`);
+  if (header) header.textContent = `${checkedCount} of ${sec.items.length} items`;
+  const badgeWrap = document.querySelector(`#sec_${sIdx} .section-header > div:last-child`);
+  if (badgeWrap) {
+    const existingBadge = badgeWrap.querySelector('.section-badge');
+    if (checkedCount === sec.items.length && !existingBadge) {
+      const badge = document.createElement('span');
+      badge.className = 'section-badge';
+      badge.style.cssText = 'background:rgba(58,125,90,0.12);color:var(--green)';
+      badge.textContent = 'Done ✓';
+      badgeWrap.insertBefore(badge, badgeWrap.querySelector('.section-chevron'));
+    } else if (checkedCount < sec.items.length && existingBadge) {
+      existingBadge.remove();
+    }
+  }
+  updateProgress();
+}
+
+function toggleSection(sIdx) {
+  const sec = document.getElementById('sec_' + sIdx);
+  const collapsed = sec.classList.toggle('collapsed');
+  localStorage.setItem('75h_col_' + sIdx, collapsed ? '1' : '0');
+}
+
+function updateProgress() {
+  let total = 0, checked = 0;
+  SECTIONS.forEach((sec, sIdx) => {
+    sec.items.forEach((_, iIdx) => {
+      total++;
+      if (state[getItemId(sIdx, iIdx)]) checked++;
+    });
+  });
+  const pct = total > 0 ? (checked / total) * 100 : 0;
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressLabel').textContent = checked + ' of ' + total + ' items checked';
+  const done = document.getElementById('allDone');
+  done.classList.toggle('show', checked === total && total > 0);
+}
+
+function filterBy(type, btn) {
+  currentFilter = type;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  SECTIONS.forEach((_, sIdx) => renderItems(sIdx));
+}
+
+function clearAll() {
+  if (!confirm('Clear all checked items?')) return;
+  Object.keys(state).forEach(k => delete state[k]);
+  save();
+  buildList();
+}
+
+function collapseAll() {
+  SECTIONS.forEach((_, sIdx) => {
+    document.getElementById('sec_' + sIdx)?.classList.add('collapsed');
+    localStorage.setItem('75h_col_' + sIdx, '1');
+  });
+}
+
+buildList();
+</script>
+
+</body>
+</html>
