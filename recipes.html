@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Recipes · 75 Hard</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--black:#0d0d0d;--charcoal:#1a1a1a;--steel:#252525;--border:#2e2e2e;--muted:#555;--mid:#888;--light:#bbb;--cream:#f0ece4;--white:#fff;--red:#e63946;--orange:#f4a261;--green:#52b788;--gold:#f4c430}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{background:var(--black);color:var(--cream);font-family:'DM Sans',sans-serif;overflow-x:hidden;padding-bottom:40px}
+
+/* HEADER */
+.header{background:var(–charcoal);border-bottom:1px solid var(–border);padding:14px 20px;position:sticky;top:0;z-index:100;display:flex;justify-content:space-between;align-items:center}
+.logo{font-family:‘Bebas Neue’,sans-serif;font-size:24px;letter-spacing:3px;color:var(–white)}.logo span{color:var(–red)}
+.back-btn{font-family:‘DM Mono’,monospace;font-size:10px;letter-spacing:1.5px;color:var(–muted);text-decoration:none;text-transform:uppercase;padding:6px 12px;border:1px solid var(–border);transition:all .2s}
+.back-btn:hover{color:var(–light);border-color:#444}
+
+/* PAGE HEAD */
+.page-head{padding:28px 20px 20px;border-bottom:1px solid var(–border);margin-bottom:24px}
+.page-label{font-family:‘DM Mono’,monospace;font-size:10px;letter-spacing:3px;color:var(–red);text-transform:uppercase;margin-bottom:6px}
+.page-title{font-family:‘Bebas Neue’,sans-serif;font-size:clamp(36px,9vw,64px);line-height:.92;color:var(–white);margin-bottom:10px}
+.page-sub{font-size:13px;color:var(–mid);line-height:1.6;max-width:480px}
+
+/* FILTER TABS */
+.filter-bar{padding:0 20px;margin-bottom:20px;display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}
+.filter-bar::-webkit-scrollbar{display:none}
+.filter-btn{font-family:‘DM Mono’,monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;padding:7px 14px;background:var(–steel);border:1px solid var(–border);color:var(–muted);cursor:pointer;white-space:nowrap;transition:all .2s;flex-shrink:0}
+.filter-btn:hover{color:var(–light);border-color:#444}
+.filter-btn.active{background:var(–red);border-color:var(–red);color:var(–white)}
+
+/* RECIPE GRID */
+.recipe-list{padding:0 20px;display:flex;flex-direction:column;gap:16px}
+
+/* RECIPE CARD */
+.recipe-card{background:var(–charcoal);border:1px solid var(–border);overflow:hidden;cursor:pointer;transition:border-color .2s}
+.recipe-card:hover{border-color:#444}
+.recipe-card.open{border-color:var(–red)}
+.card-header{padding:18px 20px;display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.card-meta{flex:1}
+.card-tag{font-family:‘DM Mono’,monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px}
+.card-title{font-family:‘Bebas Neue’,sans-serif;font-size:24px;letter-spacing:1.5px;color:var(–white);line-height:1;margin-bottom:6px}
+.card-desc{font-size:12px;color:var(–mid);line-height:1.5}
+.card-stats{display:flex;gap:16px;margin-top:10px}
+.card-stat{text-align:center}
+.card-stat-val{font-family:‘DM Mono’,monospace;font-size:13px;color:var(–gold);font-weight:500}
+.card-stat-lbl{font-family:‘DM Mono’,monospace;font-size:8px;letter-spacing:1px;color:var(–muted);text-transform:uppercase;margin-top:1px}
+.card-arrow{font-size:18px;color:var(–muted);transition:transform .3s;flex-shrink:0;margin-top:4px}
+.recipe-card.open .card-arrow{transform:rotate(180deg);color:var(–red)}
+
+/* RECIPE BODY */
+.card-body{display:none;border-top:1px solid var(–border)}
+.recipe-card.open .card-body{display:block}
+
+/* SERVINGS CONTROL */
+.servings-bar{display:flex;align-items:center;gap:12px;padding:14px 20px;background:var(–steel);border-bottom:1px solid var(–border)}
+.servings-lbl{font-family:‘DM Mono’,monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(–muted)}
+.servings-ctrl{display:flex;align-items:center;gap:10px;margin-left:auto}
+.srv-btn{width:28px;height:28px;background:var(–charcoal);border:1px solid var(–border);color:var(–light);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;line-height:1}
+.srv-btn:hover{border-color:var(–red);color:var(–red)}
+.srv-count{font-family:‘DM Mono’,monospace;font-size:16px;color:var(–white);min-width:24px;text-align:center}
+
+/* TWO COLUMNS */
+.recipe-cols{display:grid;grid-template-columns:1fr 1fr;gap:0}
+@media(max-width:600px){.recipe-cols{grid-template-columns:1fr}}
+
+/* INGREDIENTS */
+.ingredients-col{padding:18px 20px;border-right:1px solid var(–border)}
+@media(max-width:600px){.ingredients-col{border-right:none;border-bottom:1px solid var(–border)}}
+.col-title{font-family:‘DM Mono’,monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(–red);margin-bottom:12px}
+.ing-item{display:flex;justify-content:space-between;align-items:flex-start;padding:7px 0;border-bottom:1px solid var(–border);gap:10px;font-size:12px}
+.ing-item:last-child{border-bottom:none}
+.ing-name{color:var(–cream);line-height:1.4}
+.ing-amt{font-family:‘DM Mono’,monospace;font-size:11px;color:var(–gold);white-space:nowrap;text-align:right}
+
+/* STEPS */
+.steps-col{padding:18px 20px}
+.step-item{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(–border)}
+.step-item:last-child{border-bottom:none}
+.step-num{width:22px;height:22px;background:var(–red);color:var(–white);font-family:‘DM Mono’,monospace;font-size:10px;font-weight:500;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.step-content{flex:1}
+.step-title{font-family:‘DM Mono’,monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(–gold);margin-bottom:4px}
+.step-text{font-size:12px;color:var(–mid);line-height:1.6}
+.timer-btn{display:inline-flex;align-items:center;gap:5px;margin-top:7px;padding:4px 10px;background:var(–steel);border:1px solid var(–border);color:var(–muted);font-family:‘DM Mono’,monospace;font-size:9px;letter-spacing:1px;cursor:pointer;transition:all .2s}
+.timer-btn:hover{border-color:var(–green);color:var(–green)}
+.timer-btn.running{border-color:var(–green);color:var(–green);background:rgba(82,183,136,.1)}
+.timer-btn.done{border-color:var(–gold);color:var(–gold);background:rgba(244,196,48,.1)}
+
+/* NOTES */
+.recipe-notes{padding:14px 20px;background:rgba(244,196,48,.05);border-top:1px solid var(–border);font-size:12px;color:var(–mid);line-height:1.7;border-left:3px solid var(–gold)}
+.notes-lbl{font-family:‘DM Mono’,monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(–gold);margin-bottom:5px}
+
+/* EMPTY */
+.empty{padding:40px 20px;text-align:center;color:var(–muted);font-family:‘DM Mono’,monospace;font-size:11px;letter-spacing:1.5px}
+</style>
+
+</head>
+<body>
+
+<div class="header">
+  <div class="logo">75<span>HARD</span></div>
+  <a class="back-btn" href="index.html">← Home</a>
+</div>
+
+<div class="page-head">
+  <div class="page-label">Nutrition</div>
+  <div class="page-title">Recipes</div>
+  <div class="page-sub">All compliant. All from your grocery list. Tap any recipe to expand, adjust servings, and start timers.</div>
+</div>
+
+<div class="filter-bar">
+  <button class="filter-btn active" onclick="filterRecipes('all',this)">All</button>
+  <button class="filter-btn" onclick="filterRecipes('dinner',this)">Dinners</button>
+  <button class="filter-btn" onclick="filterRecipes('breakfast',this)">Breakfast</button>
+  <button class="filter-btn" onclick="filterRecipes('snack',this)">Snacks</button>
+  <button class="filter-btn" onclick="filterRecipes('prep',this)">Meal Prep</button>
+</div>
+
+<div class="recipe-list" id="recipeList"></div>
+
+<script>
+const RECIPES = [
+  {
+    id: 'sheet-pan',
+    title: 'Sheet Pan Chicken + Green Beans + Potatoes',
+    desc: 'One pan, one oven, 30 minutes. The weeknight workhorse.',
+    tag: 'Dinner · 30 min',
+    tagColor: 'var(--green)',
+    category: ['dinner','prep'],
+    time: '30 min',
+    servings: 4,
+    baseServings: 4,
+    ingredients: [
+      {name:'Boneless chicken thighs', amt:2, unit:'lb', base:2},
+      {name:'Russet potatoes, cubed 1"', amt:1.5, unit:'lb', base:1.5},
+      {name:'Green beans (fresh or frozen)', amt:12, unit:'oz', base:12},
+      {name:'Olive oil', amt:3, unit:'tbsp', base:3},
+      {name:'Garlic cloves, minced', amt:4, unit:'', base:4},
+      {name:'Garlic powder', amt:1, unit:'tsp', base:1},
+      {name:'Salt', amt:1, unit:'tsp', base:1},
+      {name:'Black pepper', amt:0.5, unit:'tsp', base:0.5},
+      {name:'Lemon, juiced', amt:1, unit:'', base:1},
+    ],
+    steps: [
+      {title:'Preheat', text:'Preheat oven to 425°F. Line a large baking sheet with foil.'},
+      {title:'Season potatoes', text:'Toss potatoes with half the olive oil, garlic, garlic powder, salt, and pepper. Spread on one half of the pan.'},
+      {title:'First roast', text:'Roast potatoes alone for 15 minutes while you prep the chicken.', timer:900},
+      {title:'Add chicken', text:'Coat chicken with remaining olive oil, salt, and pepper. Add to the sheet alongside potatoes. Roast 15 more minutes.', timer:900},
+      {title:'Add green beans', text:'Push everything to sides, add green beans to center. Squeeze lemon over everything. Roast final 10 minutes.', timer:600},
+      {title:'Rest and serve', text:'Let rest 3 minutes. Chicken should read 165°F internal.', timer:180},
+    ],
+    notes:'Meal prep tip: double the batch on Sunday — refrigerate extras for 3 days of lunches. Dan: hits your carb + protein + veg in one shot.',
+  },
+  {
+    id: 'taco-bowls',
+    title: 'Ground Turkey Taco Bowls',
+    desc: '20 minutes, everyone builds their own. Family favorite that\'s fully compliant.',
+    tag: 'Dinner · 20 min',
+    tagColor: 'var(--orange)',
+    category: ['dinner'],
+    time: '20 min',
+    servings: 4,
+    baseServings: 4,
+    ingredients: [
+      {name:'Lean ground turkey', amt:1.5, unit:'lb', base:1.5},
+      {name:'White or brown rice (dry)', amt:1.5, unit:'cup', base:1.5},
+      {name:'Canned black beans, drained', amt:15, unit:'oz', base:15},
+      {name:'Salsa (no added sugar)', amt:0.5, unit:'cup', base:0.5},
+      {name:'Shredded cheese', amt:0.75, unit:'cup', base:0.75},
+      {name:'Sour cream', amt:0.25, unit:'cup', base:0.25},
+      {name:'Cumin', amt:1.5, unit:'tsp', base:1.5},
+      {name:'Chili powder', amt:1, unit:'tsp', base:1},
+      {name:'Garlic powder', amt:0.5, unit:'tsp', base:0.5},
+      {name:'Salt', amt:0.5, unit:'tsp', base:0.5},
+      {name:'Olive oil', amt:1, unit:'tbsp', base:1},
+      {name:'Corn tortillas (optional)', amt:8, unit:'', base:8},
+    ],
+    steps: [
+      {title:'Cook rice', text:'Start rice in cooker or pot — takes ~18 minutes. Start this first.', timer:1080},
+      {title:'Brown turkey', text:'Heat oil in skillet over medium-high. Add turkey, break apart. Cook until no pink, about 7 minutes.', timer:420},
+      {title:'Season', text:'Add cumin, chili powder, garlic powder, and salt. Stir to coat. Add 2 tbsp water and stir 1 more minute.', timer:60},
+      {title:'Warm beans', text:'Microwave black beans with a pinch of cumin and salt for 90 seconds.', timer:90},
+      {title:'Build bowls', text:'Rice → turkey → beans → salsa → cheese → sour cream. Corn tortillas on the side if you want them.'},
+    ],
+    notes:'Dan: heavy on rice and beans for your carb target. Carrie: lighter rice, extra turkey. Leftovers reheat great for lunch next day.',
+  },
+  {
+    id: 'baked-cod',
+    title: 'Baked Cod + Green Beans + Rice',
+    desc: 'Into the oven, forgotten, done in 12 minutes.',
+    tag: 'Dinner · 20 min',
+    tagColor: 'var(--blue)',
+    category: ['dinner'],
+    time: '20 min',
+    servings: 4,
+    baseServings: 4,
+    ingredients: [
+      {name:'Frozen cod fillets', amt:1.5, unit:'lb', base:1.5},
+      {name:'Green beans (fresh or frozen)', amt:12, unit:'oz', base:12},
+      {name:'White or brown rice (dry)', amt:1.5, unit:'cup', base:1.5},
+      {name:'Olive oil', amt:2, unit:'tbsp', base:2},
+      {name:'Garlic cloves, minced', amt:3, unit:'', base:3},
+      {name:'Lemon, sliced', amt:1, unit:'', base:1},
+      {name:'Salt', amt:0.5, unit:'tsp', base:0.5},
+      {name:'Black pepper', amt:0.25, unit:'tsp', base:0.25},
+      {name:'Garlic powder', amt:0.5, unit:'tsp', base:0.5},
+    ],
+    steps: [
+      {title:'Preheat + rice', text:'Preheat oven to 400°F. Start rice in cooker now.'},
+      {title:'Thaw cod', text:'If frozen, thaw under cold running water until pliable, about 5 minutes. Pat completely dry — this is key.', timer:300},
+      {title:'Season and arrange', text:'Line a baking sheet with foil. Place cod on one side. Drizzle with oil, rub with garlic, salt, pepper, garlic powder. Lemon slices on top. Green beans on the other side with a drizzle of oil and pinch of salt.'},
+      {title:'Bake', text:'Bake 12–14 minutes until cod flakes easily with a fork. No flipping needed.', timer:780},
+      {title:'Serve', text:'Plate rice, lay cod on top, green beans on the side. Squeeze extra lemon over fish.'},
+    ],
+    notes:'If cod is still translucent in the center, give it 2 more minutes. The flesh should flake apart easily when it\'s done.',
+  },
+  {
+    id: 'beef-stew',
+    title: 'Slow Cooker Beef Stew',
+    desc: 'Start it before work. Come home to dinner.',
+    tag: 'Dinner · Set & forget',
+    tagColor: 'var(--red)',
+    category: ['dinner','prep'],
+    time: '8 hrs (set & forget)',
+    servings: 6,
+    baseServings: 6,
+    ingredients: [
+      {name:'Lean beef stew meat', amt:1.5, unit:'lb', base:1.5},
+      {name:'Russet potatoes, cubed 1"', amt:3, unit:'', base:3},
+      {name:'Large carrots, sliced', amt:3, unit:'', base:3},
+      {name:'Celery stalks, sliced', amt:3, unit:'', base:3},
+      {name:'Yellow onion, diced', amt:1, unit:'', base:1},
+      {name:'Garlic cloves, minced', amt:3, unit:'', base:3},
+      {name:'Low-sodium beef broth', amt:4, unit:'cup', base:4},
+      {name:'Salt', amt:1, unit:'tsp', base:1},
+      {name:'Black pepper', amt:0.5, unit:'tsp', base:0.5},
+      {name:'Garlic powder', amt:1, unit:'tsp', base:1},
+      {name:'Turmeric (optional)', amt:0.5, unit:'tsp', base:0.5},
+    ],
+    steps: [
+      {title:'Layer veg', text:'Add onion and garlic to bottom of slow cooker. Layer in carrots, celery, and potatoes.'},
+      {title:'Add meat', text:'Season beef with salt, pepper, and garlic powder. Place on top of vegetables.'},
+      {title:'Add broth', text:'Pour broth over everything. Add turmeric if using. Do not stir.'},
+      {title:'Cook', text:'Cover and cook on LOW for 8 hours or HIGH for 4–5 hours.', timer:28800},
+      {title:'Finish', text:'Stir gently, taste and adjust salt. Potatoes and carrots should be completely tender.'},
+    ],
+    notes:'Dan: complete meal on its own — protein, carb, and veg all in one pot. Anti-inflammatory bonus from turmeric. Gets better the next day. Make a big batch Sunday.',
+  },
+  {
+    id: 'pasta',
+    title: 'Pasta + Ground Beef + Marinara',
+    desc: '25 minutes. Pasta night done right.',
+    tag: 'Dinner · 25 min',
+    tagColor: 'var(--orange)',
+    category: ['dinner'],
+    time: '25 min',
+    servings: 4,
+    baseServings: 4,
+    ingredients: [
+      {name:'Whole wheat pasta', amt:12, unit:'oz', base:12},
+      {name:'Lean ground beef (93/7)', amt:1, unit:'lb', base:1},
+      {name:'Jarred marinara (no added sugar)', amt:24, unit:'oz', base:24},
+      {name:'Garlic cloves, minced', amt:3, unit:'', base:3},
+      {name:'Yellow onion, diced', amt:0.5, unit:'', base:0.5},
+      {name:'Olive oil', amt:1, unit:'tbsp', base:1},
+      {name:'Salt', amt:0.5, unit:'tsp', base:0.5},
+      {name:'Black pepper', amt:0.25, unit:'tsp', base:0.25},
+      {name:'Shredded cheese (optional)', amt:0.5, unit:'cup', base:0.5},
+    ],
+    steps: [
+      {title:'Cook pasta', text:'Bring large pot of salted water to boil. Cook pasta until al dente. Reserve ½ cup pasta water before draining.', timer:600},
+      {title:'Soften aromatics', text:'Heat oil in large skillet over medium-high. Add onion, cook 3 minutes. Add garlic, cook 1 more minute.', timer:240},
+      {title:'Brown beef', text:'Add beef, break apart with spoon. Season with salt and pepper. Cook until no pink, about 7 minutes. Drain excess fat.', timer:420},
+      {title:'Add sauce', text:'Pour marinara into skillet, stir to combine. Simmer 5 minutes. If too thick, splash in reserved pasta water.', timer:300},
+      {title:'Serve', text:'Toss drained pasta into sauce or plate separately and spoon sauce on top. Top with cheese if using.'},
+    ],
+    notes:'Label check on marinara: flip the jar, look for sugar in first 3 ingredients. Rao\'s has no added sugar. Aldi\'s store brand is also usually clean. Dan: full serving of pasta hits your carb target. Carrie: smaller pasta, extra meat sauce.',
+  },
+  {
+    id: 'scramble',
+    title: 'Egg Scramble with Cheese + Veggies',
+    desc: '10 minutes. The no-excuses emergency meal.',
+    tag: 'Breakfast · Dinner · 10 min',
+    tagColor: 'var(--gold)',
+    category: ['breakfast','dinner'],
+    time: '10 min',
+    servings: 2,
+    baseServings: 2,
+    ingredients: [
+      {name:'Large eggs', amt:4, unit:'', base:4},
+      {name:'Shredded cheese', amt:0.5, unit:'cup', base:0.5},
+      {name:'Bell pepper, diced', amt:0.5, unit:'', base:0.5},
+      {name:'Baby spinach, handful', amt:1, unit:'cup', base:1},
+      {name:'Garlic cloves, minced', amt:2, unit:'', base:2},
+      {name:'Olive oil', amt:1, unit:'tbsp', base:1},
+      {name:'Salt & pepper', amt:1, unit:'pinch', base:1},
+      {name:'Hot sauce to taste', amt:1, unit:'', base:1},
+    ],
+    steps: [
+      {title:'Soften veggies', text:'Heat oil in non-stick skillet over medium. Add bell pepper and garlic, cook 2 minutes until softened.', timer:120},
+      {title:'Add eggs', text:'Crack eggs directly into pan. Add salt and pepper. Let sit 30 seconds, then fold slowly with a spatula — don\'t over-stir.'},
+      {title:'Finish', text:'When eggs are just barely set (still slightly glossy), add spinach and cheese. Fold in and pull off heat. Residual heat finishes it. Rubbery eggs = cooked too long.', timer:90},
+      {title:'Serve', text:'Plate immediately. Hot sauce to taste.'},
+    ],
+    notes:'Dan: add whole grain toast or crackers on the side for carbs. Carrie: perfect light dinner on its own. This is your fallback when nothing else is happening — everything is always in the fridge.',
+  },
+  {
+    id: 'energy-balls',
+    title: 'Protein Energy Balls',
+    desc: 'No bake. Make 20 Sunday, grab 2 all week.',
+    tag: 'Snack · No-bake',
+    tagColor: 'var(--green)',
+    category: ['snack','prep'],
+    time: 'No cook',
+    servings: 20,
+    baseServings: 20,
+    ingredients: [
+      {name:'Old-fashioned oats', amt:1, unit:'cup', base:1},
+      {name:'Peanut butter (natural)', amt:0.5, unit:'cup', base:0.5},
+      {name:'Honey', amt:0.25, unit:'cup', base:0.25},
+      {name:'Chocolate chips (dark)', amt:0.5, unit:'cup', base:0.5},
+      {name:'Ground flaxseed (optional)', amt:2, unit:'tbsp', base:2},
+      {name:'Pinch of salt', amt:1, unit:'pinch', base:1},
+    ],
+    steps: [
+      {title:'Mix', text:'Combine all ingredients in a large bowl. Mix until fully combined — it should be sticky and hold together when pressed.'},
+      {title:'Chill', text:'If too dry: add more honey or peanut butter. If too wet: add a few more oats. Refrigerate 20 minutes — makes rolling much easier.', timer:1200},
+      {title:'Roll', text:'Roll into golf-ball sized balls (~1.5 tbsp each). Place on parchment-lined plate. Should make about 20.'},
+      {title:'Set', text:'Refrigerate at least 30 minutes before eating. Store covered.', timer:1800},
+    ],
+    notes:'~150 kcal and 5g protein per ball. Two = a solid snack. Store in fridge for 1–2 weeks. Swap chocolate chips for chopped walnuts for extra omega-3 for Dan.',
+  },
+  {
+    id: 'shrimp-stirfry',
+    title: 'Shrimp Stir-Fry + Rice',
+    desc: '15 minutes. Fastest protein-packed dinner on the list.',
+    tag: 'Dinner · 15 min',
+    tagColor: 'var(--blue)',
+    category: ['dinner'],
+    time: '15 min',
+    servings: 4,
+    baseServings: 4,
+    ingredients: [
+      {name:'Frozen shrimp (thawed)', amt:1, unit:'lb', base:1},
+      {name:'Frozen mixed veggies', amt:12, unit:'oz', base:12},
+      {name:'White rice (dry)', amt:1.5, unit:'cup', base:1.5},
+      {name:'Low-sodium soy sauce', amt:3, unit:'tbsp', base:3},
+      {name:'Garlic cloves, minced', amt:3, unit:'', base:3},
+      {name:'Olive oil', amt:2, unit:'tbsp', base:2},
+      {name:'Salt & pepper', amt:1, unit:'pinch', base:1},
+    ],
+    steps: [
+      {title:'Start rice + thaw shrimp', text:'Start rice in cooker. Thaw shrimp under cold running water for 5 minutes. Pat dry.', timer:300},
+      {title:'Cook veggies', text:'Heat oil in large skillet or wok over high heat. Add frozen veggies, cook 3–4 minutes until heated through and slightly charred.', timer:240},
+      {title:'Add shrimp', text:'Add garlic, stir 30 seconds. Add shrimp in single layer. Cook 2 minutes per side until pink and curled — don\'t overcook.', timer:240},
+      {title:'Sauce', text:'Pour soy sauce over everything. Toss to coat. Cook 1 more minute.', timer:60},
+      {title:'Serve', text:'Plate over rice. Season to taste.'},
+    ],
+    notes:'Shrimp cooks fast — take it off heat as soon as it turns pink and curls into a C shape. An O shape means overcooked. Aldi frozen shrimp works great here.',
+  },
+  {
+    id: 'overnight-oats',
+    title: 'Overnight Oats',
+    desc: 'Make it the night before. Zero morning effort.',
+    tag: 'Breakfast · 5 min prep',
+    tagColor: 'var(--gold)',
+    category: ['breakfast','prep'],
+    time: '5 min + overnight',
+    servings: 1,
+    baseServings: 1,
+    ingredients: [
+      {name:'Old-fashioned oats', amt:0.5, unit:'cup', base:0.5},
+      {name:'Milk or water', amt:0.5, unit:'cup', base:0.5},
+      {name:'Greek yogurt (plain full-fat)', amt:0.25, unit:'cup', base:0.25},
+      {name:'Blueberries', amt:0.5, unit:'cup', base:0.5},
+      {name:'Peanut butter', amt:1, unit:'tbsp', base:1},
+      {name:'Ground flaxseed', amt:1, unit:'tbsp', base:1},
+      {name:'Pinch of salt', amt:1, unit:'pinch', base:1},
+    ],
+    steps: [
+      {title:'Combine', text:'Add oats, milk, yogurt, flaxseed, and salt to a jar or container with a lid. Stir to combine.'},
+      {title:'Refrigerate', text:'Cover and refrigerate overnight (or at least 4 hours).', timer:28800},
+      {title:'Serve', text:'In the morning, top with blueberries and a spoonful of peanut butter. Eat cold straight from the jar.'},
+    ],
+    notes:'Dan: this is your field-ready breakfast — grab the jar on the way out. ~450 kcal, ~25g protein. Add protein powder to the mix for an extra 25g. Make 3–4 jars Sunday night.',
+  },
+];
+
+// Active timers
+const timers = {};
+
+function fmtAmt(base, servings, baseServings) {
+  const scaled = (base * servings) / baseServings;
+  if (scaled === Math.floor(scaled)) return scaled.toString();
+  const rounded = Math.round(scaled * 8) / 8;
+  if (rounded === Math.floor(rounded)) return rounded.toString();
+  // Show as fraction if clean
+  const eighths = Math.round(scaled * 8);
+  const whole = Math.floor(eighths / 8);
+  const rem = eighths % 8;
+  const fracs = {1:'⅛',2:'¼',3:'⅜',4:'½',5:'⅝',6:'¾',7:'⅞'};
+  if (rem === 0) return whole.toString();
+  return (whole > 0 ? whole + ' ' : '') + (fracs[rem] || (rem+'/8'));
+}
+
+function fmtTime(sec) {
+  const m = Math.floor(sec/60), s = sec%60;
+  return m + ':' + (s<10?'0':'') + s;
+}
+
+function startTimer(btnEl, seconds, id) {
+  if (timers[id]) {
+    clearInterval(timers[id].interval);
+    delete timers[id];
+    btnEl.classList.remove('running','done');
+    btnEl.textContent = '⏱ ' + fmtTime(seconds);
+    return;
+  }
+  let remaining = seconds;
+  btnEl.classList.add('running');
+  btnEl.textContent = '⏹ ' + fmtTime(remaining);
+  timers[id] = {
+    interval: setInterval(() => {
+      remaining--;
+      if (remaining <= 0) {
+        clearInterval(timers[id].interval);
+        delete timers[id];
+        btnEl.classList.remove('running');
+        btnEl.classList.add('done');
+        btnEl.textContent = '✓ Done';
+        // Vibrate if supported
+        if (navigator.vibrate) navigator.vibrate([200,100,200]);
+      } else {
+        btnEl.textContent = '⏹ ' + fmtTime(remaining);
+      }
+    }, 1000)
+  };
+}
+
+function renderIngredients(recipe) {
+  return recipe.ingredients.map(ing => `
+    <div class="ing-item">
+      <span class="ing-name">${ing.name}</span>
+      <span class="ing-amt ing-${ing.name.replace(/\W+/g,'_')}">${fmtAmt(ing.base, recipe.servings, recipe.baseServings)}${ing.unit ? ' ' + ing.unit : ''}</span>
+    </div>
+  `).join('');
+}
+
+function renderSteps(recipe) {
+  return recipe.steps.map((step, i) => `
+    <div class="step-item">
+      <div class="step-num">${i+1}</div>
+      <div class="step-content">
+        <div class="step-title">${step.title}</div>
+        <div class="step-text">${step.text}</div>
+        ${step.timer ? `<button class="timer-btn" id="timer-${recipe.id}-${i}" onclick="startTimer(this, ${step.timer}, '${recipe.id}-${i}')">⏱ ${fmtTime(step.timer)}</button>` : ''}
+      </div>
+    </div>
+  `).join('');
+}
+
+function updateServings(recipeId, delta) {
+  const recipe = RECIPES.find(r => r.id === recipeId);
+  if (!recipe) return;
+  recipe.servings = Math.max(1, recipe.servings + delta);
+  document.getElementById('srv-' + recipeId).textContent = recipe.servings;
+  // Update all ingredient amounts
+  recipe.ingredients.forEach(ing => {
+    const el = document.querySelector(`#card-${recipeId} .ing-${ing.name.replace(/\W+/g,'_')}`);
+    if (el) el.textContent = fmtAmt(ing.base, recipe.servings, recipe.baseServings) + (ing.unit ? ' ' + ing.unit : '');
+  });
+}
+
+function toggleCard(id) {
+  const card = document.getElementById('card-' + id);
+  card.classList.toggle('open');
+}
+
+let currentFilter = 'all';
+
+function filterRecipes(cat, btn) {
+  currentFilter = cat;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderList();
+}
+
+function renderList() {
+  const list = document.getElementById('recipeList');
+  const filtered = currentFilter === 'all' ? RECIPES : RECIPES.filter(r => r.category.includes(currentFilter));
+  if (filtered.length === 0) {
+    list.innerHTML = '<div class="empty">No recipes in this category</div>';
+    return;
+  }
+  list.innerHTML = filtered.map(recipe => `
+    <div class="recipe-card" id="card-${recipe.id}">
+      <div class="card-header" onclick="toggleCard('${recipe.id}')">
+        <div class="card-meta">
+          <div class="card-tag" style="color:${recipe.tagColor}">${recipe.tag}</div>
+          <div class="card-title">${recipe.title}</div>
+          <div class="card-desc">${recipe.desc}</div>
+          <div class="card-stats">
+            <div class="card-stat"><div class="card-stat-val">${recipe.time}</div><div class="card-stat-lbl">Time</div></div>
+            <div class="card-stat"><div class="card-stat-val">${recipe.baseServings}</div><div class="card-stat-lbl">Servings</div></div>
+            <div class="card-stat"><div class="card-stat-val">${recipe.ingredients.length}</div><div class="card-stat-lbl">Ingredients</div></div>
+          </div>
+        </div>
+        <div class="card-arrow">▼</div>
+      </div>
+      <div class="card-body">
+        <div class="servings-bar">
+          <span class="servings-lbl">Servings</span>
+          <div class="servings-ctrl">
+            <button class="srv-btn" onclick="updateServings('${recipe.id}', -1)">−</button>
+            <span class="srv-count" id="srv-${recipe.id}">${recipe.servings}</span>
+            <button class="srv-btn" onclick="updateServings('${recipe.id}', 1)">+</button>
+          </div>
+        </div>
+        <div class="recipe-cols">
+          <div class="ingredients-col">
+            <div class="col-title">Ingredients</div>
+            ${renderIngredients(recipe)}
+          </div>
+          <div class="steps-col">
+            <div class="col-title">Steps</div>
+            ${renderSteps(recipe)}
+          </div>
+        </div>
+        ${recipe.notes ? `<div class="recipe-notes"><div class="notes-lbl">Notes</div>${recipe.notes}</div>` : ''}
+      </div>
+    </div>
+  `).join('');
+}
+
+renderList();
+</script>
+
+</body>
+</html>
