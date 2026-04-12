@@ -3,190 +3,1429 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>75 Hard · Dan & Carrie</title>
-<style>@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap");</style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>75 HARD — Dan & Carrie</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{--black:#0d0d0d;--charcoal:#1a1a1a;--steel:#252525;--border:#2e2e2e;--muted:#555;--mid:#888;--light:#bbb;--cream:#f0ece4;--white:#fff;--red:#e63946;--orange:#f4a261;--green:#52b788;--blue:#4cc9f0;--gold:#f4c430}
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+button{-webkit-appearance:none;appearance:none;border-radius:0;font-family:inherit;cursor:pointer}
+button:focus{outline:none}
+a{color:inherit;text-decoration:none}
+input{-webkit-appearance:none;appearance:none;border-radius:0}
 html,body{height:100%}
-body{background:#0d0d0d;color:#f0ece4;font-family:'DM Sans',system-ui,-apple-system,sans-serif;overflow-x:hidden;min-height:100vh}
+body{background:#0d0d0d;color:#f0ece4;font-family:'DM Sans',sans-serif;overflow-x:hidden}
+.header{background:#1a1a1a;border-bottom:1px solid #2e2e2e;padding:0 20px;position:sticky;top:0;z-index:200}
+.header-inner{max-width:860px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:52px}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:3px;color:#fff}.logo span{color:#e63946}
+.day-badge{font-family:'DM Mono',monospace;font-size:10px;color:#555;letter-spacing:2px}
+.nav{background:#1a1a1a;border-bottom:1px solid #2e2e2e;overflow-x:auto;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.nav-inner{max-width:860px;margin:0 auto;display:flex;padding:0 16px}
+.tab{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#555;padding:13px 16px;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .2s;background:none;border-top:none;border-left:none;border-right:none;-webkit-appearance:none;appearance:none}
+.tab:hover{color:#bbb}.tab.active{color:#fff;border-bottom-color:#e63946}
+.main{max-width:860px;margin:0 auto;padding:24px 18px 80px}
+.section{display:none}.section.active{display:block}
+.hero{background:linear-gradient(135deg,#1a1a1a 0%,#1f0f0f 100%);border:1px solid #2e2e2e;border-left:4px solid #e63946;padding:24px;margin-bottom:24px}
+.hero-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;color:#e63946;text-transform:uppercase;margin-bottom:8px}
+.hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(34px,8vw,62px);line-height:.92;color:#fff;margin-bottom:12px}
+.hero-sub{font-size:13px;color:#888;line-height:1.7;max-width:520px}
+.rules-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px;margin-bottom:24px}
+.rule-card{background:#1a1a1a;border:1px solid #2e2e2e;padding:16px 18px;display:flex;gap:12px;align-items:flex-start}
+.rule-icon{font-size:20px;flex-shrink:0;margin-top:2px}
+.rule-title{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#f4c430;margin-bottom:4px}
+.rule-text{font-size:12px;color:#888;line-height:1.6}
+.profiles{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px}
+@media(max-width:480px){.profiles{grid-template-columns:1fr}}
+.profile-card{background:#1a1a1a;border:1px solid #2e2e2e;padding:18px}
+.profile-name{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:2px;color:#fff;margin-bottom:10px}
+.profile-stat{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #2e2e2e;font-size:12px}
+.profile-stat:last-child{border-bottom:none}
+.stat-label{color:#555}.stat-val{color:#f0ece4;font-weight:500}
+.section-head{margin-bottom:20px}
+.section-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;color:#e63946;text-transform:uppercase;margin-bottom:5px}
+.section-title{font-family:'Bebas Neue',sans-serif;font-size:36px;letter-spacing:2px;color:#fff;line-height:1}
+.section-sub{font-size:13px;color:#555;margin-top:6px;line-height:1.6}
+.info-box{background:rgba(230,57,70,.07);border:1px solid rgba(230,57,70,.25);border-left:3px solid #e63946;padding:13px 15px;margin-bottom:14px;font-size:13px;color:#888;line-height:1.7}
+.info-box strong{color:#f0ece4}
+.info-box.green{background:rgba(82,183,136,.07);border-color:rgba(82,183,136,.25);border-left-color:#52b788}
+.info-box.gold{background:rgba(244,196,48,.07);border-color:rgba(244,196,48,.25);border-left-color:#f4c430}
+.divider{height:1px;background:#2e2e2e;margin:24px 0}
 
-/* HERO */
-.hero{padding:48px 24px 36px;position:relative;overflow:hidden}
-.hero::before{content:’’;position:absolute;inset:0;background:linear-gradient(135deg,#1a0505 0%,#0d0d0d 60%);z-index:0}
-.hero-inner{position:relative;z-index:1}
-.hero-label{font-family:‘DM Mono’,monospace;font-size:10px;letter-spacing:4px;color:#e63946;text-transform:uppercase;margin-bottom:10px}
-.hero-title{font-family:‘Bebas Neue’,sans-serif;font-size:clamp(56px,15vw,96px);line-height:.88;color:#fff;margin-bottom:4px}
-.hero-title span{color:#e63946}
-.hero-names{font-family:‘DM Mono’,monospace;font-size:11px;letter-spacing:3px;color:#555;text-transform:uppercase;margin-bottom:20px}
-.hero-sub{font-size:14px;color:#888;line-height:1.6;max-width:340px}
+/* WORKOUT LAUNCHER */
+.phase-tabs{display:flex;gap:6px;margin-bottom:18px;flex-wrap:wrap}
+.phase-tab{display:inline-block;font-family:‘DM Mono’,monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;padding:6px 12px;background:#252525;border:1px solid #2e2e2e;color:#555;cursor:pointer;transition:all .2s;-webkit-appearance:none;appearance:none;border-radius:0}
+.phase-tab:hover{color:#bbb;border-color:#444}
+.phase-tab.active{background:#e63946;border-color:#e63946;color:#f0ece4}
+.day-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-bottom:18px}
+.day-btn{display:block;width:100%;padding:8px 2px;background:#252525;border:1px solid #2e2e2e;color:#555;font-family:‘DM Mono’,monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;text-align:center;transition:all .2s;-webkit-appearance:none;appearance:none;border-radius:0}
+.day-btn:hover{border-color:#444;color:#bbb}.day-btn.active{background:#e63946;border-color:#e63946;color:#f0ece4}
+.session-selector{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px}
+@media(max-width:480px){.session-selector{grid-template-columns:1fr}}
+.session-card{background:#252525;border:1px solid #2e2e2e;padding:14px;cursor:pointer;transition:all .2s;position:relative}
+.session-card.active{border-color:#e63946;border-width:2px;background:#1f0a0a}.session-card:hover{border-color:#444}.session-card.selected{border-color:#e63946;background:rgba(230,57,70,.08)}
+.sc-tag{font-family:‘DM Mono’,monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#555;margin-bottom:5px}
+.sc-name{font-family:‘Bebas Neue’,sans-serif;font-size:18px;letter-spacing:1px;color:#bbb;margin-bottom:3px}
+.sc-detail{font-size:11px;color:#555;line-height:1.5}
+.sc-check{position:absolute;top:12px;right:12px;width:18px;height:18px;border-radius:50%;border:2px solid #2e2e2e;display:flex;align-items:center;justify-content:center;font-size:10px;transition:all .2s}
+.session-card.selected .sc-check{background:#e63946;border-color:#e63946;color:#f0ece4}
+.start-btn{width:100%;padding:11px 16px;background:#2a2a2a;border:1px solid #444;color:#bbb;font-family:‘DM Mono’,monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:16px;-webkit-appearance:none;appearance:none;border-radius:0}
+.start-btn:hover{background:#e63946;border-color:#e63946;color:#f0ece4 !important}.start-btn,.start-btn *{color:#bbb !important;text-decoration:none !important}
 
-/* DAY COUNTER */
-.day-strip{margin:0 24px 32px;background:#1a1a1a;border:1px solid #2e2e2e;border-left:3px solid #e63946;padding:16px 20px;display:flex;align-items:center;gap:20px}
-.day-num{font-family:‘Bebas Neue’,sans-serif;font-size:52px;color:#e63946;line-height:1}
-.day-info{}
-.day-lbl{font-family:‘DM Mono’,monospace;font-size:9px;letter-spacing:2px;color:#555;text-transform:uppercase}
-.day-text{font-size:13px;color:#bbb;margin-top:3px}
-.day-bar-wrap{flex:1;margin-left:auto}
-.day-bar-track{height:4px;background:#2e2e2e;margin-bottom:5px}
-.day-bar-fill{height:100%;background:#e63946;transition:width .6s ease}
-.day-pct{font-family:‘DM Mono’,monospace;font-size:9px;color:#555;text-align:right;letter-spacing:1px}
+/* PHASE REFERENCE */
+.phase-block{margin-bottom:16px;background:#1a1a1a;border:1px solid #2e2e2e;overflow:hidden}
+.phase-header{padding:14px 18px;background:#252525;display:flex;justify-content:space-between;align-items:center;cursor:pointer;user-select:none}
+.phase-header:hover{background:#2c2c2c}
+.phase-name{font-family:‘Bebas Neue’,sans-serif;font-size:20px;letter-spacing:2px;color:#fff}
+.phase-range{font-family:‘DM Mono’,monospace;font-size:9px;letter-spacing:2px;color:#555;text-transform:uppercase}
+.phase-body{padding:18px;display:none}.phase-body.open{display:block}
+.chevron{color:#555;font-size:13px;transition:transform .2s}
+.phase-header.open .chevron{transform:rotate(180deg)}
+.workout-day{margin-bottom:12px;padding:14px;background:#0d0d0d;border-left:3px solid #2e2e2e}
+.workout-day.strength{border-left-color:#4cc9f0}.workout-day.cardio{border-left-color:#f4a261}.workout-day.recovery{border-left-color:#52b788}.workout-day.full{border-left-color:#f4c430}
+.wd-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px}
+.wd-day{font-family:‘Bebas Neue’,sans-serif;font-size:17px;letter-spacing:1px;color:#fff}
+.wd-tag{font-family:‘DM Mono’,monospace;font-size:9px;letter-spacing:1.5px;padding:3px 7px;text-transform:uppercase}
+.tag-s{background:rgba(76,201,240,.12);color:#4cc9f0}.tag-c{background:rgba(244,162,97,.12);color:#f4a261}.tag-r{background:rgba(82,183,136,.12);color:#52b788}.tag-f{background:rgba(244,196,48,.12);color:#f4c430}
+.wd-sessions{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media(max-width:460px){.wd-sessions{grid-template-columns:1fr}}
+.wd-session{background:#1a1a1a;padding:11px 13px;border:1px solid #2e2e2e}
+.wds-label{font-family:‘DM Mono’,monospace;font-size:9px;letter-spacing:1.5px;color:#555;text-transform:uppercase;margin-bottom:4px}
+.wds-name{font-size:13px;font-weight:600;color:#f0ece4;margin-bottom:3px}
+.wds-detail{font-size:11px;color:#555;line-height:1.5}
+.ex-table{width:100%;border-collapse:collapse;margin-bottom:14px;font-size:12px}
+.ex-table th{font-family:‘DM Mono’,monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:#555;text-align:left;padding:7px 9px;border-bottom:1px solid #2e2e2e;background:#252525}
+.ex-table td{padding:9px 9px;border-bottom:1px solid #1e1e1e;color:#f0ece4;vertical-align:top;line-height:1.5}
+.ex-table tr:last-child td{border-bottom:none}
 
-/* APPS GRID */
-.apps-section{padding:0 24px 40px}
-.section-label{font-family:‘DM Mono’,monospace;font-size:9px;letter-spacing:3px;color:#555;text-transform:uppercase;margin-bottom:16px}
-.apps-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-@media(min-width:480px){.apps-grid{grid-template-columns:1fr 1fr 1fr}}
+/* DIET */
+.person-toggle{display:flex;gap:8px;margin-bottom:18px}
+.ptog{padding:8px 20px;background:#1a1a1a;border:1px solid #2e2e2e;color:#555;font-family:‘DM Mono’,monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .2s;-webkit-appearance:none;appearance:none;border-radius:0}
+.ptog.active{background:#e63946;border-color:#e63946;color:#fff}
+.diet-person{display:none}.diet-person.active{display:block}
+.macro-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px}
+.macro-card{background:#1a1a1a;border:1px solid #2e2e2e;padding:14px;text-align:center}
+.macro-val{font-family:‘Bebas Neue’,sans-serif;font-size:30px;letter-spacing:1px;line-height:1;margin-bottom:3px}
+.macro-label{font-family:‘DM Mono’,monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#555}
+.meal-grid{display:grid;gap:8px;margin-bottom:18px}
+.meal-card{background:#1a1a1a;border:1px solid #2e2e2e;padding:14px 16px;display:grid;grid-template-columns:90px 1fr;gap:12px;align-items:start}
+@media(max-width:440px){.meal-card{grid-template-columns:1fr}}
+.meal-time{font-family:‘Bebas Neue’,sans-serif;font-size:17px;letter-spacing:1px;color:#fff;line-height:1.1}
+.meal-kcal{font-family:‘DM Mono’,monospace;font-size:10px;color:#f4a261;margin-top:2px}
+.meal-name{font-size:13px;font-weight:600;color:#f0ece4;margin-bottom:3px}
+.meal-desc{font-size:12px;color:#555;line-height:1.6}
 
-.app-card{background:#1a1a1a;border:1px solid #2e2e2e;padding:22px 18px;text-decoration:none;color:#f0ece4;display:flex;flex-direction:column;gap:10px;transition:all .2s;position:relative;overflow:hidden}
-.app-card::before{content:’’;position:absolute;bottom:0;left:0;right:0;height:2px;background:var(–accent-color, #e63946);transform:scaleX(0);transform-origin:left;transition:transform .25s}
-.app-card:hover{border-color:#444;transform:translateY(-2px)}
-.app-card:hover::before{transform:scaleX(1)}
-.app-card:active{transform:translateY(0)}
+/* STRETCH (reference) */
+.stretch-block{background:#1a1a1a;border:1px solid #2e2e2e;margin-bottom:10px;overflow:hidden}
+.stretch-header{padding:13px 16px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;background:#252525}
+.stretch-header:hover{background:#2c2c2c}
+.stretch-name{font-size:13px;font-weight:600;color:#f0ece4}
+.stretch-meta{font-family:‘DM Mono’,monospace;font-size:10px;color:#555}
+.stretch-body{display:none;padding:14px 16px}.stretch-body.open{display:block}
+.stretch-step{display:flex;gap:10px;padding:9px 0;border-bottom:1px solid #1e1e1e;font-size:12px;color:#888;line-height:1.6;align-items:flex-start}
+.stretch-step:last-child{border-bottom:none}
+.step-num{font-family:‘Bebas Neue’,sans-serif;font-size:17px;color:#e63946;flex-shrink:0;width:20px;line-height:1.1}
 
-.app-icon{font-size:28px;line-height:1}
-.app-title{font-family:‘Bebas Neue’,sans-serif;font-size:20px;letter-spacing:1.5px;color:#fff;line-height:1}
-.app-desc{font-size:11px;color:#888;line-height:1.5}
-.app-arrow{font-family:‘DM Mono’,monospace;font-size:9px;letter-spacing:1.5px;color:#555;margin-top:auto}
+/* TRACKER */
+.tracker-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(36px,1fr));gap:5px;margin-bottom:22px}
+.tracker-day{aspect-ratio:1;background:#1a1a1a;border:1px solid #2e2e2e;display:flex;align-items:center;justify-content:center;font-family:‘DM Mono’,monospace;font-size:10px;color:#555;cursor:pointer;transition:all .15s;user-select:none}
+.tracker-day:hover{border-color:#e63946}.tracker-day.done{background:#52b788;border-color:#52b788;color:#0d0d0d;font-weight:600}.tracker-day.failed{background:rgba(230,57,70,.25);border-color:#e63946;color:#e63946}
+.checklist{display:grid;gap:7px;margin-bottom:18px}
+.check-item{display:flex;align-items:center;gap:12px;padding:13px 14px;background:#1a1a1a;border:1px solid #2e2e2e;cursor:pointer;transition:all .15s;user-select:none}
+.check-item.checked{border-color:#52b788;background:rgba(82,183,136,.07)}
+.check-box{width:20px;height:20px;border:2px solid #2e2e2e;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;transition:all .15s}
+.check-item.checked .check-box{background:#52b788;border-color:#52b788;color:#0d0d0d}
+.check-label{font-size:13px;color:#f0ece4}.check-item.checked .check-label{text-decoration:line-through;color:#555}
+.check-sub{font-size:11px;color:#555;margin-top:1px}
+.water-label{font-family:‘DM Mono’,monospace;font-size:10px;color:#555;letter-spacing:2px;margin-bottom:7px}
+.water-tracker{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:18px}
+.water-cup{width:40px;height:40px;background:#1a1a1a;border:1px solid #2e2e2e;display:flex;align-items:center;justify-content:center;font-size:18px;cursor:pointer;transition:all .15s}
+.water-cup.filled{background:rgba(76,201,240,.18);border-color:#4cc9f0}
+.weight-log{display:grid;gap:7px;margin-bottom:18px}
+.weight-row{display:grid;grid-template-columns:70px 1fr 1fr;gap:8px;align-items:center;background:#1a1a1a;border:1px solid #2e2e2e;padding:11px 13px;font-size:12px}
+.weight-week{font-family:‘Bebas Neue’,sans-serif;font-size:15px;color:#fff}
+.weight-input{background:#0d0d0d;border:1px solid #2e2e2e;padding:5px 8px;color:#f0ece4;font-family:‘DM Mono’,monospace;font-size:12px;width:100%;text-align:center}
+.weight-input:focus{outline:none;border-color:#e63946}
+.wlabel{font-family:‘DM Mono’,monospace;font-size:9px;color:#555;letter-spacing:1px;text-transform:uppercase}
+h3{font-family:‘Bebas Neue’,sans-serif;font-size:20px;letter-spacing:2px;color:#fff;margin-bottom:10px}
+p.bt{font-size:13px;color:#888;line-height:1.75;margin-bottom:12px}
 
-/* RULES */
-.rules-section{padding:0 24px 32px}
-.rules-title{font-family:‘Bebas Neue’,sans-serif;font-size:26px;letter-spacing:2px;color:#fff;margin-bottom:14px}
-.rule-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.rule-item{background:#1a1a1a;border:1px solid #2e2e2e;padding:14px 16px}
-.rule-num{font-family:‘DM Mono’,monospace;font-size:9px;letter-spacing:2px;color:#e63946;margin-bottom:5px}
-.rule-text{font-size:12px;color:#888;line-height:1.5}
+/* ══════════ WORKOUT PLAYER — inline panel ══════════ */
+.player-panel{display:none;flex-direction:column;}
+.player-panel.active{display:flex;}
+.player-header{background:#1a1a1a;border:1px solid #2e2e2e;border-bottom:none;padding:0 16px;display:flex;align-items:center;justify-content:space-between;height:48px;}
+.player-close{background:none;border:1px solid #2e2e2e;color:#888;font-family:‘DM Mono’,monospace;font-size:10px;letter-spacing:1.5px;padding:5px 10px;-webkit-appearance:none;appearance:none;border-radius:0;cursor:pointer;transition:all .2s;}
+.player-close:hover{border-color:#e63946;color:#e63946;}
+.player-title{font-family:‘Bebas Neue’,sans-serif;font-size:15px;letter-spacing:2px;color:#fff;}
+.player-session-label{font-family:‘DM Mono’,monospace;font-size:9px;color:#555;letter-spacing:1px;}
+.player-elapsed{font-family:‘Bebas Neue’,sans-serif;font-size:20px;letter-spacing:2px;color:#fff;}
+.done-screen{display:none;background:#1a1a1a;border:1px solid #2e2e2e;padding:36px 20px;text-align:center;align-items:center;flex-direction:column;}
+.done-screen.active{display:flex;}
+.done-icon{font-size:48px;margin-bottom:12px;}
+.done-title{font-family:‘Bebas Neue’,sans-serif;font-size:clamp(36px,8vw,56px);letter-spacing:3px;color:#fff;line-height:1;margin-bottom:8px;}
+.done-sub{font-size:13px;color:#888;line-height:1.7;max-width:340px;margin-bottom:24px;}
+.done-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;width:100%;max-width:360px;margin-bottom:24px;}
+.dstat{background:#252525;border:1px solid #2e2e2e;padding:12px 8px;text-align:center;}
+.dstat-val{font-family:‘Bebas Neue’,sans-serif;font-size:26px;letter-spacing:1px;color:#fff;}
+.dstat-label{font-family:‘DM Mono’,monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:#555;margin-top:2px;}
+.done-btn{padding:12px 32px;background:#52b788;border:none;color:#0d0d0d;font-family:‘Bebas Neue’,sans-serif;font-size:20px;letter-spacing:3px;cursor:pointer;transition:all .2s;}
+.done-btn:hover{background:#45a373;}
 
-/* TODAY */
-.today-section{padding:0 24px 40px}
-.today-title{font-family:‘Bebas Neue’,sans-serif;font-size:26px;letter-spacing:2px;color:#fff;margin-bottom:14px}
-.checklist{display:flex;flex-direction:column;gap:8px}
-.check-row{display:flex;align-items:center;gap:12px;background:#1a1a1a;border:1px solid #2e2e2e;padding:13px 16px;cursor:pointer;transition:border-color .15s;user-select:none}
-.check-row:active{border-color:#52b788}
-.check-box{width:20px;height:20px;border:2px solid #2e2e2e;display:flex;align-items:center;justify-content:center;font-size:11px;color:transparent;flex-shrink:0;transition:all .2s}
-.check-row.done .check-box{background:#52b788;border-color:#52b788;color:#fff}
-.check-label{font-size:13px;color:#f0ece4}
-.check-row.done .check-label{color:#555;text-decoration:line-through}
+/* CHECKLIST EXERCISE ROWS */
+.cl-row{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid #2e2e2e;align-items:flex-start;transition:opacity 0.2s;cursor:pointer}
+.cl-row:last-child{border-bottom:none}
+.cl-row.cl-done{opacity:0.45}
+.cl-row.cl-done .cl-name{text-decoration:line-through;color:#555}
+.cl-check{flex-shrink:0;padding-top:1px}
+.cl-box{width:28px;height:28px;border:2px solid #555;display:flex;align-items:center;justify-content:center;font-size:14px;color:transparent;transition:all 0.15s;border-radius:4px;background:#252525}
+.cl-row.cl-done .cl-box{background:#52b788;border-color:#52b788;color:#000}
+.cl-content{flex:1;min-width:0}
+.cl-name{font-size:14px;font-weight:600;color:#f0ece4;margin-bottom:5px;line-height:1.3}
+.cl-meta{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:6px;align-items:center}
+.cl-tag{font-family:‘DM Mono’,monospace;font-size:9px;letter-spacing:1px;padding:2px 7px;border:1px solid}
+.cl-sets{color:#4cc9f0;border-color:rgba(76,201,240,.3);background:rgba(76,201,240,.08)}
+.cl-reps{color:#f4c430;border-color:rgba(244,196,48,.3);background:rgba(244,196,48,.08)}
+.cl-equip{color:#52b788;border-color:rgba(82,183,136,.3);background:rgba(82,183,136,.08)}
+.cl-mins{font-family:‘DM Mono’,monospace;font-size:9px;color:#555;letter-spacing:1px;margin-left:2px}
+.cl-desc{font-size:12px;color:#888;line-height:1.6;margin-bottom:5px}
+.cl-mod{font-size:11px;color:#f4a261;background:rgba(244,162,97,.08);border-left:2px solid #f4a261;padding:6px 10px;line-height:1.5}
 
-/* FOOTER */
-.footer{padding:20px 24px;border-top:1px solid #2e2e2e;text-align:center;font-family:‘DM Mono’,monospace;font-size:9px;letter-spacing:2px;color:#555;text-transform:uppercase}
-.app-card-main{grid-column:1/-1;border-left:3px solid #e63946}
-.app-card-main::before{background:#e63946}
-.app-card-recipes::before{background:#f4a261}
-.app-card-groceries::before{background:#52b788}
-.app-card{text-decoration:none !important}
-.app-title{color:#fff !important}
-.app-desc{color:#888 !important}
-.app-arrow{color:#555 !important}
+/* ══════════ STRETCH PLAYER — inline panel ══════════ */
+.stretch-start-btn{width:100%;padding:9px;background:#252525;border:1px solid #444;color:#bbb;font-family:‘DM Mono’,monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:10px;margin-bottom:3px;}
+.stretch-start-btn:hover{background:#52b788;border-color:#52b788;color:#0d0d0d;}
+.sp-hint{font-family:‘DM Mono’,monospace;font-size:9px;color:#555;text-align:center;letter-spacing:1.5px;margin-bottom:12px;}
+.sp-overlay{display:none;flex-direction:column;}
+.sp-overlay.active{display:flex;}
+.sp-hdr{background:#1a1a1a;border:1px solid #2e2e2e;border-bottom:none;padding:0 16px;display:flex;align-items:center;justify-content:space-between;height:48px;}
+.sp-close{background:none;border:1px solid #2e2e2e;color:#888;font-family:‘DM Mono’,monospace;font-size:10px;letter-spacing:1.5px;padding:6px 12px;cursor:pointer;transition:all .2s}
+.sp-close:hover{border-color:#e63946;color:#e63946}
+.sp-hdr-title{font-family:‘Bebas Neue’,sans-serif;font-size:17px;letter-spacing:2px;color:#fff}
+.sp-hdr-count{font-family:‘DM Mono’,monospace;font-size:11px;color:#555;letter-spacing:1px}
+
+/* Progress */
+.sp-prog-wrap{height:3px;background:#252525;flex-shrink:0}
+.sp-prog-fill{height:100%;background:#52b788;transition:width .4s ease}
+
+/* Active stretch screen */
+.sp-active{display:flex;flex-direction:column;align-items:center;flex:1;overflow-y:auto;padding:18px 18px 0}
+
+.sp-step-lbl{font-family:‘DM Mono’,monospace;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:#555;margin-bottom:12px;text-align:center}
+.sp-name{font-family:‘Bebas Neue’,sans-serif;font-size:clamp(28px,8vw,48px);letter-spacing:2px;color:#fff;line-height:1;text-align:center;margin-bottom:6px}
+.sp-dur-pill{font-family:‘DM Mono’,monospace;font-size:11px;letter-spacing:2px;background:rgba(82,183,136,.15);color:#52b788;border:1px solid rgba(82,183,136,.3);padding:4px 14px;margin-bottom:18px}
+
+/* Ring timer */
+.sp-ring-wrap{position:relative;width:min(210px,52vw);height:min(210px,52vw);margin:0 auto 18px;flex-shrink:0}
+.sp-ring-svg{width:100%;height:100%;transform:rotate(-90deg)}
+.sp-ring-bg{fill:none;stroke:#252525;stroke-width:10}
+.sp-ring-fill{fill:none;stroke:#52b788;stroke-width:10;stroke-linecap:round;transition:stroke-dashoffset .95s linear}
+.sp-ring-inner{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.sp-seconds{font-family:‘Bebas Neue’,sans-serif;font-size:clamp(50px,14vw,78px);letter-spacing:2px;color:#fff;line-height:1}
+.sp-sec-lbl{font-family:‘DM Mono’,monospace;font-size:9px;letter-spacing:2px;color:#555;text-transform:uppercase}
+
+.sp-desc{font-size:13px;color:#888;line-height:1.7;text-align:center;max-width:380px;margin:0 auto 10px}
+.sp-mod{background:rgba(244,162,97,.09);border-left:3px solid #f4a261;padding:10px 14px;font-size:12px;color:#f4a261;width:100%;max-width:420px;text-align:left;margin-bottom:14px}
+.sp-mod strong{color:#f4a261}
+.sp-next-lbl{font-family:‘DM Mono’,monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#555;text-align:center;margin-bottom:3px}
+.sp-next-name{font-size:13px;color:#888;text-align:center;margin-bottom:14px}
+
+/* Actions */
+.sp-actions{display:grid;grid-template-columns:1fr 1fr 1fr;flex-shrink:0;border-top:1px solid #2e2e2e}
+.sp-act{padding:18px 8px;border:none;font-family:‘Bebas Neue’,sans-serif;font-size:17px;letter-spacing:2px;cursor:pointer;transition:all .2s;text-align:center}
+.spa-prev{background:#252525;color:#888;border-right:1px solid #2e2e2e}
+.spa-prev:hover{background:#2c2c2c;color:#f0ece4}
+.spa-pause{background:#1a1a1a;color:#f4c430;border-right:1px solid #2e2e2e}
+.spa-pause:hover{background:#222}
+.spa-next{background:#52b788;color:#0d0d0d}
+.spa-next:hover{background:#45a373}
+.spa-next.sp-finish{background:#f4c430;color:#0d0d0d}
+
+/* Done */
+.sp-done{display:none;flex-direction:column;align-items:center;justify-content:center;flex:1;padding:40px 24px;text-align:center}
+.sp-done.show{display:flex}
 </style>
 
 </head>
 <body>
 
-<div class="hero">
-  <div class="hero-inner">
-    <div class="hero-label">The Challenge</div>
-    <div class="hero-title">75<span>HARD</span></div>
-    <div class="hero-names">Dan & Carrie Cleveland</div>
-    <div class="hero-sub">75 days. No compromises. Two workouts a day, clean diet, gallon of water, 10 pages, progress photo. Every single day.</div>
+<div class="header">
+  <div class="header-inner">
+    <a href="index.html" style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1.5px;color:#555;text-decoration:none;text-transform:uppercase;padding:5px 10px;border:1px solid #2e2e2e;">← Home</a>
+    <div class="logo">75<span>HARD</span></div>
+    <div style="text-align:right">
+      <div class="day-badge">Dan & Carrie · 75 Days</div>
+      <div id="syncStatus" style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1px;color:#555;margin-top:2px;">☁️ Loading...</div>
+    </div>
+  </div>
+</div>
+<div class="nav">
+  <div class="nav-inner">
+    <button class="tab active" onclick="showTab('overview',this)">Overview</button>
+    <button class="tab" onclick="showTab('workout',this)">Workout</button>
+    <button class="tab" onclick="showTab('diet',this)">Diet</button>
+    <button class="tab" onclick="showTab('stretch',this)">Stretch</button>
+    <button class="tab" onclick="showTab('tracker',this)">Tracker</button>
   </div>
 </div>
 
-<div class="day-strip">
-  <div class="day-num" id="dayNum">1</div>
-  <div class="day-info">
-    <div class="day-lbl">Current Day</div>
-    <div class="day-text" id="dayText">Day 1 of 75</div>
+<div class="main">
+
+<!-- ═══ OVERVIEW ═══ -->
+
+<div id="overview" class="section active">
+  <div class="hero">
+    <div class="hero-label">The Program</div>
+    <div class="hero-title">75 Days.<br>No Excuses.</div>
+    <div class="hero-sub">Built for Dan & Carrie — around your basement gear, Dan's back, Wisconsin winters, and real life.</div>
   </div>
-  <div class="day-bar-wrap">
-    <div class="day-bar-track"><div class="day-bar-fill" id="dayBarFill" style="width:0%"></div></div>
-    <div class="day-pct" id="dayPct">0% complete</div>
+  <div class="rules-grid">
+    <div class="rule-card"><div class="rule-icon">💪</div><div><div class="rule-title">Two Workouts Daily</div><div class="rule-text">45 min each. One outdoors or cold-weather row substitute.</div></div></div>
+    <div class="rule-card"><div class="rule-icon">💧</div><div><div class="rule-title">1 Gallon Water</div><div class="rule-text">128 oz per day. Plain water only.</div></div></div>
+    <div class="rule-card"><div class="rule-icon">📖</div><div><div class="rule-title">10 Pages Reading</div><div class="rule-text">Non-fiction or self-improvement. No audiobooks.</div></div></div>
+    <div class="rule-card"><div class="rule-icon">🥗</div><div><div class="rule-title">Zero Cheat Meals</div><div class="rule-text">One slip = restart Day 1. No exceptions.</div></div></div>
+    <div class="rule-card"><div class="rule-icon">📷</div><div><div class="rule-title">Progress Photo</div><div class="rule-text">Every single day. Same lighting, same pose.</div></div></div>
+    <div class="rule-card"><div class="rule-icon">🚫</div><div><div class="rule-title">No Alcohol</div><div class="rule-text">Zero. Miss any task = restart Day 1.</div></div></div>
   </div>
+  <div class="profiles">
+    <div class="profile-card">
+      <div class="profile-name">Dan</div>
+      <div class="profile-stat"><span class="stat-label">Age</span><span class="stat-val">43</span></div>
+      <div class="profile-stat"><span class="stat-label">Start Weight</span><span class="stat-val">184 lbs</span></div>
+      <div class="profile-stat"><span class="stat-label">Goal</span><span class="stat-val" style="color:#52b788">~170 lbs</span></div>
+      <div class="profile-stat"><span class="stat-label">Daily Calories</span><span class="stat-val" style="color:#f4a261">2,000 kcal</span></div>
+      <div class="profile-stat"><span class="stat-label">Back Note</span><span class="stat-val" style="color:#f4a261;font-size:11px">Bulged discs — mods throughout</span></div>
+    </div>
+    <div class="profile-card">
+      <div class="profile-name">Carrie</div>
+      <div class="profile-stat"><span class="stat-label">Age</span><span class="stat-val">42</span></div>
+      <div class="profile-stat"><span class="stat-label">Start Weight</span><span class="stat-val">125 lbs</span></div>
+      <div class="profile-stat"><span class="stat-label">Goal</span><span class="stat-val" style="color:#52b788">Tone / Recomp</span></div>
+      <div class="profile-stat"><span class="stat-label">Daily Calories</span><span class="stat-val" style="color:#f4a261">1,600 kcal</span></div>
+      <div class="profile-stat"><span class="stat-label">Level</span><span class="stat-val">Beginner / Moderate</span></div>
+    </div>
+  </div>
+  <div class="info-box gold"><strong>Equipment:</strong> Rowing machine · TRX · 25 lb KB · 10 lb KB · Bands (light / medium / heavy / leg) · Sit-up bench</div>
+  <div class="info-box green"><strong>Cold Weather Rule:</strong> When outdoors isn't possible, your "outdoor" session = 45 min structured rowing machine work. It counts.</div>
 </div>
 
-<div class="apps-section">
-  <div class="section-label">Your Tools</div>
-  <div class="apps-grid">
-    <a class="app-card app-card-main" href="75hard.html">
-      <div class="app-icon">💪</div>
-      <div class="app-title">75 Hard App</div>
-      <div class="app-desc">Workouts, tracker, diet plan, stretch routines. Your daily command center.</div>
-      <div class="app-arrow">OPEN APP →</div>
-    </a>
-    <a class="app-card app-card-recipes" href="recipes.html">
-      <div class="app-icon">🍳</div>
-      <div class="app-title">Recipes</div>
-      <div class="app-desc">9 compliant meals with timers and scaling.</div>
-      <div class="app-arrow">OPEN →</div>
-    </a>
-    <a class="app-card app-card-groceries" href="groceries.html">
-      <div class="app-icon">🛒</div>
-      <div class="app-title">Grocery List</div>
-      <div class="app-desc">Pick 'n Save & Aldi friendly. Tap to check off.</div>
-      <div class="app-arrow">OPEN →</div>
-    </a>
+<!-- ═══ WORKOUT ═══ -->
+
+<div id="workout" class="section">
+
+  <!-- LAUNCHER VIEW -->
+
+  <div id="launcher">
+    <div class="section-head">
+      <div class="section-label">The Program</div>
+      <div class="section-title">Workout Plan</div>
+      <div class="section-sub">Pick your phase, day, and session — then tap Start Workout.</div>
+    </div>
+    <h3>Who's Working Out?</h3>
+    <div class="person-toggle" style="margin-bottom:20px">
+      <button class="ptog active" id="pickDan" onclick="selectPerson('dan',this)">Dan</button>
+      <button class="ptog" id="pickCarrie" onclick="selectPerson('carrie',this)">Carrie</button>
+    </div>
+    <div class="info-box" id="personNote"><strong>Dan's Back Rules:</strong> No heavy deadlifts, no loaded forward bends. Core = bracing and anti-rotation only. If back flares, substitute any floor work with TRX or band work standing. Modifications shown on every exercise.</div>
+    <h3>Phase</h3>
+    <div class="phase-tabs">
+      <button class="phase-tab active" onclick="selPhase(0,this)">Phase 1 · Days 1–25</button>
+      <button class="phase-tab" onclick="selPhase(1,this)">Phase 2 · Days 26–50</button>
+      <button class="phase-tab" onclick="selPhase(2,this)">Phase 3 · Days 51–75</button>
+    </div>
+    <h3>Day</h3>
+    <div class="day-grid" id="dayGrid"></div>
+    <h3>Session</h3>
+    <div class="session-selector" id="sessionCards"></div>
+    <button class="start-btn" onclick="startWorkout()">▶ &nbsp; START WORKOUT</button>
+    <div class="divider"></div>
+    <h3>Program Reference</h3>
+    <div class="phase-block">
+      <div class="phase-header" onclick="togPhase(this)"><div><div class="phase-name">Phase 1 — Foundation</div><div class="phase-range">Days 1–25 · Build the habit</div></div><div class="chevron">▼</div></div>
+      <div class="phase-body open">
+        <p class="bt">Lower intensity, learning movement patterns, building daily discipline.</p>
+        <div class="workout-day full"><div class="wd-header"><div class="wd-day">Monday — Full Body</div><span class="wd-tag tag-f">Full</span></div><div class="wd-sessions"><div class="wd-session"><div class="wds-label">Session 1 · Indoor</div><div class="wds-name">TRX + KB Circuit</div><div class="wds-detail">Rows, squats, swings, pull-aparts, plank. 3 rounds.</div></div><div class="wd-session"><div class="wds-label">Session 2 · Outdoor/Row</div><div class="wds-name">Brisk Walk or Row</div><div class="wds-detail">45 min easy-moderate pace.</div></div></div></div>
+        <div class="workout-day cardio"><div class="wd-header"><div class="wd-day">Tuesday — Cardio</div><span class="wd-tag tag-c">Cardio</span></div><div class="wd-sessions"><div class="wd-session"><div class="wds-label">Session 1 · Indoor</div><div class="wds-name">Row + Band Superset</div><div class="wds-detail">20 min row + 3 rounds band work.</div></div><div class="wd-session"><div class="wds-label">Session 2 · Outdoor</div><div class="wds-name">Walk + Bodyweight</div><div class="wds-detail">20 min walk + park circuit.</div></div></div></div>
+        <div class="workout-day recovery"><div class="wd-header"><div class="wd-day">Wednesday — Recovery</div><span class="wd-tag tag-r">Recovery</span></div><div class="wd-sessions"><div class="wd-session"><div class="wds-label">Session 1 · Indoor</div><div class="wds-name">Yoga Flow</div><div class="wds-detail">Full routine. Back-safe mods throughout.</div></div><div class="wd-session"><div class="wds-label">Session 2 · Outdoor</div><div class="wds-name">Easy Walk</div><div class="wds-detail">45 min mental reset.</div></div></div></div>
+        <div class="workout-day strength"><div class="wd-header"><div class="wd-day">Thursday — Upper Body</div><span class="wd-tag tag-s">Strength</span></div><div class="wd-sessions"><div class="wd-session"><div class="wds-label">Session 1 · Indoor</div><div class="wds-name">TRX Upper + Core</div><div class="wds-detail">Push, row, curl, press. 3–4 rounds.</div></div><div class="wd-session"><div class="wds-label">Session 2 · Outdoor/Row</div><div class="wds-name">Steady Walk or Row</div><div class="wds-detail">HR 120–140 bpm target.</div></div></div></div>
+        <div class="workout-day strength"><div class="wd-header"><div class="wd-day">Friday — Lower Body</div><span class="wd-tag tag-s">Strength</span></div><div class="wd-sessions"><div class="wd-session"><div class="wds-label">Session 1 · Indoor</div><div class="wds-name">KB + Band Lower</div><div class="wds-detail">Goblet squat, RDL, band work. 3 rounds.</div></div><div class="wd-session"><div class="wds-label">Session 2 · Outdoor</div><div class="wds-name">Walk/Jog Intervals</div><div class="wds-detail">4 min walk / 1 min jog × 9.</div></div></div></div>
+        <div class="workout-day cardio"><div class="wd-header"><div class="wd-day">Saturday — Row + Core</div><span class="wd-tag tag-c">Cardio</span></div><div class="wd-sessions"><div class="wd-session"><div class="wds-label">Session 1 · Indoor</div><div class="wds-name">Structured Row</div><div class="wds-detail">5×4 min hard / 2 min easy + core finisher.</div></div><div class="wd-session"><div class="wds-label">Session 2 · Outdoor</div><div class="wds-name">Family Walk</div><div class="wds-detail">Bring Kira. Keep the motivation up.</div></div></div></div>
+        <div class="workout-day recovery"><div class="wd-header"><div class="wd-day">Sunday — Stretch + Walk</div><span class="wd-tag tag-r">Recovery</span></div><div class="wd-sessions"><div class="wd-session"><div class="wds-label">Session 1 · Indoor</div><div class="wds-name">Full Stretch</div><div class="wds-detail">Complete yoga sequence. Hold each pose longer.</div></div><div class="wd-session"><div class="wds-label">Session 2 · Outdoor</div><div class="wds-name">Easy Walk</div><div class="wds-detail">Recovery pace. 45 min.</div></div></div></div>
+      </div>
+    </div>
+    <div class="phase-block">
+      <div class="phase-header" onclick="togPhase(this)"><div><div class="phase-name">Phase 2 — Build</div><div class="phase-range">Days 26–50 · Increase intensity</div></div><div class="chevron">▼</div></div>
+      <div class="phase-body">
+        <div class="info-box gold"><strong>Changes:</strong> Switch to 25lb KB. Add HIIT row intervals Tue/Thu. TRX: single-leg squat, archer row. 5th set on all circuits. Outdoors: jog/walk intervals.</div>
+        <table class="ex-table"><thead><tr><th>Exercise</th><th>Sets × Reps</th><th>Equipment</th><th>Dan Mod</th></tr></thead><tbody>
+        <tr><td>TRX Single-Leg Squat</td><td>4 × 10 ea</td><td>TRX</td><td>Both legs if back flares</td></tr>
+        <tr><td>KB Swing (25 lb)</td><td>4 × 15</td><td>25 lb KB</td><td>Hip hinge, brace, never round</td></tr>
+        <tr><td>TRX Archer Row</td><td>4 × 10 ea</td><td>TRX</td><td>Neutral spine, slow eccentric</td></tr>
+        <tr><td>KB Goblet Squat (25 lb)</td><td>4 × 12</td><td>25 lb KB</td><td>Box squat to bench if needed</td></tr>
+        <tr><td>Band Pallof Press</td><td>3 × 12 ea</td><td>Medium band</td><td>Anti-rotation — back safe ✓</td></tr>
+        <tr><td>Reverse Crunch (Bench)</td><td>3 × 15</td><td>Sit-up bench</td><td>Feet only — no torso curl</td></tr>
+        </tbody></table>
+      </div>
+    </div>
+    <div class="phase-block">
+      <div class="phase-header" onclick="togPhase(this)"><div><div class="phase-name">Phase 3 — Push</div><div class="phase-range">Days 51–75 · Finish strong</div></div><div class="chevron">▼</div></div>
+      <div class="phase-body">
+        <div class="info-box gold"><strong>Changes:</strong> Outdoor = jog/run intervals. Row = 20 min HIIT + 25 min strength. KB clean & press, TRX suspended lunges. Final 10 days: extra set on everything.</div>
+        <table class="ex-table"><thead><tr><th>Exercise</th><th>Sets × Reps</th><th>Dan Note</th></tr></thead><tbody>
+        <tr><td>KB Clean & Press (25 lb)</td><td>4 × 8 ea</td><td>Standing, strict posture</td></tr>
+        <tr><td>TRX Suspended Lunge</td><td>4 × 10 ea</td><td>Drive through heel</td></tr>
+        <tr><td>KB Swing (25 lb)</td><td>5 × 20</td><td>Power from hips only</td></tr>
+        <tr><td>Bird Dog</td><td>4 × 12 ea</td><td>Back-safe core ✓ Slow</td></tr>
+        <tr><td>Dead Bug</td><td>3 × 10 ea</td><td>Back flat to floor the whole time</td></tr>
+        <tr><td>Row HIIT</td><td>20 min</td><td>30 sec hard / 30 sec easy × 20</td></tr>
+        </tbody></table>
+      </div>
+    </div>
+  </div><!-- /launcher -->
+
+  <!-- PLAYER VIEW — hidden until Start Workout -->
+
+  <div class="player-panel" id="playerOverlay">
+    <div class="player-header">
+      <button class="player-close" onclick="closePlayer()">✕ BACK</button>
+      <div style="text-align:center">
+        <div class="player-title" id="pTitle">Session 1</div>
+        <div class="player-session-label" id="pSubtitle">Monday</div>
+      </div>
+      <div class="player-elapsed" id="pHeaderTime">0:00</div>
+    </div>
+    <div style="background:#1a1a1a;border:1px solid #2e2e2e;border-top:none;border-bottom:none;padding:12px 16px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+        <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#555">Goal Progress</div>
+        <div style="font-family:'DM Mono',monospace;font-size:11px;color:#f0ece4"><span id="goalMins">0</span><span style="color:#555"> / 45 min</span></div>
+      </div>
+      <div style="height:6px;background:#252525;border-radius:3px;overflow:hidden">
+        <div id="goalBar" style="height:100%;background:#e63946;border-radius:3px;width:0%;transition:width 0.5s ease"></div>
+      </div>
+      <div id="goalLabel" style="font-family:'DM Mono',monospace;font-size:9px;color:#555;margin-top:4px;letter-spacing:1px">Check off exercises as you finish them</div>
+    </div>
+    <div id="exCheckList" style="background:#1a1a1a;border:1px solid #2e2e2e;border-top:none;padding:14px 16px 20px;"></div>
+    <div class="done-screen" id="doneScreen">
+      <div class="done-icon">🏆</div>
+      <div class="done-title">Session<br>Complete!</div>
+      <div class="done-sub" id="doneSub">You crushed it.</div>
+      <div class="done-stats">
+        <div class="dstat"><div class="dstat-val" id="dTime">0:00</div><div class="dstat-label">Time</div></div>
+        <div class="dstat"><div class="dstat-val" id="dExercises">8</div><div class="dstat-label">Exercises</div></div>
+        <div class="dstat"><div class="dstat-val" id="dMins">45</div><div class="dstat-label">Est. Min</div></div>
+      </div>
+      <button class="done-btn" onclick="closePlayer()">DONE ✓</button>
+    </div>
+  </div><!-- /playerOverlay -->
+
+</div>
+
+<!-- ═══ DIET ═══ -->
+
+<div id="diet" class="section">
+  <div class="section-head"><div class="section-label">Nutrition</div><div class="section-title">Diet Plan</div><div class="section-sub">Clean whole foods. High protein. Dairy is fine. Most of this is Pick 'n Save or Aldi friendly.</div></div>
+  <div class="info-box green"><strong>The Approach:</strong> High protein, real food, no processed junk, no alcohol. Full dairy is on the table. Everything on this plan is available at Pick 'n Save or Aldi — no specialty stores needed.</div>
+  <div class="person-toggle">
+    <button class="ptog active" onclick="showDiet('dan',this)">Dan</button>
+    <button class="ptog" onclick="showDiet('carrie',this)">Carrie</button>
   </div>
-</div>
 
-<div class="rules-section">
-  <div class="rules-title">The 5 Rules</div>
-  <div class="rule-grid">
-    <div class="rule-item"><div class="rule-num">01</div><div class="rule-text">Two 45-min workouts daily. One must be outdoors.</div></div>
-    <div class="rule-item"><div class="rule-num">02</div><div class="rule-text">Follow the diet. No alcohol. No cheat meals.</div></div>
-    <div class="rule-item"><div class="rule-num">03</div><div class="rule-text">1 gallon of water every day.</div></div>
-    <div class="rule-item"><div class="rule-num">04</div><div class="rule-text">Read 10 pages of non-fiction.</div></div>
-    <div class="rule-item" style="grid-column:1/-1"><div class="rule-num">05</div><div class="rule-text">Take a progress photo every day. Miss any task = restart Day 1. No exceptions.</div></div>
+  <!-- DAN -->
+
+  <div class="diet-person active" id="diet-dan">
+    <h3>Dan · 2,000 kcal / day</h3>
+    <div class="macro-grid">
+      <div class="macro-card"><div class="macro-val" style="color:#e63946">185g</div><div class="macro-label">Protein</div></div>
+      <div class="macro-card"><div class="macro-val" style="color:#f4a261">175g</div><div class="macro-label">Carbs</div></div>
+      <div class="macro-card"><div class="macro-val" style="color:#f4c430">65g</div><div class="macro-label">Fat</div></div>
+    </div>
+    <div class="info-box"><strong>Anti-inflammatory priority:</strong> Omega-3s (cod, walnuts, flaxseed), turmeric, leafy greens, berries. Minimize refined sugar and seed oils — helps your back as much as your weight.</div>
+    <div class="meal-grid">
+      <div class="meal-card"><div><div class="meal-time">Breakfast</div><div class="meal-kcal">~450 kcal</div></div><div><div class="meal-name">Eggs + Oats or Scramble</div><div class="meal-desc">3 eggs scrambled + 1 cup oatmeal with blueberries. OR 3-egg scramble with shredded cheese + whatever veg is in the fridge. Protein shake + banana when leaving early for the job.</div></div></div>
+      <div class="meal-card"><div><div class="meal-time">Lunch</div><div class="meal-kcal">~550 kcal</div></div><div><div class="meal-name">Lean Protein + Carb + Veg</div><div class="meal-desc">Grilled chicken or canned tuna over rice or pasta. Side of green beans, broccoli, or raw veggies. String cheese or almonds on the side. Eating out: grilled protein + rice or baked potato, nothing fried.</div></div></div>
+      <div class="meal-card"><div><div class="meal-time">Snack</div><div class="meal-kcal">~200 kcal</div></div><div><div class="meal-name">Quick Bites</div><div class="meal-desc">2 hard-boiled eggs (batch cook Sunday) · OR · Deli turkey slices + string cheese rolled up · OR · Whole grain crackers + shredded cheese · OR · Cottage cheese + cucumber · OR · Protein energy ball (see batch prep below).</div></div></div>
+      <div class="meal-card"><div><div class="meal-time">Dinner</div><div class="meal-kcal">~650 kcal</div></div><div><div class="meal-name">Protein + Carb + Veg</div><div class="meal-desc">Chicken thighs, lean beef, pork tenderloin, cod/white fish, or shrimp. Carb: rice, potato, pasta, or corn tortillas. Veg: green beans, broccoli, cauliflower, zucchini, or frozen mixed. Skip heavy sauces.</div></div></div>
+      <div class="meal-card"><div><div class="meal-time">Evening</div><div class="meal-kcal">~150 kcal</div></div><div><div class="meal-name">Optional Protein</div><div class="meal-desc">Cottage cheese or casein shake before bed. Muscle recovery overnight. Skip if not hungry.</div></div></div>
+    </div>
+    <div class="info-box green"><strong>Carb options:</strong> White or brown rice · Russet or gold potato · Whole wheat pasta · Corn tortillas · Oats · Whole grain bread · Black or pinto beans</div>
+    <div class="info-box green"><strong>Dairy — all fine:</strong> Full-fat Greek yogurt · Cottage cheese · Shredded cheese · String cheese · Milk · Butter (in moderation)</div>
+    <div class="info-box gold"><strong>Batch cook Sunday:</strong> Hard-boil a dozen eggs · Grill 4–5 chicken breasts · Cook a big pot of rice. That's 3 days of lunches and snacks handled with zero thought.</div>
+    <div class="info-box"><strong>Eliminate:</strong> Alcohol · Soda · Chips · Fast food · Candy · Frozen dinners · Anything with added sugar in the first 3 ingredients</div>
   </div>
+
+  <!-- CARRIE -->
+
+  <div class="diet-person" id="diet-carrie">
+    <h3>Carrie · 1,600 kcal / day</h3>
+    <div class="macro-grid">
+      <div class="macro-card"><div class="macro-val" style="color:#e63946">130g</div><div class="macro-label">Protein</div></div>
+      <div class="macro-card"><div class="macro-val" style="color:#f4a261">150g</div><div class="macro-label">Carbs</div></div>
+      <div class="macro-card"><div class="macro-val" style="color:#f4c430">55g</div><div class="macro-label">Fat</div></div>
+    </div>
+    <div class="info-box green"><strong>Goal — Recomposition:</strong> Lose fat, build lean muscle. Keep protein high. Don't under-eat — you'll lose muscle not fat. Dairy is fully on the table.</div>
+    <div class="meal-grid">
+      <div class="meal-card"><div><div class="meal-time">Breakfast</div><div class="meal-kcal">~350 kcal</div></div><div><div class="meal-name">Eggs or Smoothie</div><div class="meal-desc">2 eggs scrambled with shredded cheese + whole grain toast. OR protein shake + milk + frozen berries blended. OR Greek yogurt parfait: full-fat yogurt + berries + small handful of granola.</div></div></div>
+      <div class="meal-card"><div><div class="meal-time">Lunch</div><div class="meal-kcal">~450 kcal</div></div><div><div class="meal-name">Salad or Rice Bowl</div><div class="meal-desc">Big salad: greens, grilled chicken, cherry tomatoes, cucumber, shredded parmesan, olive oil + lemon. OR rice bowl: white rice + grilled chicken or ground turkey + salsa + shredded cheese.</div></div></div>
+      <div class="meal-card"><div><div class="meal-time">Snack</div><div class="meal-kcal">~150 kcal</div></div><div><div class="meal-name">Quick Bites</div><div class="meal-desc">Hard-boiled egg + string cheese · OR · Deli turkey roll-ups (3–4 slices) · OR · Whole grain crackers + shredded cheese · OR · Apple + peanut butter · OR · Greek yogurt + berries.</div></div></div>
+      <div class="meal-card"><div><div class="meal-time">Dinner</div><div class="meal-kcal">~550 kcal</div></div><div><div class="meal-name">Protein + Carb + Veg</div><div class="meal-desc">Chicken, cod/white fish, shrimp, or lean beef + steamed green beans, broccoli, or cauliflower + small portion of rice, potato, or pasta. Family dinner — watch the carb portion size.</div></div></div>
+      <div class="meal-card"><div><div class="meal-time">Evening</div><div class="meal-kcal">~100 kcal</div></div><div><div class="meal-name">Optional</div><div class="meal-desc">Small bowl of berries + dollop of Greek yogurt · OR · String cheese · OR · Protein energy ball. Skip if not hungry.</div></div></div>
+    </div>
+    <div class="info-box green"><strong>Carb options:</strong> White or brown rice · Regular potato · Pasta · Corn tortillas · Whole grain bread · Oats · Beans</div>
+    <div class="info-box green"><strong>Dairy — all fine:</strong> Full-fat Greek yogurt · Cottage cheese · Shredded cheese · String cheese · Milk · Parmesan</div>
+    <div class="info-box"><strong>Watch for hidden sugar:</strong> Flavored yogurts (check labels) · Granola bars · Fruit juices · Flavored coffees · "Healthy" cereals</div>
+  </div>
+
+  <div class="divider"></div>
+  <h3>Quick Bites — Batch Prep Sunday</h3>
+  <table class="ex-table"><thead><tr><th>Item</th><th>Prep Time</th><th>Grab-and-Go</th></tr></thead><tbody>
+  <tr><td>Hard-Boiled Eggs</td><td>12 min</td><td>Boil a dozen. Peel and refrigerate. Done for the week. 2 eggs = ~12g protein.</td></tr>
+  <tr><td>Deli Turkey Roll-Ups</td><td>2 min</td><td>3–4 slices nitrate-free turkey, string cheese inside, roll up. No cooking. High protein.</td></tr>
+  <tr><td>Protein Energy Balls</td><td>15 min · no bake</td><td>1 cup oats + ½ cup peanut butter + ¼ cup honey + ½ cup chocolate chips. Roll into balls, refrigerate. ~150 kcal, 5g protein each. Make 20 at once.</td></tr>
+  <tr><td>Whole Grain Crackers + Cheese</td><td>0 min</td><td>Triscuits or Wheat Thins (whole grain) + shredded or sliced cheese. Keep at your desk or in the truck.</td></tr>
+  </tbody></table>
+
+  <div class="divider"></div>
+  <h3>Quick Family Dinners — Pick 'n Save / Aldi Friendly</h3>
+  <p class="bt" style="margin-bottom:12px">Everything below is under 30 min, uses basic ingredients, and is available at either store.</p>
+  <table class="ex-table"><thead><tr><th>Meal</th><th>Time</th><th>Notes</th></tr></thead><tbody>
+  <tr><td>Sheet Pan Chicken Thighs + Green Beans + Potatoes</td><td>30 min</td><td>Olive oil, garlic, salt, pepper. One pan, one oven. Everyone eats the same thing.</td></tr>
+  <tr><td>Ground Turkey Taco Bowls</td><td>20 min</td><td>Turkey + cumin + chili powder over rice + black beans + salsa + shredded cheese. Corn tortillas optional.</td></tr>
+  <tr><td>Cod + Green Beans + Rice</td><td>20 min</td><td>Season cod with lemon + garlic + olive oil, bake at 400° for 12–14 min. Frozen green beans in the microwave. Rice cooker does the rest.</td></tr>
+  <tr><td>3-Egg Scramble</td><td>10 min</td><td>Eggs + shredded cheese + whatever veg is in the fridge + hot sauce. The no-excuses emergency meal.</td></tr>
+  <tr><td>Pasta + Lean Ground Beef + Marinara</td><td>25 min</td><td>Whole wheat pasta + 93/7 beef + jarred marinara (check: no added sugar on label). Simple and filling.</td></tr>
+  <tr><td>Baked Chicken + Broccoli + Rice</td><td>30 min</td><td>Season chicken, 400° for 25 min. Microwave broccoli. Rice cooker. Meal prep Sunday = lunches for 3 days.</td></tr>
+  <tr><td>Slow Cooker Beef Stew</td><td>Set &amp; forget</td><td>Lean beef + carrots + celery + potatoes + broth. Start before the job. Done when you get home.</td></tr>
+  <tr><td>Shrimp Stir-Fry + Rice</td><td>15 min</td><td>Frozen shrimp (thaw fast under cold water) + frozen mixed veggies + soy sauce + garlic over rice. Aldi carries all of this.</td></tr>
+  <tr><td>Burrito Bowls</td><td>20 min</td><td>Rice + pinto or black beans + grilled chicken + shredded cheese + salsa + sour cream. Everyone builds their own.</td></tr>
+  </tbody></table>
+
+  <div class="divider"></div>
+  <h3>Pick 'n Save vs. Aldi — What to Get Where</h3>
+  <table class="ex-table"><thead><tr><th>Item</th><th>Best at Aldi</th><th>Best at Pick 'n Save</th></tr></thead><tbody>
+  <tr><td>Chicken thighs / breasts</td><td>✓ Usually cheaper</td><td>Good when on sale</td></tr>
+  <tr><td>Eggs</td><td>✓ Best price</td><td>—</td></tr>
+  <tr><td>Greek yogurt</td><td>✓ Friendly Farms is solid</td><td>More variety</td></tr>
+  <tr><td>Shredded cheese / string cheese</td><td>✓ Best price</td><td>—</td></tr>
+  <tr><td>Frozen fish (cod, tilapia)</td><td>✓ Great value</td><td>—</td></tr>
+  <tr><td>Frozen shrimp</td><td>✓ Good bags</td><td>—</td></tr>
+  <tr><td>Frozen veggies (green beans, broccoli, mixed)</td><td>✓ Best price</td><td>—</td></tr>
+  <tr><td>Canned tuna / beans / tomatoes</td><td>✓ Best price</td><td>—</td></tr>
+  <tr><td>Jarred marinara (no sugar)</td><td>✓ Check label</td><td>Rao's if you want the best</td></tr>
+  <tr><td>Lean ground beef / turkey</td><td>✓ Good price</td><td>Better selection</td></tr>
+  <tr><td>Salmon (when you want it)</td><td>—</td><td>✓ Better quality / fresh</td></tr>
+  <tr><td>Nitrate-free deli turkey</td><td>—</td><td>✓ Better options</td></tr>
+  <tr><td>Protein powder</td><td>—</td><td>✓ Or order online</td></tr>
+  <tr><td>Peanut butter (natural)</td><td>✓ Good price</td><td>More natural options</td></tr>
+  </tbody></table>
 </div>
 
-<div class="today-section">
-  <div class="today-title">Today's Checklist</div>
-  <div class="checklist" id="todayChecklist"></div>
+<!-- ═══ STRETCH ═══ -->
+
+<div id="stretch" class="section">
+  <div class="section-head"><div class="section-label">Recovery</div><div class="section-title">Stretch & Yoga</div><div class="section-sub">Morning 10 min + Evening 10 min daily. Full 45-min session Wed & Sun. Each routine has a guided timed player.</div></div>
+  <div class="info-box"><strong>Dan's rules:</strong> No deep forward folds under load. No overpressure on lumbar flexion. Cat-cow daily. Pigeon = supine version only. Stop any stretch that sends pain down the leg.</div>
+
+  <h3>Morning Routine · 10 min · Daily</h3>
+  <button class="stretch-start-btn" onclick="startStretch('morning')">▶ &nbsp; START MORNING ROUTINE</button>
+  <div class="sp-hint">6 STRETCHES · TIMED HOLDS · AUTO-ADVANCE</div>
+  <div class="stretch-block">
+    <div class="stretch-header" onclick="togStretch(this)"><div class="stretch-name">Morning Wake-Up Flow</div><div style="display:flex;align-items:center;gap:10px"><div class="stretch-meta">10 min · reference</div><div class="chevron">▼</div></div></div>
+    <div class="stretch-body open">
+      <div class="stretch-step"><div class="step-num">1</div><div><strong>Cat-Cow · 10 reps · 90 sec</strong> — Hands and knees. Inhale to arch (cow), exhale to round (cat). Dan's #1 disc exercise. Non-negotiable every morning.</div></div>
+      <div class="stretch-step"><div class="step-num">2</div><div><strong>Child's Pose · 60 sec</strong> — Sit back on heels, arms forward. Dan: widen knees if lower back feels compressed.</div></div>
+      <div class="stretch-step"><div class="step-num">3</div><div><strong>Thread the Needle · 30 sec each side</strong> — From all-fours, slide one arm under body. Thoracic rotation without lumbar load.</div></div>
+      <div class="stretch-step"><div class="step-num">4</div><div><strong>Supine Knee Hug · 30 sec each + both</strong> — On back, hug one knee to chest, then both. Lumbar decompression. Safe for bulged discs.</div></div>
+      <div class="stretch-step"><div class="step-num">5</div><div><strong>Pelvic Tilts · 15 reps</strong> — On back, knees bent. Flatten lower back to floor then release. Lumbar stability. Back-safe ✓</div></div>
+      <div class="stretch-step"><div class="step-num">6</div><div><strong>Hip Flexor Stretch · 45 sec each side</strong> — Half-kneeling, lean forward. Tight hip flexors pull on the lumbar spine — critical for Dan.</div></div>
+    </div>
+  </div>
+
+  <h3>Evening Routine · 10 min · Daily</h3>
+  <button class="stretch-start-btn" onclick="startStretch('evening')">▶ &nbsp; START EVENING ROUTINE</button>
+  <div class="sp-hint">5 STRETCHES · TIMED HOLDS · AUTO-ADVANCE</div>
+  <div class="stretch-block">
+    <div class="stretch-header" onclick="togStretch(this)"><div class="stretch-name">Evening Wind-Down</div><div style="display:flex;align-items:center;gap:10px"><div class="stretch-meta">10 min · reference</div><div class="chevron">▼</div></div></div>
+    <div class="stretch-body">
+      <div class="stretch-step"><div class="step-num">1</div><div><strong>Legs Up the Wall · 3 min</strong> — On back, legs up a wall. Decompresses lower back, reverses leg blood pooling. Watch TV like this.</div></div>
+      <div class="stretch-step"><div class="step-num">2</div><div><strong>Supine Twist · 45 sec each side</strong> — One knee across body, look opposite. Dan: keep both shoulders flat.</div></div>
+      <div class="stretch-step"><div class="step-num">3</div><div><strong>Band Hamstring Stretch · 45 sec each leg</strong> — Loop resistance band around foot, lift leg while lying on back. Safe for lumbar.</div></div>
+      <div class="stretch-step"><div class="step-num">4</div><div><strong>Figure-4 Glute Stretch · 60 sec each side</strong> — Ankle over opposite knee, pull bottom leg toward chest. Tight glutes and piriformis contribute to sciatic irritation.</div></div>
+      <div class="stretch-step"><div class="step-num">5</div><div><strong>Diaphragmatic Breathing · 2 min</strong> — Hand on belly. 4 counts in, 2 hold, 6 out. Best free recovery tool you're not using.</div></div>
+    </div>
+  </div>
+
+  <h3>Full Yoga Flow · 45 min · Wed & Sun</h3>
+  <button class="stretch-start-btn" onclick="startStretch('yoga')">▶ &nbsp; START YOGA FLOW</button>
+  <div class="sp-hint">10 POSES · TIMED HOLDS · AUTO-ADVANCE</div>
+  <div class="stretch-block">
+    <div class="stretch-header" onclick="togStretch(this)"><div class="stretch-name">Warm-Up · 10 min</div><div style="display:flex;align-items:center;gap:10px"><div class="stretch-meta">10 min</div><div class="chevron">▼</div></div></div>
+    <div class="stretch-body">
+      <div class="stretch-step"><div class="step-num">1</div><div><strong>Cat-Cow · 2 min</strong> — 10 slow reps to open the session.</div></div>
+      <div class="stretch-step"><div class="step-num">2</div><div><strong>Downward Dog · 60 sec × 2</strong> — Dan: bend knees, lengthen spine over straightening legs. Walk the dog.</div></div>
+      <div class="stretch-step"><div class="step-num">3</div><div><strong>Low Lunge (Crescent) · 60 sec each side</strong> — Front knee over ankle, back knee down, arms overhead.</div></div>
+      <div class="stretch-step"><div class="step-num">4</div><div><strong>World's Greatest Stretch · 45 sec each side</strong> — From lunge, elbow to floor, rotate arm to sky. Hits hip, thoracic, and hamstring together.</div></div>
+    </div>
+  </div>
+  <div class="stretch-block">
+    <div class="stretch-header" onclick="togStretch(this)"><div class="stretch-name">Standing Flow · 15 min</div><div style="display:flex;align-items:center;gap:10px"><div class="stretch-meta">15 min</div><div class="chevron">▼</div></div></div>
+    <div class="stretch-body">
+      <div class="stretch-step"><div class="step-num">1</div><div><strong>Mountain → Forward Fold → Half-Lift · 5 reps</strong> — Dan: slight knee bend on fold, hands to knees not floor.</div></div>
+      <div class="stretch-step"><div class="step-num">2</div><div><strong>Warrior I · 60 sec each side</strong> — Front knee bent, hips square forward, arms overhead.</div></div>
+      <div class="stretch-step"><div class="step-num">3</div><div><strong>Warrior II · 60 sec each side</strong> — Hips open, arms extended. Hold and breathe through the burn.</div></div>
+      <div class="stretch-step"><div class="step-num">4</div><div><strong>Triangle Pose · 45 sec each side</strong> — Dan: hand to shin or knee only. No aggressive lateral bend.</div></div>
+      <div class="stretch-step"><div class="step-num">5</div><div><strong>Chair Pose · 45 sec × 3</strong> — Feet together, sit back, arms overhead. Back stays long.</div></div>
+    </div>
+  </div>
+  <div class="stretch-block">
+    <div class="stretch-header" onclick="togStretch(this)"><div class="stretch-name">Floor Flow + Savasana · 20 min</div><div style="display:flex;align-items:center;gap:10px"><div class="stretch-meta">20 min</div><div class="chevron">▼</div></div></div>
+    <div class="stretch-body">
+      <div class="stretch-step"><div class="step-num">1</div><div><strong>Supine Pigeon / Pigeon · 90 sec each side</strong> — Dan: supine (figure-4 on back). Carrie: floor pigeon. Most important hip stretch for rowing and squatting.</div></div>
+      <div class="stretch-step"><div class="step-num">2</div><div><strong>Seated Spinal Twist · 60 sec each side</strong> — Dan: go only as far as comfortable.</div></div>
+      <div class="stretch-step"><div class="step-num">3</div><div><strong>Band Hamstring Stretch · 60 sec each leg</strong> — On back, band around foot, lift leg.</div></div>
+      <div class="stretch-step"><div class="step-num">4</div><div><strong>Bridge Pose · 10 reps + 30 sec hold</strong> — Drive hips to ceiling. Strengthens glutes and lumbar extensors. Back-safe ✓</div></div>
+      <div class="stretch-step"><div class="step-num">5</div><div><strong>Happy Baby · 60 sec</strong> — On back, grab outer feet, knees wide. Pure decompression after a row session.</div></div>
+      <div class="stretch-step"><div class="step-num">6</div><div><strong>Legs Up the Wall · 3 min</strong> — Non-negotiable finish.</div></div>
+      <div class="stretch-step"><div class="step-num">7</div><div><strong>Savasana · 5 min</strong> — Flat on back, eyes closed, completely still. Set a timer. Stay the full 5 minutes.</div></div>
+    </div>
+  </div>
+
+  <!-- ══ STRETCH PLAYER — inline ══ -->
+
+  <div class="sp-overlay" id="spOverlay">
+    <div class="sp-hdr">
+      <button class="sp-close" onclick="closeStretch()">✕ BACK</button>
+      <div class="sp-hdr-title" id="spHdrTitle">Morning Routine</div>
+      <div class="sp-hdr-count" id="spHdrCount">1 / 6</div>
+    </div>
+    <div class="sp-prog-wrap"><div class="sp-prog-fill" id="spProg" style="width:0%"></div></div>
+    <div class="sp-active" id="spActiveScreen">
+      <div class="sp-step-lbl" id="spStepLbl">Stretch 1 of 6</div>
+      <div class="sp-name" id="spName">Cat-Cow</div>
+      <div class="sp-dur-pill" id="spDurPill">90 sec</div>
+      <div class="sp-ring-wrap">
+        <svg class="sp-ring-svg" viewBox="0 0 220 220">
+          <circle class="sp-ring-bg" cx="110" cy="110" r="96"/>
+          <circle class="sp-ring-fill" id="spRingFill" cx="110" cy="110" r="96" stroke-dasharray="603.19" stroke-dashoffset="0"/>
+        </svg>
+        <div class="sp-ring-inner">
+          <div class="sp-seconds" id="spSec">90</div>
+          <div class="sp-sec-lbl">seconds</div>
+        </div>
+      </div>
+      <div class="sp-desc" id="spDesc"></div>
+      <div class="sp-mod" id="spMod" style="display:none"><strong>⚠ Dan's Mod: </strong><span id="spModTxt"></span></div>
+      <div class="sp-next-lbl">Up Next</div>
+      <div class="sp-next-name" id="spNextName">—</div>
+    </div>
+    <div class="sp-done" id="spDoneScreen">
+      <div style="font-size:48px;margin-bottom:12px">🧘</div>
+      <div class="done-title" id="spDoneTitle">Done!</div>
+      <div class="done-sub" id="spDoneSub">Great work. Your body thanks you.</div>
+      <div class="done-stats" style="max-width:320px;width:100%;margin:0 auto 20px">
+        <div class="dstat"><div class="dstat-val" id="spDoneTime">—</div><div class="dstat-label">Time</div></div>
+        <div class="dstat"><div class="dstat-val" id="spDoneCount">—</div><div class="dstat-label">Stretches</div></div>
+        <div class="dstat"><div class="dstat-val">✓</div><div class="dstat-label">Complete</div></div>
+      </div>
+      <button class="done-btn" onclick="closeStretch()">DONE ✓</button>
+    </div>
+    <div class="sp-actions" id="spActions">
+      <button class="sp-act spa-prev" onclick="spPrev()">◀ PREV</button>
+      <button class="sp-act spa-pause" id="spPauseBtn" onclick="spTogglePause()">⏸ PAUSE</button>
+      <button class="sp-act spa-next" id="spNextBtn" onclick="spNext()">NEXT ▶</button>
+    </div>
+  </div>
+
 </div>
 
-<div class="footer">75 Hard · Dan & Carrie Cleveland · 2026</div>
+<!-- ═══ TRACKER ═══ -->
+
+<div id="tracker" class="section">
+  <div class="section-head"><div class="section-label">Daily Progress</div><div class="section-title">Day Tracker</div><div class="section-sub">Tap to mark complete. Long-press to mark failed. Miss one task = restart Day 1.</div></div>
+  <h3>75-Day Calendar</h3>
+  <div class="tracker-grid" id="trackerGrid"></div>
+  <div class="divider"></div>
+  <h3>Today's Checklist</h3>
+  <div class="checklist">
+    <div class="check-item" onclick="this.classList.toggle('checked');this.querySelector('.check-box').textContent='✓'"><div class="check-box">✓</div><div><div class="check-label">Workout 1 Complete</div><div class="check-sub">45 min indoor strength / conditioning</div></div></div>
+    <div class="check-item" onclick="this.classList.toggle('checked');this.querySelector('.check-box').textContent='✓'"><div class="check-box">✓</div><div><div class="check-label">Workout 2 Complete</div><div class="check-sub">45 min outdoor or rowing machine</div></div></div>
+    <div class="check-item" onclick="this.classList.toggle('checked');this.querySelector('.check-box').textContent='✓'"><div class="check-box">✓</div><div><div class="check-label">Diet Followed</div><div class="check-sub">No cheat meals, no alcohol</div></div></div>
+    <div class="check-item" onclick="this.classList.toggle('checked');this.querySelector('.check-box').textContent='✓'"><div class="check-box">✓</div><div><div class="check-label">1 Gallon Water</div><div class="check-sub">128 oz minimum — plain water only</div></div></div>
+    <div class="check-item" onclick="this.classList.toggle('checked');this.querySelector('.check-box').textContent='✓'"><div class="check-box">✓</div><div><div class="check-label">10 Pages Read</div><div class="check-sub">Non-fiction / self-improvement</div></div></div>
+    <div class="check-item" onclick="this.classList.toggle('checked');this.querySelector('.check-box').textContent='✓'"><div class="check-box">✓</div><div><div class="check-label">Progress Photo</div><div class="check-sub">Same pose, same spot, every day</div></div></div>
+    <div class="check-item" onclick="this.classList.toggle('checked');this.querySelector('.check-box').textContent='✓'"><div class="check-box">✓</div><div><div class="check-label">Morning Stretch Done</div><div class="check-sub">10 min morning routine</div></div></div>
+    <div class="check-item" onclick="this.classList.toggle('checked');this.querySelector('.check-box').textContent='✓'"><div class="check-box">✓</div><div><div class="check-label">Evening Stretch Done</div><div class="check-sub">10 min wind-down routine</div></div></div>
+  </div>
+  <div class="divider"></div>
+  <h3>Water Tracker</h3>
+  <div class="water-label">Each cup = 16 oz · Fill all 8 = 1 gallon</div>
+  <div class="water-tracker" id="waterTracker"></div>
+  <div class="divider"></div>
+  <h3>Weekly Weight Log</h3>
+  <div class="weight-log" id="weightLog"></div>
+</div>
+
+</div><!-- /main -->
 
 <script>
-// Day counter — reads from localStorage shared with 75hard app
-const tState = JSON.parse(localStorage.getItem('75h_days') || '{}');
-const completedDays = Object.values(tState).filter(v => v === 'done').length;
-const currentDay = Math.min(75, completedDays + 1);
-const pct = Math.round((completedDays / 75) * 100);
+// ══════════════════════════════════════
+// WORKOUT DATA
+// ══════════════════════════════════════
+const DAYS=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+const DAY_KEYS=['mon','tue','wed','thu','fri','sat','sun'];
 
-document.getElementById('dayNum').textContent = currentDay;
-document.getElementById('dayText').textContent = `Day ${currentDay} of 75`;
-document.getElementById('dayBarFill').style.width = pct + '%';
-document.getElementById('dayPct').textContent = pct + '% complete';
+// ══════════════════════════════════════
+// DAN'S SESSIONS — back-safe, heavier KB, anti-rotation core
+// ══════════════════════════════════════
+const SESSIONS_DAN={
+  mon:[
+    {name:'Session 1 · Indoor',label:'TRX + KB Full Body Circuit',rounds:3,exercises:[
+      {name:'TRX Row',sets:3,reps:'12',equip:'TRX',desc:'Face anchor, lean back, pull chest to hands. Elbows wide, squeeze shoulder blades at top.',mod:'Keep spine neutral. Don\'t let hips sag.'},
+      {name:'TRX Squat',sets:3,reps:'15',equip:'TRX',desc:'Face anchor, hold handles, feet shoulder-width. Sit back into squat, chest tall.',mod:'Box squat to sit-up bench if knees or back protest.'},
+      {name:'KB Swing (10 lb)',sets:3,reps:'15',equip:'10 lb KB',desc:'Hinge from hips, drive hips forward explosively, swing to chest height.',mod:'If back flares: deadlift pattern only — no swing today.'},
+      {name:'Band Pull-Apart',sets:3,reps:'20',equip:'Light band',desc:'Hold at chest width, pull apart until touching chest, control return.',mod:'Fully back-safe. No mod needed.'},
+      {name:'TRX Plank Hold',sets:3,reps:'30 sec',equip:'TRX',desc:'Feet in foot cradles, hands on floor. Hold rigid plank.',mod:'If back hurts: forearm plank on floor, or sub bird dogs.'},
+    ]},
+    {name:'Session 2 · Outdoor/Row',label:'Brisk Walk or Easy Row',rounds:1,exercises:[
+      {name:'Warm-Up',sets:1,reps:'5 min',equip:'Outdoors',desc:'Easy pace to get joints moving.',mod:'5 min easy row if cold.'},
+      {name:'Brisk Walk or Row',sets:1,reps:'35 min',equip:'Outdoors or Rower',desc:'Pace where you can talk but feel your heart working. Row: 22–24 strokes/min.',mod:'Row: legs drive first, lean back, then arms. Sit tall.'},
+      {name:'Cool-Down',sets:1,reps:'5 min',equip:'Outdoors',desc:'Easy pace. Let heart rate come down.',mod:''},
+    ]}
+  ],
+  tue:[
+    {name:'Session 1 · Indoor',label:'Row + Band Superset',rounds:3,exercises:[
+      {name:'Moderate Row',sets:1,reps:'20 min',equip:'Rower',desc:'Steady moderate effort. 22–24 strokes/min.',mod:'Sit tall. Don\'t round the lower back at the catch.'},
+      {name:'Band Bicep Curl',sets:3,reps:'15',equip:'Medium band',desc:'Stand on band, curl both hands to shoulders, control descent.',mod:'Fully back-safe.'},
+      {name:'Band Tricep Extension',sets:3,reps:'15',equip:'Medium band',desc:'Anchor overhead, pull down extending elbows fully.',mod:'Keep core braced.'},
+      {name:'Band Lateral Raise',sets:3,reps:'12',equip:'Light band',desc:'Stand on band, raise arms out to shoulder height.',mod:'Lighter band is fine.'},
+      {name:'March in Place',sets:3,reps:'60 sec',equip:'Bodyweight',desc:'Drive knees high, swing arms. Keeps HR up without loading the spine.',mod:'Fully back-safe.'},
+    ]},
+    {name:'Session 2 · Outdoor',label:'Walk + Bodyweight Circuit',rounds:1,exercises:[
+      {name:'Brisk Walk',sets:1,reps:'20 min',equip:'Outdoors',desc:'Get moving. Brisk pace.',mod:''},
+      {name:'Bodyweight Squat',sets:3,reps:'15',equip:'Bodyweight',desc:'Feet shoulder-width, sit back, chest up.',mod:''},
+      {name:'Reverse Lunge',sets:3,reps:'10 each',equip:'Bodyweight',desc:'Step back, lower rear knee toward ground.',mod:'Hold a fence for balance if needed.'},
+      {name:'Push-Up',sets:3,reps:'10',equip:'Bodyweight',desc:'Lower chest to ground, press up.',mod:'Incline on a park bench to reduce load on lower back.'},
+      {name:'Walk Home',sets:1,reps:'5 min',equip:'Outdoors',desc:'Cool-down walk.',mod:''},
+    ]}
+  ],
+  wed:[
+    {name:'Session 1 · Indoor',label:'Full Yoga Flow',rounds:1,exercises:[
+      {name:'Cat-Cow',sets:1,reps:'90 sec',equip:'Mat',desc:'Inhale to arch, exhale to round. Dan\'s #1 disc exercise.',mod:'Non-negotiable. Do this every single day.'},
+      {name:'Child\'s Pose',sets:1,reps:'60 sec',equip:'Mat',desc:'Sit back on heels, arms forward.',mod:'Widen knees until lower back feels comfortable.'},
+      {name:'Downward Dog',sets:2,reps:'60 sec',equip:'Mat',desc:'Hips high, hands and feet on floor. Walk the dog.',mod:'Bend knees, lengthen spine over straightening legs.'},
+      {name:'Low Lunge',sets:1,reps:'60 sec each side',equip:'Mat',desc:'Front knee over ankle, back knee down, arms overhead.',mod:''},
+      {name:'Warrior I + II',sets:1,reps:'60 sec each side',equip:'Mat',desc:'Warrior I: hips square, arms up. Warrior II: hips open, arms extended.',mod:''},
+      {name:'Supine Pigeon',sets:1,reps:'90 sec each side',equip:'Mat',desc:'On back, cross ankle over opposite knee, pull bottom leg toward chest.',mod:'Always supine. Never floor pigeon with disc issues.'},
+      {name:'Supine Twist',sets:1,reps:'45 sec each side',equip:'Mat',desc:'One knee across body, look opposite.',mod:'Keep both shoulders flat. Don\'t force.'},
+      {name:'Bridge Pose',sets:1,reps:'10 reps + 30 sec',equip:'Mat',desc:'Drive hips to ceiling, squeeze glutes.',mod:''},
+      {name:'Legs Up the Wall',sets:1,reps:'3 min',equip:'Wall',desc:'Full decompression.',mod:''},
+      {name:'Savasana',sets:1,reps:'5 min',equip:'Mat',desc:'Lie flat, eyes closed, completely still.',mod:''},
+    ]},
+    {name:'Session 2 · Outdoor',label:'Easy Recovery Walk',rounds:1,exercises:[
+      {name:'Easy Walk',sets:1,reps:'45 min',equip:'Outdoors',desc:'No intensity. Podcast or book. Mental reset.',mod:'Cold: 45 min easy row.'},
+    ]}
+  ],
+  thu:[
+    {name:'Session 1 · Indoor',label:'TRX Upper Body + Core',rounds:4,exercises:[
+      {name:'TRX Push-Up',sets:4,reps:'10',equip:'TRX',desc:'Feet in cradles, hands on floor. Lower chest, press up.',mod:'Incline push-ups on bench if back doesn\'t like this.'},
+      {name:'TRX Row',sets:4,reps:'12',equip:'TRX',desc:'Pull chest to hands, elbows wide, squeeze at top.',mod:''},
+      {name:'TRX Bicep Curl',sets:4,reps:'12',equip:'TRX',desc:'Face anchor, lean back, curl body weight up.',mod:''},
+      {name:'TRX Tricep Press',sets:4,reps:'12',equip:'TRX',desc:'Face away, lean forward, bend elbows to lower head, press out.',mod:'Keep core braced. Don\'t let hips drop.'},
+      {name:'Reverse Crunch',sets:3,reps:'15',equip:'Sit-up bench',desc:'Lie on decline. Drive knees toward chest.',mod:'Feet and legs only — no full torso curl.'},
+      {name:'Band Pallof Press',sets:3,reps:'12 each',equip:'Medium band',desc:'Anchor band at chest height, press straight out and return. Anti-rotation core.',mod:'This IS the back-safe core exercise. Perfect for disc issues.'},
+    ]},
+    {name:'Session 2 · Outdoor/Row',label:'Steady Walk or Row',rounds:1,exercises:[
+      {name:'Steady Walk or Row',sets:1,reps:'45 min',equip:'Outdoors or Rower',desc:'Target HR 120–140 bpm.',mod:'Row: 22–24 strokes/min. Sit tall.'},
+    ]}
+  ],
+  fri:[
+    {name:'Session 1 · Indoor',label:'KB + Band Lower Body',rounds:3,exercises:[
+      {name:'KB Goblet Squat (10 lb)',sets:3,reps:'12',equip:'10 lb KB',desc:'Hold KB at chest, squat deep, chest tall.',mod:'Box squat to sit-up bench to control depth.'},
+      {name:'KB Romanian Deadlift (10 lb)',sets:3,reps:'12',equip:'10 lb KB',desc:'Hinge from hips, lower KB along legs until hamstring pull, drive up. Back flat.',mod:'Light weight and neutral spine only. Stop if you feel back pain.'},
+      {name:'Band Leg Press (Floor)',sets:3,reps:'15',equip:'Leg band',desc:'On back, loop band around feet, press legs out.',mod:'Fully back-safe ✓'},
+      {name:'Band Clamshell',sets:3,reps:'20 each',equip:'Leg band',desc:'Lie on side, band above knees. Open top knee, close slowly.',mod:'Fully back-safe ✓'},
+      {name:'Band Lateral Walk',sets:3,reps:'15 steps each way',equip:'Leg band',desc:'Band above knees, slight squat. Step side-to-side.',mod:'Stand more upright if bent position bothers back.'},
+    ]},
+    {name:'Session 2 · Outdoor',label:'Walk / Jog Intervals',rounds:1,exercises:[
+      {name:'Walk/Jog Intervals',sets:9,reps:'4 min walk · 1 min jog',equip:'Outdoors',desc:'Walk 4 min brisk, jog 1 min. Repeat 9 times = 45 min.',mod:'Cold: Row 4 min easy / 1 min hard × 9.'},
+    ]}
+  ],
+  sat:[
+    {name:'Session 1 · Indoor',label:'Structured Row + Core',rounds:1,exercises:[
+      {name:'Row Warm-Up',sets:1,reps:'5 min',equip:'Rower',desc:'Easy effort. 18–20 strokes/min.',mod:'Sit tall. Long fluid strokes.'},
+      {name:'Row Intervals (5×4 min)',sets:5,reps:'4 min hard · 2 min easy',equip:'Rower',desc:'Hard: 24–26 strokes/min. Full recovery easy intervals.',mod:'Drive with legs — keep lumbar stable on hard intervals.'},
+      {name:'Row Cool-Down',sets:1,reps:'5 min',equip:'Rower',desc:'Easy effort. Breathe.',mod:''},
+      {name:'TRX Plank Hold',sets:3,reps:'30 sec',equip:'TRX',desc:'Feet in cradles. Rigid plank.',mod:'Standing forearm plank against wall if back is irritated.'},
+      {name:'Bird Dog',sets:3,reps:'10 each',equip:'Floor',desc:'Extend opposite arm and leg. Hold 2 sec, return.',mod:'Gold standard back-safe core. This IS your modification.'},
+    ]},
+    {name:'Session 2 · Outdoor',label:'Family Walk',rounds:1,exercises:[
+      {name:'Family Walk',sets:1,reps:'45 min',equip:'Outdoors',desc:'Bring Kira. Make it fun. Morale fuel.',mod:''},
+    ]}
+  ],
+  sun:[
+    {name:'Session 1 · Indoor',label:'Full Stretch + Recovery',rounds:1,exercises:[
+      {name:'Cat-Cow',sets:1,reps:'2 min',equip:'Mat',desc:'10 slow reps. Start every session here.',mod:''},
+      {name:'Child\'s Pose',sets:1,reps:'90 sec',equip:'Mat',desc:'Wider knees today. Hold longer.',mod:'Widen until comfortable.'},
+      {name:'Hip Flexor Stretch',sets:1,reps:'90 sec each side',equip:'Mat',desc:'Half-kneeling, lean forward. Hold longer — recovery day.',mod:''},
+      {name:'Supine Pigeon',sets:1,reps:'90 sec each side',equip:'Mat',desc:'Figure-4 on back. Most important hip stretch.',mod:'Never force floor pigeon with disc issues.'},
+      {name:'Band Hamstring Stretch',sets:1,reps:'90 sec each leg',equip:'Resistance band',desc:'On back, loop band around foot, lift leg.',mod:''},
+      {name:'Bridge Pose',sets:1,reps:'10 reps + 30 sec',equip:'Mat',desc:'Drive hips high, squeeze glutes.',mod:''},
+      {name:'Legs Up the Wall',sets:1,reps:'4 min',equip:'Wall',desc:'Full decompression. Non-negotiable.',mod:''},
+      {name:'Savasana',sets:1,reps:'5 min',equip:'Mat',desc:'Completely still. Eyes closed.',mod:''},
+    ]},
+    {name:'Session 2 · Outdoor',label:'Recovery Walk',rounds:1,exercises:[
+      {name:'Recovery Walk',sets:1,reps:'45 min',equip:'Outdoors',desc:'Recovery pace. Low heart rate. Tomorrow starts a new week.',mod:''},
+    ]}
+  ]
+};
 
-// Today's checklist — stored separately per day
-const today = new Date().toISOString().split('T')[0];
-const checkKey = '75h_today_' + today;
-const checkState = JSON.parse(localStorage.getItem(checkKey) || '{}');
+// ══════════════════════════════════════
+// CARRIE'S SESSIONS — no back restrictions, appropriate weights, full range
+// ══════════════════════════════════════
+const SESSIONS_CARRIE={
+  mon:[
+    {name:'Session 1 · Indoor',label:'TRX + KB Full Body Circuit',rounds:3,exercises:[
+      {name:'TRX Row',sets:3,reps:'15',equip:'TRX',desc:'Face anchor, lean back, pull chest to hands. More horizontal = harder. Go challenging.',mod:''},
+      {name:'TRX Squat',sets:3,reps:'15',equip:'TRX',desc:'Face anchor, sit back deep into squat, drive through heels. Full range of motion.',mod:''},
+      {name:'KB Swing (10 lb)',sets:3,reps:'20',equip:'10 lb KB',desc:'Hinge from hips, drive hips forward, swing to chest height. Power from hip snap.',mod:''},
+      {name:'Band Pull-Apart',sets:3,reps:'25',equip:'Light band',desc:'Pull band apart at chest height. Shoulder health and upper back activation.',mod:''},
+      {name:'TRX Plank + Knee Tuck',sets:3,reps:'10',equip:'TRX',desc:'Feet in cradles, plank position. Drive both knees to chest and return. Core and stability.',mod:''},
+    ]},
+    {name:'Session 2 · Outdoor/Row',label:'Brisk Walk or Easy Row',rounds:1,exercises:[
+      {name:'Warm-Up Walk',sets:1,reps:'5 min',equip:'Outdoors',desc:'Easy pace.',mod:''},
+      {name:'Brisk Walk or Row',sets:1,reps:'35 min',equip:'Outdoors or Rower',desc:'Brisk walking pace where you feel your heart rate. Row: 22–24 strokes/min.',mod:''},
+      {name:'Cool-Down',sets:1,reps:'5 min',equip:'Outdoors',desc:'Easy pace. Breathe.',mod:''},
+    ]}
+  ],
+  tue:[
+    {name:'Session 1 · Indoor',label:'Row + Band Superset',rounds:3,exercises:[
+      {name:'Moderate Row',sets:1,reps:'20 min',equip:'Rower',desc:'Steady moderate effort. 22–24 strokes/min. Focus on full leg drive and posture.',mod:''},
+      {name:'Band Bicep Curl',sets:3,reps:'15',equip:'Medium band',desc:'Stand on band, curl both arms to shoulders, squeeze at top.',mod:''},
+      {name:'Band Tricep Extension',sets:3,reps:'15',equip:'Medium band',desc:'Anchor overhead, extend elbows fully. Keep upper arms still.',mod:''},
+      {name:'Band Lateral Raise',sets:3,reps:'15',equip:'Light band',desc:'Stand on band, raise arms to shoulder height. Slow descent.',mod:''},
+      {name:'Band Front Raise',sets:3,reps:'12',equip:'Light band',desc:'Stand on band, raise arms straight in front to shoulder height.',mod:''},
+    ]},
+    {name:'Session 2 · Outdoor',label:'Walk + Bodyweight Circuit',rounds:1,exercises:[
+      {name:'Brisk Walk',sets:1,reps:'20 min',equip:'Outdoors',desc:'Fast walk pace. Arms pumping.',mod:''},
+      {name:'Bodyweight Squat',sets:3,reps:'20',equip:'Bodyweight',desc:'Full depth squat. Chest tall, knees track toes.',mod:''},
+      {name:'Walking Lunge',sets:3,reps:'12 each leg',equip:'Bodyweight',desc:'Step forward and lower rear knee, continue walking. Tougher than reverse lunges.',mod:''},
+      {name:'Push-Up',sets:3,reps:'10',equip:'Bodyweight',desc:'Full push-up or incline on bench. Chest to surface.',mod:''},
+      {name:'Glute Bridge',sets:3,reps:'20',equip:'Bodyweight',desc:'On back, feet flat, drive hips up. Squeeze glutes hard at top.',mod:''},
+      {name:'Walk Home',sets:1,reps:'5 min',equip:'Outdoors',desc:'Cool-down.',mod:''},
+    ]}
+  ],
+  wed:[
+    {name:'Session 1 · Indoor',label:'Full Yoga Flow',rounds:1,exercises:[
+      {name:'Cat-Cow',sets:1,reps:'90 sec',equip:'Mat',desc:'Inhale to arch, exhale to round. 10 slow reps.',mod:''},
+      {name:'Child\'s Pose',sets:1,reps:'60 sec',equip:'Mat',desc:'Sit back on heels, arms forward, forehead down.',mod:''},
+      {name:'Downward Dog',sets:2,reps:'60 sec',equip:'Mat',desc:'Hips high. Pedal heels alternately. Work toward straight legs.',mod:''},
+      {name:'Low Lunge',sets:1,reps:'60 sec each side',equip:'Mat',desc:'Front knee over ankle, back knee down, arms overhead.',mod:''},
+      {name:'Warrior I + II',sets:1,reps:'60 sec each side',equip:'Mat',desc:'Warrior I: hips square, arms up. Warrior II: hips open, arms extended.',mod:''},
+      {name:'Pigeon Pose',sets:1,reps:'90 sec each side',equip:'Mat',desc:'Full floor pigeon. Shin across mat, back leg extended. Fold forward.',mod:''},
+      {name:'Seated Spinal Twist',sets:1,reps:'45 sec each side',equip:'Mat',desc:'One leg extended, cross other foot over knee. Rotate toward raised knee.',mod:''},
+      {name:'Bridge Pose',sets:1,reps:'10 reps + 30 sec',equip:'Mat',desc:'Drive hips to ceiling, strong glute squeeze.',mod:''},
+      {name:'Legs Up the Wall',sets:1,reps:'3 min',equip:'Wall',desc:'Full decompression.',mod:''},
+      {name:'Savasana',sets:1,reps:'5 min',equip:'Mat',desc:'Lie flat, eyes closed, completely still.',mod:''},
+    ]},
+    {name:'Session 2 · Outdoor',label:'Easy Recovery Walk',rounds:1,exercises:[
+      {name:'Easy Walk',sets:1,reps:'45 min',equip:'Outdoors',desc:'No intensity. Podcast or book. Mental reset.',mod:''},
+    ]}
+  ],
+  thu:[
+    {name:'Session 1 · Indoor',label:'TRX Upper Body + Core',rounds:4,exercises:[
+      {name:'TRX Push-Up',sets:4,reps:'12',equip:'TRX',desc:'Feet in cradles, hands on floor. Lower chest, press up. Go deeper than a regular push-up.',mod:''},
+      {name:'TRX Row',sets:4,reps:'15',equip:'TRX',desc:'Pull chest to hands, elbows wide. Try to get more horizontal each set.',mod:''},
+      {name:'TRX Bicep Curl',sets:4,reps:'12',equip:'TRX',desc:'Face anchor, lean back, curl body weight up.',mod:''},
+      {name:'TRX Tricep Press',sets:4,reps:'12',equip:'TRX',desc:'Face away, lean forward, bend elbows down, press out.',mod:''},
+      {name:'Sit-Up Bench Crunch',sets:3,reps:'20',equip:'Sit-up bench',desc:'Full range crunch on decline bench. Slow and controlled on the way down.',mod:''},
+      {name:'Decline Oblique Twist',sets:3,reps:'15 each',equip:'Sit-up bench',desc:'Rotate elbow toward opposite knee on the decline.',mod:''},
+    ]},
+    {name:'Session 2 · Outdoor/Row',label:'Steady Walk or Row',rounds:1,exercises:[
+      {name:'Steady Walk or Row',sets:1,reps:'45 min',equip:'Outdoors or Rower',desc:'Target HR 120–140 bpm. Aerobic base work.',mod:''},
+    ]}
+  ],
+  fri:[
+    {name:'Session 1 · Indoor',label:'KB + Band Lower Body',rounds:3,exercises:[
+      {name:'KB Goblet Squat (10 lb)',sets:3,reps:'15',equip:'10 lb KB',desc:'Hold KB at chest, squat to full depth. Drive through heels.',mod:''},
+      {name:'KB Sumo Deadlift (25 lb)',sets:3,reps:'12',equip:'25 lb KB',desc:'Wide stance, toes out, KB between feet. Hinge and lift. Great for glutes and hamstrings.',mod:''},
+      {name:'Band Leg Press (Floor)',sets:3,reps:'20',equip:'Leg band',desc:'On back, loop band around feet, press legs out.',mod:''},
+      {name:'Band Clamshell',sets:3,reps:'25 each',equip:'Leg band',desc:'Lie on side, band above knees. Open top knee, close slowly.',mod:''},
+      {name:'Band Lateral Walk',sets:3,reps:'20 steps each way',equip:'Leg band',desc:'Band above knees, squat position. Step side-to-side.',mod:''},
+      {name:'Glute Bridge + Hold',sets:3,reps:'15 + 10 sec hold',equip:'Bodyweight',desc:'Drive hips up, hold at top for 10 sec, lower.',mod:''},
+    ]},
+    {name:'Session 2 · Outdoor',label:'Walk / Jog Intervals',rounds:1,exercises:[
+      {name:'Walk/Jog Intervals',sets:9,reps:'4 min walk · 1 min jog',equip:'Outdoors',desc:'Walk 4 min brisk, jog 1 min. Repeat 9 times = 45 min.',mod:''},
+    ]}
+  ],
+  sat:[
+    {name:'Session 1 · Indoor',label:'Structured Row + Core',rounds:1,exercises:[
+      {name:'Row Warm-Up',sets:1,reps:'5 min',equip:'Rower',desc:'Easy effort. Settle into your stroke.',mod:''},
+      {name:'Row Intervals (5×4 min)',sets:5,reps:'4 min hard · 2 min easy',equip:'Rower',desc:'Hard: push pace. Easy: full recovery.',mod:''},
+      {name:'Row Cool-Down',sets:1,reps:'5 min',equip:'Rower',desc:'Easy effort. Breathe.',mod:''},
+      {name:'TRX Plank + Knee Tuck',sets:3,reps:'12',equip:'TRX',desc:'Feet in cradles. Drive both knees to chest and extend. Control the movement.',mod:''},
+      {name:'TRX Pike',sets:3,reps:'10',equip:'TRX',desc:'Plank position, drive hips up toward ceiling (pike), return to plank.',mod:''},
+    ]},
+    {name:'Session 2 · Outdoor',label:'Family Walk',rounds:1,exercises:[
+      {name:'Family Walk',sets:1,reps:'45 min',equip:'Outdoors',desc:'Bring Kira. Make it fun.',mod:''},
+    ]}
+  ],
+  sun:[
+    {name:'Session 1 · Indoor',label:'Full Stretch + Recovery',rounds:1,exercises:[
+      {name:'Cat-Cow',sets:1,reps:'2 min',equip:'Mat',desc:'10 slow reps to start.',mod:''},
+      {name:'Child\'s Pose',sets:1,reps:'90 sec',equip:'Mat',desc:'Arms forward. Let hips melt toward heels.',mod:''},
+      {name:'Hip Flexor Stretch',sets:1,reps:'90 sec each side',equip:'Mat',desc:'Half-kneeling, lean forward. Recovery day — hold longer.',mod:''},
+      {name:'Pigeon Pose',sets:1,reps:'90 sec each side',equip:'Mat',desc:'Full floor pigeon. Fold forward over shin. Best hip stretch.',mod:''},
+      {name:'Band Hamstring Stretch',sets:1,reps:'90 sec each leg',equip:'Resistance band',desc:'On back, loop band around foot, lift leg toward ceiling.',mod:''},
+      {name:'Bridge Pose',sets:1,reps:'10 reps + 30 sec',equip:'Mat',desc:'Drive hips high.',mod:''},
+      {name:'Happy Baby',sets:1,reps:'60 sec',equip:'Mat',desc:'On back, grab outer feet, knees wide. Rock gently.',mod:''},
+      {name:'Legs Up the Wall',sets:1,reps:'4 min',equip:'Wall',desc:'Full decompression.',mod:''},
+      {name:'Savasana',sets:1,reps:'5 min',equip:'Mat',desc:'Completely still. Let it all go.',mod:''},
+    ]},
+    {name:'Session 2 · Outdoor',label:'Recovery Walk',rounds:1,exercises:[
+      {name:'Recovery Walk',sets:1,reps:'45 min',equip:'Outdoors',desc:'Easy pace. Reset before the new week.',mod:''},
+    ]}
+  ]
+};
 
-const TASKS = [
-  'Workout 1 — 45 min indoor',
-  'Workout 2 — 45 min outdoor / rowing',
-  'Diet followed — no cheat meals',
-  '1 gallon of water',
-  '10 pages read',
-  'Progress photo taken',
-  'Morning stretch done',
-  'Evening stretch done',
-];
+// Active person + sessions
+let activePerson='dan';
+let SESSIONS=SESSIONS_DAN;
 
-const cl = document.getElementById('todayChecklist');
-TASKS.forEach((task, i) => {
-  const row = document.createElement('div');
-  row.className = 'check-row' + (checkState[i] ? ' done' : '');
-  row.innerHTML = `<div class="check-box">✓</div><div class="check-label">${task}</div>`;
-  row.addEventListener('click', () => {
-    checkState[i] = !checkState[i];
-    row.classList.toggle('done', checkState[i]);
-    localStorage.setItem(checkKey, JSON.stringify(checkState));
+function selectPerson(person, btn){
+  activePerson=person;
+  SESSIONS=person==='dan'?SESSIONS_DAN:SESSIONS_CARRIE;
+  document.querySelectorAll('#pickDan,#pickCarrie').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  const note=document.getElementById('personNote');
+  if(person==='dan'){
+    note.innerHTML='<strong>Dan\'s Back Rules:</strong> No heavy deadlifts, no loaded forward bends. Core = bracing and anti-rotation only. If back flares, substitute any floor work with TRX or band work standing. Modifications shown on every exercise.';
+    note.className='info-box';
+  } else {
+    note.innerHTML='<strong>Carrie\'s Program:</strong> Full range of motion, heavier lower body work, and complete ab work with no restrictions. Reps are slightly higher to match your recomposition goal.';
+    note.className='info-box green';
+  }
+  selSessIdx=0;
+  renderSessions();
+}
+
+// ══════════════════════════════════════
+// STRETCH ROUTINES DATA
+// ══════════════════════════════════════
+const STRETCH_ROUTINES={
+  morning:{
+    title:'Morning Routine',
+    stretches:[
+      {name:'Cat-Cow',dur:90,label:'10 reps · 90 sec',desc:'On hands and knees. Inhale to arch (cow), exhale to round (cat). Slow and controlled. Your #1 disc exercise — do this every single morning.',mod:'If wrists are sore, do on fists or forearms.'},
+      {name:'Child\'s Pose',dur:60,label:'60 sec',desc:'Sit back on heels, arms extended forward, forehead toward floor. Breathe deeply into the stretch. Let gravity do the work.',mod:'Dan: widen your knees significantly until the lower back feels comfortable.'},
+      {name:'Thread the Needle',dur:60,label:'30 sec each side',desc:'From all-fours, slide one arm underneath your body. Rotates the thoracic spine without loading the lumbar. Great for upper back tightness from field work.',mod:'Keep hips level and squared. Don\'t force the rotation.'},
+      {name:'Supine Knee Hug',dur:60,label:'30 sec each + both',desc:'Lying on back, hug one knee to chest, hold, then switch, then both. Gentle lumbar decompression. One of the safest things you can do for bulged discs.',mod:'Do this every single morning without fail.'},
+      {name:'Pelvic Tilts',dur:45,label:'15 reps',desc:'Lying on back, knees bent, feet flat. Flatten lower back against floor (posterior tilt), hold 2 seconds, release. Builds lumbar awareness and stability.',mod:'Fully back-safe. Core exercise disguised as a stretch.'},
+      {name:'Hip Flexor Stretch',dur:90,label:'45 sec each side',desc:'Half-kneeling (one knee down, one foot forward). Lean slightly forward to feel the stretch in the front of the hip. Tight hip flexors pull on the lumbar spine.',mod:'Dan: keep torso upright. Don\'t lean forward aggressively.'},
+    ]
+  },
+  evening:{
+    title:'Evening Wind-Down',
+    stretches:[
+      {name:'Legs Up the Wall',dur:180,label:'3 minutes',desc:'Lie on your back with legs resting up against a wall. Reverses blood pooling in the legs and gently decompresses the lower back. Watch TV like this — you don\'t have to do anything.',mod:'Slide hips as close to the wall as comfortable. If hamstrings are too tight, scoot back a few inches.'},
+      {name:'Supine Twist',dur:90,label:'45 sec each side',desc:'Lying on back, bring one knee across your body and look in the opposite direction. Let gravity do the rotation — don\'t force it. Releases the lower back and IT band.',mod:'Dan: keep BOTH shoulders flat on the floor the entire time. Never force the twist.'},
+      {name:'Band Hamstring Stretch',dur:90,label:'45 sec each leg',desc:'Lying on back, loop your resistance band around one foot. Gently extend the leg upward. Gentle traction on the hamstring without the lumbar compression of a forward fold.',mod:'Keep the opposite leg bent with foot on floor. Slight bend in the raised knee is fine.'},
+      {name:'Figure-4 Glute Stretch',dur:120,label:'60 sec each side',desc:'Lying on back, cross one ankle over the opposite knee in a figure-4 shape. Pull the bottom leg toward your chest. Hits the glutes and piriformis — tight glutes contribute directly to sciatic irritation.',mod:'Dan: if piriformis is inflamed, be gentle. Ease into this one.'},
+      {name:'Diaphragmatic Breathing',dur:120,label:'2 minutes',desc:'Lying flat, one hand on belly. Breathe into your belly (not your chest) for 4 counts. Hold 2. Exhale slowly for 6 counts. Activates the parasympathetic nervous system and accelerates recovery.',mod:'If your mind wanders, just return to the count. Don\'t chase thoughts.'},
+    ]
+  },
+  yoga:{
+    title:'Full Yoga Flow',
+    stretches:[
+      {name:'Cat-Cow',dur:120,label:'2 minutes',desc:'Start every session here. 10 slow, deliberate reps. Warms the spine from top to bottom. By the end you should feel your whole back moving fluidly.',mod:''},
+      {name:'Downward Dog',dur:120,label:'60 sec × 2',desc:'Hands and feet on floor, hips high. Walk the dog by alternating heel presses. Focus on lengthening through the spine.',mod:'Dan: bend knees as needed. Spine length matters more than straight legs.'},
+      {name:'Low Lunge (Crescent)',dur:120,label:'60 sec each side',desc:'Front knee over ankle, back knee down on the mat, arms overhead. Deep hip flexor and quad stretch.',mod:'Use fingertips on the floor if balance is an issue.'},
+      {name:'Warrior I + II',dur:120,label:'60 sec each side',desc:'Warrior I: front knee bent, hips square forward, arms reach overhead. Warrior II: hips open sideways, arms extended, gaze over front hand.',mod:''},
+      {name:'Triangle Pose',dur:90,label:'45 sec each side',desc:'From Warrior II, straighten front leg, reach forward hand toward the shin. Opens the lateral body and hamstring.',mod:'Dan: hand to knee or shin only. No deep lateral bend.'},
+      {name:'Chair Pose',dur:135,label:'45 sec × 3',desc:'Feet together, sink back as if sitting in an invisible chair, arms overhead. Burns the quads. Back stays long — don\'t let it round.',mod:''},
+      {name:'Supine Pigeon',dur:180,label:'90 sec each side',desc:'On your back, cross one ankle over the opposite knee in a figure-4. Pull bottom leg toward chest. The most important hip stretch for people who row and squat.',mod:'Dan: ALWAYS do the supine version. Never floor pigeon with disc issues.'},
+      {name:'Bridge Pose',dur:90,label:'10 reps + 30 sec hold',desc:'Feet flat, drive hips to ceiling, squeeze glutes hard. Strengthens glutes and lumbar extensors. Fantastic for disc health.',mod:''},
+      {name:'Legs Up the Wall',dur:180,label:'3 minutes',desc:'Non-negotiable finish to the floor flow. Full decompression. Let everything drain from the legs.',mod:''},
+      {name:'Savasana',dur:300,label:'5 minutes',desc:'Lie completely flat. Eyes closed. Arms at sides. No fidgeting. Set a timer and commit to the full 5 minutes. Your nervous system needs this to integrate everything you just did.',mod:''},
+    ]
+  }
+};
+
+// STRETCH ILLUSTRATIONS — cropped from reference sheet
+// STRETCH ILLUSTRATIONS — from yoga poses poster
+function getIllustration(name) {
+  // illustrations removed
+}
+
+let spRoutine=null, spIdx=0, spTimeLeft=0, spTotalTime=0, spTimer=null, spPaused=false, spElapsed=0, spElapsedTimer=null;
+const CIRC=603.19;
+
+function startStretch(key){
+  spRoutine=STRETCH_ROUTINES[key];
+  spIdx=0;
+  spPaused=false;
+  spElapsed=0;
+  document.getElementById('spHdrTitle').textContent=spRoutine.title;
+  document.getElementById('spActiveScreen').style.display='flex';
+  document.getElementById('spDoneScreen').classList.remove('show');
+  document.getElementById('spActions').style.display='grid';
+  // Hide stretch reference content, show player inline
+  document.querySelectorAll('#stretch .stretch-start-btn, #stretch .sp-hint, #stretch .stretch-block, #stretch .section-head, #stretch .info-box, #stretch h3').forEach(el=>el.style.display='none');
+  document.getElementById('spOverlay').classList.add('active');
+  spRender();
+  spStartTimer();
+  clearInterval(spElapsedTimer);
+  spElapsedTimer=setInterval(()=>{spElapsed++;},1000);
+}
+
+function spRender(){
+  if(!spRoutine)return;
+  const total=spRoutine.stretches.length;
+  const s=spRoutine.stretches[spIdx];
+  const isLast=spIdx===total-1;
+
+  document.getElementById('spHdrCount').textContent=(spIdx+1)+' / '+total;
+  document.getElementById('spStepLbl').textContent='Stretch '+(spIdx+1)+' of '+total;
+  document.getElementById('spName').textContent=s.name;
+  document.getElementById('spDurPill').textContent=s.label;
+  document.getElementById('spDesc').textContent=s.desc;
+  document.getElementById('spProg').style.width=(spIdx/total*100)+'%';
+
+  const modEl=document.getElementById('spMod');
+  if(s.mod&&s.mod.trim()){modEl.style.display='block';document.getElementById('spModTxt').textContent=s.mod;}
+  else{modEl.style.display='none';}
+
+  const nextEl=document.getElementById('spNextName');
+  if(isLast){nextEl.textContent='— Last stretch —';}
+  else{nextEl.textContent=spRoutine.stretches[spIdx+1].name;}
+
+  const nb=document.getElementById('spNextBtn');
+  if(isLast){nb.textContent='FINISH ✓';nb.className='sp-act spa-next sp-finish';}
+  else{nb.textContent='NEXT ▶';nb.className='sp-act spa-next';}
+
+  spTimeLeft=s.dur;
+  spTotalTime=s.dur;
+  spUpdateRing();
+}
+
+function spStartTimer(){
+  clearInterval(spTimer);
+  if(spPaused)return;
+  spTimer=setInterval(()=>{
+    if(spPaused)return;
+    spTimeLeft--;
+    spUpdateRing();
+    if(spTimeLeft<=0){
+      clearInterval(spTimer);
+      if(spIdx<spRoutine.stretches.length-1){
+        spIdx++;
+        spRender();
+        spStartTimer();
+      } else {
+        spShowDone();
+      }
+    }
+  },1000);
+}
+
+function spUpdateRing(){
+  document.getElementById('spSec').textContent=spTimeLeft;
+  const pct=spTotalTime>0?(spTotalTime-spTimeLeft)/spTotalTime:1;
+  document.getElementById('spRingFill').style.strokeDashoffset=pct*CIRC;
+}
+
+function spTogglePause(){
+  spPaused=!spPaused;
+  const btn=document.getElementById('spPauseBtn');
+  btn.textContent=spPaused?'▶ RESUME':'⏸ PAUSE';
+  if(!spPaused)spStartTimer();
+}
+
+function spNext(){
+  clearInterval(spTimer);
+  if(spIdx<spRoutine.stretches.length-1){
+    spIdx++;
+    spRender();
+    if(!spPaused)spStartTimer();
+  } else {
+    spShowDone();
+  }
+}
+
+function spPrev(){
+  clearInterval(spTimer);
+  if(spIdx>0){spIdx--;spRender();if(!spPaused)spStartTimer();}
+}
+
+function spShowDone(){
+  clearInterval(spTimer);clearInterval(spElapsedTimer);
+  document.getElementById('spProg').style.width='100%';
+  document.getElementById('spActiveScreen').style.display='none';
+  document.getElementById('spActions').style.display='none';
+  const ds=document.getElementById('spDoneScreen');
+  ds.classList.add('show');
+  const m=Math.floor(spElapsed/60),s=spElapsed%60;
+  document.getElementById('spDoneTime').textContent=m+':'+(s<10?'0':'')+s;
+  document.getElementById('spDoneCount').textContent=spRoutine.stretches.length;
+  const titles={morning:'Morning Done!',evening:'Wind-Down Complete!',yoga:'Yoga Flow Complete!'};
+  const key=Object.keys(STRETCH_ROUTINES).find(k=>STRETCH_ROUTINES[k]===spRoutine)||'morning';
+  document.getElementById('spDoneTitle').textContent=titles[key]||'Done!';
+}
+
+function closeStretch(){
+  clearInterval(spTimer);clearInterval(spElapsedTimer);
+  document.getElementById('spOverlay').classList.remove('active');
+  // Restore stretch reference content
+  document.querySelectorAll('#stretch .stretch-start-btn, #stretch .sp-hint, #stretch .stretch-block, #stretch .section-head, #stretch .info-box, #stretch h3').forEach(el=>el.style.display='');
+  document.getElementById('spActiveScreen').style.display='flex';
+  document.getElementById('spDoneScreen').classList.remove('show');
+  document.getElementById('spActions').style.display='grid';
+  document.getElementById('spPauseBtn').textContent='⏸ PAUSE';
+  spPaused=false;
+}
+
+// ══════════════════════════════════════
+// WORKOUT LAUNCHER
+// ══════════════════════════════════════
+let selPhaseIdx=0,selDayIdx=0,selSessIdx=0;
+function selPhase(idx,btn){selPhaseIdx=idx;document.querySelectorAll('.phase-tab').forEach(b=>b.classList.remove('active'));btn.classList.add('active');}
+function renderDayGrid(){
+  const g=document.getElementById('dayGrid');g.innerHTML='';
+  DAYS.forEach((d,i)=>{const b=document.createElement('button');b.className='day-btn'+(i===selDayIdx?' active':'');b.textContent=d.slice(0,3);b.onclick=()=>{selDayIdx=i;renderDayGrid();renderSessions();};g.appendChild(b);});
+}
+function renderSessions(){
+  const wrap=document.getElementById('sessionCards');wrap.innerHTML='';
+  const sessions=SESSIONS[DAY_KEYS[selDayIdx]]||[];
+  sessions.forEach((s,i)=>{
+    const c=document.createElement('div');c.className='session-card'+(i===selSessIdx?' selected':'');
+    c.innerHTML=`<div class="sc-check">${i===selSessIdx?'✓':''}</div><div class="sc-tag">${s.name}</div><div class="sc-name">${s.label}</div><div class="sc-detail">${s.exercises.length} exercises · ${s.rounds} round${s.rounds>1?'s':''}</div>`;
+    c.onclick=()=>{selSessIdx=i;renderSessions();};
+    wrap.appendChild(c);
   });
-  cl.appendChild(row);
-});
+}
+renderDayGrid();renderSessions();
+
+// ══════════════════════════════════════
+// WORKOUT PLAYER — Checklist + Goal Meter
+// ══════════════════════════════════════
+let pTimer=null,elapsed=0,curSession=null;
+const GOAL_SECS=45*60;
+
+// Estimate minutes per exercise from sets × reps
+// Assumes ~45 sec/set of work + 60 sec rest between sets
+function estimateMins(ex){
+  const repsStr=String(ex.reps).toLowerCase();
+  // Timed exercises: parse minutes directly
+  const mMatch=repsStr.match(/(\d+)\s*min/);if(mMatch)return parseInt(mMatch[1]);
+  const sMatch=repsStr.match(/(\d+)\s*sec/);if(sMatch)return Math.ceil(parseInt(sMatch[1])/60);
+  // Sets × reps: ~45 sec work + 60 sec rest per set (rounded up)
+  const sets=Math.max(1,ex.sets||1);
+  return Math.round((sets*45 + (sets-1)*60)/60) || 3;
+}
+
+function startWorkout(){
+  const sessions=SESSIONS[DAY_KEYS[selDayIdx]]||[];
+  curSession=sessions[selSessIdx];if(!curSession)return;
+  elapsed=0;
+
+  const personLabel=activePerson==='dan'?'Dan':'Carrie';
+  document.getElementById('pTitle').textContent=personLabel+' · '+curSession.name;
+  document.getElementById('pSubtitle').textContent=DAYS[selDayIdx]+' · '+curSession.label;
+  document.getElementById('doneScreen').className='done-screen';
+  document.getElementById('exCheckList').style.display='block';
+  document.getElementById('launcher').style.display='none';
+  document.getElementById('playerOverlay').classList.add('active');
+
+  renderChecklist();
+  clearInterval(pTimer);
+  pTimer=setInterval(()=>{elapsed++;document.getElementById('pHeaderTime').textContent=fmt(elapsed);},1000);
+}
+
+function renderChecklist(){
+  const list=document.getElementById('exCheckList');
+  list.innerHTML='';
+  const exs=curSession.exercises;
+  const rounds=curSession.rounds||1;
+
+  // Build flat list: for each round, all exercises
+  const items=[];
+  for(let r=1;r<=rounds;r++){
+    exs.forEach(ex=>{
+      items.push({ex,round:r,totalRounds:rounds,id:items.length});
+    });
+  }
+
+  // Round header label if multi-round
+  let lastRound=0;
+  items.forEach(item=>{
+    const {ex,round,id}=item;
+    const mins=estimateMins(ex);
+
+    if(curSession.rounds>1&&round!==lastRound){
+      lastRound=round;
+      const rh=document.createElement('div');
+      rh.style.cssText='font-family:"Bebas Neue",sans-serif;font-size:16px;letter-spacing:2px;color:#f4c430;padding:12px 0 6px;border-bottom:1px solid #2e2e2e;margin-bottom:6px';
+      rh.textContent='Round '+round+' of '+curSession.rounds;
+      list.appendChild(rh);
+    }
+
+    const row=document.createElement('div');
+    row.className='cl-row';
+    row.dataset.mins=mins;
+    row.dataset.id=id;
+    row.innerHTML=`
+      <div class="cl-check" onclick="toggleExCheck(this.parentElement)">
+        <div class="cl-box">✓</div>
+      </div>
+      <div class="cl-content">
+        <div class="cl-name">${ex.name}</div>
+        <div class="cl-meta">
+          <span class="cl-tag cl-sets">${ex.sets} set${ex.sets>1?'s':''}</span>
+          <span class="cl-tag cl-reps">${ex.reps}</span>
+          <span class="cl-tag cl-equip">${ex.equip}</span>
+          <span class="cl-mins">~${mins} min</span>
+        </div>
+        ${ex.desc?`<div class="cl-desc">${ex.desc}</div>`:''}
+        ${ex.mod&&ex.mod.trim()?`<div class="cl-mod">⚠ Dan: ${ex.mod}</div>`:''}
+      </div>
+    `;
+    list.appendChild(row);
+  });
+
+  updateGoalMeter();
+}
+
+function toggleExCheck(row){
+  row.classList.toggle('cl-done');
+  updateGoalMeter();
+  // Check if all done
+  const all=document.querySelectorAll('#exCheckList .cl-row');
+  const done=document.querySelectorAll('#exCheckList .cl-row.cl-done');
+  if(all.length>0&&all.length===done.length) setTimeout(showDone,400);
+}
+
+function updateGoalMeter(){
+  let mins=0;
+  document.querySelectorAll('#exCheckList .cl-row.cl-done').forEach(r=>{mins+=parseInt(r.dataset.mins)||0;});
+  const pct=Math.min(100,(mins/45)*100);
+  document.getElementById('goalBar').style.width=pct+'%';
+  document.getElementById('goalBar').style.background=pct>=100?'#52b788':pct>=70?'#f4a261':'#e63946';
+  document.getElementById('goalMins').textContent=mins;
+  const remaining=Math.max(0,45-mins);
+  const lbl=document.getElementById('goalLabel');
+  if(pct>=100){lbl.textContent='🔥 Goal reached! You hit 45 minutes.';lbl.style.color='#52b788';}
+  else if(pct>=70){lbl.textContent=remaining+' min to go — keep pushing';lbl.style.color='#f4a261';}
+  else{lbl.textContent='Check off exercises as you finish them · '+remaining+' min remaining';lbl.style.color='#555';}
+}
+
+function closePlayer(){
+  clearInterval(pTimer);
+  document.getElementById('playerOverlay').classList.remove('active');
+  document.getElementById('launcher').style.display='block';
+  document.getElementById('doneScreen').className='done-screen';
+  document.getElementById('exCheckList').style.display='block';
+}
+
+function showDone(){
+  clearInterval(pTimer);
+  const doneChecked=document.querySelectorAll('#exCheckList .cl-row.cl-done').length;
+  let mins=0;document.querySelectorAll('#exCheckList .cl-row.cl-done').forEach(r=>{mins+=parseInt(r.dataset.mins)||0;});
+  document.getElementById('dTime').textContent=fmt(elapsed);
+  document.getElementById('dExercises').textContent=doneChecked;
+  document.getElementById('dMins').textContent=mins;
+  document.getElementById('doneSub').textContent=selSessIdx===0?'Session 1 done. Don\'t forget Session 2 today.':'Both sessions logged. Mark the day in your tracker. 🔥';
+  document.getElementById('exCheckList').style.display='none';
+  document.getElementById('doneScreen').className='done-screen active';
+}
+
+function fmt(s){const m=Math.floor(s/60);return m+':'+(s%60<10?'0':'')+s%60}
+
+// ══════════════════════════════════════
+// GENERAL UI
+// ══════════════════════════════════════
+function showTab(id,btn){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');if(btn)btn.classList.add('active');
+}
+function togPhase(h){const b=h.nextElementSibling;h.classList.toggle('open');b.classList.toggle('open');}
+function togStretch(h){const b=h.nextElementSibling;h.classList.toggle('open');b.classList.toggle('open');}
+function showDiet(p,btn){
+  document.querySelectorAll('.diet-person').forEach(d=>d.classList.remove('active'));
+  document.querySelectorAll('.ptog').forEach(b=>b.classList.remove('active'));
+  document.getElementById('diet-'+p).classList.add('active');btn.classList.add('active');
+}
+
+// ══════════════════════════════════════
+// GOOGLE SHEETS SYNC
+// Paste your deployed Apps Script URL below after setup.
+// ══════════════════════════════════════
+const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbxuls-9miNPv9k5fUf7Ub9nu5ZCKgT4SpIlU4uIRWDn0BDQnamPvSuRxFmbjWppwEBJ/exec';
+
+let syncStatus = 'idle'; // idle | syncing | ok | error | offline
+let pendingSync = false;
+let syncTimer = null;
+
+function setSyncStatus(status, msg) {
+  syncStatus = status;
+  const el = document.getElementById('syncStatus');
+  if (!el) return;
+  const icons = { idle:'☁️', syncing:'⏳', ok:'✓', error:'⚠️', offline:'📴', nourl:'⚙️' };
+  const colors = { idle:'#555', syncing:'#f4c430', ok:'#52b788', error:'#e63946', offline:'#555', nourl:'#555' };
+  el.textContent = (icons[status]||'') + ' ' + (msg || status);
+  el.style.color = colors[status] || '#555';
+}
+
+async function sheetsGet() {
+  if (!SHEETS_URL) return null;
+  try {
+    const r = await fetch(SHEETS_URL + '?action=get', { method:'GET' });
+    const d = await r.json();
+    return d.ok ? d.data : null;
+  } catch(e) { return null; }
+}
+
+async function sheetsSet(updates) {
+  if (!SHEETS_URL) return false;
+  try {
+    const r = await fetch(SHEETS_URL, {
+      method: 'POST',
+      body: JSON.stringify({ action:'set', updates })
+    });
+    const d = await r.json();
+    return d.ok;
+  } catch(e) { return false; }
+}
+
+// Debounced save — batches rapid changes into one sync call
+function scheduleSave() {
+  clearTimeout(syncTimer);
+  setSyncStatus('syncing', 'Saving...');
+  syncTimer = setTimeout(doSync, 1500);
+}
+
+async function doSync() {
+  if (!SHEETS_URL) { setSyncStatus('nourl', 'Set up Sheets URL'); return; }
+  setSyncStatus('syncing', 'Saving...');
+  const updates = [
+    { key: '75h_days',    value: localStorage.getItem('75h_days')    || '{}' },
+    { key: '75h_water',   value: localStorage.getItem('75h_water')   || '[]' },
+    { key: '75h_weights', value: localStorage.getItem('75h_weights') || '{}' },
+  ];
+  const ok = await sheetsSet(updates);
+  setSyncStatus(ok ? 'ok' : 'error', ok ? 'Saved to Sheets' : 'Sync failed — saved locally');
+}
+
+async function loadFromSheets() {
+  if (!SHEETS_URL) { setSyncStatus('nourl', 'No Sheets URL — using local only'); return; }
+  setSyncStatus('syncing', 'Loading...');
+  const data = await sheetsGet();
+  if (!data) { setSyncStatus('offline', 'Offline — using local data'); return; }
+
+  // Merge Sheets data into localStorage (Sheets wins)
+  if (data['75h_days'])    localStorage.setItem('75h_days',    data['75h_days']);
+  if (data['75h_water'])   localStorage.setItem('75h_water',   data['75h_water']);
+  if (data['75h_weights']) localStorage.setItem('75h_weights', data['75h_weights']);
+
+  setSyncStatus('ok', 'Synced ✓');
+  // Rebuild UI with fresh data
+  buildTracker();
+  buildWater();
+  buildWeightLog();
+}
+
+// Save helper — writes localStorage then schedules cloud sync
+function lsSave(key, value) {
+  localStorage.setItem(key, JSON.stringify(value));
+  scheduleSave();
+}
+
+// ══════════════════════════════════════
+// TRACKER
+// ══════════════════════════════════════
+let tState = JSON.parse(localStorage.getItem('75h_days') || '{}');
+
+function buildTracker() {
+  tState = JSON.parse(localStorage.getItem('75h_days') || '{}');
+  const tGrid = document.getElementById('trackerGrid');
+  tGrid.innerHTML = '';
+  for (let i = 1; i <= 75; i++) {
+    const d = document.createElement('div');
+    d.className = 'tracker-day';
+    d.id = 'td_' + i;
+    d.textContent = i;
+    if (tState[i] === 'done')   d.classList.add('done');
+    if (tState[i] === 'failed') d.classList.add('failed');
+    let pt;
+    const fail = () => {
+      tState[i] = tState[i] === 'failed' ? null : 'failed';
+      d.className = 'tracker-day' + (tState[i] === 'failed' ? ' failed' : '');
+      lsSave('75h_days', tState);
+    };
+    d.addEventListener('mousedown', () => { pt = setTimeout(fail, 600); });
+    d.addEventListener('mouseup',   () => clearTimeout(pt));
+    d.addEventListener('touchstart', () => { pt = setTimeout(fail, 600); }, { passive: true });
+    d.addEventListener('touchend',   () => clearTimeout(pt));
+    d.addEventListener('click', () => {
+      if (tState[i] === 'failed') return;
+      tState[i] = tState[i] === 'done' ? null : 'done';
+      d.className = 'tracker-day' + (tState[i] === 'done' ? ' done' : '');
+      lsSave('75h_days', tState);
+    });
+    tGrid.appendChild(d);
+  }
+}
+
+// ══════════════════════════════════════
+// WATER
+// ══════════════════════════════════════
+let wState = JSON.parse(localStorage.getItem('75h_water') || '[]');
+
+function buildWater() {
+  wState = JSON.parse(localStorage.getItem('75h_water') || '[]');
+  const wEl = document.getElementById('waterTracker');
+  wEl.innerHTML = '';
+  for (let i = 0; i < 8; i++) {
+    const c = document.createElement('div');
+    c.className = 'water-cup' + (wState[i] ? ' filled' : '');
+    c.textContent = '💧';
+    c.addEventListener('click', () => {
+      wState[i] = !wState[i];
+      c.classList.toggle('filled', wState[i]);
+      lsSave('75h_water', wState);
+    });
+    wEl.appendChild(c);
+  }
+}
+
+// ══════════════════════════════════════
+// WEIGHT LOG
+// ══════════════════════════════════════
+let wts = JSON.parse(localStorage.getItem('75h_weights') || '{}');
+
+function buildWeightLog() {
+  wts = JSON.parse(localStorage.getItem('75h_weights') || '{}');
+  const wLog = document.getElementById('weightLog');
+  wLog.innerHTML = '';
+  ['Wk 1','Wk 2','Wk 3','Wk 4','Wk 5','Wk 6','Wk 7','Wk 8','Wk 9','Wk 10','Done'].forEach((w, i) => {
+    const r = document.createElement('div');
+    r.className = 'weight-row';
+    r.innerHTML = `<div class="weight-week">${w}</div>
+      <div><div class="wlabel">Dan</div>
+        <input class="weight-input" type="number" placeholder="—" value="${wts['d'+i]||''}" step="0.1"
+          onchange="wts['d${i}']=this.value; lsSave('75h_weights', wts)">
+      </div>
+      <div><div class="wlabel">Carrie</div>
+        <input class="weight-input" type="number" placeholder="—" value="${wts['c'+i]||''}" step="0.1"
+          onchange="wts['c${i}']=this.value; lsSave('75h_weights', wts)">
+      </div>`;
+    wLog.appendChild(r);
+  });
+}
+
+// ══════════════════════════════════════
+// INIT — build UI then load from Sheets
+// ══════════════════════════════════════
+buildTracker();
+buildWater();
+buildWeightLog();
+loadFromSheets(); // async — updates UI when Sheets data arrives
 </script>
 
 </body>
