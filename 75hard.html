@@ -342,49 +342,104 @@ p.bt{font-size:13px;color:#888;line-height:1.75;margin-bottom:12px}
     <h3>Session</h3>
     <div class="session-selector" id="sessionCards"></div>
     <button class="start-btn" onclick="startWorkout()">▶ &nbsp; START WORKOUT</button>
-    <div class="divider"></div>
-    <h3>Program Reference</h3>
-    <div class="phase-block">
-      <div class="phase-header" onclick="togPhase(this)"><div><div class="phase-name">Phase 1 — Foundation</div><div class="phase-range">Days 1–25 · Build the habit</div></div><div class="chevron">▼</div></div>
-      <div class="phase-body open">
-        <p class="bt">Lower intensity, learning movement patterns, building daily discipline.</p>
-        <div class="workout-day full"><div class="wd-header"><div class="wd-day">Monday — Full Body</div><span class="wd-tag tag-f">Full</span></div><div class="wd-sessions"><div class="wd-session"><div class="wds-label">Session 1 · Indoor</div><div class="wds-name">KB + Band Circuit</div><div class="wds-detail">KB swings, goblet squats, DB rows, band work. 3 rounds.</div></div><div class="wd-session"><div class="wds-label">Session 2 · Outdoor/Row</div><div class="wds-name">Bike Ride or Brisk Walk</div><div class="wds-detail">45 min moderate bike or walk.</div></div></div></div>
-        <div class="workout-day cardio"><div class="wd-header"><div class="wd-day">Tuesday — Cardio</div><span class="wd-tag tag-c">Cardio</span></div><div class="wd-sessions"><div class="wd-session"><div class="wds-label">Session 1 · Indoor</div><div class="wds-name">Dumbbell + Band Upper</div><div class="wds-detail">DB + band upper body. 3 rounds.</div></div><div class="wd-session"><div class="wds-label">Session 2 · Outdoor</div><div class="wds-name">Walk + Bodyweight</div><div class="wds-detail">20 min walk + park circuit.</div></div></div></div>
-        <div class="workout-day recovery"><div class="wd-header"><div class="wd-day">Wednesday — Recovery</div><span class="wd-tag tag-r">Recovery</span></div><div class="wd-sessions"><div class="wd-session"><div class="wds-label">Session 1 · Indoor</div><div class="wds-name">Yoga Flow</div><div class="wds-detail">Full routine. Back-safe mods throughout.</div></div><div class="wd-session"><div class="wds-label">Session 2 · Outdoor</div><div class="wds-name">Easy Bike or Walk</div><div class="wds-detail">45 min mental reset.</div></div></div></div>
-        <div class="workout-day strength"><div class="wd-header"><div class="wd-day">Thursday — Upper Body</div><span class="wd-tag tag-s">Strength</span></div><div class="wd-sessions"><div class="wd-session"><div class="wds-label">Session 1 · Indoor</div><div class="wds-name">Dumbbell + Band Strength</div><div class="wds-detail">DB press, rows, curls, band work. 3–4 rounds.</div></div><div class="wd-session"><div class="wds-label">Session 2 · Outdoor/Row</div><div class="wds-name">Steady Walk or Row</div><div class="wds-detail">Bike intervals or steady walk. HR 120–140 bpm.</div></div></div></div>
-        <div class="workout-day strength"><div class="wd-header"><div class="wd-day">Friday — Lower Body</div><span class="wd-tag tag-s">Strength</span></div><div class="wd-sessions"><div class="wd-session"><div class="wds-label">Session 1 · Indoor</div><div class="wds-name">KB + Band Lower</div><div class="wds-detail">Goblet squat, RDL, band work. 3 rounds.</div></div><div class="wd-session"><div class="wds-label">Session 2 · Outdoor</div><div class="wds-name">Bike Intervals or Walk/Jog</div><div class="wds-detail">Bike: 4 min easy / 1 min hard × 8. Or walk/jog.</div></div></div></div>
-        <div class="workout-day cardio"><div class="wd-header"><div class="wd-day">Saturday — Row + Core</div><span class="wd-tag tag-c">Cardio</span></div><div class="wd-sessions"><div class="wd-session"><div class="wds-label">Session 1 · Indoor</div><div class="wds-name">Structured Row</div><div class="wds-detail">Full body KB + band circuit + stair climbs. 4 rounds.</div></div><div class="wd-session"><div class="wds-label">Session 2 · Outdoor</div><div class="wds-name">Family Bike or Walk</div><div class="wds-detail">Bike or walk. Bring Kira.</div></div></div></div>
-        <div class="workout-day recovery"><div class="wd-header"><div class="wd-day">Sunday — Stretch + Walk</div><span class="wd-tag tag-r">Recovery</span></div><div class="wd-sessions"><div class="wd-session"><div class="wds-label">Session 1 · Indoor</div><div class="wds-name">Full Stretch</div><div class="wds-detail">Complete yoga sequence. Hold each pose longer.</div></div><div class="wd-session"><div class="wds-label">Session 2 · Outdoor</div><div class="wds-name">Easy Bike or Walk</div><div class="wds-detail">Easy bike or walk. 45 min.</div></div></div></div>
+    <button class="start-btn" onclick="openFreeStyle()" style="background:#1a1a1a;border-color:#52b788;color:#52b788 !important;margin-top:-8px;">⚡ &nbsp; FREESTYLE SESSION</button>
+
+```
+<!-- FREESTYLE MODAL -->
+<div id="freestyleModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:500;flex-direction:column;align-items:center;justify-content:flex-start;padding:0;overflow-y:auto;">
+  <div style="width:100%;max-width:520px;padding:24px 20px 40px;">
+    <!-- Header -->
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;">
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:2px;color:#fff;">Freestyle Session</div>
+      <button onclick="closeFreeStyle()" style="background:none;border:1px solid #2e2e2e;color:#888;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;padding:6px 12px;cursor:pointer;-webkit-appearance:none;appearance:none;border-radius:0;">✕ CLOSE</button>
+    </div>
+
+    <!-- Activity picker -->
+    <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#555;margin-bottom:10px;">Pick Your Activity</div>
+    <div id="activityGrid" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:20px;"></div>
+
+    <!-- Custom activity input -->
+    <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#555;margin-bottom:8px;">Or Type Something Else</div>
+    <input id="customActivity" type="text" placeholder="e.g. Swimming, Jump rope..." 
+      style="width:100%;padding:11px 14px;background:#1a1a1a;border:1px solid #2e2e2e;color:#f0ece4;font-family:'DM Sans',sans-serif;font-size:14px;-webkit-appearance:none;appearance:none;border-radius:0;margin-bottom:20px;"
+      oninput="selectActivity(this.value)">
+
+    <!-- Timer display -->
+    <div style="background:#1a1a1a;border:1px solid #2e2e2e;padding:24px;text-align:center;margin-bottom:16px;">
+      <div id="fsActivityLabel" style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#52b788;margin-bottom:8px;">SELECT AN ACTIVITY</div>
+      <div id="fsTimer" style="font-family:'Bebas Neue',sans-serif;font-size:72px;letter-spacing:4px;color:#fff;line-height:1;">0:00</div>
+      <div style="margin-top:12px;">
+        <div style="height:6px;background:#252525;border-radius:3px;overflow:hidden;">
+          <div id="fsGoalBar" style="height:100%;background:#52b788;border-radius:3px;width:0%;transition:width 1s linear;"></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-top:6px;">
+          <div id="fsGoalLabel" style="font-family:'DM Mono',monospace;font-size:9px;color:#555;letter-spacing:1px;">Goal: 45 min</div>
+          <div style="font-family:'DM Mono',monospace;font-size:9px;color:#555;letter-spacing:1px;"><span id="fsMinsDone">0</span> / 45 min</div>
+        </div>
       </div>
     </div>
-    <div class="phase-block">
-      <div class="phase-header" onclick="togPhase(this)"><div><div class="phase-name">Phase 2 — Build</div><div class="phase-range">Days 26–50 · Increase intensity</div></div><div class="chevron">▼</div></div>
-      <div class="phase-body">
-        <div class="info-box gold"><strong>Changes:</strong> Increase to 20lb KB for all swings and squats. Add 4th round to all circuits. Bike intervals get harder — 2 min hard / 3 min easy. Stairs: add DBs for step-ups.</div>
-        <table class="ex-table"><thead><tr><th>Exercise</th><th>Sets × Reps</th><th>Equipment</th><th>Dan Mod</th></tr></thead><tbody>
-        <tr><td>Single-Leg Stair Step-Up (8 lb DB)</td><td>4 × 10 ea</td><td>Stairs + 8 lb DB</td><td>Hold rail if balance is off</td></tr>
-        <tr><td>KB Swing (20 lb)</td><td>4 × 15</td><td>25 lb KB</td><td>Hip hinge, brace, never round</td></tr>
-        <tr><td>Dumbbell Row (8 lb)</td><td>4 × 12 ea</td><td>8 lb DB</td><td>Neutral spine, slow eccentric</td></tr>
-        <tr><td>KB Goblet Squat (20 lb)</td><td>4 × 12</td><td>25 lb KB</td><td>Box squat to bench if needed</td></tr>
-        <tr><td>Band Pallof Press</td><td>3 × 12 ea</td><td>Medium band</td><td>Anti-rotation — back safe ✓</td></tr>
-        <tr><td>Reverse Crunch (Bench)</td><td>3 × 15</td><td>Sit-up bench</td><td>Feet only — no torso curl</td></tr>
-        </tbody></table>
-      </div>
+
+    <!-- Controls -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;">
+      <button id="fsStartBtn" onclick="fsToggle()" 
+        style="padding:14px;background:#52b788;border:none;color:#0d0d0d;font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;cursor:pointer;-webkit-appearance:none;appearance:none;border-radius:0;opacity:0.4;"
+        disabled>▶ START</button>
+      <button onclick="fsReset()" 
+        style="padding:14px;background:#252525;border:1px solid #2e2e2e;color:#888;font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;cursor:pointer;-webkit-appearance:none;appearance:none;border-radius:0;">↺ RESET</button>
     </div>
-    <div class="phase-block">
-      <div class="phase-header" onclick="togPhase(this)"><div><div class="phase-name">Phase 3 — Push</div><div class="phase-range">Days 51–75 · Finish strong</div></div><div class="chevron">▼</div></div>
-      <div class="phase-body">
-        <div class="info-box gold"><strong>Changes:</strong> Bike = push pace intervals. Add KB clean & press. Stair step-ups with 8 lb DBs every session. Final 10 days: extra set on everything.</div>
-        <table class="ex-table"><thead><tr><th>Exercise</th><th>Sets × Reps</th><th>Dan Note</th></tr></thead><tbody>
-        <tr><td>KB Clean & Press (25 lb)</td><td>4 × 8 ea</td><td>Standing, strict posture</td></tr>
-        <tr><td>Stair Step-Up with DB (8 lb)</td><td>4 × 12 ea</td><td>Drive through heel, hold rail if needed</td></tr>
-        <tr><td>KB Swing (20 lb)</td><td>5 × 20</td><td>Power from hips only</td></tr>
-        <tr><td>Bird Dog</td><td>4 × 12 ea</td><td>Back-safe core ✓ Slow</td></tr>
-        <tr><td>Dead Bug</td><td>3 × 10 ea</td><td>Back flat to floor the whole time</td></tr>
-        <tr><td>Stair Intervals</td><td>20 min</td><td>1 min hard climb / 30 sec easy × 13</td></tr>
-        </tbody></table>
-      </div>
+    <button id="fsLogBtn" onclick="fsLog()" style="display:none;width:100%;padding:14px;background:#e63946;border:none;color:#fff;font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:3px;cursor:pointer;-webkit-appearance:none;appearance:none;border-radius:0;">✓ LOG SESSION</button>
+
+    <!-- Dan note -->
+    <div style="background:rgba(244,162,97,0.08);border-left:3px solid #f4a261;padding:12px 14px;margin-top:16px;font-size:12px;color:#888;line-height:1.6;">
+      <strong style="color:#f4a261;">Any activity counts</strong> — running, swimming, basketball, hiking, shoveling, whatever. As long as it's 45 continuous minutes of movement it qualifies for 75 Hard. Dan: avoid high-impact running if your back is flared. Bike or brisk walk instead.
     </div>
+  </div>
+</div>
+<div class="divider"></div>
+<h3>Program Reference</h3>
+<div class="phase-block">
+  <div class="phase-header" onclick="togPhase(this)"><div><div class="phase-name">Phase 1 — Foundation</div><div class="phase-range">Days 1–25 · Build the habit</div></div><div class="chevron">▼</div></div>
+  <div class="phase-body open">
+    <p class="bt">Lower intensity, learning movement patterns, building daily discipline.</p>
+    <div class="workout-day full"><div class="wd-header"><div class="wd-day">Monday — Full Body</div><span class="wd-tag tag-f">Full</span></div><div class="wd-sessions"><div class="wd-session"><div class="wds-label">Session 1 · Indoor</div><div class="wds-name">KB + Band Circuit</div><div class="wds-detail">KB swings, goblet squats, DB rows, band work. 3 rounds.</div></div><div class="wd-session"><div class="wds-label">Session 2 · Outdoor/Row</div><div class="wds-name">Bike Ride or Brisk Walk</div><div class="wds-detail">45 min moderate bike or walk.</div></div></div></div>
+    <div class="workout-day cardio"><div class="wd-header"><div class="wd-day">Tuesday — Cardio</div><span class="wd-tag tag-c">Cardio</span></div><div class="wd-sessions"><div class="wd-session"><div class="wds-label">Session 1 · Indoor</div><div class="wds-name">Dumbbell + Band Upper</div><div class="wds-detail">DB + band upper body. 3 rounds.</div></div><div class="wd-session"><div class="wds-label">Session 2 · Outdoor</div><div class="wds-name">Walk + Bodyweight</div><div class="wds-detail">20 min walk + park circuit.</div></div></div></div>
+    <div class="workout-day recovery"><div class="wd-header"><div class="wd-day">Wednesday — Recovery</div><span class="wd-tag tag-r">Recovery</span></div><div class="wd-sessions"><div class="wd-session"><div class="wds-label">Session 1 · Indoor</div><div class="wds-name">Yoga Flow</div><div class="wds-detail">Full routine. Back-safe mods throughout.</div></div><div class="wd-session"><div class="wds-label">Session 2 · Outdoor</div><div class="wds-name">Easy Bike or Walk</div><div class="wds-detail">45 min mental reset.</div></div></div></div>
+    <div class="workout-day strength"><div class="wd-header"><div class="wd-day">Thursday — Upper Body</div><span class="wd-tag tag-s">Strength</span></div><div class="wd-sessions"><div class="wd-session"><div class="wds-label">Session 1 · Indoor</div><div class="wds-name">Dumbbell + Band Strength</div><div class="wds-detail">DB press, rows, curls, band work. 3–4 rounds.</div></div><div class="wd-session"><div class="wds-label">Session 2 · Outdoor/Row</div><div class="wds-name">Steady Walk or Row</div><div class="wds-detail">Bike intervals or steady walk. HR 120–140 bpm.</div></div></div></div>
+    <div class="workout-day strength"><div class="wd-header"><div class="wd-day">Friday — Lower Body</div><span class="wd-tag tag-s">Strength</span></div><div class="wd-sessions"><div class="wd-session"><div class="wds-label">Session 1 · Indoor</div><div class="wds-name">KB + Band Lower</div><div class="wds-detail">Goblet squat, RDL, band work. 3 rounds.</div></div><div class="wd-session"><div class="wds-label">Session 2 · Outdoor</div><div class="wds-name">Bike Intervals or Walk/Jog</div><div class="wds-detail">Bike: 4 min easy / 1 min hard × 8. Or walk/jog.</div></div></div></div>
+    <div class="workout-day cardio"><div class="wd-header"><div class="wd-day">Saturday — Row + Core</div><span class="wd-tag tag-c">Cardio</span></div><div class="wd-sessions"><div class="wd-session"><div class="wds-label">Session 1 · Indoor</div><div class="wds-name">Structured Row</div><div class="wds-detail">Full body KB + band circuit + stair climbs. 4 rounds.</div></div><div class="wd-session"><div class="wds-label">Session 2 · Outdoor</div><div class="wds-name">Family Bike or Walk</div><div class="wds-detail">Bike or walk. Bring Kira.</div></div></div></div>
+    <div class="workout-day recovery"><div class="wd-header"><div class="wd-day">Sunday — Stretch + Walk</div><span class="wd-tag tag-r">Recovery</span></div><div class="wd-sessions"><div class="wd-session"><div class="wds-label">Session 1 · Indoor</div><div class="wds-name">Full Stretch</div><div class="wds-detail">Complete yoga sequence. Hold each pose longer.</div></div><div class="wd-session"><div class="wds-label">Session 2 · Outdoor</div><div class="wds-name">Easy Bike or Walk</div><div class="wds-detail">Easy bike or walk. 45 min.</div></div></div></div>
+  </div>
+</div>
+<div class="phase-block">
+  <div class="phase-header" onclick="togPhase(this)"><div><div class="phase-name">Phase 2 — Build</div><div class="phase-range">Days 26–50 · Increase intensity</div></div><div class="chevron">▼</div></div>
+  <div class="phase-body">
+    <div class="info-box gold"><strong>Changes:</strong> Increase to 20lb KB for all swings and squats. Add 4th round to all circuits. Bike intervals get harder — 2 min hard / 3 min easy. Stairs: add DBs for step-ups.</div>
+    <table class="ex-table"><thead><tr><th>Exercise</th><th>Sets × Reps</th><th>Equipment</th><th>Dan Mod</th></tr></thead><tbody>
+    <tr><td>Single-Leg Stair Step-Up (8 lb DB)</td><td>4 × 10 ea</td><td>Stairs + 8 lb DB</td><td>Hold rail if balance is off</td></tr>
+    <tr><td>KB Swing (20 lb)</td><td>4 × 15</td><td>25 lb KB</td><td>Hip hinge, brace, never round</td></tr>
+    <tr><td>Dumbbell Row (8 lb)</td><td>4 × 12 ea</td><td>8 lb DB</td><td>Neutral spine, slow eccentric</td></tr>
+    <tr><td>KB Goblet Squat (20 lb)</td><td>4 × 12</td><td>25 lb KB</td><td>Box squat to bench if needed</td></tr>
+    <tr><td>Band Pallof Press</td><td>3 × 12 ea</td><td>Medium band</td><td>Anti-rotation — back safe ✓</td></tr>
+    <tr><td>Reverse Crunch (Bench)</td><td>3 × 15</td><td>Sit-up bench</td><td>Feet only — no torso curl</td></tr>
+    </tbody></table>
+  </div>
+</div>
+<div class="phase-block">
+  <div class="phase-header" onclick="togPhase(this)"><div><div class="phase-name">Phase 3 — Push</div><div class="phase-range">Days 51–75 · Finish strong</div></div><div class="chevron">▼</div></div>
+  <div class="phase-body">
+    <div class="info-box gold"><strong>Changes:</strong> Bike = push pace intervals. Add KB clean & press. Stair step-ups with 8 lb DBs every session. Final 10 days: extra set on everything.</div>
+    <table class="ex-table"><thead><tr><th>Exercise</th><th>Sets × Reps</th><th>Dan Note</th></tr></thead><tbody>
+    <tr><td>KB Clean & Press (25 lb)</td><td>4 × 8 ea</td><td>Standing, strict posture</td></tr>
+    <tr><td>Stair Step-Up with DB (8 lb)</td><td>4 × 12 ea</td><td>Drive through heel, hold rail if needed</td></tr>
+    <tr><td>KB Swing (20 lb)</td><td>5 × 20</td><td>Power from hips only</td></tr>
+    <tr><td>Bird Dog</td><td>4 × 12 ea</td><td>Back-safe core ✓ Slow</td></tr>
+    <tr><td>Dead Bug</td><td>3 × 10 ea</td><td>Back flat to floor the whole time</td></tr>
+    <tr><td>Stair Intervals</td><td>20 min</td><td>1 min hard climb / 30 sec easy × 13</td></tr>
+    </tbody></table>
+  </div>
+</div>
+```
+
   </div><!-- /launcher -->
 
   <!-- PLAYER VIEW — hidden until Start Workout -->
@@ -1242,8 +1297,168 @@ function showDone(){
 function fmt(s){const m=Math.floor(s/60);return m+':'+(s%60<10?'0':'')+s%60}
 
 // ══════════════════════════════════════
-// GENERAL UI
+// FREESTYLE SESSION
 // ══════════════════════════════════════
+const FS_ACTIVITIES = [
+  {label:'🏃 Run',       name:'Running'},
+  {label:'🚴 Bike',      name:'Cycling'},
+  {label:'🚶 Walk',      name:'Walking'},
+  {label:'🏊 Swim',      name:'Swimming'},
+  {label:'⛹️ Basketball',name:'Basketball'},
+  {label:'⚽ Soccer',    name:'Soccer'},
+  {label:'🎾 Tennis',    name:'Tennis'},
+  {label:'🧗 Hike',      name:'Hiking'},
+  {label:'🏋️ Gym',       name:'Gym Workout'},
+  {label:'🤸 Yoga',      name:'Yoga'},
+  {label:'🪜 Stairs',    name:'Stair Climbs'},
+  {label:'🥊 Boxing',    name:'Boxing'},
+];
+
+let fsActivity = '';
+let fsSeconds = 0;
+let fsRunning = false;
+let fsInterval = null;
+
+function openFreeStyle() {
+  // Build activity grid
+  const grid = document.getElementById('activityGrid');
+  grid.innerHTML = '';
+  FS_ACTIVITIES.forEach(a => {
+    const btn = document.createElement('button');
+    btn.id = 'fs_' + a.name;
+    btn.textContent = a.label;
+    btn.style.cssText = 'padding:12px 8px;background:#1a1a1a;border:1px solid #2e2e2e;color:#888;font-family:"DM Sans",sans-serif;font-size:13px;cursor:pointer;-webkit-appearance:none;appearance:none;border-radius:0;transition:all .15s;text-align:center;';
+    btn.onclick = () => selectActivity(a.name);
+    grid.appendChild(btn);
+  });
+  fsReset();
+  document.getElementById('freestyleModal').style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+
+function closeFreeStyle() {
+  fsStop();
+  document.getElementById('freestyleModal').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+function selectActivity(name) {
+  fsActivity = name;
+  // Highlight selected button
+  document.querySelectorAll('#activityGrid button').forEach(b => {
+    b.style.background = '#1a1a1a';
+    b.style.borderColor = '#2e2e2e';
+    b.style.color = '#888';
+  });
+  const btn = document.getElementById('fs_' + name);
+  if (btn) {
+    btn.style.background = 'rgba(82,183,136,0.15)';
+    btn.style.borderColor = '#52b788';
+    btn.style.color = '#52b788';
+  }
+  // Update label
+  document.getElementById('fsActivityLabel').textContent = name.toUpperCase();
+  document.getElementById('customActivity').value = '';
+  // Enable start
+  const startBtn = document.getElementById('fsStartBtn');
+  startBtn.disabled = false;
+  startBtn.style.opacity = '1';
+}
+
+function fsToggle() {
+  if (!fsActivity) return;
+  if (fsRunning) {
+    fsStop();
+  } else {
+    fsRunning = true;
+    document.getElementById('fsStartBtn').textContent = '⏸ PAUSE';
+    document.getElementById('fsStartBtn').style.background = '#f4a261';
+    fsInterval = setInterval(() => {
+      fsSeconds++;
+      fsUpdateDisplay();
+      if (fsSeconds >= 2700) { // 45 min
+        fsStop();
+        document.getElementById('fsStartBtn').textContent = '✓ DONE';
+        document.getElementById('fsStartBtn').style.background = '#52b788';
+        document.getElementById('fsLogBtn').style.display = 'block';
+        if (navigator.vibrate) navigator.vibrate([300,100,300]);
+      }
+    }, 1000);
+  }
+}
+
+function fsStop() {
+  fsRunning = false;
+  clearInterval(fsInterval);
+  const startBtn = document.getElementById('fsStartBtn');
+  if (fsSeconds > 0 && fsSeconds < 2700) {
+    startBtn.textContent = '▶ RESUME';
+    startBtn.style.background = '#52b788';
+    document.getElementById('fsLogBtn').style.display = 'block';
+  } else if (fsSeconds === 0) {
+    startBtn.textContent = '▶ START';
+    startBtn.style.background = '#52b788';
+  }
+}
+
+function fsReset() {
+  fsStop();
+  fsSeconds = 0;
+  fsActivity = '';
+  fsRunning = false;
+  document.getElementById('fsTimer').textContent = '0:00';
+  document.getElementById('fsGoalBar').style.width = '0%';
+  document.getElementById('fsGoalBar').style.background = '#52b788';
+  document.getElementById('fsMinsDone').textContent = '0';
+  document.getElementById('fsGoalLabel').textContent = 'Goal: 45 min';
+  document.getElementById('fsActivityLabel').textContent = 'SELECT AN ACTIVITY';
+  document.getElementById('fsLogBtn').style.display = 'none';
+  const startBtn = document.getElementById('fsStartBtn');
+  startBtn.textContent = '▶ START';
+  startBtn.style.background = '#52b788';
+  startBtn.style.opacity = '0.4';
+  startBtn.disabled = true;
+  document.getElementById('customActivity').value = '';
+  document.querySelectorAll('#activityGrid button').forEach(b => {
+    b.style.background = '#1a1a1a';
+    b.style.borderColor = '#2e2e2e';
+    b.style.color = '#888';
+  });
+}
+
+function fsUpdateDisplay() {
+  const m = Math.floor(fsSeconds / 60);
+  const s = fsSeconds % 60;
+  document.getElementById('fsTimer').textContent = m + ':' + (s < 10 ? '0' : '') + s;
+  const pct = Math.min(100, (fsSeconds / 2700) * 100);
+  const bar = document.getElementById('fsGoalBar');
+  bar.style.width = pct + '%';
+  bar.style.background = pct >= 100 ? '#52b788' : pct >= 70 ? '#f4a261' : '#52b788';
+  document.getElementById('fsMinsDone').textContent = m;
+  const remaining = Math.max(0, 45 - m);
+  document.getElementById('fsGoalLabel').textContent = pct >= 100
+    ? '🔥 Goal reached!'
+    : remaining + ' min remaining';
+}
+
+function fsLog() {
+  const mins = Math.floor(fsSeconds / 60);
+  const activity = fsActivity || 'Freestyle';
+  // Save to localStorage as a completed session note
+  const today = new Date().toISOString().split('T')[0];
+  const key = '75h_freestyle_' + today;
+  const existing = JSON.parse(localStorage.getItem(key) || '[]');
+  existing.push({ activity, mins, time: new Date().toLocaleTimeString() });
+  lsSave('75h_freestyle_' + today, existing);
+  // Close and confirm
+  closeFreeStyle();
+  // Flash a confirmation
+  const flash = document.createElement('div');
+  flash.style.cssText = 'position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:#52b788;color:#0d0d0d;font-family:"DM Mono",monospace;font-size:11px;letter-spacing:2px;padding:12px 20px;z-index:1000;';
+  flash.textContent = activity.toUpperCase() + ' · ' + mins + ' MIN LOGGED ✓';
+  document.body.appendChild(flash);
+  setTimeout(() => flash.remove(), 3000);
+}
 function showTab(id,btn){
   document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
