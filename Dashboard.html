@@ -1,1 +1,566 @@
 
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="theme-color" content="#e63946">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="75 HARD">
+<title>Dashboard · 75 Hard</title>
+<style>@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap");</style>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+button{-webkit-appearance:none;appearance:none;border-radius:0;font-family:inherit;cursor:pointer}
+button:focus{outline:none}
+body{background:#0d0d0d;color:#f0ece4;font-family:"DM Sans",system-ui,sans-serif;min-height:100vh;padding-bottom:60px}
+
+/* HEADER */
+.header{background:#1a1a1a;border-bottom:1px solid #2e2e2e;padding:12px 20px;position:sticky;top:0;z-index:100;display:flex;justify-content:space-between;align-items:center}
+.logo{font-family:“Bebas Neue”,sans-serif;font-size:22px;letter-spacing:3px;color:#fff}.logo span{color:#e63946}
+.back-btn{font-family:“DM Mono”,monospace;font-size:9px;letter-spacing:1.5px;color:#555;text-decoration:none;text-transform:uppercase;padding:6px 12px;border:1px solid #2e2e2e}
+
+/* PERSON TOGGLE */
+.person-bar{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid #2e2e2e}
+.person-tab{padding:14px;text-align:center;font-family:“DM Mono”,monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#555;border:none;background:#1a1a1a;border-bottom:3px solid transparent;transition:all .2s}
+.person-tab.active{color:#fff;border-bottom-color:#e63946;background:#0d0d0d}
+
+/* MAIN */
+.main{padding:20px 18px;max-width:680px;margin:0 auto}
+.section-lbl{font-family:“DM Mono”,monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#e63946;margin-bottom:6px}
+.section-title{font-family:“Bebas Neue”,sans-serif;font-size:28px;letter-spacing:2px;color:#fff;margin-bottom:16px}
+.divider{height:1px;background:#2e2e2e;margin:24px 0}
+
+/* PERSON HEADER CARD */
+.person-card{background:#1a1a1a;border:1px solid #2e2e2e;border-left:4px solid #e63946;padding:16px 18px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center}
+.person-name{font-family:“Bebas Neue”,sans-serif;font-size:32px;letter-spacing:3px;color:#fff}
+.person-stats{text-align:right}
+.person-day{font-family:“Bebas Neue”,sans-serif;font-size:28px;color:#e63946;line-height:1}
+.person-day-lbl{font-family:“DM Mono”,monospace;font-size:8px;letter-spacing:2px;color:#555;text-transform:uppercase}
+
+/* PROGRESS BAR */
+.prog-wrap{margin-bottom:6px}
+.prog-track{height:5px;background:#252525;border-radius:3px;overflow:hidden}
+.prog-fill{height:100%;background:#e63946;border-radius:3px;transition:width .6s ease}
+.prog-lbl{font-family:“DM Mono”,monospace;font-size:9px;color:#555;letter-spacing:1px;margin-top:5px;display:flex;justify-content:space-between}
+
+/* TODAY CHECKLIST */
+.check-list{display:flex;flex-direction:column;gap:8px;margin-bottom:8px}
+.check-row{display:flex;align-items:center;gap:12px;background:#1a1a1a;border:1px solid #2e2e2e;padding:12px 14px;cursor:pointer;user-select:none;transition:border-color .15s}
+.check-row.done{background:rgba(82,183,136,.05);border-color:rgba(82,183,136,.3)}
+.check-row:active{border-color:#555}
+.check-box{width:22px;height:22px;border:2px solid #444;display:flex;align-items:center;justify-content:center;font-size:12px;color:transparent;flex-shrink:0;transition:all .2s;border-radius:3px}
+.check-row.done .check-box{background:#52b788;border-color:#52b788;color:#0d0d0d}
+.check-lbl{font-size:13px;color:#f0ece4;flex:1}
+.check-row.done .check-lbl{color:#555;text-decoration:line-through}
+.check-sub{font-family:“DM Mono”,monospace;font-size:9px;color:#555;letter-spacing:1px;margin-top:2px}
+
+/* WATER */
+.water-grid{display:grid;grid-template-columns:repeat(8,1fr);gap:6px;margin-bottom:6px}
+.water-cup{aspect-ratio:1;background:#1a1a1a;border:2px solid #2e2e2e;display:flex;align-items:center;justify-content:center;font-size:18px;cursor:pointer;transition:all .2s;border-radius:4px}
+.water-cup.filled{background:rgba(76,201,240,.15);border-color:#4cc9f0}
+.water-lbl{font-family:“DM Mono”,monospace;font-size:9px;color:#555;letter-spacing:1px}
+
+/* 75-DAY GRID */
+.tracker-grid{display:grid;grid-template-columns:repeat(15,1fr);gap:4px;margin-bottom:8px}
+.t-day{aspect-ratio:1;background:#1a1a1a;border:1px solid #2e2e2e;display:flex;align-items:center;justify-content:center;font-family:“DM Mono”,monospace;font-size:8px;color:#555;cursor:pointer;transition:all .15s;border-radius:2px;user-select:none}
+.t-day.done{background:#52b788;border-color:#52b788;color:#0d0d0d;font-weight:700}
+.t-day.failed{background:#e63946;border-color:#e63946;color:#fff}
+.t-day.today{border-color:#f4c430;color:#f4c430}
+.tracker-legend{display:flex;gap:16px;margin-top:6px}
+.t-legend{display:flex;align-items:center;gap:5px;font-family:“DM Mono”,monospace;font-size:8px;letter-spacing:1px;color:#555;text-transform:uppercase}
+.t-dot{width:10px;height:10px;border-radius:2px}
+
+/* HISTORY */
+.history-list{display:flex;flex-direction:column;gap:8px}
+.hist-day{background:#1a1a1a;border:1px solid #2e2e2e;overflow:hidden}
+.hist-header{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;cursor:pointer}
+.hist-date{font-family:“DM Mono”,monospace;font-size:10px;letter-spacing:1px;color:#bbb;text-transform:uppercase}
+.hist-score{font-family:“Bebas Neue”,sans-serif;font-size:18px;letter-spacing:1px}
+.hist-score.perfect{color:#52b788}
+.hist-score.partial{color:#f4a261}
+.hist-score.zero{color:#555}
+.hist-body{display:none;padding:0 14px 12px;border-top:1px solid #2e2e2e}
+.hist-body.open{display:block}
+.hist-tasks{display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-top:10px}
+.hist-task{display:flex;align-items:center;gap:6px;font-size:11px;color:#555;padding:3px 0}
+.hist-task.done{color:#f0ece4}
+.hist-check{width:14px;height:14px;border-radius:2px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:9px}
+.hist-check.done{background:#52b788;color:#0d0d0d}
+.hist-check.miss{background:#252525;border:1px solid #2e2e2e}
+.load-more-btn{width:100%;padding:10px;background:#1a1a1a;border:1px solid #2e2e2e;color:#555;font-family:“DM Mono”,monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;margin-top:8px}
+.load-more-btn:hover{border-color:#444;color:#bbb}
+
+/* WEIGHT LOG */
+.weight-log{display:flex;flex-direction:column;gap:6px}
+.weight-row{display:grid;grid-template-columns:60px 1fr;gap:10px;align-items:center;background:#1a1a1a;border:1px solid #2e2e2e;padding:10px 14px;font-size:12px}
+.weight-week{font-family:“DM Mono”,monospace;font-size:10px;color:#555;letter-spacing:1px}
+.weight-input{width:100%;padding:6px 10px;background:#252525;border:1px solid #2e2e2e;color:#f0ece4;font-family:“DM Mono”,monospace;font-size:13px;-webkit-appearance:none;appearance:none;border-radius:0}
+.weight-input:focus{outline:none;border-color:#555}
+
+/* SYNC STATUS */
+.sync-bar{display:flex;justify-content:space-between;align-items:center;padding:8px 18px;background:#111;border-bottom:1px solid #1a1a1a}
+.sync-status{font-family:“DM Mono”,monospace;font-size:9px;letter-spacing:1px;color:#555}
+</style>
+
+</head>
+<body>
+
+<div class="header">
+  <a class="back-btn" href="index.html">← Home</a>
+  <div class="logo">75<span>HARD</span></div>
+  <div style="width:60px"></div>
+</div>
+
+<div class="sync-bar">
+  <div class="sync-status" id="syncStatus">☁️ Loading...</div>
+  <div class="sync-status" id="syncDate"></div>
+</div>
+
+<!-- PERSON TABS -->
+
+<div class="person-bar">
+  <button class="person-tab active" onclick="switchPerson('dan',this)" id="tab-dan">💪 Dan</button>
+  <button class="person-tab" onclick="switchPerson('carrie',this)" id="tab-carrie">🏃 Carrie</button>
+</div>
+
+<!-- DAN DASHBOARD -->
+
+<div id="dash-dan" class="main">
+  <div class="person-card">
+    <div>
+      <div class="person-name">Dan</div>
+      <div id="dan-prog-wrap" class="prog-wrap" style="width:180px;margin-top:8px">
+        <div class="prog-track"><div class="prog-fill" id="dan-prog-bar" style="width:0%"></div></div>
+        <div class="prog-lbl"><span id="dan-prog-pct">0% complete</span><span id="dan-prog-days">0/75 days</span></div>
+      </div>
+    </div>
+    <div class="person-stats">
+      <div class="person-day" id="dan-day-num">1</div>
+      <div class="person-day-lbl">Current Day</div>
+    </div>
+  </div>
+
+  <div class="section-lbl">Today</div>
+  <div class="section-title">Daily Checklist</div>
+  <div class="check-list" id="dan-checklist"></div>
+  <div style="font-family:'DM Mono',monospace;font-size:9px;color:#555;letter-spacing:1px;margin-top:6px;margin-bottom:24px" id="dan-check-count">0 / 8 complete</div>
+
+  <div class="section-lbl">Hydration</div>
+  <div class="section-title">Water Tracker</div>
+  <div class="water-grid" id="dan-water"></div>
+  <div class="water-lbl">Each cup = 16 oz · 8 cups = 1 gallon</div>
+
+  <div class="divider"></div>
+
+  <div class="section-lbl">Progress</div>
+  <div class="section-title">75-Day Grid</div>
+  <div class="tracker-grid" id="dan-tracker"></div>
+  <div class="tracker-legend">
+    <div class="t-legend"><div class="t-dot" style="background:#52b788"></div>Done</div>
+    <div class="t-legend"><div class="t-dot" style="background:#e63946"></div>Failed</div>
+    <div class="t-legend"><div class="t-dot" style="background:#1a1a1a;border:1px solid #f4c430"></div>Today</div>
+  </div>
+  <div style="font-family:'DM Mono',monospace;font-size:9px;color:#555;letter-spacing:1px;margin-top:8px">Tap = complete · Long press = failed</div>
+
+  <div class="divider"></div>
+
+  <div class="section-lbl">Look Back</div>
+  <div class="section-title">History</div>
+  <div class="history-list" id="dan-history"></div>
+  <button class="load-more-btn" id="dan-load-more" onclick="loadMore('dan')">LOAD MORE</button>
+
+  <div class="divider"></div>
+
+  <div class="section-lbl">Body</div>
+  <div class="section-title">Weight Log</div>
+  <div class="weight-log" id="dan-weight"></div>
+</div>
+
+<!-- CARRIE DASHBOARD -->
+
+<div id="dash-carrie" class="main" style="display:none">
+  <div class="person-card" style="border-left-color:#52b788">
+    <div>
+      <div class="person-name">Carrie</div>
+      <div id="carrie-prog-wrap" class="prog-wrap" style="width:180px;margin-top:8px">
+        <div class="prog-track"><div class="prog-fill" id="carrie-prog-bar" style="width:0%;background:#52b788"></div></div>
+        <div class="prog-lbl"><span id="carrie-prog-pct">0% complete</span><span id="carrie-prog-days">0/75 days</span></div>
+      </div>
+    </div>
+    <div class="person-stats">
+      <div class="person-day" id="carrie-day-num" style="color:#52b788">1</div>
+      <div class="person-day-lbl">Current Day</div>
+    </div>
+  </div>
+
+  <div class="section-lbl">Today</div>
+  <div class="section-title">Daily Checklist</div>
+  <div class="check-list" id="carrie-checklist"></div>
+  <div style="font-family:'DM Mono',monospace;font-size:9px;color:#555;letter-spacing:1px;margin-top:6px;margin-bottom:24px" id="carrie-check-count">0 / 8 complete</div>
+
+  <div class="section-lbl">Hydration</div>
+  <div class="section-title">Water Tracker</div>
+  <div class="water-grid" id="carrie-water"></div>
+  <div class="water-lbl">Each cup = 16 oz · 8 cups = 1 gallon</div>
+
+  <div class="divider"></div>
+
+  <div class="section-lbl">Progress</div>
+  <div class="section-title">75-Day Grid</div>
+  <div class="tracker-grid" id="carrie-tracker"></div>
+  <div class="tracker-legend">
+    <div class="t-legend"><div class="t-dot" style="background:#52b788"></div>Done</div>
+    <div class="t-legend"><div class="t-dot" style="background:#e63946"></div>Failed</div>
+    <div class="t-legend"><div class="t-dot" style="background:#1a1a1a;border:1px solid #f4c430"></div>Today</div>
+  </div>
+  <div style="font-family:'DM Mono',monospace;font-size:9px;color:#555;letter-spacing:1px;margin-top:8px">Tap = complete · Long press = failed</div>
+
+  <div class="divider"></div>
+
+  <div class="section-lbl">Look Back</div>
+  <div class="section-title">History</div>
+  <div class="history-list" id="carrie-history"></div>
+  <button class="load-more-btn" id="carrie-load-more" onclick="loadMore('carrie')">LOAD MORE</button>
+
+  <div class="divider"></div>
+
+  <div class="section-lbl">Body</div>
+  <div class="section-title">Weight Log</div>
+  <div class="weight-log" id="carrie-weight"></div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════
+// DATA KEYS — all per-person
+// ═══════════════════════════════════════════
+// 75h_dan_days      — {1:'done', 3:'failed', ...}
+// 75h_dan_water_YYYY-MM-DD — [true,false,...]
+// 75h_dan_check_YYYY-MM-DD — {0:true, 1:false, ...}
+// 75h_dan_weight    — {wk0: '184', wk1: '182', ...}
+// (same pattern for carrie)
+
+const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbxuls-9miNPv9k5fUf7Ub9nu5ZCKgT4SpIlU4uIRWDn0BDQnamPvSuRxFmbjWppwEBJ/exec';
+
+const TASKS = [
+  {label:'Workout 1 Complete', sub:'45 min indoor strength'},
+  {label:'Workout 2 Complete', sub:'45 min outdoor / bike / row'},
+  {label:'Diet Followed', sub:'No cheat meals, no alcohol'},
+  {label:'1 Gallon Water', sub:'128 oz minimum — plain water'},
+  {label:'10 Pages Read', sub:'Non-fiction / self-improvement'},
+  {label:'Progress Photo', sub:'Same pose, same spot'},
+  {label:'Morning Stretch', sub:'10 min morning routine'},
+  {label:'Evening Stretch', sub:'10 min wind-down routine'},
+];
+
+const WEEKS = ['Wk 1','Wk 2','Wk 3','Wk 4','Wk 5','Wk 6','Wk 7','Wk 8','Wk 9','Wk 10','Done'];
+
+let activePerson = 'dan';
+let historyShown = {dan: 7, carrie: 7};
+const today = new Date().toISOString().split('T')[0];
+
+// ═══════════════════════════════════════════
+// SYNC
+// ═══════════════════════════════════════════
+function setSyncStatus(msg, color) {
+  const el = document.getElementById('syncStatus');
+  el.textContent = msg;
+  el.style.color = color || '#555';
+}
+
+async function syncToSheets() {
+  if (!SHEETS_URL) return;
+  try {
+    const keys = Object.keys(localStorage).filter(k => k.startsWith('75h_'));
+    const updates = keys.map(k => ({key: k, value: localStorage.getItem(k)}));
+    setSyncStatus('⏳ Saving...', '#f4c430');
+    const r = await fetch(SHEETS_URL, {
+      method: 'POST',
+      body: JSON.stringify({action: 'set', updates})
+    });
+    const d = await r.json();
+    setSyncStatus('✓ Synced', '#52b788');
+    document.getElementById('syncDate').textContent = new Date().toLocaleTimeString();
+  } catch(e) {
+    setSyncStatus('📴 Offline — saved locally', '#555');
+  }
+}
+
+async function loadFromSheets() {
+  if (!SHEETS_URL) { setSyncStatus('No Sheets URL', '#555'); return; }
+  setSyncStatus('☁️ Loading...', '#555');
+  try {
+    const r = await fetch(SHEETS_URL + '?action=get');
+    const d = await r.json();
+    if (d.ok && d.data) {
+      Object.entries(d.data).forEach(([k, v]) => {
+        if (k.startsWith('75h_')) localStorage.setItem(k, v);
+      });
+      setSyncStatus('✓ Synced', '#52b788');
+    }
+  } catch(e) {
+    setSyncStatus('📴 Offline — using local', '#555');
+  }
+  buildAll();
+}
+
+let syncTimer = null;
+function scheduleSave() {
+  clearTimeout(syncTimer);
+  syncTimer = setTimeout(syncToSheets, 1500);
+}
+
+function lsSave(key, value) {
+  localStorage.setItem(key, JSON.stringify(value));
+  scheduleSave();
+}
+
+// ═══════════════════════════════════════════
+// PERSON SWITCH
+// ═══════════════════════════════════════════
+function switchPerson(person, btn) {
+  activePerson = person;
+  document.querySelectorAll('.person-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('dash-dan').style.display = person === 'dan' ? 'block' : 'none';
+  document.getElementById('dash-carrie').style.display = person === 'carrie' ? 'block' : 'none';
+}
+
+// ═══════════════════════════════════════════
+// CHECKLIST
+// ═══════════════════════════════════════════
+function buildChecklist(person) {
+  const key = '75h_' + person + '_check_' + today;
+  const state = JSON.parse(localStorage.getItem(key) || '{}');
+  const container = document.getElementById(person + '-checklist');
+  container.innerHTML = '';
+
+  TASKS.forEach((task, i) => {
+    const row = document.createElement('div');
+    row.className = 'check-row' + (state[i] ? ' done' : '');
+    row.innerHTML = '<div class="check-box">✓</div><div><div class="check-lbl">' + task.label + '</div><div class="check-sub">' + task.sub + '</div></div>';
+    row.addEventListener('click', () => {
+      state[i] = !state[i];
+      row.classList.toggle('done', state[i]);
+      lsSave(key, state);
+      updateCheckCount(person, state);
+    });
+    container.appendChild(row);
+  });
+  updateCheckCount(person, state);
+}
+
+function updateCheckCount(person, state) {
+  const done = Object.values(state).filter(Boolean).length;
+  const el = document.getElementById(person + '-check-count');
+  el.textContent = done + ' / 8 complete' + (done === 8 ? ' 🔥' : '');
+  el.style.color = done === 8 ? '#52b788' : '#555';
+}
+
+// ═══════════════════════════════════════════
+// WATER
+// ═══════════════════════════════════════════
+function buildWater(person) {
+  const key = '75h_' + person + '_water_' + today;
+  const state = JSON.parse(localStorage.getItem(key) || '[]');
+  const container = document.getElementById(person + '-water');
+  container.innerHTML = '';
+  for (let i = 0; i < 8; i++) {
+    const c = document.createElement('div');
+    c.className = 'water-cup' + (state[i] ? ' filled' : '');
+    c.textContent = '💧';
+    c.addEventListener('click', () => {
+      state[i] = !state[i];
+      c.classList.toggle('filled', state[i]);
+      lsSave(key, state);
+    });
+    container.appendChild(c);
+  }
+}
+
+// ═══════════════════════════════════════════
+// 75-DAY TRACKER
+// ═══════════════════════════════════════════
+function buildTracker(person) {
+  const key = '75h_' + person + '_days';
+  const state = JSON.parse(localStorage.getItem(key) || '{}');
+  const container = document.getElementById(person + '-tracker');
+  container.innerHTML = '';
+
+  const done = Object.values(state).filter(v => v === 'done').length;
+  const currentDay = Math.min(75, done + 1);
+  const pct = Math.round((done / 75) * 100);
+
+  document.getElementById(person + '-day-num').textContent = currentDay;
+  document.getElementById(person + '-prog-bar').style.width = pct + '%';
+  document.getElementById(person + '-prog-pct').textContent = pct + '% complete';
+  document.getElementById(person + '-prog-days').textContent = done + '/75 days';
+
+  for (let i = 1; i <= 75; i++) {
+    const d = document.createElement('div');
+    d.className = 't-day' + (state[i] === 'done' ? ' done' : state[i] === 'failed' ? ' failed' : i === currentDay ? ' today' : '');
+    d.textContent = i;
+    d.title = 'Day ' + i;
+
+    let pt;
+    const fail = () => {
+      state[i] = state[i] === 'failed' ? null : 'failed';
+      d.className = 't-day' + (state[i] === 'failed' ? ' failed' : '');
+      lsSave(key, state);
+      buildTracker(person);
+    };
+    d.addEventListener('mousedown', () => { pt = setTimeout(fail, 600); });
+    d.addEventListener('mouseup', () => clearTimeout(pt));
+    d.addEventListener('touchstart', () => { pt = setTimeout(fail, 600); }, {passive: true});
+    d.addEventListener('touchend', () => clearTimeout(pt));
+    d.addEventListener('click', () => {
+      if (state[i] === 'failed') return;
+      state[i] = state[i] === 'done' ? null : 'done';
+      d.className = 't-day' + (state[i] === 'done' ? ' done' : i === currentDay ? ' today' : '');
+      lsSave(key, state);
+      buildTracker(person);
+    });
+    container.appendChild(d);
+  }
+}
+
+// ═══════════════════════════════════════════
+// HISTORY
+// ═══════════════════════════════════════════
+function buildHistory(person, limit) {
+  const container = document.getElementById(person + '-history');
+  container.innerHTML = '';
+
+  // Collect all dates that have check data for this person
+  const allKeys = Object.keys(localStorage).filter(k => k.startsWith('75h_' + person + '_check_'));
+  const dates = allKeys.map(k => k.replace('75h_' + person + '_check_', '')).sort().reverse();
+
+  // Also include days from tracker that are done/failed but may not have check data
+  const dayKey = '75h_' + person + '_days';
+  const dayState = JSON.parse(localStorage.getItem(dayKey) || '{}');
+
+  // Merge — show all unique dates up to limit
+  const shown = dates.slice(0, limit);
+
+  if (shown.length === 0) {
+    container.innerHTML = '<div style="font-family:DM Mono,monospace;font-size:10px;color:#555;letter-spacing:1px;text-align:center;padding:24px 0;">No history yet — start checking off your daily tasks.</div>';
+    document.getElementById(person + '-load-more').style.display = 'none';
+    return;
+  }
+
+  shown.forEach(date => {
+    const checkKey = '75h_' + person + '_check_' + date;
+    const checkState = JSON.parse(localStorage.getItem(checkKey) || '{}');
+    const doneCount = Object.values(checkState).filter(Boolean).length;
+    const total = TASKS.length;
+    const isPerfect = doneCount === total;
+    const isZero = doneCount === 0;
+
+    // Format date nicely
+    const d = new Date(date + 'T12:00:00');
+    const dayStr = d.toLocaleDateString('en-US', {weekday:'short', month:'short', day:'numeric'});
+    const isToday = date === today;
+
+    const item = document.createElement('div');
+    item.className = 'hist-day';
+
+    const scoreClass = isPerfect ? 'perfect' : isZero ? 'zero' : 'partial';
+    const scoreText = doneCount + '/' + total;
+
+    item.innerHTML = '<div class="hist-header" onclick="toggleHistDay(this)">' +
+      '<div>' +
+        '<div class="hist-date">' + dayStr + (isToday ? ' · TODAY' : '') + '</div>' +
+      '</div>' +
+      '<div style="display:flex;align-items:center;gap:10px">' +
+        '<div class="hist-score ' + scoreClass + '">' + scoreText + ' tasks</div>' +
+        '<div style="color:#555;font-size:12px">▼</div>' +
+      '</div>' +
+    '</div>' +
+    '<div class="hist-body">' +
+      '<div class="hist-tasks">' +
+        TASKS.map((task, i) => {
+          const done = checkState[i];
+          return '<div class="hist-task' + (done ? ' done' : '') + '">' +
+            '<div class="hist-check ' + (done ? 'done' : 'miss') + '">' + (done ? '✓' : '') + '</div>' +
+            '<span>' + task.label + '</span>' +
+          '</div>';
+        }).join('') +
+      '</div>' +
+    '</div>';
+
+    container.appendChild(item);
+  });
+
+  // Show/hide load more
+  const loadMoreBtn = document.getElementById(person + '-load-more');
+  loadMoreBtn.style.display = dates.length > limit ? 'block' : 'none';
+}
+
+function toggleHistDay(header) {
+  const body = header.nextElementSibling;
+  const arrow = header.querySelector('div:last-child div:last-child');
+  body.classList.toggle('open');
+  arrow.textContent = body.classList.contains('open') ? '▲' : '▼';
+}
+
+function loadMore(person) {
+  historyShown[person] += 7;
+  buildHistory(person, historyShown[person]);
+}
+
+// ═══════════════════════════════════════════
+// WEIGHT LOG
+// ═══════════════════════════════════════════
+function buildWeight(person) {
+  const key = '75h_' + person + '_weight';
+  const wts = JSON.parse(localStorage.getItem(key) || '{}');
+  const container = document.getElementById(person + '-weight');
+  container.innerHTML = '';
+
+  WEEKS.forEach((w, i) => {
+    const row = document.createElement('div');
+    row.className = 'weight-row';
+    row.innerHTML = '<div class="weight-week">' + w + '</div>' +
+      '<input class="weight-input" type="number" placeholder="— lbs" step="0.1" value="' + (wts['wk'+i] || '') + '">';
+    const input = row.querySelector('input');
+    input.addEventListener('change', () => {
+      wts['wk'+i] = input.value;
+      lsSave(key, wts);
+    });
+    container.appendChild(row);
+  });
+}
+
+// ═══════════════════════════════════════════
+// BUILD ALL
+// ═══════════════════════════════════════════
+function buildAll() {
+  ['dan','carrie'].forEach(person => {
+    buildChecklist(person);
+    buildWater(person);
+    buildTracker(person);
+    buildHistory(person, historyShown[person]);
+    buildWeight(person);
+  });
+}
+
+// ═══════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════
+buildAll();
+loadFromSheets();
+
+// Handle deep link from hub — #dan or #carrie
+const hash = window.location.hash.replace('#','');
+if (hash === 'carrie') {
+  switchPerson('carrie', document.getElementById('tab-carrie'));
+}
+
+
+// Update today's date display
+document.getElementById('syncDate').textContent = new Date().toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});
+</script>
+
+</body>
+</html>
