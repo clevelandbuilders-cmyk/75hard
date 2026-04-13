@@ -320,26 +320,22 @@ async function sheetsGet() {
 
 // On every open: pull from Sheets → restore localStorage → rebuild UI
 async function loadFromSheets() {
-  setSyncStatus('☁️ Loading...', '#888');
-  const data = await sheetsGet();
-  if (!data) {
-    setSyncStatus('📴 Offline — using cached data', '#f4a261');
-    buildAll();
-    return;
-  }
-  // Sheets is the source of truth — restore ALL keys
-  // Even if browser was cleared, this brings everything back
-  let restored = 0;
-  Object.entries(data).forEach(([k, v]) => {
-    if (k.startsWith('75h_')) {
-      localStorage.setItem(k, v);
-      restored++;
+  setSyncStatus('☁️ Syncing...', '#888');
+  try {
+    const data = await sheetsGet();
+    if (!data) {
+      setSyncStatus('📴 Offline — using cached data', '#f4a261');
+      return;
     }
-  });
-  const ts = new Date().toLocaleTimeString();
-  setSyncStatus('✓ Synced · ' + ts, '#52b788');
-  document.getElementById('syncDate').textContent = '';
-  buildAll(); // Rebuild UI with restored data
+    Object.entries(data).forEach(([k, v]) => {
+      if (k.startsWith('75h_')) localStorage.setItem(k, v);
+    });
+    const ts = new Date().toLocaleTimeString();
+    setSyncStatus('✓ Synced · ' + ts, '#52b788');
+    buildAll(); // Rebuild with restored Sheets data
+  } catch(e) {
+    setSyncStatus('📴 Offline — using cached data', '#f4a261');
+  }
 }
 
 // On every save: write to localStorage + push to Sheets
@@ -730,14 +726,25 @@ function buildAll() {
 // ═══════════════════════════════════════════
 // INIT
 // ═══════════════════════════════════════════
-buildAll();
-loadFromSheets();
+// Build immediately from localStorage first — instant load
+try {
+  buildAll();
+} catch(e) {
+  document.body.innerHTML += '<div style="background:#e63946;color:#fff;padding:20px;font-family:monospace;font-size:12px;position:fixed;bottom:0;left:0;right:0;z-index:999">BUILD ERROR: ' + e.message + '</div>';
+}
+
+// Then sync from Sheets in background — restores data if browser was cleared
+loadFromSheets().catch(() => {
+  setSyncStatus('📴 Offline — using cached data', '#f4a261');
+});
 
 // Handle deep link from hub — #dan or #carrie
-const hash = window.location.hash.replace('#','');
-if (hash === 'carrie') {
-  switchPerson('carrie', document.getElementById('tab-carrie'));
-}
+try {
+  const hash = window.location.hash.replace('#','');
+  if (hash === 'carrie') {
+    switchPerson('carrie', document.getElementById('tab-carrie'));
+  }
+} catch(e) {}
 
 
 // Update today's date display
