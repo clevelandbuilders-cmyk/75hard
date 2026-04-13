@@ -1183,6 +1183,40 @@ renderDayGrid();renderSessions();
 // WORKOUT PLAYER — Checklist + Goal Meter
 // ══════════════════════════════════════
 let pTimer=null,elapsed=0,curSession=null;
+
+// Persistent workout session key
+function getSessionKey() {
+  const today = new Date().toISOString().split('T')[0];
+  return '75h_workout_session_' + activePerson + '_' + today + '_' + selDayIdx + '_' + selSessIdx;
+}
+
+function saveWorkoutState() {
+  const key = getSessionKey();
+  const checkedIds = [];
+  document.querySelectorAll('#exCheckList .cl-row.cl-done').forEach(r => {
+    checkedIds.push(r.dataset.id);
+  });
+  const data = {
+    startMs: workoutStartMs,
+    pausedMs: workoutPausedMs,
+    paused: workoutPaused,
+    pausedAt: workoutPausedAt,
+    checkedIds,
+    dayIdx: selDayIdx,
+    sessIdx: selSessIdx,
+    person: activePerson
+  };
+  localStorage.setItem(key, JSON.stringify(data));
+}
+
+function clearWorkoutState() {
+  localStorage.removeItem(getSessionKey());
+}
+
+let workoutStartMs = 0;
+let workoutPausedMs = 0;
+let workoutPaused = false;
+let workoutPausedAt = 0;
 const GOAL_SECS=45*60;
 
 // Estimate minutes per exercise from sets × reps
@@ -1200,7 +1234,6 @@ function estimateMins(ex){
 function startWorkout(){
   const sessions=SESSIONS[DAY_KEYS[selDayIdx]]||[];
   curSession=sessions[selSessIdx];if(!curSession)return;
-  elapsed=0;
 
   const personLabel=activePerson==='dan'?'Dan':'Carrie';
   document.getElementById('pTitle').textContent=personLabel+' · '+curSession.name;
@@ -1210,12 +1243,108 @@ function startWorkout(){
   document.getElementById('launcher').style.display='none';
   document.getElementById('playerOverlay').classList.add('active');
 
-  renderChecklist();
+  // Check for a saved session from today
+  const savedKey = getSessionKey();
+  const saved = localStorage.getItem(savedKey);
+  let restoredIds = [];
+
+  if (saved) {
+    try {
+      const data = JSON.parse(saved);
+      // Restore timer state from timestamps
+      workoutStartMs = data.startMs || Date.now();
+      workoutPausedMs = data.pausedMs || 0;
+      workoutPaused = data.paused || false;
+      workoutPausedAt = data.pausedAt || 0;
+      restoredIds = data.checkedIds || [];
+
+      // Calculate elapsed from real timestamps
+      if (workoutPaused) {
+        elapsed = Math.floor((workoutPausedAt - workoutStartMs - workoutPausedMs) / 1000);
+      } else {
+        elapsed = Math.floor((Date.now() - workoutStartMs - workoutPausedMs) / 1000);
+      }
+    } catch(e) {
+      workoutStartMs = Date.now();
+      workoutPausedMs = 0;
+      workoutPaused = false;
+      elapsed = 0;
+    }
+  } else {
+    // Fresh start
+    workoutStartMs = Date.now();
+    workoutPausedMs = 0;
+    workoutPaused = false;
+    workoutPausedAt = 0;
+    elapsed = 0;
+    saveWorkoutState();
+  }
+
+  renderChecklist(restoredIds);
+
+  // Update header
+  document.getElementById('pHeaderTime').textContent = fmt(elapsed);
+
+  // Add pause button to header if not present
+  const header = document.querySelector('.player-header');
+  let pauseBtn = document.getElementById('workoutPauseBtn');
+  if (!pauseBtn) {
+    pauseBtn = document.createElement('button');
+    pauseBtn.id = 'workoutPauseBtn';
+    pauseBtn.style.cssText = 'background:none;border:1px solid #2e2e2e;color:#888;font-family:DM Mono,monospace;font-size:10px;letter-spacing:1px;padding:4px 10px;cursor:pointer;-webkit-appearance:none;appearance:none;border-radius:0;transition:all .2s';
+    pauseBtn.onclick = toggleWorkoutPause;
+    header.appendChild(pauseBtn);
+  }
+
   clearInterval(pTimer);
-  pTimer=setInterval(()=>{elapsed++;document.getElementById('pHeaderTime').textContent=fmt(elapsed);},1000);
+  if (!workoutPaused) {
+    startWorkoutTimer();
+  }
+  updatePauseBtn();
 }
 
-function renderChecklist(){
+function startWorkoutTimer() {
+  clearInterval(pTimer);
+  pTimer = setInterval(() => {
+    elapsed = Math.floor((Date.now() - workoutStartMs - workoutPausedMs) / 1000);
+    document.getElementById('pHeaderTime').textContent = fmt(elapsed);
+    saveWorkoutState();
+  }, 1000);
+}
+
+function toggleWorkoutPause() {
+  if (workoutPaused) {
+    // RESUME — add the pause duration to pausedMs
+    const pauseDuration = Date.now() - workoutPausedAt;
+    workoutPausedMs += pauseDuration;
+    workoutPaused = false;
+    workoutPausedAt = 0;
+    startWorkoutTimer();
+  } else {
+    // PAUSE
+    clearInterval(pTimer);
+    workoutPaused = true;
+    workoutPausedAt = Date.now();
+  }
+  saveWorkoutState();
+  updatePauseBtn();
+}
+
+function updatePauseBtn() {
+  const btn = document.getElementById('workoutPauseBtn');
+  if (!btn) return;
+  if (workoutPaused) {
+    btn.textContent = '▶ RESUME';
+    btn.style.color = '#52b788';
+    btn.style.borderColor = '#52b788';
+  } else {
+    btn.textContent = '⏸ PAUSE';
+    btn.style.color = '#888';
+    btn.style.borderColor = '#2e2e2e';
+  }
+}
+
+function renderChecklist(restoredIds=[]){
   const list=document.getElementById('exCheckList');
   list.innerHTML='';
   const exs=curSession.exercises;
@@ -1269,6 +1398,10 @@ function renderChecklist(){
         <div class="ex-timer-progress"><div class="ex-timer-progress-fill" id="${timerId}_bar"></div></div>
       </div>
     `;
+    // Restore checked state from saved session
+    if (restoredIds.includes(String(id))) {
+      row.classList.add('cl-done');
+    }
     list.appendChild(row);
   });
 
@@ -1278,6 +1411,7 @@ function renderChecklist(){
 function toggleExCheck(row){
   row.classList.toggle('cl-done');
   updateGoalMeter();
+  saveWorkoutState(); // Persist checked state immediately
   // Check if all done
   const all=document.querySelectorAll('#exCheckList .cl-row');
   const done=document.querySelectorAll('#exCheckList .cl-row.cl-done');
@@ -1299,11 +1433,20 @@ function updateGoalMeter(){
 }
 
 function closePlayer(){
+  // Pause the timer when closing (don't clear state — resume later)
+  if (!workoutPaused) {
+    workoutPaused = true;
+    workoutPausedAt = Date.now();
+    saveWorkoutState();
+  }
   clearInterval(pTimer);
   document.getElementById('playerOverlay').classList.remove('active');
   document.getElementById('launcher').style.display='block';
   document.getElementById('doneScreen').className='done-screen';
   document.getElementById('exCheckList').style.display='block';
+  // Remove pause button from header
+  const pb = document.getElementById('workoutPauseBtn');
+  if (pb) pb.remove();
 }
 
 function showDone(){
