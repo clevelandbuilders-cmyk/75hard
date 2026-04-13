@@ -1476,7 +1476,7 @@ function showDiet(p,btn){
 // GOOGLE SHEETS SYNC
 // Paste your deployed Apps Script URL below after setup.
 // ══════════════════════════════════════
-const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbxuls-9miNPv9k5fUf7Ub9nu5ZCKgT4SpIlU4uIRWDn0BDQnamPvSuRxFmbjWppwEBJ/exec';
+const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbwGPsMupiH1mG6ApUHsm8ZDPssXBLmQkIgiuFfBmSeue3pFR0UfS6LXvTS14kaHfvImNg/exec';
 
 let syncStatus = 'idle'; // idle | syncing | ok | error | offline
 let pendingSync = false;
@@ -1523,28 +1523,29 @@ function scheduleSave() {
 async function doSync() {
   if (!SHEETS_URL) { setSyncStatus('nourl', 'Set up Sheets URL'); return; }
   setSyncStatus('syncing', 'Saving...');
-  const updates = [
-    { key: '75h_days',    value: localStorage.getItem('75h_days')    || '{}' },
-    { key: '75h_water',   value: localStorage.getItem('75h_water')   || '[]' },
-    { key: '75h_weights', value: localStorage.getItem('75h_weights') || '{}' },
-  ];
+  const updates = Object.keys(localStorage)
+    .filter(k => k.startsWith('75h_'))
+    .map(k => ({ key: k, value: localStorage.getItem(k) }));
+  if (!updates.length) { setSyncStatus('ok', 'Synced ✓'); return; }
   const ok = await sheetsSet(updates);
-  setSyncStatus(ok ? 'ok' : 'error', ok ? 'Saved to Sheets' : 'Sync failed — saved locally');
+  setSyncStatus(ok ? 'ok' : 'error', ok ? 'Synced ✓' : 'Sync failed — saved locally');
 }
 
 async function loadFromSheets() {
   if (!SHEETS_URL) { setSyncStatus('nourl', 'No Sheets URL — using local only'); return; }
-  setSyncStatus('syncing', 'Loading...');
+  setSyncStatus('syncing', 'Loading from Google Sheets...');
   const data = await sheetsGet();
-  if (!data) { setSyncStatus('offline', 'Offline — using local data'); return; }
-
-  // Merge Sheets data into localStorage (Sheets wins)
-  if (data['75h_days'])    localStorage.setItem('75h_days',    data['75h_days']);
-  if (data['75h_water'])   localStorage.setItem('75h_water',   data['75h_water']);
-  if (data['75h_weights']) localStorage.setItem('75h_weights', data['75h_weights']);
-
+  if (!data) {
+    setSyncStatus('offline', 'Offline — using cached data');
+    buildTracker(); buildWater(); buildWeightLog();
+    return;
+  }
+  // Sheets is the source of truth.
+  // Write ALL keys back into localStorage — fully restores app even after browser clear.
+  Object.entries(data).forEach(([k, v]) => {
+    if (k.startsWith('75h_')) localStorage.setItem(k, v);
+  });
   setSyncStatus('ok', 'Synced ✓');
-  // Rebuild UI with fresh data
   buildTracker();
   buildWater();
   buildWeightLog();
@@ -1552,8 +1553,16 @@ async function loadFromSheets() {
 
 // Save helper — writes localStorage then schedules cloud sync
 function lsSave(key, value) {
+  // Write to localStorage immediately as local cache
   localStorage.setItem(key, JSON.stringify(value));
-  scheduleSave();
+  // Push this single key to Sheets right away (fast)
+  setSyncStatus('syncing', 'Saving...');
+  clearTimeout(lsSave._timers = lsSave._timers || {});
+  (lsSave._timers[key] = lsSave._timers[key] || null) && clearTimeout(lsSave._timers[key]);
+  lsSave._timers[key] = setTimeout(async () => {
+    const ok = await sheetsSet([{ key, value: JSON.stringify(value) }]);
+    setSyncStatus(ok ? 'ok' : 'error', ok ? 'Synced ✓' : 'Saved locally — sync later');
+  }, 800);
 }
 
 // ══════════════════════════════════════
