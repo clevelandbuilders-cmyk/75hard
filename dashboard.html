@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 
 <html lang="en">
@@ -241,7 +240,7 @@ body{background:#0d0d0d;color:#f0ece4;font-family:"DM Sans",system-ui,sans-serif
 // 75h_dan_weight    — {wk0: '184', wk1: '182', ...}
 // (same pattern for carrie)
 
-const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbxuls-9miNPv9k5fUf7Ub9nu5ZCKgT4SpIlU4uIRWDn0BDQnamPvSuRxFmbjWppwEBJ/exec';
+const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbwGPsMupiH1mG6ApUHsm8ZDPssXBLmQkIgiuFfBmSeue3pFR0UfS6LXvTS14kaHfvImNg/exec';
 
 const TASKS = [
   {label:'Workout 1 Complete', sub:'45 min indoor strength'},
@@ -265,55 +264,87 @@ const today = new Date().toISOString().split('T')[0];
 // ═══════════════════════════════════════════
 function setSyncStatus(msg, color) {
   const el = document.getElementById('syncStatus');
-  el.textContent = msg;
-  el.style.color = color || '#555';
+  if (el) { el.textContent = msg; el.style.color = color || '#555'; }
 }
 
-async function syncToSheets() {
-  if (!SHEETS_URL) return;
+// ══════════════════════════════════════════════════════
+// TRUE BIDIRECTIONAL SYNC WITH GOOGLE SHEETS
+// ══════════════════════════════════════════════════════
+// ON OPEN:   Pull ALL data from Sheets → write to localStorage → build UI
+// ON CHANGE: Write to localStorage immediately → push to Sheets (800ms debounce)
+// ON CLEAR:  Browser data gone → reopen app → Sheets restores everything
+// ══════════════════════════════════════════════════════
+
+const saveTimers = {};
+
+// Write a single key to Sheets
+async function sheetsSet(key, value) {
   try {
-    const keys = Object.keys(localStorage).filter(k => k.startsWith('75h_'));
-    const updates = keys.map(k => ({key: k, value: localStorage.getItem(k)}));
-    setSyncStatus('⏳ Saving...', '#f4c430');
     const r = await fetch(SHEETS_URL, {
       method: 'POST',
-      body: JSON.stringify({action: 'set', updates})
+      body: JSON.stringify({ updates: [{ key, value }] })
     });
     const d = await r.json();
-    setSyncStatus('✓ Synced', '#52b788');
-    document.getElementById('syncDate').textContent = new Date().toLocaleTimeString();
-  } catch(e) {
-    setSyncStatus('📴 Offline — saved locally', '#555');
-  }
+    return d.ok;
+  } catch(e) { return false; }
 }
 
-async function loadFromSheets() {
-  if (!SHEETS_URL) { setSyncStatus('No Sheets URL', '#555'); return; }
-  setSyncStatus('☁️ Loading...', '#555');
+// Read ALL data from Sheets
+async function sheetsGet() {
   try {
     const r = await fetch(SHEETS_URL + '?action=get');
     const d = await r.json();
-    if (d.ok && d.data) {
-      Object.entries(d.data).forEach(([k, v]) => {
-        if (k.startsWith('75h_')) localStorage.setItem(k, v);
-      });
-      setSyncStatus('✓ Synced', '#52b788');
-    }
-  } catch(e) {
-    setSyncStatus('📴 Offline — using local', '#555');
+    return d.ok ? d.data : null;
+  } catch(e) { return null; }
+}
+
+// On every open: pull from Sheets → restore localStorage → rebuild UI
+async function loadFromSheets() {
+  setSyncStatus('☁️ Loading...', '#888');
+  const data = await sheetsGet();
+  if (!data) {
+    setSyncStatus('📴 Offline — using cached data', '#f4a261');
+    buildAll();
+    return;
   }
-  buildAll();
+  // Sheets is the source of truth — restore ALL keys
+  // Even if browser was cleared, this brings everything back
+  let restored = 0;
+  Object.entries(data).forEach(([k, v]) => {
+    if (k.startsWith('75h_')) {
+      localStorage.setItem(k, v);
+      restored++;
+    }
+  });
+  const ts = new Date().toLocaleTimeString();
+  setSyncStatus('✓ Synced · ' + ts, '#52b788');
+  document.getElementById('syncDate').textContent = '';
+  buildAll(); // Rebuild UI with restored data
 }
 
-let syncTimer = null;
-function scheduleSave() {
-  clearTimeout(syncTimer);
-  syncTimer = setTimeout(syncToSheets, 1500);
-}
-
+// On every save: write to localStorage + push to Sheets
 function lsSave(key, value) {
+  // localStorage is the immediate local cache
   localStorage.setItem(key, JSON.stringify(value));
-  scheduleSave();
+  // Push to Sheets with per-key debounce
+  setSyncStatus('⏳ Saving...', '#f4c430');
+  clearTimeout(saveTimers[key]);
+  saveTimers[key] = setTimeout(async () => {
+    const ok = await sheetsSet(key, JSON.stringify(value));
+    if (ok) {
+      setSyncStatus('✓ Saved to Google Sheets', '#52b788');
+    } else {
+      setSyncStatus('📴 Saved locally — will sync when online', '#f4a261');
+    }
+  }, 800);
+}
+
+// Safe read from localStorage with fallback
+function lsGet(key, fallback) {
+  try {
+    const v = localStorage.getItem(key);
+    return v !== null ? JSON.parse(v) : fallback;
+  } catch(e) { return fallback; }
 }
 
 // ═══════════════════════════════════════════
@@ -332,7 +363,7 @@ function switchPerson(person, btn) {
 // ═══════════════════════════════════════════
 function buildChecklist(person) {
   const key = '75h_' + person + '_check_' + today;
-  const state = JSON.parse(localStorage.getItem(key) || '{}');
+  const state = lsGet(key, {});
   const container = document.getElementById(person + '-checklist');
   container.innerHTML = '';
 
@@ -363,7 +394,7 @@ function updateCheckCount(person, state) {
 // ═══════════════════════════════════════════
 function buildWater(person) {
   const key = '75h_' + person + '_water_' + today;
-  const state = JSON.parse(localStorage.getItem(key) || '[]');
+  const state = lsGet(key, []);
   const container = document.getElementById(person + '-water');
   container.innerHTML = '';
   for (let i = 0; i < 8; i++) {
@@ -384,7 +415,7 @@ function buildWater(person) {
 // ═══════════════════════════════════════════
 function buildTracker(person) {
   const key = '75h_' + person + '_days';
-  const state = JSON.parse(localStorage.getItem(key) || '{}');
+  const state = lsGet(key, {});
   const container = document.getElementById(person + '-tracker');
   container.innerHTML = '';
 
@@ -438,7 +469,7 @@ function buildHistory(person, limit) {
 
   // Also include days from tracker that are done/failed but may not have check data
   const dayKey = '75h_' + person + '_days';
-  const dayState = JSON.parse(localStorage.getItem(dayKey) || '{}');
+  const dayState = lsGet(dayKey, {});
 
   // Merge — show all unique dates up to limit
   const shown = dates.slice(0, limit);
@@ -451,7 +482,7 @@ function buildHistory(person, limit) {
 
   shown.forEach(date => {
     const checkKey = '75h_' + person + '_check_' + date;
-    const checkState = JSON.parse(localStorage.getItem(checkKey) || '{}');
+    const checkState = lsGet(checkKey, {});
     const doneCount = Object.values(checkState).filter(Boolean).length;
     const total = TASKS.length;
     const isPerfect = doneCount === total;
@@ -514,7 +545,7 @@ function loadMore(person) {
 // ═══════════════════════════════════════════
 function buildWeight(person) {
   const key = '75h_' + person + '_weight';
-  const wts = JSON.parse(localStorage.getItem(key) || '{}');
+  const wts = lsGet(key, {});
   const container = document.getElementById(person + '-weight');
   container.innerHTML = '';
 
