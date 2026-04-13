@@ -75,6 +75,16 @@ body{background:#0d0d0d;color:#f0ece4;font-family:'DM Sans',system-ui,-apple-sys
 .check-label{font-size:13px;color:#f0ece4}
 .check-row.done .check-label{color:#555;text-decoration:line-through}
 
+/* DASHBOARD LINKS */
+.dash-link{display:block;background:#1a1a1a;border:1px solid #2e2e2e;border-left:4px solid #e63946;padding:16px 18px;text-decoration:none;color:#f0ece4;margin-bottom:10px;transition:border-color .2s}
+.dash-link:hover{border-color:#444}
+.dash-person-name{font-family:“Bebas Neue”,sans-serif;font-size:22px;letter-spacing:2px;color:#fff;margin-bottom:8px}
+.dash-day-num{font-family:“DM Mono”,monospace;font-size:11px;letter-spacing:2px;color:#e63946;margin-bottom:6px}
+.dash-progress-wrap{margin-bottom:5px}
+.dash-prog-track{height:4px;background:#252525;border-radius:2px;overflow:hidden}
+.dash-prog-fill{height:100%;border-radius:2px;transition:width .6s ease}
+.dash-tasks{font-family:“DM Mono”,monospace;font-size:9px;letter-spacing:1px;color:#555}
+.dash-arrow{font-family:“DM Mono”,monospace;font-size:9px;letter-spacing:1.5px;color:#555;margin-top:8px}
 /* FOOTER */
 .footer{padding:20px 24px;border-top:1px solid #2e2e2e;text-align:center;font-family:‘DM Mono’,monospace;font-size:9px;letter-spacing:2px;color:#555;text-transform:uppercase}
 .app-card-main{grid-column:1/-1;border-left:3px solid #e63946}
@@ -147,52 +157,52 @@ body{background:#0d0d0d;color:#f0ece4;font-family:'DM Sans',system-ui,-apple-sys
 </div>
 
 <div class="today-section">
-  <div class="today-title">Today's Checklist</div>
-  <div class="checklist" id="todayChecklist"></div>
+  <div class="today-title">Dashboards</div>
+  <a href="dashboard.html#dan" class="dash-link" id="dan-dash-link">
+    <div class="dash-person-name">💪 Dan</div>
+    <div class="dash-day-info">
+      <div class="dash-day-num" id="idx-dan-day">Day 1</div>
+      <div class="dash-progress-wrap">
+        <div class="dash-prog-track"><div class="dash-prog-fill" id="idx-dan-bar" style="width:0%;background:#e63946"></div></div>
+      </div>
+      <div class="dash-tasks" id="idx-dan-tasks">— / 8 tasks today</div>
+    </div>
+    <div class="dash-arrow">OPEN →</div>
+  </a>
+  <a href="dashboard.html#carrie" class="dash-link" id="carrie-dash-link" style="border-left-color:#52b788">
+    <div class="dash-person-name">🏃 Carrie</div>
+    <div class="dash-day-info">
+      <div class="dash-day-num" id="idx-carrie-day" style="color:#52b788">Day 1</div>
+      <div class="dash-progress-wrap">
+        <div class="dash-prog-track"><div class="dash-prog-fill" id="idx-carrie-bar" style="width:0%;background:#52b788"></div></div>
+      </div>
+      <div class="dash-tasks" id="idx-carrie-tasks">— / 8 tasks today</div>
+    </div>
+    <div class="dash-arrow">OPEN →</div>
+  </a>
 </div>
 
 <div class="footer">75 Hard · Dan & Carrie Cleveland · 2026</div>
 
 <script>
-// Day counter — reads from localStorage shared with 75hard app
-const tState = JSON.parse(localStorage.getItem('75h_days') || '{}');
-const completedDays = Object.values(tState).filter(v => v === 'done').length;
-const currentDay = Math.min(75, completedDays + 1);
-const pct = Math.round((completedDays / 75) * 100);
-
-document.getElementById('dayNum').textContent = currentDay;
-document.getElementById('dayText').textContent = `Day ${currentDay} of 75`;
-document.getElementById('dayBarFill').style.width = pct + '%';
-document.getElementById('dayPct').textContent = pct + '% complete';
-
-// Today's checklist — stored separately per day
+// Per-person dashboard summaries
 const today = new Date().toISOString().split('T')[0];
-const checkKey = '75h_today_' + today;
-const checkState = JSON.parse(localStorage.getItem(checkKey) || '{}');
 
-const TASKS = [
-  'Workout 1 — 45 min indoor',
-  'Workout 2 — 45 min outdoor / rowing',
-  'Diet followed — no cheat meals',
-  '1 gallon of water',
-  '10 pages read',
-  'Progress photo taken',
-  'Morning stretch done',
-  'Evening stretch done',
-];
+function loadPersonSummary(person, dayElId, barElId, tasksElId) {
+  const days = JSON.parse(localStorage.getItem('75h_' + person + '_days') || '{}');
+  const done = Object.values(days).filter(v => v === 'done').length;
+  const currentDay = Math.min(75, done + 1);
+  const pct = Math.round((done / 75) * 100);
+  document.getElementById(dayElId).textContent = 'Day ' + currentDay + ' of 75';
+  document.getElementById(barElId).style.width = pct + '%';
 
-const cl = document.getElementById('todayChecklist');
-TASKS.forEach((task, i) => {
-  const row = document.createElement('div');
-  row.className = 'check-row' + (checkState[i] ? ' done' : '');
-  row.innerHTML = `<div class="check-box">✓</div><div class="check-label">${task}</div>`;
-  row.addEventListener('click', () => {
-    checkState[i] = !checkState[i];
-    row.classList.toggle('done', checkState[i]);
-    localStorage.setItem(checkKey, JSON.stringify(checkState));
-  });
-  cl.appendChild(row);
-});
+  const checkState = JSON.parse(localStorage.getItem('75h_' + person + '_check_' + today) || '{}');
+  const tasksDone = Object.values(checkState).filter(Boolean).length;
+  document.getElementById(tasksElId).textContent = tasksDone + ' / 8 tasks today' + (tasksDone === 8 ? ' 🔥' : '');
+}
+
+loadPersonSummary('dan', 'idx-dan-day', 'idx-dan-bar', 'idx-dan-tasks');
+loadPersonSummary('carrie', 'idx-carrie-day', 'idx-carrie-bar', 'idx-carrie-tasks');
 </script>
 
 <script>
