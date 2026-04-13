@@ -186,6 +186,7 @@ body{background:#0d0d0d;color:#f0ece4;font-family:'DM Sans',system-ui,-apple-sys
 
 <script>
 // Per-person dashboard summaries
+const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbwGPsMupiH1mG6ApUHsm8ZDPssXBLmQkIgiuFfBmSeue3pFR0UfS6LXvTS14kaHfvImNg/exec';
 const today = new Date().toISOString().split('T')[0];
 
 function loadPersonSummary(person, dayElId, barElId, tasksElId) {
@@ -201,8 +202,20 @@ function loadPersonSummary(person, dayElId, barElId, tasksElId) {
   document.getElementById(tasksElId).textContent = tasksDone + ' / 8 tasks today' + (tasksDone === 8 ? ' 🔥' : '');
 }
 
-loadPersonSummary('dan', 'idx-dan-day', 'idx-dan-bar', 'idx-dan-tasks');
-loadPersonSummary('carrie', 'idx-carrie-day', 'idx-carrie-bar', 'idx-carrie-tasks');
+// Pull fresh data from Sheets on open so summary is always current
+(async () => {
+  try {
+    const r = await fetch(SHEETS_URL + '?action=get');
+    const d = await r.json();
+    if (d.ok && d.data) {
+      Object.entries(d.data).forEach(([k,v]) => {
+        if (k.startsWith('75h_')) localStorage.setItem(k, v);
+      });
+    }
+  } catch(e) { /* offline — use cached */ }
+  loadPersonSummary('dan',    'idx-dan-day',    'idx-dan-bar',    'idx-dan-tasks');
+  loadPersonSummary('carrie', 'idx-carrie-day', 'idx-carrie-bar', 'idx-carrie-tasks');
+})();
 </script>
 
 <script>
