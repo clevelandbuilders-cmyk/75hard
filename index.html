@@ -29,14 +29,7 @@ body{background:#0d0d0d;color:#f0ece4;font-family:'DM Sans',system-ui,-apple-sys
 .hero-sub{font-size:14px;color:#888;line-height:1.6;max-width:340px}
 
 /* DAY COUNTER */
-.day-strip{margin:0 24px 32px;background:#1a1a1a;border:1px solid #2e2e2e;border-left:3px solid #e63946;padding:16px 20px;display:flex;align-items:center;gap:20px}
-.day-num{font-family:‘Bebas Neue’,sans-serif;font-size:52px;color:#e63946;line-height:1}
-.day-info{}
-.day-lbl{font-family:‘DM Mono’,monospace;font-size:9px;letter-spacing:2px;color:#555;text-transform:uppercase}
-.day-text{font-size:13px;color:#bbb;margin-top:3px}
-.day-bar-wrap{flex:1;margin-left:auto}
-.day-bar-track{height:4px;background:#2e2e2e;margin-bottom:5px}
-.day-bar-fill{height:100%;background:#e63946;transition:width .6s ease}
+
 .day-pct{font-family:‘DM Mono’,monospace;font-size:9px;color:#555;text-align:right;letter-spacing:1px}
 
 /* APPS GRID */
@@ -65,8 +58,6 @@ body{background:#0d0d0d;color:#f0ece4;font-family:'DM Sans',system-ui,-apple-sys
 .rule-text{font-size:12px;color:#888;line-height:1.5}
 
 /* TODAY */
-.today-section{padding:0 24px 40px}
-.today-title{font-family:‘Bebas Neue’,sans-serif;font-size:26px;letter-spacing:2px;color:#fff;margin-bottom:14px}
 .checklist{display:flex;flex-direction:column;gap:8px}
 .check-row{display:flex;align-items:center;gap:12px;background:#1a1a1a;border:1px solid #2e2e2e;padding:13px 16px;cursor:pointer;transition:border-color .15s;user-select:none}
 .check-row:active{border-color:#52b788}
@@ -109,16 +100,22 @@ body{background:#0d0d0d;color:#f0ece4;font-family:'DM Sans',system-ui,-apple-sys
   </div>
 </div>
 
-<div class="day-strip">
-  <div class="day-num" id="dayNum">1</div>
-  <div class="day-info">
-    <div class="day-lbl">Current Day</div>
-    <div class="day-text" id="dayText">Day 1 of 75</div>
-  </div>
-  <div class="day-bar-wrap">
-    <div class="day-bar-track"><div class="day-bar-fill" id="dayBarFill" style="width:0%"></div></div>
-    <div class="day-pct" id="dayPct">0% complete</div>
-  </div>
+<div style="padding:0 24px;margin-bottom:24px;">
+  <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#555;margin-bottom:12px;">Your Dashboards</div>
+  <a href="dashboard.html#dan" style="display:block;background:#1a1a1a;border:1px solid #2e2e2e;border-left:4px solid #e63946;padding:16px 18px;text-decoration:none;color:#f0ece4;margin-bottom:10px;">
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;color:#fff;margin-bottom:6px;">💪 Dan</div>
+    <div style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:2px;color:#e63946;margin-bottom:6px;" id="idx-dan-day">Loading...</div>
+    <div style="height:4px;background:#252525;margin-bottom:6px;"><div id="idx-dan-bar" style="height:100%;background:#e63946;width:0%;transition:width .6s ease;"></div></div>
+    <div style="font-family:'DM Mono',monospace;font-size:9px;color:#555;letter-spacing:1px;" id="idx-dan-tasks">— / 8 tasks today</div>
+    <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1.5px;color:#555;margin-top:8px;">OPEN DASHBOARD →</div>
+  </a>
+  <a href="dashboard.html#carrie" style="display:block;background:#1a1a1a;border:1px solid #2e2e2e;border-left:4px solid #52b788;padding:16px 18px;text-decoration:none;color:#f0ece4;margin-bottom:10px;">
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;color:#fff;margin-bottom:6px;">🏃 Carrie</div>
+    <div style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:2px;color:#52b788;margin-bottom:6px;" id="idx-carrie-day">Loading...</div>
+    <div style="height:4px;background:#252525;margin-bottom:6px;"><div id="idx-carrie-bar" style="height:100%;background:#52b788;width:0%;transition:width .6s ease;"></div></div>
+    <div style="font-family:'DM Mono',monospace;font-size:9px;color:#555;letter-spacing:1px;" id="idx-carrie-tasks">— / 8 tasks today</div>
+    <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1.5px;color:#555;margin-top:8px;">OPEN DASHBOARD →</div>
+  </a>
 </div>
 
 <div class="apps-section">
@@ -156,32 +153,6 @@ body{background:#0d0d0d;color:#f0ece4;font-family:'DM Sans',system-ui,-apple-sys
   </div>
 </div>
 
-<div class="today-section">
-  <div class="today-title">Dashboards</div>
-  <a href="dashboard.html#dan" class="dash-link" id="dan-dash-link">
-    <div class="dash-person-name">💪 Dan</div>
-    <div class="dash-day-info">
-      <div class="dash-day-num" id="idx-dan-day">Day 1</div>
-      <div class="dash-progress-wrap">
-        <div class="dash-prog-track"><div class="dash-prog-fill" id="idx-dan-bar" style="width:0%;background:#e63946"></div></div>
-      </div>
-      <div class="dash-tasks" id="idx-dan-tasks">— / 8 tasks today</div>
-    </div>
-    <div class="dash-arrow">OPEN →</div>
-  </a>
-  <a href="dashboard.html#carrie" class="dash-link" id="carrie-dash-link" style="border-left-color:#52b788">
-    <div class="dash-person-name">🏃 Carrie</div>
-    <div class="dash-day-info">
-      <div class="dash-day-num" id="idx-carrie-day" style="color:#52b788">Day 1</div>
-      <div class="dash-progress-wrap">
-        <div class="dash-prog-track"><div class="dash-prog-fill" id="idx-carrie-bar" style="width:0%;background:#52b788"></div></div>
-      </div>
-      <div class="dash-tasks" id="idx-carrie-tasks">— / 8 tasks today</div>
-    </div>
-    <div class="dash-arrow">OPEN →</div>
-  </a>
-</div>
-
 <div class="footer">75 Hard · Dan & Carrie Cleveland · 2026</div>
 
 <script>
@@ -189,10 +160,20 @@ body{background:#0d0d0d;color:#f0ece4;font-family:'DM Sans',system-ui,-apple-sys
 const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbwGPsMupiH1mG6ApUHsm8ZDPssXBLmQkIgiuFfBmSeue3pFR0UfS6LXvTS14kaHfvImNg/exec';
 const today = new Date().toISOString().split('T')[0];
 
+// Start date — must match dashboard.html
+const START_DATE_IDX = new Date('2026-04-12T00:00:00');
+
+function getActualDayNum() {
+  const todayMs = new Date(today + 'T00:00:00').getTime();
+  const diff = Math.floor((todayMs - START_DATE_IDX.getTime()) / 86400000);
+  return Math.min(75, Math.max(1, diff + 1));
+}
+
 function loadPersonSummary(person, dayElId, barElId, tasksElId) {
+  // Current day always from real calendar date
+  const currentDay = getActualDayNum();
   const days = JSON.parse(localStorage.getItem('75h_' + person + '_days') || '{}');
   const done = Object.values(days).filter(v => v === 'done').length;
-  const currentDay = Math.min(75, done + 1);
   const pct = Math.round((done / 75) * 100);
   document.getElementById(dayElId).textContent = 'Day ' + currentDay + ' of 75';
   document.getElementById(barElId).style.width = pct + '%';
