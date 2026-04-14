@@ -335,7 +335,14 @@ async function loadFromSheets() {
       return;
     }
     Object.entries(data).forEach(([k, v]) => {
-      if (k.startsWith('75h_')) localStorage.setItem(k, v);
+      if (!k.startsWith('75h_')) return;
+      // Strip any check_ keys for future dates (timezone bug artifacts)
+      const checkMatch = k.match(/75h_\w+_check_(\d{4}-\d{2}-\d{2})$/);
+      if (checkMatch) {
+        const dateDayNum = getDayNum(checkMatch[1]);
+        if (dateDayNum > getDayNum(today)) return; // skip future dates
+      }
+      localStorage.setItem(k, v);
     });
     const ts = new Date().toLocaleTimeString();
     setSyncStatus('✓ Synced · ' + ts, '#52b788');
@@ -687,16 +694,19 @@ function buildHistory(person, limit) {
   const container = document.getElementById(person + '-history');
   container.innerHTML = '';
 
-  // Collect all dates that have check data for this person
+  const todayDayNum = getDayNum(today);
+
+  // Get ALL 75h_ keys from localStorage, find check_ keys for this person
   const allKeys = Object.keys(localStorage).filter(k => k.startsWith('75h_' + person + '_check_'));
-  const dates = allKeys.map(k => k.replace('75h_' + person + '_check_', '')).sort().reverse();
+  const allDates = allKeys
+    .map(k => k.replace('75h_' + person + '_check_', ''))
+    .filter(d => {
+      const dn = getDayNum(d);
+      return dn >= 1 && dn <= todayDayNum; // NEVER show future dates
+    })
+    .sort().reverse();
 
-  // Also include days from tracker that are done/failed but may not have check data
-  const dayKey = '75h_' + person + '_days';
-  const dayState = lsGet(dayKey, {});
-
-  // Merge — show all unique dates up to limit
-  const shown = dates.slice(0, limit);
+  const shown = allDates.slice(0, limit);
 
   if (shown.length === 0) {
     container.innerHTML = '<div style="font-family:DM Mono,monospace;font-size:10px;color:#555;letter-spacing:1px;text-align:center;padding:24px 0;">No history yet — start checking off your daily tasks.</div>';
@@ -706,17 +716,17 @@ function buildHistory(person, limit) {
 
   shown.forEach(date => {
     const checkKey = '75h_' + person + '_check_' + date;
-    const checkState = lsGet(checkKey, {});
-    // Normalize keys before counting
-    const normState = {};
-    Object.keys(checkState).forEach(k => { normState[String(k)] = checkState[k]; });
-    const doneCount = Object.values(normState).filter(Boolean).length;
+    const rawCheck = lsGet(checkKey, {});
+    // Normalize all keys to strings
+    const checkState = {};
+    Object.keys(rawCheck).forEach(k => { checkState[String(k)] = rawCheck[k]; });
+    const normState = checkState;
+    const doneCount = Object.values(checkState).filter(Boolean).length;
     const total = TASKS.length;
     const isPerfect = doneCount === total;
     const isZero = doneCount === 0;
 
-    // Format date nicely
-    // Parse date string directly to avoid timezone issues
+    // Parse date string parts directly — no UTC conversion
     const dparts = date.split('-');
     const d = new Date(parseInt(dparts[0]), parseInt(dparts[1])-1, parseInt(dparts[2]));
     const dayStr = d.toLocaleDateString('en-US', {weekday:'short', month:'short', day:'numeric'});
@@ -732,7 +742,7 @@ function buildHistory(person, limit) {
 
     item.innerHTML = '<div class="hist-header" onclick="toggleHistDay(this)">' +
       '<div>' +
-        '<div class="hist-date">' + dayStr + (isToday ? ' · TODAY' : '') + '</div>' +
+        '<div class="hist-date">' + dayLabel + (isToday ? ' · TODAY' : '') + '</div>' +
       '</div>' +
       '<div style="display:flex;align-items:center;gap:10px">' +
         '<div class="hist-score ' + scoreClass + '">' + scoreText + ' tasks</div>' +
@@ -742,7 +752,7 @@ function buildHistory(person, limit) {
     '<div class="hist-body">' +
       '<div class="hist-tasks">' +
         TASKS.map((task, i) => {
-          const done = normState ? normState[String(i)] : (checkState[String(i)] || false);
+          const done = normState ? normState[String(i)] : false;
           return '<div class="hist-task' + (done ? ' done' : '') + '">' +
             '<div class="hist-check ' + (done ? 'done' : 'miss') + '">' + (done ? '✓' : '') + '</div>' +
             '<span>' + task.label + '</span>' +
@@ -756,8 +766,9 @@ function buildHistory(person, limit) {
 
   // Show/hide load more
   const loadMoreBtn = document.getElementById(person + '-load-more');
-  loadMoreBtn.style.display = dates.length > limit ? 'block' : 'none';
+  loadMoreBtn.style.display = allDates.length > limit ? 'block' : 'none';
 }
+
 
 function toggleHistDay(header) {
   const body = header.nextElementSibling;
