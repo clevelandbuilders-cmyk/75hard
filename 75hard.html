@@ -1186,7 +1186,14 @@ let pTimer=null,elapsed=0,curSession=null;
 
 // Persistent workout session key
 function getSessionKey() {
-  const today = new Date().toISOString().split('T')[0];
+  function localDateStr() {
+  const d = new Date();
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return y + '-' + m + '-' + day;
+}
+const today = localDateStr();
   return '75h_workout_session_' + activePerson + '_' + today + '_' + selDayIdx + '_' + selSessIdx;
 }
 
@@ -1421,15 +1428,28 @@ function toggleExCheck(row){
 function updateGoalMeter(){
   let mins=0;
   document.querySelectorAll('#exCheckList .cl-row.cl-done').forEach(r=>{mins+=parseInt(r.dataset.mins)||0;});
-  const pct=Math.min(100,(mins/45)*100);
+  const pct=Math.min(100,Math.round((mins/45)*100));
   document.getElementById('goalBar').style.width=pct+'%';
   document.getElementById('goalBar').style.background=pct>=100?'#52b788':pct>=70?'#f4a261':'#e63946';
   document.getElementById('goalMins').textContent=mins;
   const remaining=Math.max(0,45-mins);
   const lbl=document.getElementById('goalLabel');
-  if(pct>=100){lbl.textContent='🔥 Goal reached! You hit 45 minutes.';lbl.style.color='#52b788';}
+  if(pct>=100){lbl.textContent='🔥 Goal reached! You hit 45 minutes.';lbl.style.color='#52b788';autoCheckWorkout(selSessIdx);}
   else if(pct>=70){lbl.textContent=remaining+' min to go — keep pushing';lbl.style.color='#f4a261';}
   else{lbl.textContent='Check off exercises as you finish them · '+remaining+' min remaining';lbl.style.color='#555';}
+  // Save progress % to shared key so dashboard progress bars can read it
+  function localDateStr() {
+  const d = new Date();
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return y + '-' + m + '-' + day;
+}
+const today = localDateStr();
+  const progKey='75h_workout_prog_'+activePerson+'_'+today+'_'+selSessIdx;
+  localStorage.setItem(progKey, JSON.stringify({pct, mins}));
+  // If all exercises done, push to Sheets
+  if(pct>=100) lsSave(progKey, {pct:100, mins});
 }
 
 function closePlayer(){
@@ -1690,7 +1710,7 @@ function fsLog() {
   const mins = Math.floor(fsSeconds / 60);
   const activity = fsActivity || 'Freestyle';
   // Save to localStorage as a completed session note
-  const today = new Date().toISOString().split('T')[0];
+  const today = localDateStr();
   const key = '75h_freestyle_' + today;
   const existing = JSON.parse(localStorage.getItem(key) || '[]');
   existing.push({ activity, mins, time: new Date().toLocaleTimeString() });
@@ -2100,12 +2120,40 @@ function buildTracker() {
 // ══════════════════════════════════════
 // WATER
 // ══════════════════════════════════════
-let wState = JSON.parse(localStorage.getItem('75h_water') || '[]');
+let wState = [];
+
+
+// Auto-check a task in the daily checklist (shared with dashboard)
+function autoCheckTask(taskIdx, checked) {
+  const today = localDateStr();
+  const key = '75h_' + activePerson + '_check_' + today;
+  const state = JSON.parse(localStorage.getItem(key) || '{}');
+  if (checked) {
+    state[taskIdx] = true;
+  }
+  // Never auto-uncheck — user can manually uncheck
+  lsSave(key, state);
+}
+
+// Auto-check workout task when session is complete
+function autoCheckWorkout(sessIdx) {
+  // sessIdx 0 = Workout 1 (task 0), sessIdx 1 = Workout 2 (task 1)
+  const taskIdx = sessIdx === 0 ? 0 : 1;
+  autoCheckTask(taskIdx, true);
+}
+
+function getWaterKey() {
+  const today = localDateStr();
+  return '75h_' + activePerson + '_water_' + today;
+}
 
 function buildWater() {
-  wState = JSON.parse(localStorage.getItem('75h_water') || '[]');
+  const key = getWaterKey();
+  wState = JSON.parse(localStorage.getItem(key) || '[]');
   const wEl = document.getElementById('waterTracker');
+  if (!wEl) return;
   wEl.innerHTML = '';
+  const filled = wState.filter(Boolean).length;
   for (let i = 0; i < 8; i++) {
     const c = document.createElement('div');
     c.className = 'water-cup' + (wState[i] ? ' filled' : '');
@@ -2113,7 +2161,10 @@ function buildWater() {
     c.addEventListener('click', () => {
       wState[i] = !wState[i];
       c.classList.toggle('filled', wState[i]);
-      lsSave('75h_water', wState);
+      lsSave(key, wState);
+      // Auto-check gallon task in checklist when all 8 filled
+      const allFilled = wState.filter(Boolean).length === 8;
+      autoCheckTask(3, allFilled); // index 3 = 1 Gallon Water
     });
     wEl.appendChild(c);
   }
