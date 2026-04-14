@@ -2130,11 +2130,11 @@ let wState = [];
 function autoCheckTask(taskIdx, checked) {
   const today = localDateStr();
   const key = '75h_' + activePerson + '_check_' + today;
-  const state = JSON.parse(localStorage.getItem(key) || '{}');
-  if (checked) {
-    state[taskIdx] = true;
-  }
-  // Never auto-uncheck — user can manually uncheck
+  // Always normalize to string keys to avoid int/string mismatch
+  const raw = JSON.parse(localStorage.getItem(key) || '{}');
+  const state = {};
+  Object.keys(raw).forEach(k => { state[String(k)] = raw[k]; });
+  if (checked) state[String(taskIdx)] = true;
   lsSave(key, state);
 }
 
