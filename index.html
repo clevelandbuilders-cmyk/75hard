@@ -160,12 +160,17 @@ body{background:#0d0d0d;color:#f0ece4;font-family:'DM Sans',system-ui,-apple-sys
 const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbwGPsMupiH1mG6ApUHsm8ZDPssXBLmQkIgiuFfBmSeue3pFR0UfS6LXvTS14kaHfvImNg/exec';
 const today = new Date().toISOString().split('T')[0];
 
-// Start date — must match dashboard.html
-const START_DATE_IDX = new Date('2026-04-12T00:00:00');
+// Start date — timezone-safe integer arithmetic
+function dateStrToDaysIdx(dateStr) {
+  const p = dateStr.split('-');
+  const y=parseInt(p[0]),m=parseInt(p[1]),d=parseInt(p[2]);
+  const a=Math.floor((14-m)/12),yr=y+4800-a,mo=m+12*a-3;
+  return d+Math.floor((153*mo+2)/5)+365*yr+Math.floor(yr/4)-Math.floor(yr/100)+Math.floor(yr/400)-32045;
+}
+const START_DAYS_IDX = dateStrToDaysIdx('2026-04-12');
 
 function getActualDayNum() {
-  const todayMs = new Date(today + 'T00:00:00').getTime();
-  const diff = Math.floor((todayMs - START_DATE_IDX.getTime()) / 86400000);
+  const diff = dateStrToDaysIdx(today) - START_DAYS_IDX;
   return Math.min(75, Math.max(1, diff + 1));
 }
 
