@@ -158,7 +158,14 @@ body{background:#0d0d0d;color:#f0ece4;font-family:'DM Sans',system-ui,-apple-sys
 <script>
 // Per-person dashboard summaries
 const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbwGPsMupiH1mG6ApUHsm8ZDPssXBLmQkIgiuFfBmSeue3pFR0UfS6LXvTS14kaHfvImNg/exec';
-const today = new Date().toISOString().split('T')[0];
+function localDateStr() {
+  const d = new Date();
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return y + '-' + m + '-' + day;
+}
+const today = localDateStr();
 
 // Start date — timezone-safe integer arithmetic
 function dateStrToDaysIdx(dateStr) {
