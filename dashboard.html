@@ -821,8 +821,32 @@ function buildAll() {
 // ═══════════════════════════════════════════
 // INIT
 // ═══════════════════════════════════════════
+// Purge any future-dated keys from localStorage (timezone bug artifacts)
+function purgeFutureDates() {
+  const todayDayNum = getDayNum(today);
+  const keysToDelete = [];
+  for (let i = 0; i < localStorage.length; i++) {
+    const k = localStorage.key(i);
+    if (!k) continue;
+    const m = k.match(/75h_\w+_check_(\d{4}-\d{2}-\d{2})$/);
+    if (m) {
+      const dn = getDayNum(m[1]);
+      if (dn > todayDayNum) keysToDelete.push(k);
+    }
+  }
+  keysToDelete.forEach(k => {
+    localStorage.removeItem(k);
+    // Also push deletion to Sheets by saving empty — 
+    // next sync will overwrite with nothing meaningful
+  });
+  if (keysToDelete.length > 0) {
+    console.log('Purged future date keys:', keysToDelete);
+  }
+}
+
 // Build immediately from localStorage first — instant load
 try {
+  purgeFutureDates(); // Remove any bad future-dated data first
   buildAll();
 } catch(e) {
   document.body.innerHTML += '<div style="background:#e63946;color:#fff;padding:20px;font-family:monospace;font-size:12px;position:fixed;bottom:0;left:0;right:0;z-index:999">BUILD ERROR: ' + e.message + '</div>';
