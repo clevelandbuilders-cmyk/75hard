@@ -485,21 +485,39 @@ function buildWater(person) {
 // 75-DAY TRACKER
 // ═══════════════════════════════════════════
 // Start date: April 12, 2026 = Day 1
-const START_DATE = new Date('2026-04-12T00:00:00');
+// All date math uses pure string/integer arithmetic — no timezone issues
+const START_YEAR = 2026, START_MONTH = 4, START_DAY = 12;
+
+function dateStrToDays(dateStr) {
+  // Convert YYYY-MM-DD to a pure integer day count (no timezone)
+  const parts = dateStr.split('-');
+  const y = parseInt(parts[0]), m = parseInt(parts[1]), d = parseInt(parts[2]);
+  // Days since epoch using integer math only
+  const a = Math.floor((14 - m) / 12);
+  const yr = y + 4800 - a;
+  const mo = m + 12 * a - 3;
+  return d + Math.floor((153 * mo + 2) / 5) + 365 * yr + Math.floor(yr / 4) - Math.floor(yr / 100) + Math.floor(yr / 400) - 32045;
+}
+
+const START_DAYS = dateStrToDays('2026-04-12');
+// April 12 2026 is a Sunday = day of week 0
+const START_DOW = 0;
+
+function getDayNum(dateStr) {
+  // Returns 1-based day number — pure integer, no timezone
+  return dateStrToDays(dateStr) - START_DAYS + 1;
+}
 
 function getDayDate(dayNum) {
-  // Returns Date object for a given day number (1-based)
-  const d = new Date(START_DATE);
+  // Returns a Date object for display purposes only (not for math)
+  // Add dayNum-1 days to April 12 2026
+  const d = new Date(2026, 3, 12); // month is 0-based: 3=April
   d.setDate(d.getDate() + dayNum - 1);
   return d;
 }
 
-function getDayNum(dateStr) {
-  // Returns day number for a given YYYY-MM-DD string
-  const d = new Date(dateStr + 'T00:00:00');
-  const diff = Math.floor((d - START_DATE) / 86400000);
-  return diff + 1; // 1-based
-}
+// Keep START_DATE for DOW calculation only
+const START_DATE = new Date(2026, 3, 12);
 
 function fmtCellDate(date) {
   // Short format for grid cell: "Apr 12"
@@ -543,7 +561,7 @@ function buildTracker(person) {
 
   // Figure out what day of week Day 1 falls on
   // April 12 2026 = Sunday = 0
-  const startDow = START_DATE.getDay(); // 0=Sun, should be 0
+  const startDow = START_DOW; // April 12 2026 = Sunday = 0
 
   // Build weeks — 75 days + leading empty cells
   const totalCells = 75 + startDow; // cells needed including padding
