@@ -383,12 +383,58 @@ function buildChecklist(person) {
   const container = document.getElementById(person + '-checklist');
   container.innerHTML = '';
 
+  // Get workout progress (exercises checked off)
+  const sess1Key = '75h_workout_session_' + person + '_' + today + '_0_0'; // Mon sess1
+  const sess2Key = '75h_workout_session_' + person + '_' + today + '_0_1'; // Mon sess2
+  // We can't know exact session key without knowing the day — just check if task is done
+  // Workout progress bar reads from goal meter data saved in workout state
+  const w1State = (() => { try { return JSON.parse(localStorage.getItem('75h_workout_prog_' + person + '_' + today + '_0') || '{"pct":0}'); } catch(e) { return {pct:0}; } })();
+  const w2State = (() => { try { return JSON.parse(localStorage.getItem('75h_workout_prog_' + person + '_' + today + '_1') || '{"pct":0}'); } catch(e) { return {pct:0}; } })();
+
+  // Water progress
+  const waterState = lsGet('75h_' + person + '_water_' + today, []);
+  const waterFilled = waterState.filter(Boolean).length;
+  const waterPct = Math.round((waterFilled / 8) * 100);
+
   TASKS.forEach((task, i) => {
+    const isDone = state[i] || state[String(i)]; // handle both int and string keys
     const row = document.createElement('div');
-    row.className = 'check-row' + (state[i] ? ' done' : '');
-    row.innerHTML = '<div class="check-box">✓</div><div><div class="check-lbl">' + task.label + '</div><div class="check-sub">' + task.sub + '</div></div>';
+    row.className = 'check-row' + (isDone ? ' done' : '');
+    row.style.cssText = 'position:relative;overflow:hidden';
+
+    // Progress bar background for workout and water tasks
+    let progressBar = '';
+    let progressPct = 0;
+    let progressLabel = '';
+
+    if (i === 0 && !isDone) { // Workout 1
+      progressPct = w1State.pct || 0;
+      if (progressPct > 0) progressLabel = progressPct + '% complete';
+    } else if (i === 1 && !isDone) { // Workout 2
+      progressPct = w2State.pct || 0;
+      if (progressPct > 0) progressLabel = progressPct + '% complete';
+    } else if (i === 3 && !isDone) { // Water
+      progressPct = waterPct;
+      if (waterFilled > 0) progressLabel = waterFilled + '/8 cups';
+    }
+
+    if (progressPct > 0 && !isDone) {
+      progressBar = '<div style="position:absolute;left:0;top:0;bottom:0;width:' + progressPct + '%;background:rgba(82,183,136,0.12);pointer-events:none;transition:width .4s ease;"></div>';
+    }
+
+    row.innerHTML = progressBar +
+      '<div class="check-box">✓</div>' +
+      '<div style="flex:1">' +
+        '<div class="check-lbl">' + task.label + '</div>' +
+        '<div class="check-sub">' + (progressLabel || task.sub) + '</div>' +
+      '</div>';
+
     row.addEventListener('click', () => {
-      state[i] = !state[i];
+      // Toggle — manual always wins
+      const currentVal = state[i] || state[String(i)];
+      state[i] = !currentVal;
+      // Clean up string key if present
+      delete state[String(i)];
       row.classList.toggle('done', state[i]);
       lsSave(key, state);
       updateCheckCount(person, state);
@@ -421,6 +467,15 @@ function buildWater(person) {
       state[i] = !state[i];
       c.classList.toggle('filled', state[i]);
       lsSave(key, state);
+      // Auto-check gallon task when all 8 filled
+      if (state.filter(Boolean).length === 8) {
+        const checkKey = '75h_' + person + '_check_' + today;
+        const checkState = lsGet(checkKey, {});
+        checkState[3] = true; // index 3 = 1 Gallon Water
+        lsSave(checkKey, checkState);
+      }
+      // Rebuild checklist to update progress bar
+      buildChecklist(person);
     });
     container.appendChild(c);
   }
@@ -586,10 +641,11 @@ function showDayDetail(person, dateStr, dayNum) {
     '</div>' +
     '<div style="display:flex;flex-direction:column;gap:6px">' +
     TASKS.map((task, i) => {
-      const done = checkData[i];
+      // Keys stored as strings in localStorage — check both
+      const done = checkData[i] || checkData[String(i)] || false;
       return '<div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:#252525;border:1px solid ' + (done ? '#52b788' : '#2e2e2e') + '">' +
         '<div style="width:18px;height:18px;border-radius:3px;background:' + (done ? '#52b788' : '#252525') + ';border:2px solid ' + (done ? '#52b788' : '#444') + ';display:flex;align-items:center;justify-content:center;font-size:10px;color:' + (done ? '#000' : 'transparent') + ';flex-shrink:0">✓</div>' +
-        '<div style="font-size:12px;color:' + (done ? '#f0ece4' : '#555') + ';' + (done ? '' : 'text-decoration:line-through') + '">' + task.label + '</div>' +
+        '<div style="font-size:12px;color:' + (done ? '#f0ece4' : '#555') + '">' + task.label + (done ? ' ✓' : '') + '</div>' +
       '</div>';
     }).join('') +
     '</div>';
