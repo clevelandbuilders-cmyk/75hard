@@ -540,7 +540,7 @@ function buildTracker(person) {
   const container = document.getElementById(person + '-tracker');
   container.innerHTML = '';
 
-  const todayMs = new Date(today + 'T00:00:00').getTime();
+  // Use integer day numbers only — no timestamps, no timezone issues
   const todayDayNum = getDayNum(today);
 
   const done = Object.values(state).filter(v => v === 'done').length;
@@ -592,7 +592,7 @@ function buildTracker(person) {
       const i = dayNum;
       const dayDate = getDayDate(i);
       const dayDateStr = (function(d){const y=d.getFullYear(),m=String(d.getMonth()+1).padStart(2,'0'),dy=String(d.getDate()).padStart(2,'0');return y+'-'+m+'-'+dy;})(dayDate);
-      const isFuture = dayDate.getTime() > todayMs;
+      const isFuture = i > todayDayNum;
       const isToday = dayDateStr === today;
 
       const checkData = lsGet('75h_' + person + '_check_' + dayDateStr, {});
@@ -716,7 +716,9 @@ function buildHistory(person, limit) {
     const isZero = doneCount === 0;
 
     // Format date nicely
-    const d = new Date(date + 'T12:00:00');
+    // Parse date string directly to avoid timezone issues
+    const dparts = date.split('-');
+    const d = new Date(parseInt(dparts[0]), parseInt(dparts[1])-1, parseInt(dparts[2]));
     const dayStr = d.toLocaleDateString('en-US', {weekday:'short', month:'short', day:'numeric'});
     const dayNum = getDayNum(date);
     const isToday = date === today;
